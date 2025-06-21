@@ -16,8 +16,9 @@ type TeamHistory = {
 
 type Player = {
   name: string;
-  image_link?: string;
+  image_link: string;
   teams_history: TeamHistory[];
+  wikipedia_url: string;
 };
 
 export default function DisplayPlayers({
@@ -31,6 +32,7 @@ export default function DisplayPlayers({
     teams,
     difficulty,
     endedRound,
+    getPlayerDivisions,
   } = usePlayTogetherCtx();
 
   console.log(difficulty);
@@ -115,30 +117,15 @@ export default function DisplayPlayers({
             <h2 className="text-lg font-bold mb-2">{name}</h2>
             {(difficulty < 1 || endedRound) && <p>{activePeriod}</p>}
             {difficulty < 1 && !endedRound && (
-              <div className="grid grid-cols-4 gap-4">
-                {teams_history
-                  .filter(({ team }) => teams.some((t) => team.includes(t)))
-                  .map((singleTeam: TeamHistory, teamIndex: number) => {
-                    const { team } = singleTeam;
+              <div className="flex flex-col justify-start gap-2">
+                <p>Divisions played in</p>
 
-                    const teamLogo: string | undefined = getTeamLogo(team);
-
-                    return (
-                      <div key={teamIndex} className="team-history my-2">
-                        {teamLogo && (
-                          <Image
-                            src={teamLogo}
-                            alt={`${team} logo`}
-                            width={50}
-                            height={50}
-                            className="team-logo"
-                          />
-                        )}
-                      </div>
-                    );
-                  })}
+                {getPlayerDivisions(player).map((division, divIndex) => (
+                  <p key={divIndex}>{division}</p>
+                ))}
               </div>
             )}
+
             {endedRound && (
               <>
                 {teams_history

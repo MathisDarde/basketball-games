@@ -19,6 +19,8 @@ export default function GuessingBlock({
     havePlayedTogether,
     endedRound,
     setEndedRound,
+    streakCount,
+    setStreakCount,
   } = usePlayTogetherCtx();
 
   const [endRoundMessage, setEndRoundMessage] = useState(0);
@@ -46,24 +48,26 @@ export default function GuessingBlock({
         <>
           <p>Have these players played together ?</p>
 
-          <button
-            onClick={() => {
-              setEndedRound(true);
-              setEndRoundMessage(1);
-            }}
-            className="bg-green-500 text-black"
-          >
-            Yes
-          </button>
-          <button
-            onClick={() => {
-              setEndedRound(true);
-              setEndRoundMessage(2);
-            }}
-            className="bg-red-500 text-white"
-          >
-            No
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => {
+                setEndedRound(true);
+                setEndRoundMessage(1);
+              }}
+              className="bg-green-500 text-black flex-1"
+            >
+              Yes
+            </button>
+            <button
+              onClick={() => {
+                setEndedRound(true);
+                setEndRoundMessage(2);
+              }}
+              className="bg-red-500 text-white flex-1"
+            >
+              No
+            </button>
+          </div>
         </>
       )}
       {endRoundMessage === 1 && endedRound && (
@@ -74,7 +78,15 @@ export default function GuessingBlock({
                 <Check size={24} color="#fff" />
               </div>
               <p className="text-black">Great! They have played together.</p>
-              <button onClick={nextRound}>Next round</button>
+              <button
+                onClick={() => {
+                  nextRound();
+                  setStreakCount(streakCount + 1);
+                }}
+                className="bg-blue-900 text-white rounded-md px-6 py-3 cursor-pointer"
+              >
+                Next round
+              </button>
             </div>
           ) : (
             <div className="flex flex-col items-center gap-2">
@@ -84,7 +96,15 @@ export default function GuessingBlock({
               <p className="text-black">
                 Wrong answer! They have not played together.
               </p>
-              <button onClick={nextRound}>Next round</button>
+              <button
+                onClick={() => {
+                  nextRound();
+                  setStreakCount(0);
+                }}
+                className="bg-blue-900 text-white rounded-md px-6 py-3 cursor-pointer"
+              >
+                Next round
+              </button>
             </div>
           )}
         </>
@@ -99,7 +119,15 @@ export default function GuessingBlock({
               <p className="text-black">
                 Great! They have not played together.
               </p>
-              <button onClick={nextRound}>Next round</button>
+              <button
+                onClick={() => {
+                  nextRound();
+                  setStreakCount(streakCount + 1);
+                }}
+                className="bg-blue-900 text-white rounded-md px-6 py-3 cursor-pointer"
+              >
+                Next round
+              </button>
             </div>
           ) : (
             <div className="flex flex-col items-center gap-2">
@@ -109,7 +137,15 @@ export default function GuessingBlock({
               <p className="text-black">
                 Wrong answer! They did play together.
               </p>
-              <button onClick={nextRound}>Next round</button>
+              <button
+                onClick={() => {
+                  nextRound();
+                  setStreakCount(0);
+                }}
+                className="bg-blue-900 text-white rounded-md px-6 py-3 cursor-pointer"
+              >
+                Next round
+              </button>
             </div>
           )}
         </>

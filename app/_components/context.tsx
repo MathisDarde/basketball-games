@@ -25,11 +25,14 @@ interface PlayTogetherContextType {
   selectedPlayers: PlayerData[];
   setSelectedPlayers: React.Dispatch<React.SetStateAction<PlayerData[]>>;
   teams: string[];
+  getPlayerDivisions: (player: PlayerData) => string[];
   havePlayedTogether: (player1: PlayerData, player2: PlayerData) => boolean;
   difficulty: number;
   setDifficulty: React.Dispatch<React.SetStateAction<number>>;
   endedRound: boolean;
   setEndedRound: React.Dispatch<React.SetStateAction<boolean>>;
+  streakCount: number;
+  setStreakCount: React.Dispatch<React.SetStateAction<number>>;
 }
 
 const PlayTogetherContext = createContext<PlayTogetherContextType | undefined>(
@@ -41,6 +44,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [selectedPlayers, setSelectedPlayers] = useState<PlayerData[]>([]);
   const [difficulty, setDifficulty] = useState(0);
   const [endedRound, setEndedRound] = useState(false);
+  const [streakCount, setStreakCount] = useState(0);
 
   useEffect(() => {
     fetch("/data/player_data_teams_pics.json")
@@ -75,6 +79,15 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     return player.teams_history
       .filter(({ team }) => teams.includes(team))
       .map(({ team }) => team);
+  };
+
+  const getPlayerDivisions = (player: PlayerData) => {
+    const playerTeams = getPlayerTeams(player);
+    return divisions
+      .filter((division) =>
+        division.teams.some((team) => playerTeams.includes(team))
+      )
+      .map((division) => division.name);
   };
 
   const havePlayedTogether = (player1: PlayerData, player2: PlayerData) => {
@@ -116,35 +129,49 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const teams = [
     "Philadelphia 76ers",
     "Boston Celtics",
-    "Los Angeles Lakers",
-    "Golden State Warriors",
-    "Miami Heat",
-    "Chicago Bulls",
-    "San Antonio Spurs",
-    "Houston Rockets",
-    "Dallas Mavericks",
+    "New York Knicks",
     "Toronto Raptors",
     "Brooklyn Nets",
-    "New York Knicks",
-    "Los Angeles Clippers",
-    "Denver Nuggets",
-    "Utah Jazz",
-    "Phoenix Suns",
-    "Atlanta Hawks",
-    "Charlotte Hornets",
-    "Orlando Magic",
+    "Cleveland Cavaliers",
+    "Chicago Bulls",
     "Indiana Pacers",
     "Detroit Pistons",
     "Milwaukee Bucks",
+    "Washington Wizards",
+    "Miami Heat",
+    "Atlanta Hawks",
+    "Charlotte Hornets",
+    "Orlando Magic",
+    "Los Angeles Lakers",
+    "Golden State Warriors",
+    "Los Angeles Clippers",
+    "Sacramento Kings",
+    "Phoenix Suns",
+    "San Antonio Spurs",
+    "Houston Rockets",
+    "Dallas Mavericks",
+    "Memphis Grizzlies",
+    "New Orleans Pelicans",
+    "Denver Nuggets",
+    "Utah Jazz",
     "Minnesota Timberwolves",
     "Oklahoma City Thunder",
     "Portland Trail Blazers",
-    "Sacramento Kings",
-    "New Orleans Pelicans",
-    "Memphis Grizzlies",
-    "Washington Wizards",
-    "Cleveland Cavaliers",
   ];
+
+  const divisionNames = [
+    "Atlantic",
+    "Central",
+    "Southeast",
+    "Northwest",
+    "Pacific",
+    "Southwest",
+  ];
+
+  const divisions = divisionNames.map((name, i) => ({
+    name,
+    teams: teams.slice(i * 5, i * 5 + 5),
+  }));
 
   return (
     <PlayTogetherContext.Provider
@@ -155,11 +182,14 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         selectedPlayers,
         setSelectedPlayers,
         teams,
+        getPlayerDivisions,
         havePlayedTogether,
         difficulty,
         setDifficulty,
         endedRound,
         setEndedRound,
+        streakCount,
+        setStreakCount,
       }}
     >
       {children}
