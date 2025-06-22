@@ -13,6 +13,9 @@ export interface PlayerData {
   wikipedia_url: string;
   teams_history: TeamHistory[];
   image_link: string;
+  number: number;
+  position: string;
+  awards: string[];
 }
 
 interface PlayTogetherContextType {
@@ -33,6 +36,7 @@ interface PlayTogetherContextType {
   setEndedRound: React.Dispatch<React.SetStateAction<boolean>>;
   streakCount: number;
   setStreakCount: React.Dispatch<React.SetStateAction<number>>;
+  formatPosition: (position: string) => string;
 }
 
 const PlayTogetherContext = createContext<PlayTogetherContextType | undefined>(
@@ -126,6 +130,22 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     return false;
   };
 
+  function formatPosition(position: string | null | undefined): string {
+    if (!position) return "";
+
+    const firstPos = position.split("/")[0].trim().toLowerCase();
+
+    const posMap: Record<string, string> = {
+      "point guard": "PG",
+      "shooting guard": "SG",
+      "small forward": "SF",
+      "power forward": "PF",
+      center: "C",
+    };
+
+    return posMap[firstPos] || "";
+  }
+
   const teams = [
     "Philadelphia 76ers",
     "Boston Celtics",
@@ -190,6 +210,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         setEndedRound,
         streakCount,
         setStreakCount,
+        formatPosition,
       }}
     >
       {children}
