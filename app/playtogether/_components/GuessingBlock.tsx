@@ -1,7 +1,7 @@
-import { usePlayTogetherCtx } from "@/app/_components/context";
+import { usePlayTogetherCtx } from "@/components/context";
 import { useState } from "react";
 
-import type { PlayerData } from "@/app/_components/context";
+import type { PlayerData } from "@/components/context";
 import { Check, X } from "lucide-react";
 
 interface GuessingBlockProps {

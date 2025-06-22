@@ -1,5 +1,5 @@
 import "./globals.css";
-import { AppProvider } from "./_components/context";
+import { AppProvider } from "../components/context";
 import { Righteous } from "next/font/google";
 
 const righteous = Righteous({

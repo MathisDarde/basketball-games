@@ -3,7 +3,7 @@
 import { useState } from "react";
 import GuessingBlock from "./_components/GuessingBlock";
 import DisplayPlayers from "./_components/DisplayPlayers";
-import { usePlayTogetherCtx } from "../_components/context";
+import { usePlayTogetherCtx } from "../../components/context";
 import { useRouter } from "next/navigation";
 
 export default function PlayTogetherPage() {

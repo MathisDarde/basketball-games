@@ -1,6 +1,6 @@
 "use client";
 
-import { usePlayTogetherCtx } from "@/app/_components/context";
+import { usePlayTogetherCtx } from "@/components/context";
 import Image from "next/image";
 
 export default function CardsDisplay() {
