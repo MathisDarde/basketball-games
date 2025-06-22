@@ -1,5 +1,5 @@
 "use client";
-import { Aperture } from "lucide-react";
+import { Aperture, Shell, LucideFileUser } from "lucide-react";
 
 import React from "react";
 import { useRouter } from "next/navigation";
@@ -17,6 +17,20 @@ export default function MainPage() {
       >
         <Aperture />
         <h3>Play Together</h3>
+      </div>
+      <div
+        className="flex flex-col justify-center items-center gap-4 p-4 rounded-md bg-purple-200"
+        onClick={() => router.push("/happyfamilies")}
+      >
+        <Shell />
+        <h3>Happy Families</h3>
+      </div>
+      <div
+        className="flex flex-col justify-center items-center gap-4 p-4 rounded-md bg-red-200"
+        onClick={() => router.push("/nbacollection")}
+      >
+        <LucideFileUser />
+        <h3>NBA Cards Collection</h3>
       </div>
     </div>
   );

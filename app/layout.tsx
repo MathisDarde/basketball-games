@@ -1,5 +1,13 @@
 import "./globals.css";
 import { AppProvider } from "./_components/context";
+import { Righteous } from "next/font/google";
+
+const righteous = Righteous({
+  weight: "400",
+  variable: "--font-righteous",
+  subsets: ["latin"],
+  preload: true,
+});
 
 export default function RootLayout({
   children,
@@ -8,7 +16,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning>
+      <body suppressHydrationWarning className={`${righteous.variable}`}>
         <AppProvider>{children}</AppProvider>
       </body>
     </html>
