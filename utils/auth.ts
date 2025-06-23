@@ -11,8 +11,8 @@ export const auth = betterAuth({
 
   user: {
     additionalFields: {
-      birthday: {
-        type: "date",
+      favorite_team: {
+        type: "string",
         required: true,
         defaultValue: "",
       },
@@ -21,7 +21,7 @@ export const auth = betterAuth({
         required: true,
         defaultValue: "false",
       },
-      photodeprofil: {
+      profilepicture: {
         type: "string",
         required: false,
         defaultValue: null,

@@ -10,24 +10,12 @@ export const LoginSchema = z.object({
     .nonempty({ message: "Veuillez entrer un mot de passe." }),
 });
 
-export const InscSchema = z
+export const RegisterSchema = z
   .object({
     name: z.string().nonempty({ message: "Veuillez renseigner un pseudo." }),
-    birthday: z.union([
-      z
-        .string()
-        .refine(
-          (val) => {
-            const date = new Date(val);
-            return !isNaN(date.getTime()) && date < new Date();
-          },
-          {
-            message: "La date de naissance doit être valide et dans le passé.",
-          }
-        )
-        .transform((val) => new Date(val)),
-      z.date(),
-    ]),
+    favorite_team: z
+      .string()
+      .nonempty({ message: "Veuillez sélectionner une équipe." }),
     email: z
       .string()
       .email({ message: "Le mail que vous avez entré n'est pas valide." }),

@@ -4,13 +4,14 @@ import {
   boolean,
   timestamp,
   integer,
+  varchar,
 } from "drizzle-orm/pg-core";
 
 export const user = pgTable("users", {
   id: text("id").primaryKey(),
   name: text("name").notNull().unique(),
   profilepicture: text("profilepicture"),
-  favoriteTeam: text("favorite_team").notNull(),
+  favorite_team: text("favorite_team").notNull(),
   email: text("email").notNull().unique(),
   emailVerified: boolean("email_verified").notNull().default(false),
   createdAt: timestamp("created_at").notNull().defaultNow(),
@@ -60,12 +61,12 @@ export const verification = pgTable("verification", {
   updatedAt: timestamp("updated_at"),
 });
 
-export const cards = pgTable("cards", {
+export const players = pgTable("players", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   position: text("position").notNull(),
   number: integer("position").notNull(),
-  team: text("team").notNull(),
+  teams: varchar("teams", { length: 255 }).array().notNull(),
   img_url: text("img_url"),
   rarity: text("rarity").notNull(),
 });
@@ -84,7 +85,7 @@ export const schema = {
   session,
   account,
   verification,
-  cards,
+  players,
   highscores,
 };
 

@@ -10,6 +10,7 @@ export default function MainPage() {
   return (
     <div>
       <h1>BasketballGames Homepage</h1>
+      <button onClick={() => router.push("login")}>Login</button>
 
       <div
         className="flex flex-col justify-center items-center gap-4 p-4 rounded-md bg-orange-200"
