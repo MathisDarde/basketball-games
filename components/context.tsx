@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { TeamLogos } from "./TeamLogos";
+import { authClient } from "@/utils/auth-client";
 
 interface TeamHistory {
   period: string;
@@ -9,6 +10,7 @@ interface TeamHistory {
 }
 
 export interface PlayerData {
+  id: string;
   name: string;
   wikipedia_url: string;
   teams_history: TeamHistory[];
@@ -25,8 +27,6 @@ interface PlayTogetherContextType {
   }) => PlayerData[];
   getTeamLogo: (teamName: string) => string | undefined;
   players: PlayerData[];
-  selectedPlayers: PlayerData[];
-  setSelectedPlayers: React.Dispatch<React.SetStateAction<PlayerData[]>>;
   teams: string[];
   getPlayerDivisions: (player: PlayerData) => string[];
   havePlayedTogether: (player1: PlayerData, player2: PlayerData) => boolean;
@@ -37,6 +37,7 @@ interface PlayTogetherContextType {
   streakCount: number;
   setStreakCount: React.Dispatch<React.SetStateAction<number>>;
   formatPosition: (position: string) => string;
+  getUserId: () => Promise<string | null>;
 }
 
 const PlayTogetherContext = createContext<PlayTogetherContextType | undefined>(
@@ -45,22 +46,39 @@ const PlayTogetherContext = createContext<PlayTogetherContextType | undefined>(
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [players, setPlayers] = useState<PlayerData[]>([]);
-  const [selectedPlayers, setSelectedPlayers] = useState<PlayerData[]>([]);
   const [difficulty, setDifficulty] = useState(0);
   const [endedRound, setEndedRound] = useState(false);
   const [streakCount, setStreakCount] = useState(0);
 
   useEffect(() => {
-    fetch("/data/player_data_teams_pics.json")
-      .then((response) => {
-        if (!response.ok) throw new Error("Network response was not ok");
-        return response.json();
-      })
-      .then((data) => setPlayers(data))
-      .catch((error) => {
-        console.error("There was a problem with the fetch operation:", error);
-      });
+    const fetchPlayers = async () => {
+      const data = await import("@/actions/players/getplayers").then((mod) =>
+        mod.default()
+      );
+
+      if (Array.isArray(data)) {
+        setPlayers(
+          data.map((player) => ({
+            ...player,
+            teams_history: Array.isArray(player.teams_history)
+              ? player.teams_history
+              : [],
+            awards: Array.isArray(player.awards) ? player.awards : [],
+          }))
+        );
+      } else {
+        setPlayers([]);
+      }
+    };
+
+    fetchPlayers();
   }, []);
+
+  const getUserId = async () => {
+    const session = await authClient.getSession();
+    const user_id = session?.data?.user.id || null;
+    return user_id;
+  };
 
   const getRandomPlayers = ({
     numberPlayers,
@@ -69,9 +87,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     numberPlayers: number;
     players: PlayerData[];
   }): PlayerData[] => {
-    const shuffled = [...players].sort(() => 0.5 - Math.random());
-    setSelectedPlayers(shuffled.slice(0, numberPlayers));
-    return selectedPlayers;
+    return [...players].sort(() => 0.5 - Math.random()).slice(0, numberPlayers);
   };
 
   const getTeamLogo = (teamName: string): string | undefined => {
@@ -199,8 +215,6 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         getRandomPlayers,
         getTeamLogo,
         players,
-        selectedPlayers,
-        setSelectedPlayers,
         teams,
         getPlayerDivisions,
         havePlayedTogether,
@@ -211,6 +225,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         streakCount,
         setStreakCount,
         formatPosition,
+        getUserId,
       }}
     >
       {children}

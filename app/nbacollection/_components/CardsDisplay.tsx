@@ -55,7 +55,7 @@ export default function CardsDisplay() {
                 uniqueCardClasses || "bg-gray-200"
               } rounded-lg shadow cursor-pointer hover:shadow-lg transition-shadow`}
             >
-              <p className="relative text-sm text-gray-600 flex items-center gap-2">
+              <div className="relative text-sm text-gray-600 flex items-center gap-2">
                 {(() => {
                   const filteredTeams = teams_history.filter(({ team }) =>
                     teams.some((t) => team.includes(t))
@@ -81,7 +81,7 @@ export default function CardsDisplay() {
                     </div>
                   );
                 })()}
-              </p>
+              </div>
               <div className="absolute right-4 top-3 rounded-full w-14 h-14 bg-black flex items-center justify-center">
                 <p className=" italic font-righteous text-2xl text-white">{`#${number}`}</p>
               </div>
@@ -98,14 +98,14 @@ export default function CardsDisplay() {
                   />
                 </div>
                 <div className="h-fit p-2 bg-black  text-white uppercase flex items-center justify-center">
-                  <p className="flex gap-2 justify-center items-center text-center font-righteous flex-5 ">
+                  <div className="flex gap-2 justify-center items-center text-center font-righteous flex-5 ">
                     <div className="flex flex-col items-center">
                       <span className="text-sm">{nameParts[0]}</span>
                       <span className="text-xl">
                         {nameParts.slice(1).join(" ")}
                       </span>
                     </div>
-                  </p>
+                  </div>
                   <div className=" flex-1">
                     <span className="flex items-center justify-center font-righteous text-md bg-white text-black rounded-full w-full aspect-square">
                       {formatPosition(position)}

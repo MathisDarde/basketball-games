@@ -81,6 +81,17 @@ export const highscores = pgTable("highscores", {
   highscore: integer("score").notNull().default(0),
 });
 
+export const cardcollection = pgTable("cardcollection", {
+  id: text("id").primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  cardId: text("cardId")
+    .notNull()
+    .references(() => playersData.id, { onDelete: "cascade" }),
+  createdAt: timestamp("created_at").notNull().defaultNow(),
+});
+
 export const schema = {
   user,
   session,

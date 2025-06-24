@@ -1,24 +1,17 @@
 "use client";
 
-import { usePlayTogetherCtx } from "@/components/context";
+import { PlayerData, usePlayTogetherCtx } from "@/components/context";
 import Image from "next/image";
 import { useRef } from "react";
 
 type DisplayPlayersProps = {
-  randomPlayers: Player[];
-  setRandomPlayers: (players: Player[]) => void;
+  randomPlayers: PlayerData[];
+  setRandomPlayers: (players: PlayerData[]) => void;
 };
 
 type TeamHistory = {
   team: string;
   period: string;
-};
-
-type Player = {
-  name: string;
-  image_link: string;
-  teams_history: TeamHistory[];
-  wikipedia_url: string;
 };
 
 export default function DisplayPlayers({
@@ -52,7 +45,7 @@ export default function DisplayPlayers({
 
   return (
     <div className="flex items-center gap-2">
-      {randomPlayers.map((player: Player, index: number) => {
+      {randomPlayers.map((player: PlayerData, index: number) => {
         const { name, image_link, teams_history } = player;
 
         const allYears = teams_history

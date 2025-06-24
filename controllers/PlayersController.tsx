@@ -1,9 +1,20 @@
 import { db } from "@/app/db";
-import { playersData } from "@/app/db/schema";
+import { cardcollection, playersData } from "@/app/db/schema";
 import path from "path";
 import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
 import { PlayersSchemaType } from "@/types/players";
+
+export const getPlayers = async () => {
+  return db
+    .select()
+    .from(playersData)
+    .then((players) =>
+      players.map((player) => ({
+        ...player,
+      }))
+    );
+};
 
 export const storePlayers = async () => {
   try {
@@ -36,4 +47,12 @@ export const storePlayers = async () => {
     console.error("storePlayers error:", error);
     throw error;
   }
+};
+
+export const addCardToCollection = async (cardId: string, userId: string) => {
+  const data = { id: uuidv4(), cardId, userId };
+
+  const result = await db.insert(cardcollection).values(data);
+
+  return result;
 };
