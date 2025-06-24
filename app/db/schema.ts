@@ -4,7 +4,7 @@ import {
   boolean,
   timestamp,
   integer,
-  varchar,
+  jsonb,
 } from "drizzle-orm/pg-core";
 
 export const user = pgTable("users", {
@@ -61,14 +61,15 @@ export const verification = pgTable("verification", {
   updatedAt: timestamp("updated_at"),
 });
 
-export const players = pgTable("players", {
+export const playersData = pgTable("playersData", {
   id: text("id").primaryKey(),
   name: text("name").notNull(),
   position: text("position").notNull(),
-  number: integer("position").notNull(),
-  teams: varchar("teams", { length: 255 }).array().notNull(),
-  img_url: text("img_url"),
-  rarity: text("rarity").notNull(),
+  number: integer("number").notNull(),
+  teams_history: jsonb("teams_history").notNull(), // JSON array of { period, team }
+  image_link: text("image_link").notNull(),
+  wikipedia_url: text("wikipedia_url").notNull(),
+  awards: jsonb("awards").notNull().default("[]"), // JSON array of strings
 });
 
 export const highscores = pgTable("highscores", {
@@ -85,7 +86,7 @@ export const schema = {
   session,
   account,
   verification,
-  players,
+  playersData,
   highscores,
 };
 

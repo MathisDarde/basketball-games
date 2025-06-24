@@ -32,3 +32,21 @@ export const RegisterSchema = z
     message: "Les mots de passe ne correspondent pas !",
     path: ["confirmPassword"],
   });
+
+const TeamHistorySchema = z.object({
+  period: z.string(),
+  team: z.string(),
+});
+
+export const PlayersSchema = z.object({
+  name: z.string().nonempty(),
+  image_link: z.string().url().optional(),
+  position: z.string().nonempty(),
+  number: z.preprocess(
+    (val) => (typeof val === "string" ? parseInt(val, 10) : val),
+    z.number()
+  ),
+  teams_history: z.array(TeamHistorySchema).optional(),
+  awards: z.array(z.string()).optional(),
+  wikipedia_url: z.string().url().nonempty(),
+});
