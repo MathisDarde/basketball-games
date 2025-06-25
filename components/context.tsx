@@ -38,6 +38,17 @@ interface PlayTogetherContextType {
   setStreakCount: React.Dispatch<React.SetStateAction<number>>;
   formatPosition: (position: string) => string;
   getUserId: () => Promise<string | null>;
+  awardStyleCardBg: {
+    readonly mvp: string;
+    readonly all_nba: string;
+    readonly all_star: string;
+    readonly dpoy: string;
+    readonly mip: string;
+    readonly "6moy": string;
+    readonly roty: string;
+  };
+  awardPriority: readonly string[];
+  getBackgroundClass: (awards?: string[]) => string;
 }
 
 const PlayTogetherContext = createContext<PlayTogetherContextType | undefined>(
@@ -95,7 +106,6 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   const getPlayerTeams = (player: PlayerData) => {
-    console.log(player.teams_history);
     return player.teams_history
       .filter(({ team }) => teams.includes(team))
       .map(({ team }) => team);
@@ -209,6 +219,35 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     teams: teams.slice(i * 5, i * 5 + 5),
   }));
 
+  const awardStyleCardBg = {
+    mvp: "bg-[url('/bluediamondbgtest.jpeg')]",
+    all_nba: "bg-[url('/rubybgtest.jpg')]",
+    all_star: "bg-[url('/goldbgtest.avif')]",
+    dpoy: "bg-[url('/silverbgtest.jpg')]",
+    mip: "bg-[url('/silverbgtest.jpg')]",
+    "6moy": "bg-[url('/diamondbgtest.jpg')]",
+    roty: "bg-[url('/silverbgtest.jpg')]",
+  } as const;
+
+  const awardPriority = [
+    "mvp",
+    "all_nba",
+    "all_star",
+    "dpoy",
+    "mip",
+    "6moy",
+    "roty",
+  ] as const;
+
+  const getBackgroundClass = (awards: string[] = []) => {
+    for (const key of awardPriority) {
+      if (awards.some((a) => a.toLowerCase() === key)) {
+        return awardStyleCardBg[key];
+      }
+    }
+    return "";
+  };
+
   return (
     <PlayTogetherContext.Provider
       value={{
@@ -226,6 +265,9 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         setStreakCount,
         formatPosition,
         getUserId,
+        awardStyleCardBg,
+        awardPriority,
+        getBackgroundClass,
       }}
     >
       {children}

@@ -28,8 +28,6 @@ export default function DisplayPlayers({
     getPlayerDivisions,
   } = usePlayTogetherCtx();
 
-  console.log(difficulty);
-
   const hasInitialized = useRef(false);
 
   if (

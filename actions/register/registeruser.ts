@@ -15,8 +15,6 @@ const submitRegisterForm = async (
       return { success: false, errors: parsedData.error.errors };
     }
 
-    console.log("File param :", file);
-
     try {
       await signUp(parsedData.data, file ?? undefined);
       return { success: true, message: "Account created !" };

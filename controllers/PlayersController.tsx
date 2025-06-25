@@ -4,6 +4,7 @@ import path from "path";
 import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
 import { PlayersSchemaType } from "@/types/players";
+import { eq } from "drizzle-orm";
 
 export const getPlayers = async () => {
   return db
@@ -52,7 +53,28 @@ export const storePlayers = async () => {
 export const addCardToCollection = async (cardId: string, userId: string) => {
   const data = { id: uuidv4(), cardId, userId };
 
-  const result = await db.insert(cardcollection).values(data);
+  await db.insert(cardcollection).values(data);
 
-  return result;
+  const [current] = await db
+    .select({ possessed: cardcollection.possessed })
+    .from(cardcollection)
+    .where(eq(cardcollection.cardId, cardId));
+
+  const newPossessed = (current?.possessed ?? 0) + 1;
+
+  await db
+    .update(cardcollection)
+    .set({
+      possessed: newPossessed,
+    })
+    .where(eq(cardcollection.cardId, cardId));
+
+  return { success: true };
+};
+
+export const getUserCards = async (userId: string) => {
+  return await db
+    .select()
+    .from(cardcollection)
+    .where(eq(cardcollection.userId, userId));
 };
