@@ -1,5 +1,5 @@
 "use client";
-import { Aperture, Shell, LucideFileUser } from "lucide-react";
+import { Aperture, Shell, LucideFileUser, Flower2Icon } from "lucide-react";
 
 import React from "react";
 import { useRouter } from "next/navigation";
@@ -32,6 +32,13 @@ export default function MainPage() {
       >
         <LucideFileUser />
         <h3>NBA Cards Collection</h3>
+      </div>
+      <div
+        className="flex flex-col justify-center items-center gap-4 p-4 rounded-md bg-blue-200"
+        onClick={() => router.push("/careerpath")}
+      >
+        <Flower2Icon />
+        <h3>Career Path</h3>
       </div>
     </div>
   );
