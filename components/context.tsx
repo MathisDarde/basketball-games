@@ -20,6 +20,12 @@ export interface PlayerData {
   awards: string[];
 }
 
+export interface GridThemeData {
+  label: string;
+  imageUrl?: string;
+  type: string;
+}
+
 interface PlayTogetherContextType {
   getRandomPlayers: (params: {
     numberPlayers: number;
@@ -49,6 +55,10 @@ interface PlayTogetherContextType {
   };
   awardPriority: readonly string[];
   getBackgroundClass: (awards?: string[]) => string;
+  getRandomGridThemes: (params: {
+    numberThemes: number;
+    themes: GridThemeData[];
+  }) => GridThemeData[];
 }
 
 const PlayTogetherContext = createContext<PlayTogetherContextType | undefined>(
@@ -248,6 +258,16 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     return "";
   };
 
+  const getRandomGridThemes = ({
+    numberThemes,
+    themes,
+  }: {
+    numberThemes: number;
+    themes: GridThemeData[];
+  }): GridThemeData[] => {
+    return [...themes].sort(() => 0.5 - Math.random()).slice(0, numberThemes);
+  };
+
   return (
     <PlayTogetherContext.Provider
       value={{
@@ -268,6 +288,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         awardStyleCardBg,
         awardPriority,
         getBackgroundClass,
+        getRandomGridThemes,
       }}
     >
       {children}

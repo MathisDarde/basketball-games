@@ -1,5 +1,11 @@
 "use client";
-import { Aperture, Shell, LucideFileUser, Flower2Icon } from "lucide-react";
+import {
+  Aperture,
+  Shell,
+  LucideFileUser,
+  Flower2Icon,
+  LucideVariable,
+} from "lucide-react";
 
 import React from "react";
 import { useRouter } from "next/navigation";
@@ -39,6 +45,13 @@ export default function MainPage() {
       >
         <Flower2Icon />
         <h3>Career Path</h3>
+      </div>
+      <div
+        className="flex flex-col justify-center items-center gap-4 p-4 rounded-md bg-green-200"
+        onClick={() => router.push("/nbagrid")}
+      >
+        <LucideVariable />
+        <h3>NBA Grid</h3>
       </div>
     </div>
   );
