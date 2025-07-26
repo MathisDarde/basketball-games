@@ -1,43 +1,62 @@
 "use client";
 
+import storeCardInCollection from "@/actions/cardcollection/addcardtocollection";
 import { usePlayTogetherCtx } from "@/components/GlobalContext";
-import { Card, PlayerData } from "@/interfaces/Interfaces";
+import { PlayerData } from "@/interfaces/Interfaces";
+import { authClient } from "@/utils/auth-client";
 import Image from "next/image";
-import { teams } from "@/components/Teams";
+import { redirect } from "next/navigation";
+import { useState } from "react";
 
-export default function CardsDisplay({
-  ownedCards,
+export default function DailyDraw({
   players,
+  teams,
 }: {
-  ownedCards: Card[];
   players: PlayerData[];
+  teams: string[];
 }) {
-  const { getTeamLogo, formatPosition, getBackgroundClass } =
+  const { getRandomPlayers, getTeamLogo, formatPosition, getBackgroundClass } =
     usePlayTogetherCtx();
 
-  const cardIds = ownedCards.map((card) => card.cardId);
+  const getUserId = async () => {
+    const session = await authClient.getSession();
+    const user_id = session?.data?.user.id || null;
+    return user_id;
+  };
+
+  const randomPlayers = getRandomPlayers({ numberPlayers: 5, players });
+
+  const [flipped, setFlipped] = useState<number[]>([]);
+
+  const handleCardClick = (index: number) => {
+    if (flipped.includes(index) || flipped.length >= 5) return;
+
+    const updatedFlipped = [...flipped, index];
+    setFlipped(updatedFlipped);
+  };
+
+  const handleRedirectAndStore = async () => {
+    const userId = await getUserId();
+
+    if (!userId) return;
+
+    const flippedPlayers = flipped.map((index) => randomPlayers[index]);
+
+    for (const player of flippedPlayers) {
+      await storeCardInCollection(player.id, userId);
+    }
+
+    redirect("/nbacollection");
+  };
 
   return (
-    <div>
-      <p>Cards</p>
+    <>
+      <div className="flex items-center justify-center gap-2">
+        {randomPlayers.map((player, index) => {
+          const isFlipped = flipped.includes(index);
+          const { name, image_link, teams_history, number, position } = player;
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-[1200px]">
-        {players.map((player) => {
-          const {
-            id,
-            name,
-            number,
-            position,
-            awards,
-            teams_history,
-            image_link,
-          } = player;
-          const isOwned = cardIds.includes(id);
           const nameParts = name.split(" ");
-          const uniqueCardClasses = getBackgroundClass(awards || []);
-          const backgroundClass = isOwned
-            ? uniqueCardClasses || "bg-gray-200"
-            : "bg-gray-300";
 
           const filteredTeams = teams_history.filter(({ team }) =>
             teams.some((t) => team.includes(t))
@@ -49,15 +68,26 @@ export default function CardsDisplay({
           const { team } = lastTeam;
           const teamLogo = getTeamLogo(team);
 
+          const backgroundClass = getBackgroundClass();
+
           return (
             <div
-              key={id}
-              className={`relative overflow-hidden h-[400px] px-4 pb-4 pt-12 ${backgroundClass} rounded-lg shadow transition-shadow ${
-                isOwned ? "cursor-pointer hover:shadow-lg" : "opacity-50"
-              }`}
+              key={index}
+              className="relative w-[288px] h-[400px] cursor-pointer border rounded overflow-hidden"
+              onClick={() => handleCardClick(index)}
             >
-              {isOwned ? (
-                <>
+              {!isFlipped ? (
+                <Image
+                  src="/cardback.png"
+                  alt="Back of the card"
+                  width={96}
+                  height={128}
+                  className="w-full h-full object-cover"
+                />
+              ) : (
+                <div
+                  className={`relative overflow-hidden h-[400px] px-4 pb-4 pt-12 ${backgroundClass} rounded-lg shadow transition-shadow`}
+                >
                   <div className="relative text-sm text-gray-600 flex items-center gap-2">
                     <div className="absolute -top-9 -left-1">
                       {teamLogo && (
@@ -102,21 +132,23 @@ export default function CardsDisplay({
                       </div>
                     </div>
                   </div>
-                </>
-              ) : (
-                <div className="flex flex-col justify-center items-center h-full text-center px-4">
-                  <p className="text-xl font-bold uppercase font-righteous text-black">
-                    {name}
-                  </p>
-                  <p className="text-sm italic text-black/60 mt-2">
-                    Carte non possédée
-                  </p>
                 </div>
               )}
             </div>
           );
         })}
       </div>
-    </div>
+
+      {flipped.length === 5 && (
+        <div className="mt-6 text-center">
+          <button
+            onClick={handleRedirectAndStore}
+            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded mt-4 cursor-pointer"
+          >
+            Voir ma collection
+          </button>
+        </div>
+      )}
+    </>
   );
 }

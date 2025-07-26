@@ -1,12 +1,11 @@
-import { usePlayTogetherCtx } from "@/components/context";
+import { usePlayTogetherCtx } from "@/components/GlobalContext";
 import Image from "next/image";
+import { useState } from "react";
 
-type TeamBlockProps = {
-  availableTeams: string[];
-};
+export default function TeamBlock({ teams }: { teams: string[] }) {
+  const { getTeamLogo, difficulty } = usePlayTogetherCtx();
 
-export default function TeamBlock({ availableTeams }: TeamBlockProps) {
-  const { getTeamLogo, difficulty, teams } = usePlayTogetherCtx();
+  const [availableTeams] = useState<string[]>([]);
 
   return (
     <>

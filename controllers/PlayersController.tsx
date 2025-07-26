@@ -1,23 +1,30 @@
-import { db } from "@/app/db";
-import { cardcollection, playersData } from "@/app/db/schema";
+import { db } from "@/db";
+import { cardcollection, playersData } from "@/db/schema";
 import path from "path";
 import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
 import { PlayersSchemaType } from "@/types/players";
 import { eq } from "drizzle-orm";
+import { PlayerData, TeamHistory } from "@/interfaces/Interfaces";
 
-export const getPlayers = async () => {
+export async function getAllPlayers(): Promise<PlayerData[]> {
   return db
     .select()
     .from(playersData)
     .then((players) =>
-      players.map((player) => ({
-        ...player,
-      }))
+      players.map(
+        (player): PlayerData => ({
+          ...player,
+          teams_history: JSON.parse(
+            player.teams_history as unknown as string
+          ) as TeamHistory[],
+          awards: JSON.parse(player.awards as unknown as string) as string[],
+        })
+      )
     );
-};
+}
 
-export const storePlayers = async () => {
+export async function storePlayers() {
   try {
     const filePath = path.join(
       process.cwd(),
@@ -48,9 +55,9 @@ export const storePlayers = async () => {
     console.error("storePlayers error:", error);
     throw error;
   }
-};
+}
 
-export const addCardToCollection = async (cardId: string, userId: string) => {
+export async function addCardToCollection(cardId: string, userId: string) {
   const data = { id: uuidv4(), cardId, userId };
 
   await db.insert(cardcollection).values(data);
@@ -70,11 +77,11 @@ export const addCardToCollection = async (cardId: string, userId: string) => {
     .where(eq(cardcollection.cardId, cardId));
 
   return { success: true };
-};
+}
 
-export const getUserCards = async (userId: string) => {
+export async function getUserCards(userId: string) {
   return await db
     .select()
     .from(cardcollection)
     .where(eq(cardcollection.userId, userId));
-};
+}

@@ -1,32 +1,26 @@
 "use client";
 
-import { PlayerData, usePlayTogetherCtx } from "@/components/context";
+import { usePlayTogetherCtx } from "@/components/GlobalContext";
+import { PlayerData, TeamHistory } from "@/interfaces/Interfaces";
 import Image from "next/image";
 import { useRef } from "react";
 
-type DisplayPlayersProps = {
-  randomPlayers: PlayerData[];
-  setRandomPlayers: (players: PlayerData[]) => void;
-};
-
-type TeamHistory = {
-  team: string;
-  period: string;
-};
-
 export default function DisplayPlayers({
-  randomPlayers,
-  setRandomPlayers,
-}: DisplayPlayersProps) {
+  players,
+  teams,
+}: {
+  players: PlayerData[];
+  teams: string[];
+}) {
   const {
     getRandomPlayers,
-    players,
     getTeamLogo,
-    teams,
     difficulty,
     endedRound,
     getPlayerDivisions,
   } = usePlayTogetherCtx();
+
+  const randomPlayers = getRandomPlayers({ numberPlayers: 2, players });
 
   const hasInitialized = useRef(false);
 
@@ -35,9 +29,7 @@ export default function DisplayPlayers({
     players.length > 0 &&
     randomPlayers.length === 0
   ) {
-    const selected = getRandomPlayers({ numberPlayers: 2, players });
-    setRandomPlayers(selected);
-    localStorage.setItem("randomPlayers", JSON.stringify(selected));
+    localStorage.setItem("randomPlayers", JSON.stringify(randomPlayers));
     hasInitialized.current = true;
   }
 

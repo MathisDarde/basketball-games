@@ -1,30 +1,10 @@
 "use client";
 
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { TeamLogos } from "./TeamLogos";
 import { authClient } from "@/utils/auth-client";
-
-interface TeamHistory {
-  period: string;
-  team: string;
-}
-
-export interface PlayerData {
-  id: string;
-  name: string;
-  wikipedia_url: string;
-  teams_history: TeamHistory[];
-  image_link: string;
-  number: number;
-  position: string;
-  awards: string[];
-}
-
-export interface GridThemeData {
-  label: string;
-  imageUrl?: string;
-  type: string;
-}
+import { GridThemeData, PlayerData } from "@/interfaces/Interfaces";
+import { teams } from "./Teams";
 
 interface PlayTogetherContextType {
   getRandomPlayers: (params: {
@@ -32,8 +12,6 @@ interface PlayTogetherContextType {
     players: PlayerData[];
   }) => PlayerData[];
   getTeamLogo: (teamName: string) => string | undefined;
-  players: PlayerData[];
-  teams: string[];
   getPlayerDivisions: (player: PlayerData) => string[];
   havePlayedTogether: (player1: PlayerData, player2: PlayerData) => boolean;
   difficulty: number;
@@ -66,34 +44,9 @@ const PlayTogetherContext = createContext<PlayTogetherContextType | undefined>(
 );
 
 export const AppProvider = ({ children }: { children: React.ReactNode }) => {
-  const [players, setPlayers] = useState<PlayerData[]>([]);
   const [difficulty, setDifficulty] = useState(0);
   const [endedRound, setEndedRound] = useState(false);
   const [streakCount, setStreakCount] = useState(0);
-
-  useEffect(() => {
-    const fetchPlayers = async () => {
-      const data = await import("@/actions/players/getplayers").then((mod) =>
-        mod.default()
-      );
-
-      if (Array.isArray(data)) {
-        setPlayers(
-          data.map((player) => ({
-            ...player,
-            teams_history: Array.isArray(player.teams_history)
-              ? player.teams_history
-              : [],
-            awards: Array.isArray(player.awards) ? player.awards : [],
-          }))
-        );
-      } else {
-        setPlayers([]);
-      }
-    };
-
-    fetchPlayers();
-  }, []);
 
   const getUserId = async () => {
     const session = await authClient.getSession();
@@ -182,39 +135,6 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     return posMap[firstPos] || "";
   }
 
-  const teams = [
-    "Philadelphia 76ers",
-    "Boston Celtics",
-    "New York Knicks",
-    "Toronto Raptors",
-    "Brooklyn Nets",
-    "Cleveland Cavaliers",
-    "Chicago Bulls",
-    "Indiana Pacers",
-    "Detroit Pistons",
-    "Milwaukee Bucks",
-    "Washington Wizards",
-    "Miami Heat",
-    "Atlanta Hawks",
-    "Charlotte Hornets",
-    "Orlando Magic",
-    "Los Angeles Lakers",
-    "Golden State Warriors",
-    "Los Angeles Clippers",
-    "Sacramento Kings",
-    "Phoenix Suns",
-    "San Antonio Spurs",
-    "Houston Rockets",
-    "Dallas Mavericks",
-    "Memphis Grizzlies",
-    "New Orleans Pelicans",
-    "Denver Nuggets",
-    "Utah Jazz",
-    "Minnesota Timberwolves",
-    "Oklahoma City Thunder",
-    "Portland Trail Blazers",
-  ];
-
   const divisionNames = [
     "Atlantic",
     "Central",
@@ -273,8 +193,6 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
       value={{
         getRandomPlayers,
         getTeamLogo,
-        players,
-        teams,
         getPlayerDivisions,
         havePlayedTogether,
         difficulty,

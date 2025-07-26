@@ -1,4 +1,6 @@
-import { usePlayTogetherCtx } from "./context";
+"use client";
+
+import { usePlayTogetherCtx } from "./GlobalContext";
 
 export default function Difficulty() {
   const { setDifficulty, streakCount } = usePlayTogetherCtx();

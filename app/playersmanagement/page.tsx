@@ -1,5 +1,3 @@
-"use client";
-
 import registerPlayers from "@/actions/players/registerplayers";
 
 export default function Page() {

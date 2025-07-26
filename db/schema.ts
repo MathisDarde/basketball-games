@@ -100,6 +100,13 @@ export const schema = {
   verification,
   playersData,
   highscores,
+  cardcollection,
 };
 
 export type SelectUser = typeof user.$inferSelect;
+
+export type SelectPlayersData = typeof playersData.$inferSelect;
+
+export type SelectHighscores = typeof highscores.$inferSelect;
+
+export type SelectCardCollection = typeof cardcollection.$inferSelect;

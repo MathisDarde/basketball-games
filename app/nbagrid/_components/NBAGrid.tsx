@@ -1,6 +1,6 @@
 "use client";
 
-import { usePlayTogetherCtx } from "@/components/context";
+import { usePlayTogetherCtx } from "@/components/GlobalContext";
 import { GridThemes } from "@/components/GridThemes";
 import Image from "next/image";
 

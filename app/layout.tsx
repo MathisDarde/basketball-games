@@ -1,5 +1,5 @@
 import "./globals.css";
-import { AppProvider } from "../components/context";
+import { AppProvider } from "../components/GlobalContext";
 import { Righteous } from "next/font/google";
 import { Toaster } from "sonner";
 

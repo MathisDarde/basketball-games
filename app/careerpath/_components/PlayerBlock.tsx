@@ -1,25 +1,33 @@
 "use client";
 
-import { PlayerData, usePlayTogetherCtx } from "@/components/context";
+import { usePlayTogetherCtx } from "@/components/GlobalContext";
+import { PlayerData } from "@/interfaces/Interfaces";
 import Image from "next/image";
-
-type PlayerBlockProps = {
-  droppedTeams: (string | null)[];
-  setDroppedTeams: React.Dispatch<React.SetStateAction<(string | null)[]>>;
-  setAvailableTeams: React.Dispatch<React.SetStateAction<string[]>>;
-  player: PlayerData[];
-  name: string;
-  image_link: string;
-};
+import { useState } from "react";
 
 export default function PlayerBlock({
-  droppedTeams,
-  setDroppedTeams,
-  setAvailableTeams,
-  name,
-  image_link,
-}: PlayerBlockProps) {
-  const { getTeamLogo, difficulty } = usePlayTogetherCtx();
+  players,
+  teams,
+}: {
+  players: PlayerData[];
+  teams: string[];
+}) {
+  const { getTeamLogo, difficulty, getRandomPlayers } = usePlayTogetherCtx();
+
+  const [droppedTeams, setDroppedTeams] = useState<(string | null)[]>([]);
+  const [, setAvailableTeams] = useState<string[]>([]);
+
+  const playerArr = getRandomPlayers({ numberPlayers: 1, players });
+  const { teams_history, image_link, name } = playerArr[0] || {};
+
+  if (teams_history.length > 0) {
+    const filteredTeams = teams_history
+      .filter(({ team }) => teams.some((t) => team.includes(t)))
+      .map(({ team }) => team);
+
+    setDroppedTeams(Array(filteredTeams.length).fill(null));
+    setAvailableTeams(filteredTeams);
+  }
 
   return (
     <div className="flex flex-col justify-center items-center border rounded-md p-4">

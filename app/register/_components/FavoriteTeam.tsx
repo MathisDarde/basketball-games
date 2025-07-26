@@ -1,9 +1,7 @@
-"use client";
-
-import { usePlayTogetherCtx } from "@/components/context";
 import { UseFormRegister, UseFormSetValue } from "react-hook-form";
 import { RegisterSchemaType } from "@/types/forms";
 import { ImageIcon } from "lucide-react";
+import { teams } from "@/components/Teams";
 
 type FavoriteTeamSelectProps = {
   register: UseFormRegister<RegisterSchemaType>;
@@ -14,8 +12,6 @@ export default function FavoriteTeamSelect({
   register,
   setValue,
 }: FavoriteTeamSelectProps) {
-  const { teams } = usePlayTogetherCtx();
-
   const handleSelect = (team: string) => {
     setValue("favorite_team", team);
   };

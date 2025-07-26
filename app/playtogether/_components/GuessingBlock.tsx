@@ -1,21 +1,12 @@
-import { usePlayTogetherCtx } from "@/components/context";
+import { usePlayTogetherCtx } from "@/components/GlobalContext";
 import { useState } from "react";
 
-import type { PlayerData } from "@/components/context";
 import { Check, X } from "lucide-react";
+import { PlayerData } from "@/interfaces/Interfaces";
 
-interface GuessingBlockProps {
-  setRandomPlayers: (players: PlayerData[]) => void;
-  randomPlayers: PlayerData[];
-}
-
-export default function GuessingBlock({
-  setRandomPlayers,
-  randomPlayers,
-}: GuessingBlockProps) {
+export default function GuessingBlock({ players }: { players: PlayerData[] }) {
   const {
     getRandomPlayers,
-    players,
     havePlayedTogether,
     endedRound,
     setEndedRound,
@@ -24,11 +15,13 @@ export default function GuessingBlock({
   } = usePlayTogetherCtx();
 
   const [endRoundMessage, setEndRoundMessage] = useState(0);
+  const [randomPlayers, setRandomPlayers] = useState<PlayerData[]>(() =>
+    getRandomPlayers({ numberPlayers: 2, players })
+  );
 
   const regeneratePlayers = () => {
     const newPlayers = getRandomPlayers({ numberPlayers: 2, players });
     setRandomPlayers(newPlayers);
-    localStorage.setItem("randomPlayers", JSON.stringify(newPlayers));
   };
 
   const nextRound = () => {

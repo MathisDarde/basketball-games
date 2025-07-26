@@ -1,5 +1,5 @@
-import { db } from "@/app/db";
-import { SelectUser, user } from "@/app/db/schema";
+import { db } from "@/db";
+import { SelectUser, user } from "@/db/schema";
 import { RegisterSchemaType } from "@/types/forms";
 import { eq } from "drizzle-orm";
 import { auth } from "@/utils/auth";
@@ -7,7 +7,7 @@ import path from "path";
 import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
 
-export const signUp = async (data: RegisterSchemaType, file?: File) => {
+export async function signUp(data: RegisterSchemaType, file?: File) {
   let imageUrl = "";
 
   try {
@@ -68,7 +68,7 @@ export const signUp = async (data: RegisterSchemaType, file?: File) => {
       "Erreur lors de l'upload du fichier ou de la création de l'article"
     );
   }
-};
+}
 
 export async function deleteUser(id: SelectUser["id"]) {
   await db.delete(user).where(eq(user.id, id));
