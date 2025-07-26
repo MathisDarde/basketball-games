@@ -1,9 +1,8 @@
-import GuessingBlock from "./_components/GuessingBlock";
-import DisplayPlayers from "./_components/DisplayPlayers";
 import Difficulty from "@/components/Difficulty";
 import Link from "next/link";
 import { getAllPlayers } from "@/controllers/PlayersController";
 import { teams } from "@/components/Teams";
+import PageContent from "./_components/PageContent";
 
 export default async function PlayTogetherPage() {
   const players = await getAllPlayers();
@@ -16,10 +15,7 @@ export default async function PlayTogetherPage() {
 
       <Difficulty />
 
-      <div className="flex flex-col items-center gap-4">
-        <DisplayPlayers players={players} teams={teams} />
-        <GuessingBlock players={players} />
-      </div>
+      <PageContent players={players} teams={teams} />
     </>
   );
 }

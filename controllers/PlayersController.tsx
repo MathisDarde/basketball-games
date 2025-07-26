@@ -5,7 +5,7 @@ import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
 import { PlayersSchemaType } from "@/types/players";
 import { eq } from "drizzle-orm";
-import { PlayerData, TeamHistory } from "@/interfaces/Interfaces";
+import { PlayerData } from "@/interfaces/Interfaces";
 
 export async function getAllPlayers(): Promise<PlayerData[]> {
   return db
@@ -15,10 +15,14 @@ export async function getAllPlayers(): Promise<PlayerData[]> {
       players.map(
         (player): PlayerData => ({
           ...player,
-          teams_history: JSON.parse(
-            player.teams_history as unknown as string
-          ) as TeamHistory[],
-          awards: JSON.parse(player.awards as unknown as string) as string[],
+          teams_history:
+            typeof player.teams_history === "string"
+              ? JSON.parse(player.teams_history)
+              : player.teams_history,
+          awards:
+            typeof player.awards === "string"
+              ? JSON.parse(player.awards)
+              : player.awards,
         })
       )
     );

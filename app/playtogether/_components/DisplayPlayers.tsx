@@ -7,20 +7,15 @@ import { useRef } from "react";
 
 export default function DisplayPlayers({
   players,
+  randomPlayers,
   teams,
 }: {
   players: PlayerData[];
+  randomPlayers: PlayerData[];
   teams: string[];
 }) {
-  const {
-    getRandomPlayers,
-    getTeamLogo,
-    difficulty,
-    endedRound,
-    getPlayerDivisions,
-  } = usePlayTogetherCtx();
-
-  const randomPlayers = getRandomPlayers({ numberPlayers: 2, players });
+  const { getTeamLogo, difficulty, endedRound, getPlayerDivisions } =
+    usePlayTogetherCtx();
 
   const hasInitialized = useRef(false);
 

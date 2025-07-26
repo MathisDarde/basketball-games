@@ -1,10 +1,20 @@
+"use client";
+
 import { usePlayTogetherCtx } from "@/components/GlobalContext";
 import { useState } from "react";
 
 import { Check, X } from "lucide-react";
 import { PlayerData } from "@/interfaces/Interfaces";
 
-export default function GuessingBlock({ players }: { players: PlayerData[] }) {
+export default function GuessingBlock({
+  players,
+  randomPlayers,
+  setRandomPlayers,
+}: {
+  players: PlayerData[];
+  randomPlayers: PlayerData[];
+  setRandomPlayers: React.Dispatch<PlayerData[]>;
+}) {
   const {
     getRandomPlayers,
     havePlayedTogether,
@@ -15,9 +25,6 @@ export default function GuessingBlock({ players }: { players: PlayerData[] }) {
   } = usePlayTogetherCtx();
 
   const [endRoundMessage, setEndRoundMessage] = useState(0);
-  const [randomPlayers, setRandomPlayers] = useState<PlayerData[]>(() =>
-    getRandomPlayers({ numberPlayers: 2, players })
-  );
 
   const regeneratePlayers = () => {
     const newPlayers = getRandomPlayers({ numberPlayers: 2, players });
