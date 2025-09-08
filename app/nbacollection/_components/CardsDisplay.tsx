@@ -8,12 +8,16 @@ import { teams } from "@/components/Teams";
 export default function CardsDisplay({
   ownedCards,
   players,
+  params,
 }: {
   ownedCards: Card[];
   players: PlayerData[];
+  params: { period: string };
 }) {
   const { getTeamLogo, formatPosition, getBackgroundClass } =
     usePlayTogetherCtx();
+
+  const { period } = params;
 
   const cardIds = ownedCards.map((card) => card.cardId);
 
@@ -45,9 +49,27 @@ export default function CardsDisplay({
 
           if (filteredTeams.length === 0) return "Unknown";
 
+          const parsePeriod = (period?: string): number => {
+            if (!period) return new Date().getFullYear(); // fallback si rien
+
+            const normalized = period.replace("–", "-").toLowerCase();
+
+            if (normalized.includes("-")) {
+              const [, to] = normalized.split("-");
+
+              if (to.trim() === "present") {
+                return new Date().getFullYear();
+              }
+
+              return Number(to);
+            }
+
+            return Number(normalized);
+          };
+
           const lastTeam = filteredTeams[filteredTeams.length - 1];
-          const { team } = lastTeam;
-          const teamLogo = getTeamLogo(team);
+          const year = parsePeriod(period);
+          const teamLogo = getTeamLogo(lastTeam.team, year);
 
           return (
             <div
@@ -63,7 +85,7 @@ export default function CardsDisplay({
                       {teamLogo && (
                         <Image
                           src={teamLogo}
-                          alt={`${team} logo`}
+                          alt={`${lastTeam.team} logo`}
                           width={50}
                           height={50}
                           className="inline-block size-14 object-fit"
@@ -97,7 +119,7 @@ export default function CardsDisplay({
                       </div>
                       <div className=" flex-1">
                         <span className="flex items-center justify-center font-righteous text-md bg-white text-black rounded-full w-full aspect-square">
-                          {formatPosition(position)}
+                          {formatPosition(position ?? "")}
                         </span>
                       </div>
                     </div>

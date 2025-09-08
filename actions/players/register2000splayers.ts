@@ -1,14 +1,14 @@
 "use server";
 
-import { storePlayers } from "@/controllers/PlayersController";
+import { store2000sPlayers } from "@/controllers/PlayersController";
 import { FormResponse } from "@/types/players";
 
-const registerPlayers = async (): Promise<FormResponse> => {
+const register2000sPlayers = async (): Promise<FormResponse> => {
   try {
-    await storePlayers();
+    await store2000sPlayers();
     return { success: true, message: "Player stored !" };
   } catch (error) {
-    console.error("storePlayers error:", error);
+    console.error("store2000sPlayers error:", error);
     return {
       success: false,
       message: "An error was encountered during the registration.",
@@ -16,4 +16,4 @@ const registerPlayers = async (): Promise<FormResponse> => {
   }
 };
 
-export default registerPlayers;
+export default register2000sPlayers;

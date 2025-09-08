@@ -1,6 +1,7 @@
 "use client";
 
 import { usePlayTogetherCtx } from "@/components/GlobalContext";
+import { TeamLogos } from "@/components/TeamLogos";
 import { PlayerData, TeamHistory } from "@/interfaces/Interfaces";
 import Image from "next/image";
 import { useRef } from "react";
@@ -14,8 +15,7 @@ export default function DisplayPlayers({
   randomPlayers: PlayerData[];
   teams: string[];
 }) {
-  const { getTeamLogo, difficulty, endedRound, getPlayerDivisions } =
-    usePlayTogetherCtx();
+  const { getTeamLogo, difficulty, endedRound } = usePlayTogetherCtx();
 
   const hasInitialized = useRef(false);
 
@@ -29,7 +29,7 @@ export default function DisplayPlayers({
   }
 
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex flex-col items-center gap-6">
       {randomPlayers.map((player: PlayerData, index: number) => {
         const { name, image_link, teams_history } = player;
 
@@ -70,72 +70,92 @@ export default function DisplayPlayers({
         }
 
         return (
-          <div
-            key={index}
-            className="player-card border p-4 my-4 rounded-md shadow flex-1"
-          >
+          <div key={index} className="player-card p-4 w-[300px] bg-white">
             {difficulty < 2 || endedRound ? (
               <Image
                 src={image_link || "/pdpdebase.png"}
                 alt={name}
-                width={100}
-                height={100}
+                width={75}
+                height={75}
                 className="rounded-full mb-4"
               />
             ) : (
               <Image
                 src="/playersilhouette.png"
                 alt={name}
-                width={100}
-                height={100}
+                width={75}
+                height={75}
                 className="rounded-full mb-4"
               />
             )}
 
-            <h2 className="text-lg font-bold mb-2">{name}</h2>
-            {(difficulty < 1 || endedRound) && <p>{activePeriod}</p>}
-            {difficulty < 1 && !endedRound && (
-              <div className="flex flex-col justify-start gap-2">
-                <p>Divisions played in</p>
-
-                {getPlayerDivisions(player).map((division, divIndex) => (
-                  <p key={divIndex}>{division}</p>
-                ))}
-              </div>
+            <h2
+              className={`text-xl mb-2 font-medium font-unbounded text-center`}
+            >
+              {name}
+            </h2>
+            {(difficulty < 1 || endedRound) && (
+              <p className="text-sm text-center font-outfit">
+                Active Period: {activePeriod}
+              </p>
             )}
 
             {endedRound && (
-              <>
+              <div className="grid grid-cols-3 gap-1 mt-4">
                 {teams_history
                   .filter(({ team }) => teams.some((t) => team.includes(t)))
                   .map((singleTeam: TeamHistory, teamIndex: number) => {
                     const { team, period } = singleTeam;
 
-                    const teamLogo: string | undefined = getTeamLogo(team);
+                    const parsePeriod = (period: string): number => {
+                      const normalized = period.replace("–", "-").toLowerCase();
+
+                      if (normalized.includes("-")) {
+                        const [, to] = normalized.split("-");
+
+                        if (to.trim() === "present") {
+                          return new Date().getFullYear();
+                        }
+
+                        return Number(to);
+                      }
+
+                      return Number(normalized);
+                    };
+
+                    const year = parsePeriod(period);
+                    const teamLogo: string | undefined = getTeamLogo(
+                      team,
+                      year
+                    );
+
+                    const abrevation = TeamLogos.find(
+                      (t) => t.team === team
+                    )?.abr;
 
                     return (
-                      <div key={teamIndex} className="team-history my-2">
-                        <div className="flex items-center gap-3">
-                          <p>
-                            <strong>Team:</strong> {team}
-                          </p>
+                      <div key={teamIndex} className="team-history">
+                        <div className="flex flex-col border border-black gap-2 items-center p-2 rounded-md">
                           {teamLogo && (
                             <Image
                               src={teamLogo}
                               alt={`${team} logo`}
                               width={50}
                               height={50}
-                              className="team-logo"
+                              className="team-logo h-10 w-auto object-contain"
                             />
                           )}
+                          <p className={`font-bold uppercase font-unbounded`}>
+                            {abrevation}
+                          </p>
+                          <p className={`text-xs font-outfit font-normal`}>
+                            {period}
+                          </p>
                         </div>
-                        <p>
-                          <strong>Years:</strong> {period}
-                        </p>
                       </div>
                     );
                   })}
-              </>
+              </div>
             )}
           </div>
         );

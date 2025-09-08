@@ -1,0 +1,39 @@
+import { getPlayers } from "@/controllers/PlayersController";
+import { getDailyDraw } from "@/controllers/DailyDrawController";
+import { teams } from "@/components/Teams";
+import { getAuthenticatedUserId } from "@/actions/user/get-connected-user-id";
+import CountdownToNextDraw from "./_components/CountdownToNextDraw";
+import { PeriodTypes } from "@/interfaces/Interfaces";
+import DailyDrawClient from "./_components/DrawClient";
+
+export default async function DailyDrawPage({
+  params,
+}: {
+  params: { period: PeriodTypes };
+}) {
+  const { period } = params;
+
+  const userId = await getAuthenticatedUserId();
+  if (!userId) return <p>Vous devez être connecté.</p>;
+
+  const allPlayers = await getPlayers(period);
+
+  const { players, flippedIds } = await getDailyDraw(userId, allPlayers);
+
+  return (
+    <>
+      <h1 className="text-2xl font-bold mb-4">Daily Draw</h1>
+
+      <DailyDrawClient
+        initialPlayers={players}
+        flippedInitial={flippedIds}
+        allPlayers={allPlayers}
+        teams={teams}
+        userId={userId}
+        period={period}
+      />
+
+      <CountdownToNextDraw />
+    </>
+  );
+}

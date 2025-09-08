@@ -1,21 +1,15 @@
-import Difficulty from "@/components/Difficulty";
-import Link from "next/link";
-import { getAllPlayers } from "@/controllers/PlayersController";
-import { teams } from "@/components/Teams";
-import PageContent from "./_components/PageContent";
+"use client";
 
-export default async function PlayTogetherPage() {
-  const players = await getAllPlayers();
+import PeriodSelector from "@/components/PeriodSelector";
+import { BrickWallIcon, StarIcon } from "lucide-react";
 
-  return (
-    <>
-      <Link href="/">
-        <h1 className="cursor-pointer">Back to home</h1>
-      </Link>
+const periods = [
+  { key: "2020s", label: "2020s Edition", Icon: BrickWallIcon },
+  { key: "1990s", label: "1990s Edition", Icon: StarIcon },
+  { key: "2000s", label: "2000s Edition" },
+  { key: "2010s", label: "2010s Edition", Icon: BrickWallIcon },
+];
 
-      <Difficulty />
-
-      <PageContent players={players} teams={teams} />
-    </>
-  );
+export default function CareerPathPeriodSelector() {
+  return <PeriodSelector periods={periods} basePath="/playtogether" />;
 }

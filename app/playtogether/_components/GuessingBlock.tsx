@@ -2,7 +2,7 @@
 
 import { usePlayTogetherCtx } from "@/components/GlobalContext";
 import { useState } from "react";
-
+import { getRandomPlayers } from "@/utils/get-random-players";
 import { Check, X } from "lucide-react";
 import { PlayerData } from "@/interfaces/Interfaces";
 
@@ -16,7 +16,6 @@ export default function GuessingBlock({
   setRandomPlayers: React.Dispatch<PlayerData[]>;
 }) {
   const {
-    getRandomPlayers,
     havePlayedTogether,
     endedRound,
     setEndedRound,
@@ -43,32 +42,52 @@ export default function GuessingBlock({
       : false;
 
   return (
-    <div className="mx-auto bg-gray-100 rounded-md p-4">
+    <div className={`mx-auto bg-white p-4 w-[300px]`}>
       {endRoundMessage === 0 && !endedRound && (
-        <>
-          <p>Have these players played together ?</p>
+        <div className="flex flex-col items-center gap-3">
+          <p className={`text-cente`}>Have these players played together ?</p>
 
-          <div className="flex items-center gap-2">
+          <div className="relative">
+            {/* Ombre */}
+            <span
+              className="absolute top-0 left-0 w-[200px] h-full 
+                 bg-black
+                 translate-x-[6px] translate-y-[6px]"
+            ></span>
             <button
               onClick={() => {
                 setEndedRound(true);
                 setEndRoundMessage(1);
               }}
-              className="bg-green-500 text-black flex-1"
+              className={`relative w-[200px] px-6 py-3 font-bold text-black 
+                 bg-[#00F5D4]
+                 active:translate-x-[1px] active:translate-y-[1px] 
+                 transition-transform font-unbounded cursor-pointer`}
             >
               Yes
             </button>
+          </div>
+
+          <div className="relative">
+            <span
+              className="absolute top-0 left-0 w-[200px] h-full 
+                 bg-black 
+                 translate-x-[6px] translate-y-[6px]"
+            ></span>
             <button
               onClick={() => {
                 setEndedRound(true);
                 setEndRoundMessage(2);
               }}
-              className="bg-red-500 text-white flex-1"
+              className={`relative w-[200px] px-6 py-3 font-bold text-black 
+                 bg-[#F15BB5]
+                 active:translate-x-[1px] active:translate-y-[1px] 
+                 transition-transform font-unbounded cursor-pointer`}
             >
               No
             </button>
           </div>
-        </>
+        </div>
       )}
       {endRoundMessage === 1 && endedRound && (
         <>
@@ -77,34 +96,57 @@ export default function GuessingBlock({
               <div className="bg-green-500 rounded-full p-2 mb-2">
                 <Check size={24} color="#fff" />
               </div>
-              <p className="text-black">Great! They have played together.</p>
-              <button
-                onClick={() => {
-                  nextRound();
-                  setStreakCount(streakCount + 1);
-                }}
-                className="bg-blue-900 text-white rounded-md px-6 py-3 cursor-pointer"
-              >
-                Next round
-              </button>
+              <p className={`font-unbounded text-center`}>
+                Great! They have played together.
+              </p>
+
+              <div className="relative">
+                <span
+                  className="absolute top-0 left-0 w-[200px] h-full 
+                 bg-black 
+                 translate-x-[6px] translate-y-[6px]"
+                ></span>
+                <button
+                  onClick={() => {
+                    nextRound();
+                    setStreakCount(streakCount + 1);
+                  }}
+                  className={`relative w-[200px] px-6 py-3 font-bold text-black 
+                 bg-[#00BBF9]
+                 active:translate-x-[1px] active:translate-y-[1px] 
+                 transition-transform font-unbounded cursor-pointer`}
+                >
+                  Next round
+                </button>
+              </div>
             </div>
           ) : (
             <div className="flex flex-col items-center gap-2">
               <div className="bg-red-500 rounded-full p-2 mb-2">
                 <X size={24} color="#fff" />
               </div>
-              <p className="text-black">
+              <p className={`font-unbounded text-center`}>
                 Wrong answer! They have not played together.
               </p>
-              <button
-                onClick={() => {
-                  nextRound();
-                  setStreakCount(0);
-                }}
-                className="bg-blue-900 text-white rounded-md px-6 py-3 cursor-pointer"
-              >
-                Next round
-              </button>
+              <div className="relative">
+                <span
+                  className="absolute top-0 left-0 w-[200px] h-full 
+                 bg-black 
+                 translate-x-[6px] translate-y-[6px]"
+                ></span>
+                <button
+                  onClick={() => {
+                    nextRound();
+                    setStreakCount(0);
+                  }}
+                  className={`relative w-[200px] px-6 py-3 font-bold text-black 
+                 bg-[#00BBF9]
+                 active:translate-x-[1px] active:translate-y-[1px] 
+                 transition-transform font-unbounded cursor-pointer`}
+                >
+                  Next round
+                </button>
+              </div>
             </div>
           )}
         </>
@@ -116,36 +158,57 @@ export default function GuessingBlock({
               <div className="bg-green-500 rounded-full p-2 mb-2">
                 <Check size={24} color="#fff" />
               </div>
-              <p className="text-black">
+              <p className={`font-unbounded text-center`}>
                 Great! They have not played together.
               </p>
-              <button
-                onClick={() => {
-                  nextRound();
-                  setStreakCount(streakCount + 1);
-                }}
-                className="bg-blue-900 text-white rounded-md px-6 py-3 cursor-pointer"
-              >
-                Next round
-              </button>
+
+              <div className="relative">
+                <span
+                  className="absolute top-0 left-0 w-[200px] h-full 
+                 bg-black 
+                 translate-x-[6px] translate-y-[6px]"
+                ></span>
+                <button
+                  onClick={() => {
+                    nextRound();
+                    setStreakCount(streakCount + 1);
+                  }}
+                  className={`relative w-[200px] px-6 py-3 font-bold text-black 
+                 bg-[#00BBF9]
+                 active:translate-x-[1px] active:translate-y-[1px] 
+                 transition-transform font-unbounded cursor-pointer`}
+                >
+                  Next round
+                </button>
+              </div>
             </div>
           ) : (
             <div className="flex flex-col items-center gap-2">
               <div className="bg-red-500 rounded-full p-2 mb-2">
                 <X size={24} color="#fff" />
               </div>
-              <p className="text-black">
+              <p className={`font-unbounded text-center`}>
                 Wrong answer! They did play together.
               </p>
-              <button
-                onClick={() => {
-                  nextRound();
-                  setStreakCount(0);
-                }}
-                className="bg-blue-900 text-white rounded-md px-6 py-3 cursor-pointer"
-              >
-                Next round
-              </button>
+              <div className="relative">
+                <span
+                  className="absolute top-0 left-0 w-[200px] h-full 
+                 bg-black 
+                 translate-x-[6px] translate-y-[6px]"
+                ></span>
+                <button
+                  onClick={() => {
+                    nextRound();
+                    setStreakCount(0);
+                  }}
+                  className={`relative w-[200px] px-6 py-3 font-bold text-black 
+                 bg-[#00BBF9]
+                 active:translate-x-[1px] active:translate-y-[1px] 
+                 transition-transform font-unbounded cursor-pointer`}
+                >
+                  Next round
+                </button>
+              </div>
             </div>
           )}
         </>

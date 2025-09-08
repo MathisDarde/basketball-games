@@ -1,89 +1,95 @@
 "use client";
 
-import storeCardInCollection from "@/actions/cardcollection/addcardtocollection";
+import flipCardFunction from "@/actions/cardcollection/flipcard";
 import { usePlayTogetherCtx } from "@/components/GlobalContext";
-import { PlayerData } from "@/interfaces/Interfaces";
-import { authClient } from "@/utils/auth-client";
+import { PeriodTypes, PlayerData } from "@/interfaces/Interfaces";
 import Image from "next/image";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function DailyDraw({
   players,
   teams,
+  flippedInitial,
+  userId,
+  params,
 }: {
   players: PlayerData[];
   teams: string[];
+  flippedInitial: string[];
+  userId: string;
+  params: { period: PeriodTypes };
 }) {
-  const { getRandomPlayers, getTeamLogo, formatPosition, getBackgroundClass } =
+  const { getTeamLogo, formatPosition, getBackgroundClass } =
     usePlayTogetherCtx();
 
-  const getUserId = async () => {
-    const session = await authClient.getSession();
-    const user_id = session?.data?.user.id || null;
-    return user_id;
+  const { period } = params;
+
+  const [flippedIds, setFlippedIds] = useState<string[]>(flippedInitial);
+  const router = useRouter();
+
+  const handleCardClick = async (player: PlayerData) => {
+    if (flippedIds.includes(player.id)) return;
+
+    await flipCardFunction(userId, player.id);
+    setFlippedIds((prev) => [...prev, player.id]);
   };
 
-  const randomPlayers = getRandomPlayers({ numberPlayers: 5, players });
-
-  const [flipped, setFlipped] = useState<number[]>([]);
-
-  const handleCardClick = (index: number) => {
-    if (flipped.includes(index) || flipped.length >= 5) return;
-
-    const updatedFlipped = [...flipped, index];
-    setFlipped(updatedFlipped);
-  };
-
-  const handleRedirectAndStore = async () => {
-    const userId = await getUserId();
-
-    if (!userId) return;
-
-    const flippedPlayers = flipped.map((index) => randomPlayers[index]);
-
-    for (const player of flippedPlayers) {
-      await storeCardInCollection(player.id, userId);
-    }
-
-    redirect("/nbacollection");
+  const handleRedirectAndStore = () => {
+    router.push("/nbacollection");
   };
 
   return (
     <>
       <div className="flex items-center justify-center gap-2">
-        {randomPlayers.map((player, index) => {
-          const isFlipped = flipped.includes(index);
+        {players.map((player) => {
+          const isFlipped = flippedIds.includes(player.id);
           const { name, image_link, teams_history, number, position } = player;
+          const backgroundClass = getBackgroundClass(player.awards);
 
-          const nameParts = name.split(" ");
-
+          // filtrer teams valides
           const filteredTeams = teams_history.filter(({ team }) =>
             teams.some((t) => team.includes(t))
           );
+          if (filteredTeams.length === 0) return null;
 
-          if (filteredTeams.length === 0) return "Unknown";
+          const parsePeriod = (period: string): number => {
+            const normalized = period.replace("–", "-").toLowerCase();
+
+            if (normalized.includes("-")) {
+              const [, to] = normalized.split("-");
+
+              if (to.trim() === "present") {
+                return new Date().getFullYear();
+              }
+
+              return Number(to);
+            }
+
+            return Number(normalized);
+          };
 
           const lastTeam = filteredTeams[filteredTeams.length - 1];
-          const { team } = lastTeam;
-          const teamLogo = getTeamLogo(team);
+          const year = parsePeriod(period);
+          const teamLogo = getTeamLogo(lastTeam.team, year);
 
-          const backgroundClass = getBackgroundClass();
+          const [firstName, ...lastNameParts] = name.split(" ");
 
           return (
             <div
-              key={index}
+              key={player.id}
               className="relative w-[288px] h-[400px] cursor-pointer border rounded overflow-hidden"
-              onClick={() => handleCardClick(index)}
+              onClick={() => handleCardClick(player)}
             >
               {!isFlipped ? (
-                <Image
-                  src="/cardback.png"
-                  alt="Back of the card"
-                  width={96}
-                  height={128}
-                  className="w-full h-full object-cover"
-                />
+                <div className="relative w-full h-full">
+                  <Image
+                    src="/cardback.png"
+                    alt="Back of the card"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
               ) : (
                 <div
                   className={`relative overflow-hidden h-[400px] px-4 pb-4 pt-12 ${backgroundClass} rounded-lg shadow transition-shadow`}
@@ -93,7 +99,7 @@ export default function DailyDraw({
                       {teamLogo && (
                         <Image
                           src={teamLogo}
-                          alt={`${team} logo`}
+                          alt={`Team Logo`}
                           width={50}
                           height={50}
                           className="inline-block size-14 object-fit"
@@ -119,15 +125,13 @@ export default function DailyDraw({
                     <div className="h-fit p-2 bg-black text-white uppercase flex items-center justify-center">
                       <div className="flex gap-2 justify-center items-center text-center font-righteous flex-5 ">
                         <div className="flex flex-col items-center">
-                          <span className="text-sm">{nameParts[0]}</span>
-                          <span className="text-xl">
-                            {nameParts.slice(1).join(" ")}
-                          </span>
+                          <span className="text-sm">{firstName}</span>
+                          <span className="text-xl">{lastNameParts}</span>
                         </div>
                       </div>
                       <div className=" flex-1">
                         <span className="flex items-center justify-center font-righteous text-md bg-white text-black rounded-full w-full aspect-square">
-                          {formatPosition(position)}
+                          {formatPosition(position ?? "")}
                         </span>
                       </div>
                     </div>
@@ -139,7 +143,7 @@ export default function DailyDraw({
         })}
       </div>
 
-      {flipped.length === 5 && (
+      {flippedIds.length === 5 && (
         <div className="mt-6 text-center">
           <button
             onClick={handleRedirectAndStore}

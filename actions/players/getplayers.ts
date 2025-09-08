@@ -2,9 +2,9 @@
 
 import { getPlayers } from "@/controllers/PlayersController";
 
-const getAllPlayers = async () => {
+const getAllPlayers = async (period: string) => {
   try {
-    const players = await getPlayers();
+    const players = await getPlayers(period);
     return players;
   } catch (error) {
     console.error("getAllPlayers error:", error);

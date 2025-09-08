@@ -29,4 +29,10 @@ export const teams = [
   "Minnesota Timberwolves",
   "Oklahoma City Thunder",
   "Portland Trail Blazers",
+  "New Jersey Nets",
+  "Charlotte Bobcats",
+  "New Orleans Hornets",
+  "Seattle SuperSonics",
+  "Vancouver Grizzlies",
+  "Washington Bullets",
 ];

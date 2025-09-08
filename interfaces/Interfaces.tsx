@@ -3,14 +3,17 @@ export interface TeamHistory {
   team: string;
 }
 
+export type PeriodTypes = "1990s" | "2000s" | "2010s" | "2020s";
+
 export interface PlayerData {
   id: string;
+  period: PeriodTypes;
   name: string;
   wikipedia_url: string;
   teams_history: TeamHistory[];
-  image_link: string;
-  number: number;
-  position: string;
+  image_link: string | null;
+  number: number | null;
+  position: string | null;
   awards: string[];
 }
 

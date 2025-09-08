@@ -1,11 +1,17 @@
 import "./globals.css";
 import { AppProvider } from "../components/GlobalContext";
-import { Righteous } from "next/font/google";
+import { Outfit, Unbounded } from "next/font/google";
 import { Toaster } from "sonner";
 
-const righteous = Righteous({
-  weight: "400",
-  variable: "--font-righteous",
+const unbounded = Unbounded({
+  weight: ["300", "900"],
+  variable: "--font-unbounded",
+  subsets: ["latin"],
+  preload: true,
+});
+const outfit = Outfit({
+  weight: ["300", "900"],
+  variable: "--font-outfit",
   subsets: ["latin"],
   preload: true,
 });
@@ -17,7 +23,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body suppressHydrationWarning className={`${righteous.variable}`}>
+      <body
+        suppressHydrationWarning
+        className={`${unbounded.variable} ${outfit.variable}`}
+      >
         <AppProvider>{children}</AppProvider>
         <Toaster />
       </body>

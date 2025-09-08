@@ -1,3 +1,4 @@
+import { sql } from "drizzle-orm";
 import {
   pgTable,
   text,
@@ -5,6 +6,7 @@ import {
   timestamp,
   integer,
   jsonb,
+  varchar,
 } from "drizzle-orm/pg-core";
 
 export const user = pgTable("users", {
@@ -61,15 +63,26 @@ export const verification = pgTable("verification", {
   updatedAt: timestamp("updated_at"),
 });
 
+type TeamHistoryEntry = {
+  period: string;
+  team: string;
+};
+
+type PeriodType = "1990s" | "2000s" | "2010s" | "2020s";
+
 export const playersData = pgTable("playersData", {
   id: text("id").primaryKey(),
+  period: text("period").$type<PeriodType>().notNull(),
   name: text("name").notNull(),
-  position: text("position").notNull(),
-  number: integer("number").notNull(),
-  teams_history: jsonb("teams_history").notNull(), // JSON array of { period, team }
-  image_link: text("image_link").notNull(),
+  position: text("position"),
+  number: integer("number"),
+  teams_history: jsonb("teams_history").$type<TeamHistoryEntry[]>().notNull(),
+  image_link: text("image_link"),
   wikipedia_url: text("wikipedia_url").notNull(),
-  awards: jsonb("awards").notNull().default("[]"), // JSON array of strings
+  awards: jsonb("awards")
+    .$type<string[]>()
+    .notNull()
+    .default(sql`'[]'::jsonb`),
 });
 
 export const highscores = pgTable("highscores", {
@@ -93,6 +106,15 @@ export const cardcollection = pgTable("cardcollection", {
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });
 
+export const dailydraws = pgTable("dailydraws", {
+  id: text("id").primaryKey(),
+  userId: text("userId").notNull(),
+  date: timestamp("date").notNull(),
+  playersId: varchar("playersId", { length: 255 }).array().notNull(),
+  flippedId: varchar("flippedId", { length: 255 }).array().notNull(),
+  createdAt: timestamp("createdAt").notNull().defaultNow(),
+});
+
 export const schema = {
   user,
   session,
@@ -101,6 +123,7 @@ export const schema = {
   playersData,
   highscores,
   cardcollection,
+  dailydraws,
 };
 
 export type SelectUser = typeof user.$inferSelect;
@@ -110,3 +133,5 @@ export type SelectPlayersData = typeof playersData.$inferSelect;
 export type SelectHighscores = typeof highscores.$inferSelect;
 
 export type SelectCardCollection = typeof cardcollection.$inferSelect;
+
+export type SelectDailyDraws = typeof dailydraws.$inferSelect;

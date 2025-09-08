@@ -2,16 +2,11 @@
 
 import React, { createContext, useContext, useState } from "react";
 import { TeamLogos } from "./TeamLogos";
-import { authClient } from "@/utils/auth-client";
 import { GridThemeData, PlayerData } from "@/interfaces/Interfaces";
 import { teams } from "./Teams";
 
 interface PlayTogetherContextType {
-  getRandomPlayers: (params: {
-    numberPlayers: number;
-    players: PlayerData[];
-  }) => PlayerData[];
-  getTeamLogo: (teamName: string) => string | undefined;
+  getTeamLogo: (teamName: string, year: number) => string | undefined;
   getPlayerDivisions: (player: PlayerData) => string[];
   havePlayedTogether: (player1: PlayerData, player2: PlayerData) => boolean;
   difficulty: number;
@@ -21,7 +16,6 @@ interface PlayTogetherContextType {
   streakCount: number;
   setStreakCount: React.Dispatch<React.SetStateAction<number>>;
   formatPosition: (position: string) => string;
-  getUserId: () => Promise<string | null>;
   awardStyleCardBg: {
     readonly mvp: string;
     readonly all_nba: string;
@@ -48,24 +42,19 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [endedRound, setEndedRound] = useState(false);
   const [streakCount, setStreakCount] = useState(0);
 
-  const getUserId = async () => {
-    const session = await authClient.getSession();
-    const user_id = session?.data?.user.id || null;
-    return user_id;
-  };
+  const getTeamLogo = (teamName: string, year: number): string | undefined => {
+    return TeamLogos.find((t) => {
+      if (t.team !== teamName) return false;
 
-  const getRandomPlayers = ({
-    numberPlayers,
-    players,
-  }: {
-    numberPlayers: number;
-    players: PlayerData[];
-  }): PlayerData[] => {
-    return [...players].sort(() => 0.5 - Math.random()).slice(0, numberPlayers);
-  };
+      const normalized = t.period.replace("–", "-").toLowerCase();
+      const [from, to] = normalized.split("-");
 
-  const getTeamLogo = (teamName: string): string | undefined => {
-    return TeamLogos.find((t) => t.team === teamName)?.logo;
+      const fromYear = Number(from);
+      const toYear =
+        to && to.trim() === "present" ? new Date().getFullYear() : Number(to);
+
+      return year >= fromYear && year <= toYear;
+    })?.logo;
   };
 
   const getPlayerTeams = (player: PlayerData) => {
@@ -87,10 +76,21 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     const currentYear = new Date().getFullYear();
 
     const parsePeriod = (period: string) => {
-      const [startRaw, endRaw] = period.split("–");
+      // Normaliser le séparateur en "-"
+      const normalized = period.replace("–", "-").toLowerCase();
+      const [startRaw, endRaw] = normalized.split("-");
 
       const start = parseInt(startRaw, 10);
-      const end = endRaw === "present" ? currentYear : parseInt(endRaw, 10);
+      let end: number;
+
+      if (!endRaw) {
+        // Cas "2005" → une seule année
+        end = start;
+      } else if (endRaw.trim() === "present") {
+        end = currentYear;
+      } else {
+        end = parseInt(endRaw, 10);
+      }
 
       return { start, end };
     };
@@ -191,7 +191,6 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   return (
     <PlayTogetherContext.Provider
       value={{
-        getRandomPlayers,
         getTeamLogo,
         getPlayerDivisions,
         havePlayedTogether,
@@ -202,7 +201,6 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         streakCount,
         setStreakCount,
         formatPosition,
-        getUserId,
         awardStyleCardBg,
         awardPriority,
         getBackgroundClass,
