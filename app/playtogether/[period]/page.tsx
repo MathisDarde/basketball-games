@@ -16,17 +16,6 @@ export default async function PlayTogetherPeriodPage({
 
   return (
     <>
-      <div className="flex items-center gap-6">
-        <Link href="/">
-          <h1 className="cursor-pointer">Back to home</h1>
-        </Link>
-        <Link href="/playtogether">
-          <h1 className="cursor-pointer">Back to era selection</h1>
-        </Link>
-      </div>
-
-      <Difficulty />
-
       <div className={`p-4`}>
         <PageContent players={players} teams={teams} period={period} />
       </div>

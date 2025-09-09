@@ -42,45 +42,47 @@ export default function GuessingBlock({
       : false;
 
   return (
-    <div className={`mx-auto bg-white p-4 w-[300px]`}>
+    <div className={`mx-auto p-4 w-[300px]`}>
       {endRoundMessage === 0 && !endedRound && (
         <div className="flex flex-col items-center gap-3">
-          <p className={`text-cente`}>Have these players played together ?</p>
+          <p className={`text-center font-outfit font-normal`}>Have these players played together ?</p>
 
           <div className="relative">
-            {/* Ombre */}
+            {/* Ombre
             <span
               className="absolute top-0 left-0 w-[200px] h-full 
                  bg-black
                  translate-x-[6px] translate-y-[6px]"
-            ></span>
+            ></span> */}
             <button
               onClick={() => {
                 setEndedRound(true);
                 setEndRoundMessage(1);
               }}
-              className={`relative w-[200px] px-6 py-3 font-bold text-black 
-                 bg-[#00F5D4]
-                 active:translate-x-[1px] active:translate-y-[1px] 
-                 transition-transform font-unbounded cursor-pointer`}
+              className={`relative w-[200px] px-6 py-3 font-medium text-white 
+              bg-[#ac7434] rounded-lg
+              active:translate-x-[1px] active:translate-y-[1px] 
+              transition-transform font-unbounded cursor-pointer`}
             >
               Yes
             </button>
+
           </div>
 
           <div className="relative">
+            {/* Ombre
             <span
               className="absolute top-0 left-0 w-[200px] h-full 
-                 bg-black 
+                 bg-black
                  translate-x-[6px] translate-y-[6px]"
-            ></span>
+            ></span> */}
             <button
               onClick={() => {
                 setEndedRound(true);
                 setEndRoundMessage(2);
               }}
-              className={`relative w-[200px] px-6 py-3 font-bold text-black 
-                 bg-[#F15BB5]
+              className={`relative w-[200px] px-6 py-3 font-medium text-white 
+                 bg-[#6B2F4B] rounded-lg
                  active:translate-x-[1px] active:translate-y-[1px] 
                  transition-transform font-unbounded cursor-pointer`}
             >
@@ -96,23 +98,23 @@ export default function GuessingBlock({
               <div className="bg-green-500 rounded-full p-2 mb-2">
                 <Check size={24} color="#fff" />
               </div>
-              <p className={`font-unbounded text-center`}>
+              <p className={`font-outfit font-normal text-center`}>
                 Great! They have played together.
               </p>
 
               <div className="relative">
-                <span
+               {/* <span
                   className="absolute top-0 left-0 w-[200px] h-full 
                  bg-black 
                  translate-x-[6px] translate-y-[6px]"
-                ></span>
+          ></span> */}
                 <button
                   onClick={() => {
                     nextRound();
                     setStreakCount(streakCount + 1);
                   }}
-                  className={`relative w-[200px] px-6 py-3 font-bold text-black 
-                 bg-[#00BBF9]
+                  className={`relative w-[200px] px-6 py-3 font-medium text-white 
+                 bg-[#ac7434] rounded-lg
                  active:translate-x-[1px] active:translate-y-[1px] 
                  transition-transform font-unbounded cursor-pointer`}
                 >
@@ -125,22 +127,22 @@ export default function GuessingBlock({
               <div className="bg-red-500 rounded-full p-2 mb-2">
                 <X size={24} color="#fff" />
               </div>
-              <p className={`font-unbounded text-center`}>
+              <p className={`font-outfit font-normal text-center`}>
                 Wrong answer! They have not played together.
               </p>
               <div className="relative">
-                <span
+               {/* <span
                   className="absolute top-0 left-0 w-[200px] h-full 
                  bg-black 
                  translate-x-[6px] translate-y-[6px]"
-                ></span>
+          ></span> */}
                 <button
                   onClick={() => {
                     nextRound();
                     setStreakCount(0);
                   }}
-                  className={`relative w-[200px] px-6 py-3 font-bold text-black 
-                 bg-[#00BBF9]
+                  className={`relative w-[200px] px-6 py-3 font-medium text-white 
+                 bg-[#ac7434] rounded-lg
                  active:translate-x-[1px] active:translate-y-[1px] 
                  transition-transform font-unbounded cursor-pointer`}
                 >
@@ -158,23 +160,23 @@ export default function GuessingBlock({
               <div className="bg-green-500 rounded-full p-2 mb-2">
                 <Check size={24} color="#fff" />
               </div>
-              <p className={`font-unbounded text-center`}>
+              <p className={`font-outfit font-normal text-center`}>
                 Great! They have not played together.
               </p>
 
               <div className="relative">
-                <span
+               {/* <span
                   className="absolute top-0 left-0 w-[200px] h-full 
                  bg-black 
                  translate-x-[6px] translate-y-[6px]"
-                ></span>
+          ></span> */}
                 <button
                   onClick={() => {
                     nextRound();
                     setStreakCount(streakCount + 1);
                   }}
-                  className={`relative w-[200px] px-6 py-3 font-bold text-black 
-                 bg-[#00BBF9]
+                  className={`relative w-[200px] px-6 py-3 font-medium text-white 
+                 bg-[#ac7434] rounded-lg
                  active:translate-x-[1px] active:translate-y-[1px] 
                  transition-transform font-unbounded cursor-pointer`}
                 >
@@ -187,22 +189,22 @@ export default function GuessingBlock({
               <div className="bg-red-500 rounded-full p-2 mb-2">
                 <X size={24} color="#fff" />
               </div>
-              <p className={`font-unbounded text-center`}>
+              <p className={`font-outfit text-center font-normal`}>
                 Wrong answer! They did play together.
               </p>
               <div className="relative">
-                <span
+               {/* <span
                   className="absolute top-0 left-0 w-[200px] h-full 
                  bg-black 
                  translate-x-[6px] translate-y-[6px]"
-                ></span>
+          ></span> */}
                 <button
                   onClick={() => {
                     nextRound();
                     setStreakCount(0);
                   }}
-                  className={`relative w-[200px] px-6 py-3 font-bold text-black 
-                 bg-[#00BBF9]
+                  className={`relative w-[200px] px-6 py-3 font-medium text-white 
+                 bg-[#ac7434] rounded-lg
                  active:translate-x-[1px] active:translate-y-[1px] 
                  transition-transform font-unbounded cursor-pointer`}
                 >

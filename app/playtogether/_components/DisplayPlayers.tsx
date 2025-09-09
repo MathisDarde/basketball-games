@@ -70,14 +70,14 @@ export default function DisplayPlayers({
         }
 
         return (
-          <div key={index} className="player-card p-4 w-[300px] bg-white">
+          <div key={index} className="player-card p-4 w-[300px]">
             {difficulty < 2 || endedRound ? (
               <Image
                 src={image_link || "/pdpdebase.png"}
                 alt={name}
                 width={75}
                 height={75}
-                className="rounded-full mb-4"
+                className="rounded-full mb-4 mx-auto"
               />
             ) : (
               <Image
@@ -85,17 +85,17 @@ export default function DisplayPlayers({
                 alt={name}
                 width={75}
                 height={75}
-                className="rounded-full mb-4"
+                className="rounded-full mb-4 mx-auto"
               />
             )}
 
             <h2
-              className={`text-xl mb-2 font-medium font-unbounded text-center`}
+              className={`text-xl mb-2 font-regular font-unbounded text-center`}
             >
               {name}
             </h2>
             {(difficulty < 1 || endedRound) && (
-              <p className="text-sm text-center font-outfit">
+              <p className="text-sm text-center font-outfit font-light">
                 Active Period: {activePeriod}
               </p>
             )}
@@ -135,7 +135,7 @@ export default function DisplayPlayers({
 
                     return (
                       <div key={teamIndex} className="team-history">
-                        <div className="flex flex-col border border-black gap-2 items-center p-2 rounded-md">
+                        <div className="flex flex-col shadow-lg gap-2 items-center p-2 rounded-md bg-[#FFFBF4]">
                           {teamLogo && (
                             <Image
                               src={teamLogo}
@@ -148,7 +148,7 @@ export default function DisplayPlayers({
                           <p className={`font-bold uppercase font-unbounded`}>
                             {abrevation}
                           </p>
-                          <p className={`text-xs font-outfit font-normal`}>
+                          <p className={`text-xs font-outfit font-light`}>
                             {period}
                           </p>
                         </div>

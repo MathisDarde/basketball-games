@@ -369,13 +369,13 @@ export const TeamLogos = [
     team: "Oklahoma City Thunder",
     abr: "OKC",
     logo: "/logos/current/thunder.svg",
-    period: "2008–present",
+    period: "2009–present",
   },
   {
     team: "Seattle SuperSonics",
     abr: "SEA",
     logo: "/logos/old/sonics3.svg",
-    period: "2001-2007",
+    period: "2001-2008",
   },
   {
     team: "Seattle SuperSonics",

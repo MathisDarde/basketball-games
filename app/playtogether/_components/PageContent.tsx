@@ -50,13 +50,11 @@ export default function PageContent({
         players={players}
         randomPlayers={randomPlayers}
         teams={teams}
-        period={period}
       />
       <GuessingBlock
         players={players}
         randomPlayers={randomPlayers}
         setRandomPlayers={setRandomPlayers}
-        period={period}
       />
     </div>
   );
