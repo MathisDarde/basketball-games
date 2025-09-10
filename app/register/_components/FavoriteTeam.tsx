@@ -17,14 +17,15 @@ export default function FavoriteTeamSelect({
   };
 
   return (
-    <div className="relative w-[600px] z-10">
-      <span className="font-semibold font-Montserrat text-gray-600 flex items-center mb-2">
-        <ImageIcon className="mr-4" />
+    <div className="relative w-full xl:w-[600px] space-y-2">
+      <span className="font-outfit text-black flex items-center">
+        <ImageIcon size={18} className="mr-2" />
         Favorite Team :
       </span>
-      <select className="w-full border border-gray-400 rounded-full px-6 py-4 bg-white cursor-pointer flex items-center justify-between">
-        {teams.map((team, index) => {
-          return (
+      <select className="w-full xl:w-[600px] border border-accent-brown rounded px-4 py-3 bg-white cursor-pointer flex items-center justify-between shadow font-outfit text-sm">
+        {[...teams]
+          .sort((a, b) => a.localeCompare(b))
+          .map((team, index) => (
             <option
               key={index}
               {...register("favorite_team")}
@@ -33,8 +34,7 @@ export default function FavoriteTeamSelect({
             >
               {team}
             </option>
-          );
-        })}
+          ))}
       </select>
     </div>
   );

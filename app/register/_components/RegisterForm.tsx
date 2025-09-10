@@ -61,80 +61,91 @@ export default function RegisterForm() {
   }, [formState.errors]);
 
   return (
-    <div className="w-[600px] mx-auto">
+    <div className="w-screen xl:w-[600px] mx-auto px-8 pb-8 text-center">
+      <h1 className="text-center font-unbounded text-2xl">Register</h1>
+      <p className="font-outfit mt-2 mb-4 underline cursor-pointer text-dark-purple">
+        Already have an account
+      </p>
       <form
         onSubmit={handleSubmit(handleSubmitForm)}
         id="inscform"
-        className="w-[600px]"
+        className="w-full xl:w-[600px] space-y-2"
       >
         <FileManagement setSelectedFile={setSelectedFile} />
 
-        <div className="relative w-[600px]">
-          <span className="font-semibold font-Montserrat text-gray-600 flex items-center">
-            <User className="mr-4" />
+        <div className="relative w-full xl:w-[600px] space-y-2">
+          <span className="font-outfit text-black flex items-center">
+            <User size={18} className="mr-2" />
             Name :
           </span>
           <input
             type="text"
             {...register("name")}
-            className="w-[600px] my-4 py-4 px-6 rounded-full border border-gray-600 font-Montserrat text-sm"
-            placeholder="Pseudo"
+            className="w-full xl:w-[600px] py-3 px-4 rounded border border-accent-brown shadow font-outfit text-sm bg-white"
+            placeholder="Name"
           />
         </div>
 
         <FavoriteTeamSelect register={register} setValue={setValue} />
 
-        <div className="relative w-[600px]">
-          <span className="font-semibold font-Montserrat text-gray-600 flex items-center">
-            <Mail className="mr-4" />
+        <div className="relative w-full xl:w-[600px] space-y-3">
+          <span className="font-outfit text-black flex items-center">
+            <Mail size={18} className="mr-2" />
             Mail :
           </span>
           <input
             type="email"
             {...register("email")}
-            className="w-[600px] my-4 py-4 px-6 rounded-full border border-gray-600 font-Montserrat text-sm"
-            placeholder="Adresse Mail"
+            className="w-full xl:w-[600px] py-3 px-4 rounded border border-accent-brown shadow font-outfit text-sm bg-white"
+            placeholder="Mail address"
           />
         </div>
-        <div className="relative w-[600px]">
-          <span className="font-semibold font-Montserrat text-gray-600 flex items-center">
-            <KeyRound className="mr-4" />
+
+        <div className="relative w-full xl:w-[600px] space-y-2">
+          <span className="font-outfit text-black flex items-center">
+            <KeyRound size={18} className="mr-2" />
             Password :
           </span>
           <input
             type={showPassword ? "text" : "password"}
             {...register("password")}
-            className="w-[600px] my-4 py-4 px-6 rounded-full border border-gray-600 font-Montserrat text-sm"
-            placeholder="Mot de passe"
+            className="w-full xl:w-[600px] py-3 px-4 rounded border border-accent-brown shadow font-outfit text-sm bg-white"
+            placeholder="Password"
           />
           <span
-            className="text-gray-600 absolute top-14 right-5 cursor-pointer"
+            className="text-gray-600 absolute top-[2.85rem] right-4 cursor-pointer"
             onClick={togglePasswordVisibility}
           >
-            {showPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
           </span>
         </div>
-        <div className="relative w-[600px]">
-          <span className="font-semibold font-Montserrat text-gray-600 flex items-center">
-            <KeyRound className="mr-4" />
+
+        <div className="relative w-full xl:w-[600px] space-y-2">
+          <span className="font-outfit text-black flex items-center">
+            <KeyRound size={18} className="mr-2" />
             Confirm password :
           </span>
           <input
             type={showConfirmPassword ? "text" : "password"}
             {...register("confirmPassword")}
-            className="w-[600px] my-4 py-4 px-6 rounded-full border border-gray-600 font-Montserrat text-sm"
-            placeholder="Confirmez votre mot de passe"
+            className="w-full xl:w-[600px] py-3 px-4 rounded border border-accent-brown shadow font-outfit text-sm bg-white"
+            placeholder="Confirm password"
           />
           <span
-            className="text-gray-600 absolute top-14 right-5 cursor-pointer"
+            className="text-gray-600 absolute top-[2.85rem] right-4 cursor-pointer"
             onClick={toggleConfirmPasswordVisibility}
           >
-            {showConfirmPassword ? <EyeOff size={20} /> : <Eye size={20} />}
+            {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
           </span>
         </div>
 
         <div className="flex justify-center items-center">
-          <button type="submit">Je m&apos;inscris</button>
+          <button
+            type="submit"
+            className="bg-dark-purple px-4 py-2 rounded font-outfit text-white"
+          >
+            Je m&apos;inscris
+          </button>
         </div>
       </form>
     </div>

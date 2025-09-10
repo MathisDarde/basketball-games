@@ -30,28 +30,30 @@ export default function FileManagement({ setSelectedFile }: FileProps) {
   }, [previewUrl]);
 
   return (
-    <div className="relative w-[600px]">
-      <span className="font-semibold font-Montserrat flex items-center text-gray-600">
-        <ImageIcon className="mr-4" />
+    <div className="relative w-full xl:w-[600px] space-y-2">
+      <span className="font-outfit text-black flex items-center">
+        <ImageIcon size={18} className="mr-2" />
         Profile Picture :
       </span>
-      <input
-        type="file"
-        onChange={handleFileChange}
-        className="w-w-600 my-4 py-4 px-6 rounded-full border border-gray-600 font-Montserrat text-sm"
-        accept="image/*"
-      />
+
       {previewUrl && (
-        <div className="mt-4">
+        <div className="">
           <Image
             src={previewUrl}
             alt="Preview"
             width={100}
             height={100}
-            className="rounded-full object-cover"
+            className="rounded-full aspect-square object-cover"
           />
         </div>
       )}
+
+      <input
+        type="file"
+        onChange={handleFileChange}
+        className="w-full xl:w-[600px] py-3 px-4 rounded border border-accent-brown shadow font-outfit text-sm bg-white"
+        accept="image/*"
+      />
     </div>
   );
 }
