@@ -135,7 +135,7 @@ export default function DisplayPlayers({
 
                     return (
                       <div key={teamIndex} className="team-history">
-                        <div className="flex flex-col shadow-lg gap-2 items-center p-2 rounded-md bg-[#FFFBF4]">
+                        <div className="flex flex-col shadow-lg gap-2 items-center p-2 rounded-md bg-[#FFFBF4] border border-accent-brown">
                           {teamLogo && (
                             <Image
                               src={teamLogo}

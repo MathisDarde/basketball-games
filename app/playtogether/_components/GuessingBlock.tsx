@@ -45,7 +45,9 @@ export default function GuessingBlock({
     <div className={`mx-auto p-4 w-[300px]`}>
       {endRoundMessage === 0 && !endedRound && (
         <div className="flex flex-col items-center gap-3">
-          <p className={`text-center font-outfit font-normal`}>Have these players played together ?</p>
+          <p className={`text-center font-outfit font-normal`}>
+            Have these players played together ?
+          </p>
 
           <div className="relative">
             {/* Ombre
@@ -60,13 +62,12 @@ export default function GuessingBlock({
                 setEndRoundMessage(1);
               }}
               className={`relative w-[200px] px-6 py-3 font-medium text-white 
-              bg-[#ac7434] rounded-lg
+              bg-accent-brown rounded-lg
               active:translate-x-[1px] active:translate-y-[1px] 
               transition-transform font-unbounded cursor-pointer`}
             >
               Yes
             </button>
-
           </div>
 
           <div className="relative">
@@ -82,7 +83,7 @@ export default function GuessingBlock({
                 setEndRoundMessage(2);
               }}
               className={`relative w-[200px] px-6 py-3 font-medium text-white 
-                 bg-[#6B2F4B] rounded-lg
+                 bg-dark-purple rounded-lg
                  active:translate-x-[1px] active:translate-y-[1px] 
                  transition-transform font-unbounded cursor-pointer`}
             >
@@ -103,7 +104,7 @@ export default function GuessingBlock({
               </p>
 
               <div className="relative">
-               {/* <span
+                {/* <span
                   className="absolute top-0 left-0 w-[200px] h-full 
                  bg-black 
                  translate-x-[6px] translate-y-[6px]"
@@ -114,7 +115,7 @@ export default function GuessingBlock({
                     setStreakCount(streakCount + 1);
                   }}
                   className={`relative w-[200px] px-6 py-3 font-medium text-white 
-                 bg-[#ac7434] rounded-lg
+                 bg-accent-brown rounded-lg
                  active:translate-x-[1px] active:translate-y-[1px] 
                  transition-transform font-unbounded cursor-pointer`}
                 >
@@ -131,7 +132,7 @@ export default function GuessingBlock({
                 Wrong answer! They have not played together.
               </p>
               <div className="relative">
-               {/* <span
+                {/* <span
                   className="absolute top-0 left-0 w-[200px] h-full 
                  bg-black 
                  translate-x-[6px] translate-y-[6px]"
@@ -142,7 +143,7 @@ export default function GuessingBlock({
                     setStreakCount(0);
                   }}
                   className={`relative w-[200px] px-6 py-3 font-medium text-white 
-                 bg-[#ac7434] rounded-lg
+                 bg-accent-brown rounded-lg
                  active:translate-x-[1px] active:translate-y-[1px] 
                  transition-transform font-unbounded cursor-pointer`}
                 >
@@ -165,7 +166,7 @@ export default function GuessingBlock({
               </p>
 
               <div className="relative">
-               {/* <span
+                {/* <span
                   className="absolute top-0 left-0 w-[200px] h-full 
                  bg-black 
                  translate-x-[6px] translate-y-[6px]"
@@ -176,7 +177,7 @@ export default function GuessingBlock({
                     setStreakCount(streakCount + 1);
                   }}
                   className={`relative w-[200px] px-6 py-3 font-medium text-white 
-                 bg-[#ac7434] rounded-lg
+                 bg-accent-brown rounded-lg
                  active:translate-x-[1px] active:translate-y-[1px] 
                  transition-transform font-unbounded cursor-pointer`}
                 >
@@ -193,7 +194,7 @@ export default function GuessingBlock({
                 Wrong answer! They did play together.
               </p>
               <div className="relative">
-               {/* <span
+                {/* <span
                   className="absolute top-0 left-0 w-[200px] h-full 
                  bg-black 
                  translate-x-[6px] translate-y-[6px]"
@@ -204,7 +205,7 @@ export default function GuessingBlock({
                     setStreakCount(0);
                   }}
                   className={`relative w-[200px] px-6 py-3 font-medium text-white 
-                 bg-[#ac7434] rounded-lg
+                 bg-accent-brown rounded-lg
                  active:translate-x-[1px] active:translate-y-[1px] 
                  transition-transform font-unbounded cursor-pointer`}
                 >

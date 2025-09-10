@@ -24,16 +24,15 @@ export default function PeriodSelector({
 
   return (
     <div className="p-4">
-      <h1>Choose your edition</h1>
       <div className="flex gap-4 flex-col">
         {periods.map(({ key, label, Icon }) => (
           <div
             key={key}
-            className="cursor-pointer p-4 rounded-md bg-blue-950 text-white flex items-center gap-2"
+            className="cursor-pointer p-4 rounded-md bg-dark-purple text-white flex items-center gap-2"
             onClick={() => handleSelect(key)}
           >
             {Icon ? <Icon /> : <BrickWallIcon />}
-            <p>{label}</p>
+            <p className="font-outfit">{label}</p>
           </div>
         ))}
       </div>

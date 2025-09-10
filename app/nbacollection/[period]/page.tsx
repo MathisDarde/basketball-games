@@ -28,7 +28,9 @@ export default async function NBACollectionPage({
 
   return (
     <div>
-      <h1>NBA Cards Collection</h1>
+      <h1 className="font-unbounded text-2xl text-center">
+        NBA Cards Collection
+      </h1>
       <PageMenu ownedCards={ownedCards} players={players} params={params} />
       <CardsDisplay ownedCards={ownedCards} players={players} params={params} />
     </div>

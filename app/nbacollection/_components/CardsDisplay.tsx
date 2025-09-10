@@ -23,9 +23,7 @@ export default function CardsDisplay({
 
   return (
     <div>
-      <p>Cards</p>
-
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-[1200px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-screen">
         {players.map((player) => {
           const {
             id,
@@ -49,32 +47,22 @@ export default function CardsDisplay({
 
           if (filteredTeams.length === 0) return "Unknown";
 
-          const parsePeriod = (period?: string): number => {
-            if (!period) return new Date().getFullYear(); // fallback si rien
-
-            const normalized = period.replace("–", "-").toLowerCase();
-
-            if (normalized.includes("-")) {
-              const [, to] = normalized.split("-");
-
-              if (to.trim() === "present") {
-                return new Date().getFullYear();
-              }
-
-              return Number(to);
-            }
-
-            return Number(normalized);
-          };
-
           const lastTeam = filteredTeams[filteredTeams.length - 1];
-          const year = parsePeriod(period);
+          const year =
+            period === "1990s"
+              ? 1995
+              : period === "2000s"
+              ? 2005
+              : period === "2010s"
+              ? 2015
+              : 2025;
+
           const teamLogo = getTeamLogo(lastTeam.team, year);
 
           return (
             <div
               key={id}
-              className={`relative overflow-hidden h-[400px] px-4 pb-4 pt-12 ${backgroundClass} rounded-lg shadow transition-shadow ${
+              className={`relative overflow-hidden w-[250px] h-[350px] sm:h-[400px] mx-auto px-4 pb-4 pt-12 ${backgroundClass} rounded-lg shadow transition-shadow ${
                 isOwned ? "cursor-pointer hover:shadow-lg" : "opacity-50"
               }`}
             >
@@ -94,7 +82,7 @@ export default function CardsDisplay({
                     </div>
                   </div>
                   <div className="absolute right-4 top-3 rounded-full w-14 h-14 bg-black flex items-center justify-center">
-                    <p className=" italic font-righteous text-2xl text-white">{`#${number}`}</p>
+                    <p className="italic font-unbounded text-lg text-white">{`#${number}`}</p>
                   </div>
                   <div
                     className={`bg-[url('/motifbackground90s.jpg')] bg-cover bg-center w-full h-full rounded-t-full flex flex-col overflow-hidden`}
@@ -109,10 +97,10 @@ export default function CardsDisplay({
                       />
                     </div>
                     <div className="h-fit p-2 bg-black text-white uppercase flex items-center justify-center">
-                      <div className="flex gap-2 justify-center items-center text-center font-righteous flex-5 ">
+                      <div className="flex gap-2 justify-center items-center text-center font-unbounded flex-5 ">
                         <div className="flex flex-col items-center">
-                          <span className="text-sm">{nameParts[0]}</span>
-                          <span className="text-xl">
+                          <span className="text-xs">{nameParts[0]}</span>
+                          <span className="text-lg">
                             {nameParts.slice(1).join(" ")}
                           </span>
                         </div>
@@ -126,12 +114,12 @@ export default function CardsDisplay({
                   </div>
                 </>
               ) : (
-                <div className="flex flex-col justify-center items-center h-full text-center px-4">
-                  <p className="text-xl font-bold uppercase font-righteous text-black">
+                <div className="flex flex-col justify-center items-center w-full h-full text-center px-4">
+                  <p className="text-xl font-bold uppercase font-unbounded text-black">
                     {name}
                   </p>
-                  <p className="text-sm italic text-black/60 mt-2">
-                    Carte non possédée
+                  <p className="text-sm font-outfit italic text-black/60 mt-2">
+                    Card not collected
                   </p>
                 </div>
               )}

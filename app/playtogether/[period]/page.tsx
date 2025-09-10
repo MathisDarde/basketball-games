@@ -1,5 +1,3 @@
-import Difficulty from "@/components/Difficulty";
-import Link from "next/link";
 import { getPlayers } from "@/controllers/PlayersController";
 import { teams } from "@/components/Teams";
 import PageContent from "../_components/PageContent";

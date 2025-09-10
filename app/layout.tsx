@@ -17,7 +17,6 @@ const outfit = Outfit({
   preload: true,
 });
 
-
 export default function RootLayout({
   children,
 }: {
@@ -29,9 +28,9 @@ export default function RootLayout({
         suppressHydrationWarning
         className={`${unbounded.variable} ${outfit.variable}`}
       >
-        <div className="bg-[#FFF7EA]">
+        <div className="bg-light-beige">
           <NavbarMenu />
-            <AppProvider>{children}</AppProvider>
+          <AppProvider>{children}</AppProvider>
           <Toaster />
         </div>
       </body>

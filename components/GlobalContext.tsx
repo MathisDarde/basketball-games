@@ -47,11 +47,10 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
       if (t.team !== teamName) return false;
 
       const normalized = t.period.replace("–", "-").toLowerCase();
-      const [from, to] = normalized.split("-");
+      const [from, to] = normalized.split("-").map((x) => x.trim());
 
       const fromYear = Number(from);
-      const toYear =
-        to && to.trim() === "present" ? new Date().getFullYear() : Number(to);
+      const toYear = to === "present" ? new Date().getFullYear() : Number(to);
 
       return year >= fromYear && year <= toYear;
     })?.logo;
