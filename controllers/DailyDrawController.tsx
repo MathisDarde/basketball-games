@@ -47,7 +47,7 @@ export async function createDailyDraw(
   const todayStr = new Date().toISOString().split("T")[0];
 
   const randomPlayers = getRandomPlayers({
-    numberPlayers: 5,
+    numberPlayers: 10,
     players: allPlayers,
   });
 

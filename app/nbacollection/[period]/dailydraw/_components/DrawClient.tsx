@@ -31,12 +31,14 @@ export default function DailyDrawClient({
 
   if (players.length === 0) {
     return (
-      <button
-        onClick={handleDrawClick}
-        className="px-6 py-2 bg-blue-600 text-white rounded"
-      >
-        Tirer mes cartes
-      </button>
+      <div className="text-center">
+        <button
+          onClick={handleDrawClick}
+          className="px-6 py-2 bg-dark-purple text-white rounded font-outfit"
+        >
+          Tirer mes cartes
+        </button>
+      </div>
     );
   }
 

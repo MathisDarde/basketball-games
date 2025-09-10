@@ -15,7 +15,8 @@ export default function DisplayPlayers({
   randomPlayers: PlayerData[];
   teams: string[];
 }) {
-  const { getTeamLogo, difficulty, endedRound } = usePlayTogetherCtx();
+  const { getTeamLogo, difficulty, endedRound, getLastYear } =
+    usePlayTogetherCtx();
 
   const hasInitialized = useRef(false);
 
@@ -106,24 +107,7 @@ export default function DisplayPlayers({
                   .filter(({ team }) => teams.some((t) => team.includes(t)))
                   .map((singleTeam: TeamHistory, teamIndex: number) => {
                     const { team, period } = singleTeam;
-
-                    const parsePeriod = (period: string): number => {
-                      const normalized = period.replace("–", "-").toLowerCase();
-
-                      if (normalized.includes("-")) {
-                        const [, to] = normalized.split("-");
-
-                        if (to.trim() === "present") {
-                          return new Date().getFullYear();
-                        }
-
-                        return Number(to);
-                      }
-
-                      return Number(normalized);
-                    };
-
-                    const year = parsePeriod(period);
+                    const year = getLastYear(period);
                     const teamLogo: string | undefined = getTeamLogo(
                       team,
                       year

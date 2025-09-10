@@ -1,10 +1,4 @@
-import {
-  Aperture,
-  Shell,
-  LucideFileUser,
-  Flower2Icon,
-  LucideVariable,
-} from "lucide-react";
+import { Aperture, LucideFileUser, Flower2Icon } from "lucide-react";
 import Link from "next/link";
 
 import React from "react";
@@ -12,35 +6,36 @@ import React from "react";
 export default function MainPage() {
   return (
     <div className="p-4">
-      <h1>BasketballGames Homepage</h1>
-      <Link href="/login">Login</Link>
+      <h1 className="text-center font-unbounded text-2xl mb-4">
+        BasketballGames
+      </h1>
 
       <div className="flex flex-col gap-4">
-        <Link href="/playtogether">
-          <div className="flex flex-col justify-center items-center gap-4 p-4 rounded-md bg-orange-200">
-            <Aperture />
-            <h3>Play Together</h3>
-          </div>
-        </Link>
-
-        <Link href="/happyfamilies">
-          <div className="flex flex-col justify-center items-center gap-4 p-4 rounded-md bg-purple-200">
-            <Shell />
-            <h3>Happy Families</h3>
-          </div>
-        </Link>
-
         <Link href="/nbacollection">
-          <div className="flex flex-col justify-center items-center gap-4 p-4 rounded-md bg-red-200">
+          <div className="flex flex-col justify-center items-center gap-4 p-4 rounded-md bg-accent-brown text-white">
             <LucideFileUser />
-            <h3>NBA Cards Collection</h3>
+            <h3 className="font-outfit">NBA Cards Collection</h3>
+          </div>
+        </Link>
+
+        <Link href="/playtogether">
+          <div className="flex flex-col justify-center items-center gap-4 p-4 rounded-md bg-dark-purple text-white">
+            <Aperture />
+            <h3 className="font-outfit">Play Together</h3>
           </div>
         </Link>
 
         <Link href="/careerpath">
-          <div className="flex flex-col justify-center items-center gap-4 p-4 rounded-md bg-blue-200">
+          <div className="flex flex-col justify-center items-center gap-4 p-4 rounded-md bg-accent-brown text-white">
             <Flower2Icon />
-            <h3>Career Path</h3>
+            <h3 className="font-outfit">Career Path</h3>
+          </div>
+        </Link>
+
+        {/* <Link href="/happyfamilies">
+          <div className="flex flex-col justify-center items-center gap-4 p-4 rounded-md bg-dark-purple text-white">
+            <Shell />
+            <h3>Happy Families</h3>
           </div>
         </Link>
 
@@ -49,7 +44,7 @@ export default function MainPage() {
             <LucideVariable />
             <h3>NBA Grid</h3>
           </div>
-        </Link>
+        </Link> */}
       </div>
     </div>
   );

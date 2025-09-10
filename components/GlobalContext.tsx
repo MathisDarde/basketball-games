@@ -31,6 +31,7 @@ interface PlayTogetherContextType {
     numberThemes: number;
     themes: GridThemeData[];
   }) => GridThemeData[];
+  getLastYear: (period: string) => number;
 }
 
 const PlayTogetherContext = createContext<PlayTogetherContextType | undefined>(
@@ -116,6 +117,22 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     }
 
     return false;
+  };
+
+  const getLastYear = (period: string): number => {
+    const normalized = period.replace("–", "-").toLowerCase();
+
+    if (normalized.includes("-")) {
+      const [, to] = normalized.split("-");
+
+      if (to.trim() === "present") {
+        return new Date().getFullYear();
+      }
+
+      return Number(to);
+    }
+
+    return Number(normalized);
   };
 
   function formatPosition(position: string | null | undefined): string {
@@ -204,6 +221,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         awardPriority,
         getBackgroundClass,
         getRandomGridThemes,
+        getLastYear,
       }}
     >
       {children}

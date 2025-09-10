@@ -11,7 +11,7 @@ export default function ClientTeamInteraction({
   teams: string[];
   params: { period: string };
 }) {
-  const { getTeamLogo } = usePlayTogetherCtx();
+  const { getTeamLogo, getLastYear } = usePlayTogetherCtx();
 
   const { period } = params;
   const [visibleTeams] = useState(teams);
@@ -22,23 +22,7 @@ export default function ClientTeamInteraction({
         <p className="text-gray-500 italic">Aucune équipe disponible</p>
       ) : (
         visibleTeams.map((team, index) => {
-          const parsePeriod = (period: string): number => {
-            const normalized = period.replace("–", "-").toLowerCase();
-
-            if (normalized.includes("-")) {
-              const [, to] = normalized.split("-");
-
-              if (to.trim() === "present") {
-                return new Date().getFullYear();
-              }
-
-              return Number(to);
-            }
-
-            return Number(normalized);
-          };
-
-          const year = parsePeriod(period);
+          const year = getLastYear(period);
           const teamLogo = getTeamLogo(team, year);
           return (
             <div

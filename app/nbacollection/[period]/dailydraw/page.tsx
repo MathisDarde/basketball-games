@@ -22,7 +22,10 @@ export default async function DailyDrawPage({
 
   return (
     <>
-      <h1 className="text-2xl font-bold mb-4">Daily Draw</h1>
+      <div className="text-center mb-4">
+        <h1 className="text-2xl font-unbounded ">Daily Draw</h1>
+        <p className="text-md font-outfit">{period}</p>
+      </div>
 
       <DailyDrawClient
         initialPlayers={players}

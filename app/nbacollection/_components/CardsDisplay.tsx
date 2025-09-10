@@ -10,16 +10,12 @@ import { CardResearch } from "./CardResearch";
 export default function CardsDisplay({
   ownedCards,
   players,
-  params,
 }: {
   ownedCards: Card[];
   players: PlayerData[];
-  params: { period: string };
 }) {
   const { getTeamLogo, formatPosition, getBackgroundClass } =
     usePlayTogetherCtx();
-
-  const { period } = params;
 
   const cardIds = ownedCards.map((card) => card.cardId);
   const [query, setQuery] = useState("");
@@ -27,7 +23,7 @@ export default function CardsDisplay({
   const filteredPlayers = players.filter((player) => {
     const nameMatch = player.name.toLowerCase().includes(query.toLowerCase());
     return nameMatch;
-  })
+  });
 
   return (
     <div>
@@ -79,8 +75,9 @@ export default function CardsDisplay({
             return (
               <div
                 key={id}
-                className={`relative overflow-hidden w-[250px] h-[350px] sm:h-[400px] mx-auto px-4 pb-4 pt-12 ${backgroundClass} rounded-lg shadow transition-shadow ${isOwned ? "cursor-pointer hover:shadow-lg" : "opacity-50"
-                  }`}
+                className={`relative overflow-hidden w-[250px] h-[350px] sm:h-[400px] mx-auto px-4 pb-4 pt-12 ${backgroundClass} rounded-lg shadow transition-shadow ${
+                  isOwned ? "cursor-pointer hover:shadow-lg" : "opacity-50"
+                }`}
               >
                 {isOwned ? (
                   <>

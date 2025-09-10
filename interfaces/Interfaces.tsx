@@ -30,3 +30,14 @@ export interface Card {
   possessed: number | null;
   createdAt: Date;
 }
+
+export interface User {
+  id: string;
+  email: string;
+  name: string;
+  profilePicture: string | null;
+  favoriteTeam: string;
+  createdAt: Date;
+  updatedAt: Date;
+  admin: boolean;
+}

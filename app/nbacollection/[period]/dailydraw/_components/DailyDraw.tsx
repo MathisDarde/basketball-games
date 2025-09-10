@@ -20,7 +20,7 @@ export default function DailyDraw({
   userId: string;
   params: { period: PeriodTypes };
 }) {
-  const { getTeamLogo, formatPosition, getBackgroundClass } =
+  const { getTeamLogo, formatPosition, getBackgroundClass, getLastYear } =
     usePlayTogetherCtx();
 
   const { period } = params;
@@ -41,36 +41,18 @@ export default function DailyDraw({
 
   return (
     <>
-      <div className="flex items-center justify-center gap-2">
+      <div className="grid grid-cols-5 gap-2">
         {players.map((player) => {
           const isFlipped = flippedIds.includes(player.id);
           const { name, image_link, teams_history, number, position } = player;
           const backgroundClass = getBackgroundClass(player.awards);
 
-          // filtrer teams valides
           const filteredTeams = teams_history.filter(({ team }) =>
             teams.some((t) => team.includes(t))
           );
           if (filteredTeams.length === 0) return null;
-
-          const parsePeriod = (period: string): number => {
-            const normalized = period.replace("–", "-").toLowerCase();
-
-            if (normalized.includes("-")) {
-              const [, to] = normalized.split("-");
-
-              if (to.trim() === "present") {
-                return new Date().getFullYear();
-              }
-
-              return Number(to);
-            }
-
-            return Number(normalized);
-          };
-
           const lastTeam = filteredTeams[filteredTeams.length - 1];
-          const year = parsePeriod(period);
+          const year = getLastYear(period);
           const teamLogo = getTeamLogo(lastTeam.team, year);
 
           const [firstName, ...lastNameParts] = name.split(" ");
@@ -143,7 +125,7 @@ export default function DailyDraw({
         })}
       </div>
 
-      {flippedIds.length === 5 && (
+      {flippedIds.length === 10 && (
         <div className="mt-6 text-center">
           <button
             onClick={handleRedirectAndStore}
