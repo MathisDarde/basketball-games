@@ -133,7 +133,7 @@ export default function DisplayPlayers({
                             {abrevation}
                           </p>
                           <p className={`text-xs font-outfit font-light`}>
-                            {period}
+                            {period.replace("present", new Date().getFullYear().toString())}
                           </p>
                         </div>
                       </div>
