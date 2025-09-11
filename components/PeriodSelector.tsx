@@ -1,7 +1,6 @@
 "use client";
 
 import { BrickWallIcon } from "lucide-react";
-import { useRouter } from "next/navigation";
 
 type PeriodOption = {
   key: string;
@@ -11,15 +10,13 @@ type PeriodOption = {
 
 export default function PeriodSelector({
   periods,
-  basePath,
+  onSelect,
 }: {
   periods: PeriodOption[];
-  basePath?: string;
+  onSelect: (period: string) => void;
 }) {
-  const router = useRouter();
-
   const handleSelect = (period: string) => {
-    router.push(`${basePath || ""}/${period}`);
+    onSelect(period);
   };
 
   return (
