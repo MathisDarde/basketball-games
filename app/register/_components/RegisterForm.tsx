@@ -11,6 +11,7 @@ import { toast } from "sonner";
 import FileManagement from "./FileManagement";
 import submitRegisterForm from "@/actions/register/registeruser";
 import FavoriteTeamSelect from "./FavoriteTeam";
+import Link from "next/link";
 
 export default function RegisterForm() {
   const [showPassword, setShowPassword] = useState(false);
@@ -63,9 +64,11 @@ export default function RegisterForm() {
   return (
     <div className="w-screen xl:w-[600px] mx-auto px-8 pb-8 text-center">
       <h1 className="text-center font-unbounded text-2xl">Register</h1>
-      <p className="font-outfit mt-2 mb-4 underline cursor-pointer text-dark-purple">
+      <div className="mt-2 mb-4">
+      <Link href="/login" className="font-outfit underline cursor-pointer text-dark-purple">
         Already have an account
-      </p>
+      </Link>
+      </div>
       <form
         onSubmit={handleSubmit(handleSubmitForm)}
         id="inscform"
@@ -144,7 +147,7 @@ export default function RegisterForm() {
             type="submit"
             className="bg-dark-purple px-4 py-2 rounded font-outfit text-white"
           >
-            Je m&apos;inscris
+            Register
           </button>
         </div>
       </form>
