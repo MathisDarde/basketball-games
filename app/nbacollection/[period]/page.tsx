@@ -4,12 +4,10 @@ import PageMenu from "../_components/PageMenu";
 import CardsDisplay from "../_components/CardsDisplay";
 import { PeriodTypes } from "@/interfaces/Interfaces";
 
-export default async function NBACollectionPage({
-  params,
-}: {
-  params: { period: PeriodTypes };
+export default async function NBACollectionPage(props: {
+  params: Promise<{ period: PeriodTypes }>;
 }) {
-  const { period } = params;
+  const { period } = await props.params;
 
   const userId = await getAuthenticatedUserId();
 
@@ -31,8 +29,12 @@ export default async function NBACollectionPage({
       <h1 className="font-unbounded text-2xl text-center">
         NBA Cards Collection
       </h1>
-      <PageMenu ownedCards={ownedCards} players={players} params={params} />
-      <CardsDisplay ownedCards={ownedCards} players={players} params={params} />
+      <PageMenu
+        ownedCards={ownedCards}
+        players={players}
+        params={props.params}
+      />
+      <CardsDisplay ownedCards={ownedCards} players={players} />
     </div>
   );
 }
