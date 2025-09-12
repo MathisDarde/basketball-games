@@ -1,7 +1,19 @@
-import { authClient } from "./auth-client";
+"use server";
 
-export const getUserId = async () => {
-  const session = await authClient.getSession();
-  const user_id = session?.data?.user.id || null;
-  return user_id;
-};
+import { headers } from "next/headers";
+import { auth } from "./auth";
+
+export async function getUserId() {
+  const incomingHeaders = headers();
+
+  const converted = new Headers();
+  (await incomingHeaders).forEach((value, key) => {
+    converted.append(key, value);
+  });
+
+  const session = await auth.api.getSession({
+    headers: converted,
+  });
+
+  return session?.user?.id ?? null;
+}

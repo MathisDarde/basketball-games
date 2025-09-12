@@ -1,3 +1,5 @@
+"use client"
+
 import { PlayerData } from "@/interfaces/Interfaces";
 
 export const getRandomPlayers = ({

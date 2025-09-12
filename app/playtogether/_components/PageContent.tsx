@@ -10,10 +10,16 @@ export default function PageContent({
   players,
   teams,
   period,
+  userId,
+  streak,
+  setStreak
 }: {
   players: PlayerData[];
   teams: string[];
   period: PeriodTypes;
+  userId: string | null;
+  streak: number;
+  setStreak: (value: number) => void;
 }) {
   const storageKey = `randomPlayers-${period}`;
   const [randomPlayers, setRandomPlayers] = useState<PlayerData[]>([]);
@@ -55,6 +61,10 @@ export default function PageContent({
         players={players}
         randomPlayers={randomPlayers}
         setRandomPlayers={setRandomPlayers}
+        userId={userId}
+        period={period}
+        streak={streak}
+        setStreak={setStreak}
       />
     </div>
   );

@@ -85,15 +85,6 @@ export const playersData = pgTable("playersData", {
     .default(sql`'[]'::jsonb`),
 });
 
-export const highscores = pgTable("highscores", {
-  id: text("id").primaryKey(),
-  game: text("game").notNull(),
-  userId: text("userId")
-    .notNull()
-    .references(() => user.id, { onDelete: "cascade" }),
-  highscore: integer("score").notNull().default(0),
-});
-
 export const cardcollection = pgTable("cardcollection", {
   id: text("id").primaryKey(),
   userId: text("userId")
@@ -115,13 +106,23 @@ export const dailydraws = pgTable("dailydraws", {
   createdAt: timestamp("createdAt").notNull().defaultNow(),
 });
 
+export const playtogether_sessions = pgTable("playtogether_sessions", {
+  id: text("id").primaryKey(),
+  userId: text("userId")
+  .notNull()
+  .references(() => user.id, { onDelete: "cascade" }),
+  period: text("period").notNull(),
+  correct: boolean("correct").notNull(),
+  streak: integer("streak").notNull(),
+  playedAt: timestamp("playedAt").notNull().defaultNow()
+})
+
 export const schema = {
   user,
   session,
   account,
   verification,
   playersData,
-  highscores,
   cardcollection,
   dailydraws,
 };
@@ -130,8 +131,8 @@ export type SelectUser = typeof user.$inferSelect;
 
 export type SelectPlayersData = typeof playersData.$inferSelect;
 
-export type SelectHighscores = typeof highscores.$inferSelect;
-
 export type SelectCardCollection = typeof cardcollection.$inferSelect;
 
 export type SelectDailyDraws = typeof dailydraws.$inferSelect;
+
+export type SelectPlayTogetherSessions = typeof playtogether_sessions.$inferSelect;

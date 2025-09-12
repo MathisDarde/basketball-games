@@ -4,23 +4,30 @@ import { usePlayTogetherCtx } from "@/components/GlobalContext";
 import { useState } from "react";
 import { getRandomPlayers } from "@/utils/get-random-players";
 import { Check, X } from "lucide-react";
-import { PlayerData } from "@/interfaces/Interfaces";
+import { PeriodTypes, PlayerData } from "@/interfaces/Interfaces";
+import handleStoreSession from "@/actions/playtogether/store-session";
 
 export default function GuessingBlock({
   players,
   randomPlayers,
   setRandomPlayers,
+  userId,
+  period,
+  streak,
+  setStreak
 }: {
   players: PlayerData[];
   randomPlayers: PlayerData[];
   setRandomPlayers: React.Dispatch<PlayerData[]>;
+  userId: string | null;
+  period: PeriodTypes;
+  streak: number;
+  setStreak: (value: number) => void
 }) {
   const {
     havePlayedTogether,
     endedRound,
     setEndedRound,
-    streakCount,
-    setStreakCount,
   } = usePlayTogetherCtx();
 
   const [endRoundMessage, setEndRoundMessage] = useState(0);
@@ -110,9 +117,11 @@ export default function GuessingBlock({
                  translate-x-[6px] translate-y-[6px]"
           ></span> */}
                 <button
-                  onClick={() => {
+                  onClick={async () => {
+                    const next = streak + 1;
+                    setStreak(next);
+                    if (userId) await handleStoreSession(userId, period, true, next);
                     nextRound();
-                    setStreakCount(streakCount + 1);
                   }}
                   className={`relative w-[200px] px-6 py-3 font-medium text-white 
                  bg-accent-brown rounded-lg
@@ -138,9 +147,10 @@ export default function GuessingBlock({
                  translate-x-[6px] translate-y-[6px]"
           ></span> */}
                 <button
-                  onClick={() => {
+                  onClick={async () => {
+                    setStreak(0);
+                    if (userId) await handleStoreSession(userId, period, false, 0);
                     nextRound();
-                    setStreakCount(0);
                   }}
                   className={`relative w-[200px] px-6 py-3 font-medium text-white 
                  bg-accent-brown rounded-lg
@@ -172,9 +182,11 @@ export default function GuessingBlock({
                  translate-x-[6px] translate-y-[6px]"
           ></span> */}
                 <button
-                  onClick={() => {
+                  onClick={async () => {
+                    const next = streak + 1;
+                    setStreak(next);
+                    if (userId) await handleStoreSession(userId, period, true, next);
                     nextRound();
-                    setStreakCount(streakCount + 1);
                   }}
                   className={`relative w-[200px] px-6 py-3 font-medium text-white 
                  bg-accent-brown rounded-lg
@@ -200,9 +212,10 @@ export default function GuessingBlock({
                  translate-x-[6px] translate-y-[6px]"
           ></span> */}
                 <button
-                  onClick={() => {
+                  onClick={async () => {
+                    setStreak(0);
+                    if (userId) await handleStoreSession(userId, period, false, 0);
                     nextRound();
-                    setStreakCount(0);
                   }}
                   className={`relative w-[200px] px-6 py-3 font-medium text-white 
                  bg-accent-brown rounded-lg
