@@ -70,6 +70,71 @@ export async function signUp(data: RegisterSchemaType, file?: File) {
   }
 }
 
+export async function updateUser(
+  id: SelectUser["id"],
+  data: Partial<Omit<SelectUser, "id">>,
+  file?: File
+) {
+  try {
+    if (file) {
+      // Vérification type/size, upload fichier...
+      const MAX_SIZE = 5 * 1024 * 1024; // 5 Mo corrigé (2048*2048 c’est trop grand)
+      const ALLOWED_TYPES = [
+        "image/jpeg",
+        "image/png",
+        "image/jpg",
+        "image/webp",
+      ];
+
+      if (file.size > MAX_SIZE) {
+        throw new Error(
+          "Le fichier est trop grand. La taille maximale est de 5 Mo."
+        );
+      }
+
+      if (!ALLOWED_TYPES.includes(file.type)) {
+        throw new Error(
+          "Type de fichier non autorisé. Veuillez télécharger une image JPEG, PNG, JPG ou WEBP."
+        );
+      }
+
+      const uploadDir = path.join(process.cwd(), "/public/uploads");
+      if (!fs.existsSync(uploadDir)) {
+        fs.mkdirSync(uploadDir, { recursive: true });
+      }
+
+      const fileExtension = path.extname(file.name);
+      const fileName = `${uuidv4()}${fileExtension}`;
+      const filePath = path.join(uploadDir, fileName);
+
+      if (file) {
+        const buffer = await file.arrayBuffer();
+        fs.writeFileSync(filePath, Buffer.from(buffer));
+      }
+
+      const imageUrl = `/uploads/${fileName}`;
+
+      const updatedData: Partial<Omit<SelectUser, "id">> = {
+        ...data,
+        profilepicture: file ? imageUrl : undefined,
+      };
+
+      // Effectuer la mise à jour
+      const result = await db
+        .update(user)
+        .set(updatedData)
+        .where(eq(user.id, id));
+
+      return result;
+    }
+  } catch (err) {
+    console.log(err);
+    throw new Error(
+      "Erreur lors de l'upload du fichier ou de la création de l'article"
+    );
+  }
+};
+
 export async function deleteUser(id: SelectUser["id"]) {
   await db.delete(user).where(eq(user.id, id));
 }

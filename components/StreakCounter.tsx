@@ -11,6 +11,6 @@ export default function StreakCounter({
   }: StreakCounterProps) {
 
     return (
-        <p>Streak {period}: {streak}</p>
+        <p className="font-outfit">Streak {period}: <span className="font-bold ml-1">{streak}</span></p>
     )
 }
