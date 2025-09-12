@@ -51,3 +51,14 @@ export const PlayersSchema = z.object({
   awards: z.array(z.string()).optional(),
   wikipedia_url: z.string().url().nonempty(),
 });
+
+export const updateProfileSchema = z.object({
+  name: z.string().nonempty({ message: "Veuillez renseigner un pseudo." }),
+  favorite_team: z
+    .string()
+    .nonempty({ message: "Veuillez sélectionner une équipe." }),
+  email: z
+    .string()
+    .email({ message: "Le mail que vous avez entré n'est pas valide." }),
+  profilepicture: z.string().optional(),
+});
