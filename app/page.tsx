@@ -1,4 +1,4 @@
-import { Aperture, LucideFileUser, Flower2Icon } from "lucide-react";
+import { Aperture, LucideFileUser, Flower2Icon, LockIcon } from "lucide-react";
 import Link from "next/link";
 
 import React from "react";
@@ -26,9 +26,15 @@ export default function MainPage() {
         </Link>
 
         <Link href="/careerpath">
-          <div className="flex flex-col justify-center items-center gap-4 p-4 rounded-md bg-accent-brown text-white">
+          <div className="relative flex flex-col justify-center items-center gap-4 p-4 rounded-md bg-accent-brown text-white">
             <Flower2Icon />
             <h3 className="font-outfit">Career Path</h3>
+
+            {/* Overlay pour bloquer le clic */}
+            <div className="absolute inset-0 bg-white opacity-70 flex flex-col justify-center items-center rounded-md cursor-not-allowed">
+              {/* Icône cadenas */}
+              <LockIcon size={30} className="text-gray-700" />
+            </div>
           </div>
         </Link>
 
