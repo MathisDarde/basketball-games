@@ -1,6 +1,6 @@
 import "./globals.css";
 import { AppProvider } from "../components/GlobalContext";
-import { Outfit, Unbounded } from "next/font/google";
+import { Outfit, Unbounded, Righteous } from "next/font/google";
 import { Toaster } from "sonner";
 import NavbarServer from "@/components/NavbarServer";
 
@@ -16,6 +16,12 @@ const outfit = Outfit({
   subsets: ["latin"],
   preload: true,
 });
+const righteous = Righteous({
+  weight: ["400"],
+  variable: "--font-righteous",
+  subsets: ["latin"],
+  preload: true,
+});
 
 export default function RootLayout({
   children,
@@ -26,7 +32,7 @@ export default function RootLayout({
     <html lang="en">
       <body
         suppressHydrationWarning
-        className={`${unbounded.variable} ${outfit.variable}`}
+        className={`${unbounded.variable} ${outfit.variable} ${righteous.variable}`}
       >
         <div className="bg-light-beige">
           <NavbarServer />

@@ -36,7 +36,7 @@ export default function DailyDraw({
   };
 
   const handleRedirectAndStore = () => {
-    router.push("/nbacollection");
+    router.push(`/nbacollection/${period}`);
   };
 
   return (
@@ -44,7 +44,7 @@ export default function DailyDraw({
       <div className="grid grid-cols-5 gap-2">
         {players.map((player) => {
           const isFlipped = flippedIds.includes(player.id);
-          const { name, image_link, teams_history, number, position } = player;
+          const { name, image_link, teams_history, position } = player;
           const backgroundClass = getBackgroundClass(player.awards);
 
           const filteredTeams = teams_history.filter(({ team }) =>
@@ -88,9 +88,6 @@ export default function DailyDraw({
                         />
                       )}
                     </div>
-                  </div>
-                  <div className="absolute right-4 top-3 rounded-full w-14 h-14 bg-black flex items-center justify-center">
-                    <p className=" italic font-righteous text-2xl text-white">{`#${number}`}</p>
                   </div>
                   <div
                     className={`bg-[url('/motifbackground90s.jpg')] bg-cover bg-center w-full h-full rounded-t-full flex flex-col overflow-hidden`}

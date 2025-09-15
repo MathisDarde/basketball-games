@@ -12,7 +12,6 @@ export interface PlayerData {
   wikipedia_url: string;
   teams_history: TeamHistory[];
   image_link: string | null;
-  number: number | null;
   position: string | null;
   awards: string[];
 }

@@ -20,6 +20,7 @@
   --font-mono: var(--font-geist-mono);
   --font-unbounded: var(--font-unbounded);
   --font-outfit: var(--font-outfit);
+  --font-righteous: var(--font-righteous);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -33,4 +34,9 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+.verticaltext {
+  writing-mode: vertical-lr;
+  text-orientation: upright;
 }

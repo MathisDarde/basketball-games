@@ -36,20 +36,18 @@ export async function store1990sPlayers() {
       process.cwd(),
       "public",
       "data",
-      "1990sdata.json"
+      "nba_players_1990s_enriched.json"
     );
     const raw = fs.readFileSync(filePath, "utf-8");
     const playersArray = JSON.parse(raw); // Tableau d'objets joueurs
 
     // Prépare un tableau d'insertions
     const playersToInsert = playersArray.map((player: PlayersSchemaType) => {
-      const parsedNumber = Number(player.number);
       return {
         id: uuidv4(),
         name: player.name,
         period: "1990s",
-        position: player.position ?? null,
-        number: isNaN(parsedNumber) ? null : parsedNumber,
+        position: player.position,
         teams_history: player.teams_history ?? [],
         image_link: player.image_link ?? null,
         wikipedia_url: player.wikipedia_url ?? null,
@@ -79,13 +77,11 @@ export async function store2000sPlayers() {
 
     // Prépare un tableau d'insertions
     const playersToInsert = playersArray.map((player: PlayersSchemaType) => {
-      const parsedNumber = Number(player.number);
       return {
         id: uuidv4(),
         name: player.name,
         period: "2000s",
         position: player.position ?? null,
-        number: isNaN(parsedNumber) ? null : parsedNumber,
         teams_history: player.teams_history ?? [],
         image_link: player.image_link ?? null,
         wikipedia_url: player.wikipedia_url ?? null,
@@ -115,13 +111,11 @@ export async function store2010sPlayers() {
 
     // Prépare un tableau d'insertions
     const playersToInsert = playersArray.map((player: PlayersSchemaType) => {
-      const parsedNumber = Number(player.number);
       return {
         id: uuidv4(),
         name: player.name,
         period: "2010s",
         position: player.position ?? null,
-        number: isNaN(parsedNumber) ? null : parsedNumber,
         teams_history: player.teams_history ?? [],
         image_link: player.image_link ?? null,
         wikipedia_url: player.wikipedia_url ?? null,
@@ -151,13 +145,11 @@ export async function store2020sPlayers() {
 
     // Prépare un tableau d'insertions
     const playersToInsert = playersArray.map((player: PlayersSchemaType) => {
-      const parsedNumber = Number(player.number);
       return {
         id: uuidv4(),
         name: player.name,
         period: "2020s",
         position: player.position ?? null,
-        number: isNaN(parsedNumber) ? null : parsedNumber,
         teams_history: player.teams_history ?? [],
         image_link: player.image_link ?? null,
         wikipedia_url: player.wikipedia_url ?? null,

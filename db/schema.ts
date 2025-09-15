@@ -75,7 +75,6 @@ export const playersData = pgTable("playersData", {
   period: text("period").$type<PeriodType>().notNull(),
   name: text("name").notNull(),
   position: text("position"),
-  number: integer("number"),
   teams_history: jsonb("teams_history").$type<TeamHistoryEntry[]>().notNull(),
   image_link: text("image_link"),
   wikipedia_url: text("wikipedia_url").notNull(),
@@ -109,13 +108,13 @@ export const dailydraws = pgTable("dailydraws", {
 export const playtogether_sessions = pgTable("playtogether_sessions", {
   id: text("id").primaryKey(),
   userId: text("userId")
-  .notNull()
-  .references(() => user.id, { onDelete: "cascade" }),
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
   period: text("period").notNull(),
   correct: boolean("correct").notNull(),
   streak: integer("streak").notNull(),
-  playedAt: timestamp("playedAt").notNull().defaultNow()
-})
+  playedAt: timestamp("playedAt").notNull().defaultNow(),
+});
 
 export const schema = {
   user,
@@ -135,4 +134,5 @@ export type SelectCardCollection = typeof cardcollection.$inferSelect;
 
 export type SelectDailyDraws = typeof dailydraws.$inferSelect;
 
-export type SelectPlayTogetherSessions = typeof playtogether_sessions.$inferSelect;
+export type SelectPlayTogetherSessions =
+  typeof playtogether_sessions.$inferSelect;
