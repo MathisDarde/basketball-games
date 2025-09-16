@@ -5,13 +5,14 @@ import { logOut } from "@/actions/user/log-out";
 import ActionPopup from "@/components/ActionPopup";
 import { usePlayTogetherCtx } from "@/components/GlobalContext";
 import { User } from "@/interfaces/Interfaces";
-import { LogOut, Trash } from "lucide-react";
+import { CalendarCheckIcon, LogOut, Mail, Trash, BellIcon } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import StatisticsBlock from "./StatisticsBlock";
 
-export const ProfileContent = ({ user }: { user: User | null }) => {
+export const ProfileContent = ({ user, highestStreak, totalPlayTogetherGames }: { user: User | null, highestStreak: number, totalPlayTogetherGames: number }) => {
   const { getTeamLogo } = usePlayTogetherCtx();
   const router = useRouter();
   const [logoutPopupOpen, setLogoutPopupOpen] = useState(false);
@@ -89,8 +90,8 @@ export const ProfileContent = ({ user }: { user: User | null }) => {
           <Image
             src={user?.profilePicture || "/pdpdebase.png"}
             alt="Profile picture"
-            width={100}
-            height={100}
+            width={125}
+            height={125}
             className="rounded-full aspect-square object-cover mx-auto"
           />
           <h2 className="font-unbounded text-center">{user?.name}</h2>
@@ -103,11 +104,14 @@ export const ProfileContent = ({ user }: { user: User | null }) => {
         </div>
 
         <div className="space-y-2">
-          <div className="font-outfit text-sm">{user?.email}</div>
-          <div className="font-outfit text-sm">
+          <div className="font-outfit text-sm flex items-center justify-center gap-2"><Mail size={18} />{user?.email}</div>
+          <div className="font-outfit text-sm flex items-center justify-center gap-2">
+            <CalendarCheckIcon size={18} />
             First registered on {user?.createdAt.toLocaleDateString()}
           </div>
-          <div className="font-outfit text-sm flex items-center gap-2">
+          <div className="font-outfit text-sm flex items-center justify-center gap-2">
+            <BellIcon size={18} />
+
             {user?.favoriteTeam}
 
             <Image
@@ -120,8 +124,10 @@ export const ProfileContent = ({ user }: { user: User | null }) => {
           </div>
         </div>
 
-        <div className="my-4">
-          <h3 className="font-unbounded text-center">Statistics</h3>
+        <div className="mb-4 mt-8">
+          <h2 className="text-center font-unbounded text-2xl">Statistics</h2>
+
+          <StatisticsBlock highestStreak={highestStreak} totalPlayTogetherGames={totalPlayTogetherGames} />
         </div>
 
         <div className="flex flex-col items-center gap-4 ">

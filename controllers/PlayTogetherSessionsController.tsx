@@ -2,7 +2,7 @@
 
 import { db } from "@/db";
 import { SelectPlayTogetherSessions, playtogether_sessions } from "@/db/schema";
-import { and, desc, eq } from "drizzle-orm";
+import { and, desc, eq, max, sql } from "drizzle-orm";
 import { v4 as uuidv4 } from "uuid";
 
 export async function getSessions(): Promise<
@@ -53,4 +53,30 @@ export async function getLastStreak(userId: string | null, period: string) {
       .limit(1);
   
     return lastGame.length ? lastGame[0].streak : 0;
+  }
+
+  export async function getUserHighestStreak(userId: string | null) {
+    if (!userId) return 0;
+  
+    const result = await db
+      .select({
+        highestStreak: max(playtogether_sessions.streak)
+      })
+      .from(playtogether_sessions)
+      .where(eq(playtogether_sessions.userId, userId));
+
+    return result[0]?.highestStreak ?? 0;
+  }
+
+  export async function getUserGamesCount(userId: string | null) {
+    if (!userId) return 0;
+  
+    const result = await db
+      .select({
+        gamesCount: sql<number>`COUNT(*)`.as("gamesCount")
+      })
+      .from(playtogether_sessions)
+      .where(eq(playtogether_sessions.userId, userId));
+  
+    return result[0]?.gamesCount ?? 0;
   }
