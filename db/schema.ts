@@ -113,6 +113,7 @@ export const playtogether_sessions = pgTable("playtogether_sessions", {
   period: text("period").notNull(),
   correct: boolean("correct").notNull(),
   streak: integer("streak").notNull(),
+  difficulty: text("difficulty").notNull(),
   playedAt: timestamp("playedAt").notNull().defaultNow(),
 });
 

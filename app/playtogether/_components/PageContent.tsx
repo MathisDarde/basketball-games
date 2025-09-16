@@ -12,7 +12,8 @@ export default function PageContent({
   period,
   userId,
   streak,
-  setStreak
+  setStreak,
+  difficulty,
 }: {
   players: PlayerData[];
   teams: string[];
@@ -20,6 +21,7 @@ export default function PageContent({
   userId: string | null;
   streak: number;
   setStreak: (value: number) => void;
+  difficulty: string;
 }) {
   const storageKey = `randomPlayers-${period}`;
   const [randomPlayers, setRandomPlayers] = useState<PlayerData[]>([]);
@@ -56,6 +58,7 @@ export default function PageContent({
         players={players}
         randomPlayers={randomPlayers}
         teams={teams}
+        difficulty={difficulty}
       />
       <GuessingBlock
         players={players}
@@ -65,6 +68,7 @@ export default function PageContent({
         period={period}
         streak={streak}
         setStreak={setStreak}
+        difficulty={difficulty}
       />
     </div>
   );

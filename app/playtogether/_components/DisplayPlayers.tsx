@@ -10,12 +10,14 @@ export default function DisplayPlayers({
   players,
   randomPlayers,
   teams,
+  difficulty,
 }: {
   players: PlayerData[];
   randomPlayers: PlayerData[];
   teams: string[];
+  difficulty: string;
 }) {
-  const { getTeamLogo, difficulty, endedRound, getLastYear } =
+  const { getTeamLogo, endedRound, getLastYear } =
     usePlayTogetherCtx();
 
   const hasInitialized = useRef(false);
@@ -32,11 +34,13 @@ export default function DisplayPlayers({
   return (
     <div className="flex flex-col items-center gap-6">
       {randomPlayers.map((player: PlayerData, index: number) => {
-        const { name, image_link, teams_history } = player;
+        const { name, image_link, teams_history, position } = player;
 
         const allYears = teams_history
           .map(({ period }) => {
-            const parts = period.split("–");
+            const parts = period.includes("–")
+              ? period.split("–")
+              : period.split("-");
 
             let start: number;
             let end: number;
@@ -72,7 +76,7 @@ export default function DisplayPlayers({
 
         return (
           <div key={index} className="player-card p-4 w-[300px]">
-            {difficulty < 2 || endedRound ? (
+            {(difficulty != "hard" || endedRound) ? (
               <Image
                 src={image_link || "/pdpdebase.png"}
                 alt={name}
@@ -90,16 +94,21 @@ export default function DisplayPlayers({
               />
             )}
 
+<div className="space-y-1">
             <h2
-              className={`text-xl mb-2 font-regular font-unbounded text-center`}
+              className={`text-xl font-regular font-unbounded text-center`}
             >
               {name}
             </h2>
-            {(difficulty < 1 || endedRound) && (
+
+            <p className="font-outfit font-light text-center text-sm">{position}</p>
+
+            {(difficulty === "easy" || endedRound) && (
               <p className="text-sm text-center font-outfit font-light">
                 Active Period: {activePeriod}
               </p>
             )}
+            </div>
 
             {endedRound && (
               <div className="grid grid-cols-3 gap-1 mt-4">

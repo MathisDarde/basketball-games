@@ -14,7 +14,8 @@ export default function GuessingBlock({
   userId,
   period,
   streak,
-  setStreak
+  setStreak,
+  difficulty,
 }: {
   players: PlayerData[];
   randomPlayers: PlayerData[];
@@ -22,7 +23,8 @@ export default function GuessingBlock({
   userId: string | null;
   period: PeriodTypes;
   streak: number;
-  setStreak: (value: number) => void
+  setStreak: (value: number) => void;
+  difficulty: string;
 }) {
   const {
     havePlayedTogether,
@@ -120,7 +122,7 @@ export default function GuessingBlock({
                   onClick={async () => {
                     const next = streak + 1;
                     setStreak(next);
-                    if (userId) await handleStoreSession(userId, period, true, next);
+                    if (userId) await handleStoreSession(userId, period, true, next, difficulty);
                     nextRound();
                   }}
                   className={`relative w-[200px] px-6 py-3 font-medium text-white 
@@ -149,7 +151,7 @@ export default function GuessingBlock({
                 <button
                   onClick={async () => {
                     setStreak(0);
-                    if (userId) await handleStoreSession(userId, period, false, 0);
+                    if (userId) await handleStoreSession(userId, period, false, 0, difficulty);
                     nextRound();
                   }}
                   className={`relative w-[200px] px-6 py-3 font-medium text-white 
@@ -185,7 +187,7 @@ export default function GuessingBlock({
                   onClick={async () => {
                     const next = streak + 1;
                     setStreak(next);
-                    if (userId) await handleStoreSession(userId, period, true, next);
+                    if (userId) await handleStoreSession(userId, period, true, next, difficulty);
                     nextRound();
                   }}
                   className={`relative w-[200px] px-6 py-3 font-medium text-white 
@@ -214,7 +216,7 @@ export default function GuessingBlock({
                 <button
                   onClick={async () => {
                     setStreak(0);
-                    if (userId) await handleStoreSession(userId, period, false, 0);
+                    if (userId) await handleStoreSession(userId, period, false, 0, difficulty);
                     nextRound();
                   }}
                   className={`relative w-[200px] px-6 py-3 font-medium text-white 

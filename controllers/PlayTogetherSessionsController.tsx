@@ -15,7 +15,7 @@ export async function getSessionsbyUserId(userId: SelectPlayTogetherSessions["us
     return db.select().from(playtogether_sessions).where(eq(playtogether_sessions.userId, userId))
 }
 
-export async function storeSession(userId: string, period: string, correct: boolean, streak: number ): Promise<
+export async function storeSession(userId: string, period: string, correct: boolean, streak: number, difficulty: string ): Promise<
     SelectPlayTogetherSessions[]
 > {
     const newSession = {
@@ -24,6 +24,7 @@ export async function storeSession(userId: string, period: string, correct: bool
         period,
         correct,
         streak,
+        difficulty,
         playedAt: new Date()
       };
 

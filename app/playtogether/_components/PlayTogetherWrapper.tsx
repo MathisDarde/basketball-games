@@ -11,11 +11,13 @@ export default function PlayTogetherWrapper({
   userId,
   lastStreak,
   period,
+  difficulty,
 }: {
   players: PlayerData[];
   userId: string | null;
   lastStreak: number;
   period: PeriodTypes;
+  difficulty: string;
 }) {
     const [streak, setStreak] = useState<number>(lastStreak);
 
@@ -29,6 +31,7 @@ export default function PlayTogetherWrapper({
         userId={userId}
         streak={streak}
         setStreak={setStreak}
+        difficulty={difficulty}
       />
     </div>
   );
