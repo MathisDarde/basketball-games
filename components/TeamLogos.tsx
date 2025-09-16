@@ -56,20 +56,26 @@ export const TeamLogos = [
   {
     team: "Golden State Warriors",
     abr: "GSW",
-    logo: "/logos/old/warriors3.svg",
+    logo: "/logos/old/warriors4.svg",
     period: "2010-2018",
   },
   {
     team: "Golden State Warriors",
     abr: "GSW",
-    logo: "/logos/old/warriors2.png",
+    logo: "/logos/old/warriors3.png",
     period: "1997-2009",
   },
   {
     team: "Golden State Warriors",
     abr: "GSW",
-    logo: "/logos/old/warriors1.gif",
-    period: "1988-1996",
+    logo: "/logos/old/warriors2.gif",
+    period: "1989-1996",
+  },
+  {
+    team: "Golden State Warriors",
+    abr: "GSW",
+    logo: "/logos/old/warriors1.png",
+    period: "1976-1988",
   },
   {
     team: "Miami Heat",
@@ -98,14 +104,20 @@ export const TeamLogos = [
   {
     team: "San Antonio Spurs",
     abr: "SAS",
-    logo: "/logos/old/spurs2.svg",
+    logo: "/logos/old/spurs3.svg",
     period: "2002-2017",
   },
   {
     team: "San Antonio Spurs",
     abr: "SAS",
-    logo: "/logos/old/spurs1.png",
+    logo: "/logos/old/spurs2.png",
     period: "1990-2001",
+  },
+  {
+    team: "San Antonio Spurs",
+    abr: "SAS",
+    logo: "/logos/old/spurs1.webp",
+    period: "1976-1989",
   },
   {
     team: "Houston Rockets",
@@ -182,20 +194,26 @@ export const TeamLogos = [
   {
     team: "New York Knicks",
     abr: "NYK",
-    logo: "/logos/old/knicks3.avif",
+    logo: "/logos/old/knicks4.avif",
     period: "1996-2011",
   },
   {
     team: "New York Knicks",
     abr: "NYK",
-    logo: "/logos/old/knicks2.webp",
+    logo: "/logos/old/knicks3.webp",
     period: "1993-1995",
   },
   {
     team: "New York Knicks",
     abr: "NYK",
-    logo: "/logos/old/knicks1.png",
+    logo: "/logos/old/knicks2.png",
     period: "1990-1992",
+  },
+  {
+    team: "New York Knicks",
+    abr: "NYK",
+    logo: "/logos/old/knicks1.webp",
+    period: "1984-1989",
   },
   {
     team: "Brooklyn Nets",
@@ -206,14 +224,20 @@ export const TeamLogos = [
   {
     team: "New Jersey Nets",
     abr: "NJN",
-    logo: "/logos/old/nets2.svg",
+    logo: "/logos/old/nets3.svg",
     period: "1997-2011",
   },
   {
     team: "New Jersey Nets",
     abr: "NJN",
-    logo: "/logos/old/nets1.gif",
+    logo: "/logos/old/nets2.gif",
     period: "1990-1996",
+  },
+  {
+    team: "New Jersey Nets",
+    abr: "NJN",
+    logo: "/logos/old/nets1.png",
+    period: "1979-1989",
   },
   {
     team: "Los Angeles Clippers",
@@ -272,20 +296,26 @@ export const TeamLogos = [
   {
     team: "Portland Trail Blazers",
     abr: "POR",
-    logo: "/logos/old/blazers3.svg",
+    logo: "/logos/old/blazers4.svg",
     period: "2004-2016",
   },
   {
     team: "Portland Trail Blazers",
     abr: "POR",
-    logo: "/logos/old/blazers2.webp",
+    logo: "/logos/old/blazers3.webp",
     period: "2002-2003",
   },
   {
     team: "Portland Trail Blazers",
     abr: "POR",
-    logo: "/logos/old/blazers1.png",
+    logo: "/logos/old/blazers2.png",
     period: "1990-2001",
+  },
+  {
+    team: "Portland Trail Blazers",
+    abr: "POR",
+    logo: "/logos/old/blazers1.webp",
+    period: "1970-1989",
   },
   {
     team: "Utah Jazz",
@@ -356,14 +386,20 @@ export const TeamLogos = [
   {
     team: "Indiana Pacers",
     abr: "IND",
-    logo: "/logos/old/pacers2.png",
+    logo: "/logos/old/pacers3.png",
     period: "2005-2016",
   },
   {
     team: "Indiana Pacers",
     abr: "IND",
+    logo: "/logos/old/pacers2.webp",
+    period: "1991-2004",
+  },
+  {
+    team: "Indiana Pacers",
+    abr: "IND",
     logo: "/logos/old/pacers1.webp",
-    period: "1990-2004",
+    period: "1976-1990",
   },
   {
     team: "Oklahoma City Thunder",
@@ -446,14 +482,20 @@ export const TeamLogos = [
   {
     team: "Sacramento Kings",
     abr: "SAC",
-    logo: "/logos/old/kings2.png",
+    logo: "/logos/old/kings3.png",
     period: "1994-2015",
   },
   {
     team: "Sacramento Kings",
     abr: "SAC",
-    logo: "/logos/old/kings1.webp",
-    period: "1986-1993",
+    logo: "/logos/old/kings2.webp",
+    period: "1985-1993",
+  },
+  {
+    team: "Kansas City Kings",
+    abr: "KCK",
+    logo: "/logos/old/kings1.png",
+    period: "1976-1984",
   },
   {
     team: "Detroit Pistons",
@@ -518,20 +560,26 @@ export const TeamLogos = [
   {
     team: "Washington Wizards",
     abr: "WAS",
-    logo: "/logos/old/wizards3.png",
+    logo: "/logos/old/wizards4.png",
     period: "2011-2014",
   },
   {
     team: "Washington Wizards",
     abr: "WAS",
-    logo: "/logos/old/wizards2.png",
+    logo: "/logos/old/wizards3.png",
     period: "1997-2010",
   },
   {
     team: "Washington Bullets",
     abr: "WSB",
-    logo: "/logos/old/wizards1.gif",
+    logo: "/logos/old/wizards2.gif",
     period: "1987-1996",
+  },
+  {
+    team: "Washington Bullets",
+    abr: "WSB",
+    logo: "/logos/old/wizards1.png",
+    period: "1974-1986",
   },
   {
     team: "Orlando Magic",
