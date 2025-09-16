@@ -13,7 +13,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GamesDropdown } from "./GamesDropdown";
 import { SocialsDropdown } from "./SocialsDropdown";
 
@@ -32,6 +32,52 @@ export const NavbarMenu = ({ user }: { user: User | null }) => {
       router.push(`/${parts[1]}`);
     }
   };
+
+  // swipe gestion
+
+  const touchStartX = useRef<number | null>(null);
+  const touchEndX = useRef<number | null>(null);
+
+  useEffect(() => {
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      touchEndX.current = e.touches[0].clientX;
+    };
+
+    const handleTouchEnd = () => {
+      if (touchStartX.current === null || touchEndX.current === null) return;
+
+      const diff = touchStartX.current - touchEndX.current;
+
+      if (Math.abs(diff) > 50) {
+        if (diff > 0) {
+          // Swipe gauche => ouvrir
+          setMenuOpen(false);
+        } else {
+          // Swipe droite => fermer
+          setMenuOpen(true);
+        }
+      }
+
+      touchStartX.current = null;
+      touchEndX.current = null;
+    };
+
+    window.addEventListener("touchstart", handleTouchStart);
+    window.addEventListener("touchmove", handleTouchMove);
+    window.addEventListener("touchend", handleTouchEnd);
+
+    return () => {
+      window.removeEventListener("touchstart", handleTouchStart);
+      window.removeEventListener("touchmove", handleTouchMove);
+      window.removeEventListener("touchend", handleTouchEnd);
+    };
+  }, []);
+
+  // end of swipe gestion
 
   return (
     <>
