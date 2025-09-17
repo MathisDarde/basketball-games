@@ -219,13 +219,13 @@ export const TeamLogos = [
     team: "Brooklyn Nets",
     abr: "BKN",
     logo: "/logos/current/nets.svg",
-    period: "2012–present",
+    period: "2013–present",
   },
   {
     team: "New Jersey Nets",
     abr: "NJN",
     logo: "/logos/old/nets3.svg",
-    period: "1997-2011",
+    period: "1997-2012",
   },
   {
     team: "New Jersey Nets",
@@ -567,13 +567,13 @@ export const TeamLogos = [
     team: "Washington Wizards",
     abr: "WAS",
     logo: "/logos/old/wizards3.png",
-    period: "1997-2010",
+    period: "1998-2010",
   },
   {
     team: "Washington Bullets",
     abr: "WSB",
     logo: "/logos/old/wizards2.gif",
-    period: "1987-1996",
+    period: "1987-1997",
   },
   {
     team: "Washington Bullets",

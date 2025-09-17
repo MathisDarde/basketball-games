@@ -70,7 +70,7 @@ export async function store2000sPlayers() {
       process.cwd(),
       "public",
       "data",
-      "2000sdata.json"
+      "nba_players_2000s_enriched.json"
     );
     const raw = fs.readFileSync(filePath, "utf-8");
     const playersArray = JSON.parse(raw); // Tableau d'objets joueurs
@@ -104,7 +104,7 @@ export async function store2010sPlayers() {
       process.cwd(),
       "public",
       "data",
-      "2010sdata.json"
+      "nba_players_2010s_enriched.json"
     );
     const raw = fs.readFileSync(filePath, "utf-8");
     const playersArray = JSON.parse(raw); // Tableau d'objets joueurs
@@ -138,7 +138,7 @@ export async function store2020sPlayers() {
       process.cwd(),
       "public",
       "data",
-      "2020sdata.json"
+      "nba_players_2020s_enriched.json"
     );
     const raw = fs.readFileSync(filePath, "utf-8");
     const playersArray = JSON.parse(raw); // Tableau d'objets joueurs

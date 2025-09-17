@@ -33,7 +33,7 @@ export default function CardsDisplay({
           No player was found
         </p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-screen">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-screen mt-4">
           {filteredPlayers.map((player) => {
             const { id, name, position, awards, teams_history, image_link } =
               player;
