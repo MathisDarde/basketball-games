@@ -1418,48 +1418,6 @@
     ]
   },
   {
-    "name": "Troy Brown",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Troy_Brown_Jr.",
-    "teams_history": [
-      {
-        "period": "2018–2021",
-        "team": "Washington Wizards"
-      },
-      {
-        "period": "2018–2019",
-        "team": "Capital City Go-Go"
-      },
-      {
-        "period": "2021–2022",
-        "team": "Chicago Bulls"
-      },
-      {
-        "period": "2022–2023",
-        "team": "Los Angeles Lakers"
-      },
-      {
-        "period": "2023–2024",
-        "team": "Minnesota Timberwolves"
-      },
-      {
-        "period": "2024",
-        "team": "Detroit Pistons"
-      },
-      {
-        "period": "2024",
-        "team": "Manisa Basket"
-      },
-      {
-        "period": "2025–present",
-        "team": "Cangrejeros de Santurce"
-      }
-    ],
-    "position": "Small forward / shooting guard",
-    "awards": [
-      "McDonald's All-American ( 2017 )"
-    ]
-  },
-  {
     "name": "Devon Dotson",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Devon_Dotson",
     "teams_history": [
@@ -2419,42 +2377,6 @@
     ]
   },
   {
-    "name": "Larry Nance",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Larry_Nance_Jr.",
-    "teams_history": [
-      {
-        "period": "2015–2018",
-        "team": "Los Angeles Lakers"
-      },
-      {
-        "period": "2018–2021",
-        "team": "Cleveland Cavaliers"
-      },
-      {
-        "period": "2021–2022",
-        "team": "Portland Trail Blazers"
-      },
-      {
-        "period": "2022–2024",
-        "team": "New Orleans Pelicans"
-      },
-      {
-        "period": "2024–2025",
-        "team": "Atlanta Hawks"
-      },
-      {
-        "period": "2025–present",
-        "team": "Cleveland Cavaliers"
-      }
-    ],
-    "position": "Power forward / center",
-    "awards": [
-      "2× First-team All- MWC (2014, 2015)",
-      "MWC Defensive Player of the Year (2015)",
-      "2× MWC All-Defensive Team (2014, 2015)"
-    ]
-  },
-  {
     "name": "Isaac Okoro",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Isaac_Okoro",
     "teams_history": [
@@ -3042,52 +2964,6 @@
       "Hillcrest Prep ( Phoenix, Arizona )",
       "IMG Academy ( Bradenton, Florida )",
       "McDonald's All-American ( 2019 )"
-    ]
-  },
-  {
-    "name": "Tim Hardaway",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Tim_Hardaway_Jr.",
-    "teams_history": [
-      {
-        "period": "2013–2015",
-        "team": "New York Knicks"
-      },
-      {
-        "period": "2015–2017",
-        "team": "Atlanta Hawks"
-      },
-      {
-        "period": "2015",
-        "team": "Canton Charge"
-      },
-      {
-        "period": "2015–2016",
-        "team": "Austin Spurs"
-      },
-      {
-        "period": "2017–2019",
-        "team": "New York Knicks"
-      },
-      {
-        "period": "2019–2024",
-        "team": "Dallas Mavericks"
-      },
-      {
-        "period": "2024–2025",
-        "team": "Detroit Pistons"
-      },
-      {
-        "period": "2025–present",
-        "team": "Denver Nuggets"
-      }
-    ],
-    "position": "Small forward / shooting guard",
-    "awards": [
-      "Miami Palmetto ( Pinecrest, Florida )",
-      "NBA All-Rookie First Team ( 2014 )",
-      "First-team All- Big Ten ( 2013 )",
-      "Third-team All-Big Ten ( 2012 )",
-      "Big Ten All-Freshman Team ( 2011 )"
     ]
   },
   {
@@ -4170,29 +4046,6 @@
       "First-team All-Pac-12 ( 2020 )",
       "Pac-12 Freshman of the Year (2020)",
       "Pac-12 All-Freshman team (2020)"
-    ]
-  },
-  {
-    "name": "Michael Porter",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Michael_Porter_Jr.",
-    "teams_history": [
-      {
-        "period": "2018–2025",
-        "team": "Denver Nuggets"
-      },
-      {
-        "period": "2025–present",
-        "team": "Brooklyn Nets"
-      }
-    ],
-    "position": "Small forward",
-    "awards": [
-      "Father Tolton ( Columbia, Missouri )",
-      "Nathan Hale ( Seattle, Washington )",
-      "NBA champion ( 2023 )",
-      "National high school player of the year (2017)",
-      "McDonald's All-American MVP ( 2017 )",
-      "Washington Mr. Basketball (2017)"
     ]
   },
   {
@@ -5408,40 +5261,6 @@
     ]
   },
   {
-    "name": "Kelly Oubre",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Kelly_Oubre_Jr.",
-    "teams_history": [
-      {
-        "period": "2015–2018",
-        "team": "Washington Wizards"
-      },
-      {
-        "period": "2018–2020",
-        "team": "Phoenix Suns"
-      },
-      {
-        "period": "2020–2021",
-        "team": "Golden State Warriors"
-      },
-      {
-        "period": "2021–2023",
-        "team": "Charlotte Hornets"
-      },
-      {
-        "period": "2023–present",
-        "team": "Philadelphia 76ers"
-      }
-    ],
-    "position": "Shooting guard / small forward",
-    "awards": [
-      "George Bush ( Fort Bend, Texas )",
-      "Findlay Prep ( Henderson, Nevada )",
-      "Big 12 All-Newcomer Team (2015)",
-      "McDonald's All-American ( 2014 )",
-      "First-team Parade All-American (2014)"
-    ]
-  },
-  {
     "name": "Eric Paschall",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Eric_Paschall",
     "teams_history": [
@@ -6189,39 +6008,6 @@
     ]
   },
   {
-    "name": "Kenyon Martin",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Kenyon_Martin_Jr.",
-    "teams_history": [
-      {
-        "period": "2020–2023",
-        "team": "Houston Rockets"
-      },
-      {
-        "period": "2021",
-        "team": "Rio Grande Valley Vipers"
-      },
-      {
-        "period": "2023",
-        "team": "Los Angeles Clippers"
-      },
-      {
-        "period": "2023–2025",
-        "team": "Philadelphia 76ers"
-      },
-      {
-        "period": "2025–present",
-        "team": "Utah Jazz"
-      }
-    ],
-    "position": "Small forward / power forward",
-    "awards": [
-      "Chaminade College Prep (Los Angeles, California)",
-      "Sierra Canyon ( Chatsworth, California )",
-      "IMG Academy ( Bradenton, Florida )",
-      "NBA G League All-Rookie Team ( 2021 )"
-    ]
-  },
-  {
     "name": "David Nwaba",
     "wikipedia_url": "https://en.wikipedia.org/wiki/David_Nwaba",
     "teams_history": [
@@ -6320,43 +6106,6 @@
       "WCC Player of the Year (2013)",
       "First-team All- WCC (2013)",
       "No. 13 retired by Gonzaga Bulldogs"
-    ]
-  },
-  {
-    "name": "Kevin Porter",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Kevin_Porter_Jr.",
-    "teams_history": [
-      {
-        "period": "2019–2021",
-        "team": "Cleveland Cavaliers"
-      },
-      {
-        "period": "2021–2023",
-        "team": "Houston Rockets"
-      },
-      {
-        "period": "2021",
-        "team": "Rio Grande Valley Vipers"
-      },
-      {
-        "period": "2024",
-        "team": "PAOK"
-      },
-      {
-        "period": "2024–2025",
-        "team": "Los Angeles Clippers"
-      },
-      {
-        "period": "2025–present",
-        "team": "Milwaukee Bucks"
-      }
-    ],
-    "position": "Point guard / small forward",
-    "awards": [
-      "All-NBA G League First Team ( 2021 )",
-      "NBA G League scoring leader ( 2021 )",
-      "NBA G League assists leader ( 2021 )",
-      "Washington Mr. Basketball (2018)"
     ]
   },
   {
@@ -7854,7 +7603,7 @@
     "awards": []
   },
   {
-    "name": "Marcus Morris",
+    "name": "Marcus Morris Sr.",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Marcus_Morris",
     "teams_history": [
       {
@@ -12752,27 +12501,6 @@
     ]
   },
   {
-    "name": "Wendell Carter",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Wendell_Carter_Jr.",
-    "teams_history": [
-      {
-        "period": "2018–2021",
-        "team": "Chicago Bulls"
-      },
-      {
-        "period": "2021–present",
-        "team": "Orlando Magic"
-      }
-    ],
-    "position": "Center / power forward",
-    "awards": [
-      "Second-team All-ACC (2018)",
-      "ACC All-Freshman Team (2018)",
-      "Morgan Wootten National Player of the Year (2017)",
-      "McDonald's All-American ( 2017 )"
-    ]
-  },
-  {
     "name": "Michael Carter-Williams",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Michael_Carter-Williams",
     "teams_history": [
@@ -13062,39 +12790,6 @@
       "All-NBA G League Third Team ( 2025 )",
       "NBA G League Winter Showcase champion ( 2024 )",
       "Mr. Georgia Basketball (2017)"
-    ]
-  },
-  {
-    "name": "Otto Porter",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Otto_Porter",
-    "teams_history": [
-      {
-        "period": "2013–2019",
-        "team": "Washington Wizards"
-      },
-      {
-        "period": "2019–2021",
-        "team": "Chicago Bulls"
-      },
-      {
-        "period": "2021",
-        "team": "Orlando Magic"
-      },
-      {
-        "period": "2021–2022",
-        "team": "Golden State Warriors"
-      },
-      {
-        "period": "2022–2024",
-        "team": "Toronto Raptors"
-      }
-    ],
-    "position": "Small forward / power forward",
-    "awards": [
-      "NBA champion ( 2022 )",
-      "Consensus first-team All-American ( 2013 )",
-      "Big East Player of the Year (2013)",
-      "First-team All-Big East (2013)"
     ]
   },
   {
@@ -15186,49 +14881,6 @@
     ]
   },
   {
-    "name": "Derrick Jones",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Derrick_Jones_Jr.",
-    "teams_history": [
-      {
-        "period": "2016–2017",
-        "team": "Phoenix Suns"
-      },
-      {
-        "period": "2016–2017",
-        "team": "Northern Arizona Suns"
-      },
-      {
-        "period": "2017–2020",
-        "team": "Miami Heat"
-      },
-      {
-        "period": "2017–2018",
-        "team": "Sioux Falls Skyforce"
-      },
-      {
-        "period": "2020–2021",
-        "team": "Portland Trail Blazers"
-      },
-      {
-        "period": "2021–2023",
-        "team": "Chicago Bulls"
-      },
-      {
-        "period": "2023–2024",
-        "team": "Dallas Mavericks"
-      },
-      {
-        "period": "2024–present",
-        "team": "Los Angeles Clippers"
-      }
-    ],
-    "position": "Small forward / power forward",
-    "awards": [
-      "NBA Slam Dunk Contest champion ( 2020 )",
-      "Mr. Pennsylvania Basketball (2015)"
-    ]
-  },
-  {
     "name": "Enes Kanter",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Enes_Kanter",
     "teams_history": [
@@ -15505,45 +15157,6 @@
       "Edgewater ( Orlando, Florida )",
       "IMG Academy ( Bradenton, Florida )",
       "NBA Slam Dunk Contest champion ( 2021 )"
-    ]
-  },
-  {
-    "name": "Marvin Bagley",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Marvin_Bagley_III",
-    "teams_history": [
-      {
-        "period": "2018–2022",
-        "team": "Sacramento Kings"
-      },
-      {
-        "period": "2022–2024",
-        "team": "Detroit Pistons"
-      },
-      {
-        "period": "2024–2025",
-        "team": "Washington Wizards"
-      },
-      {
-        "period": "2025",
-        "team": "Memphis Grizzlies"
-      },
-      {
-        "period": "2025–present",
-        "team": "Washington Wizards"
-      }
-    ],
-    "position": "Power forward",
-    "awards": [
-      "Corona del Sol (Tempe, Arizona)",
-      "Hillcrest Prep ( Phoenix, Arizona )",
-      "Sierra Canyon ( Chatsworth, California )",
-      "NBA All-Rookie First Team ( 2019 )",
-      "Consensus first-team All-American ( 2018 )",
-      "Pete Newell Big Man Award (2018)",
-      "NABC Freshman of the Year (2018)",
-      "ACC Player of the Year (2018)",
-      "First-team All-ACC (2018)",
-      "ACC Rookie of the Year (2018)"
     ]
   },
   {
@@ -17024,7 +16637,7 @@
     ]
   },
   {
-    "name": "Charlie Brown",
+    "name": "Charlie Brown Jr.",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Charlie_Brown_Jr._(basketball)",
     "teams_history": [
       {
@@ -19430,32 +19043,6 @@
     ]
   },
   {
-    "name": "Jaren Jackson",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Jaren_Jackson_Jr.",
-    "teams_history": [
-      {
-        "period": "2018–present",
-        "team": "Memphis Grizzlies"
-      }
-    ],
-    "position": "Power Forward / Center",
-    "awards": [
-      "Park Tudor ( Indianapolis, Indiana )",
-      "La Lumiere School ( La Porte, Indiana )",
-      "2× NBA All-Star ( 2023 , 2025 )",
-      "NBA Defensive Player of the Year ( 2023 )",
-      "2× NBA All-Defensive First Team ( 2022 , 2023 )",
-      "NBA All-Defensive Second Team ( 2025 )",
-      "NBA All-Rookie First Team ( 2019 )",
-      "2× NBA blocks leader ( 2022 , 2023 )",
-      "Third-team All- Big Ten (2018)",
-      "Big Ten Defensive Player of the Year (2018)",
-      "Big Ten Freshman of the Year (2018)",
-      "Big Ten All-Freshman Team (2018)",
-      "McDonald's All-American ( 2017 )"
-    ]
-  },
-  {
     "name": "Tyus Jones",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Tyus_Jones",
     "teams_history": [
@@ -20270,7 +19857,7 @@
     ]
   },
   {
-    "name": "Kira Lewis",
+    "name": "Kira Lewis Jr.",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Kira_Lewis_Jr.",
     "teams_history": [
       {
@@ -20618,7 +20205,7 @@
     ]
   },
   {
-    "name": "Vernon Carey",
+    "name": "Vernon Carey Jr.",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Vernon_Carey_Jr.",
     "teams_history": [
       {
@@ -21116,7 +20703,7 @@
     ]
   },
   {
-    "name": "Chaundee, Jr. Brown",
+    "name": "Chaundee Brown Jr.",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Chaundee_Brown_Jr.",
     "teams_history": [
       {
@@ -21429,32 +21016,6 @@
     ]
   },
   {
-    "name": "Robert III Williams",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Robert_Williams_III",
-    "teams_history": [
-      {
-        "period": "2018–2023",
-        "team": "Boston Celtics"
-      },
-      {
-        "period": "2018–2019",
-        "team": "Maine Red Claws"
-      },
-      {
-        "period": "2023–present",
-        "team": "Portland Trail Blazers"
-      }
-    ],
-    "position": "Center / power forward",
-    "awards": [
-      "NBA All-Defensive Second Team ( 2022 )",
-      "2× SEC Defensive Player of the Year (2017, 2018)",
-      "Second-team All-SEC (2017)",
-      "SEC All-Freshman Team (2017)",
-      "2× SEC All-Defensive Team (2017, 2018)"
-    ]
-  },
-  {
     "name": "Ayo Dosunmu",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Ayo_Dosunmu",
     "teams_history": [
@@ -21693,52 +21254,6 @@
     "position": "Power forward / center",
     "awards": [
       "NBA All-Rookie Second Team ( 2017 )"
-    ]
-  },
-  {
-    "name": "Tim, Jr. Hardaway",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Tim_Hardaway_Jr.",
-    "teams_history": [
-      {
-        "period": "2013–2015",
-        "team": "New York Knicks"
-      },
-      {
-        "period": "2015–2017",
-        "team": "Atlanta Hawks"
-      },
-      {
-        "period": "2015",
-        "team": "Canton Charge"
-      },
-      {
-        "period": "2015–2016",
-        "team": "Austin Spurs"
-      },
-      {
-        "period": "2017–2019",
-        "team": "New York Knicks"
-      },
-      {
-        "period": "2019–2024",
-        "team": "Dallas Mavericks"
-      },
-      {
-        "period": "2024–2025",
-        "team": "Detroit Pistons"
-      },
-      {
-        "period": "2025–present",
-        "team": "Denver Nuggets"
-      }
-    ],
-    "position": "Small forward / shooting guard",
-    "awards": [
-      "Miami Palmetto ( Pinecrest, Florida )",
-      "NBA All-Rookie First Team ( 2014 )",
-      "First-team All- Big Ten ( 2013 )",
-      "Third-team All-Big Ten ( 2012 )",
-      "Big Ten All-Freshman Team ( 2011 )"
     ]
   },
   {
@@ -22766,39 +22281,6 @@
     ]
   },
   {
-    "name": "Brandon Boston",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Brandon_Boston_Jr.",
-    "teams_history": [
-      {
-        "period": "2021–2024",
-        "team": "Los Angeles Clippers"
-      },
-      {
-        "period": "2021–2024",
-        "team": "Agua Caliente / Ontario Clippers"
-      },
-      {
-        "period": "2024–2025",
-        "team": "New Orleans Pelicans"
-      },
-      {
-        "period": "2024–2025",
-        "team": "Birmingham Squadron"
-      },
-      {
-        "period": "2025–present",
-        "team": "Fenerbahçe"
-      }
-    ],
-    "position": "Shooting guard / small forward",
-    "awards": [
-      "Norcross (Norcross, Georgia)",
-      "Sierra Canyon ( Chatsworth, California )",
-      "McDonald's All-American ( 2020 )",
-      "California Mr. Basketball (2020)"
-    ]
-  },
-  {
     "name": "Rodney Hood",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Rodney_Hood",
     "teams_history": [
@@ -23601,40 +23083,6 @@
       "Big 12 All-Defensive Team (2006)",
       "Second-team Parade All-American (2004)",
       "McDonald's All-American ( 2004 )"
-    ]
-  },
-  {
-    "name": "David Duke",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/David_Duke_Jr.",
-    "teams_history": [
-      {
-        "period": "2021–2023",
-        "team": "Brooklyn Nets"
-      },
-      {
-        "period": "2021–2023",
-        "team": "Long Island Nets"
-      },
-      {
-        "period": "2023",
-        "team": "Delaware Blue Coats"
-      },
-      {
-        "period": "2023–2025",
-        "team": "San Antonio Spurs"
-      },
-      {
-        "period": "2023–2025",
-        "team": "Austin Spurs"
-      }
-    ],
-    "position": "Point guard / shooting guard",
-    "awards": [
-      "Classical (Providence, Rhode Island)",
-      "Cushing Academy ( Ashburnham, Massachusetts )",
-      "All-NBA G League First Team ( 2023 )",
-      "NBA G League Next Up Game (2023)",
-      "Second-team All-Big East (2021)"
     ]
   },
   {
@@ -24740,46 +24188,6 @@
     ]
   },
   {
-    "name": "Lindy Waters",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Lindy_Waters_III",
-    "teams_history": [
-      {
-        "period": "2021",
-        "team": "Enid Outlaws"
-      },
-      {
-        "period": "2021–2022",
-        "team": "Oklahoma City Blue"
-      },
-      {
-        "period": "2022–2024",
-        "team": "Oklahoma City Thunder"
-      },
-      {
-        "period": "2022–2024",
-        "team": "→Oklahoma City Blue"
-      },
-      {
-        "period": "2024–2025",
-        "team": "Golden State Warriors"
-      },
-      {
-        "period": "2025",
-        "team": "Detroit Pistons"
-      },
-      {
-        "period": "2025-present",
-        "team": "San Antonio Spurs"
-      }
-    ],
-    "position": "Small forward",
-    "awards": [
-      "Norman North (Norman, Oklahoma)",
-      "Sunrise Christian Academy ( Bel Aire, Kansas )",
-      "NBA G League champion ( 2024 )"
-    ]
-  },
-  {
     "name": "Aaron Wiggins",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Aaron_Wiggins",
     "teams_history": [
@@ -25062,7 +24470,7 @@
     ]
   },
   {
-    "name": "Jaren, Jr. Jackson",
+    "name": "Jaren Jackson Jr.",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Jaren_Jackson_Jr.",
     "teams_history": [
       {
@@ -25178,7 +24586,7 @@
     ]
   },
   {
-    "name": "Trey Murphy",
+    "name": "Trey Murphy III",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Trey_Murphy_III",
     "teams_history": [
       {
@@ -25633,32 +25041,6 @@
     ]
   },
   {
-    "name": "Robert, III Williams",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Robert_Williams_III",
-    "teams_history": [
-      {
-        "period": "2018–2023",
-        "team": "Boston Celtics"
-      },
-      {
-        "period": "2018–2019",
-        "team": "Maine Red Claws"
-      },
-      {
-        "period": "2023–present",
-        "team": "Portland Trail Blazers"
-      }
-    ],
-    "position": "Center / power forward",
-    "awards": [
-      "NBA All-Defensive Second Team ( 2022 )",
-      "2× SEC Defensive Player of the Year (2017, 2018)",
-      "Second-team All-SEC (2017)",
-      "SEC All-Freshman Team (2017)",
-      "2× SEC All-Defensive Team (2017, 2018)"
-    ]
-  },
-  {
     "name": "Carlik Jones",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Carlik_Jones",
     "teams_history": [
@@ -25709,7 +25091,7 @@
     ]
   },
   {
-    "name": "Derrick Jr. Jones",
+    "name": "Derrick Jones Jr.",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Derrick_Jones_Jr.",
     "teams_history": [
       {
@@ -25832,52 +25214,6 @@
     ]
   },
   {
-    "name": "Tim Jr. Hardaway",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Tim_Hardaway_Jr.",
-    "teams_history": [
-      {
-        "period": "2013–2015",
-        "team": "New York Knicks"
-      },
-      {
-        "period": "2015–2017",
-        "team": "Atlanta Hawks"
-      },
-      {
-        "period": "2015",
-        "team": "Canton Charge"
-      },
-      {
-        "period": "2015–2016",
-        "team": "Austin Spurs"
-      },
-      {
-        "period": "2017–2019",
-        "team": "New York Knicks"
-      },
-      {
-        "period": "2019–2024",
-        "team": "Dallas Mavericks"
-      },
-      {
-        "period": "2024–2025",
-        "team": "Detroit Pistons"
-      },
-      {
-        "period": "2025–present",
-        "team": "Denver Nuggets"
-      }
-    ],
-    "position": "Small forward / shooting guard",
-    "awards": [
-      "Miami Palmetto ( Pinecrest, Florida )",
-      "NBA All-Rookie First Team ( 2014 )",
-      "First-team All- Big Ten ( 2013 )",
-      "Third-team All-Big Ten ( 2012 )",
-      "Big Ten All-Freshman Team ( 2011 )"
-    ]
-  },
-  {
     "name": "Jaden Hardy",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Jaden_Hardy",
     "teams_history": [
@@ -25955,47 +25291,6 @@
     ]
   },
   {
-    "name": "McKinley IV Wright",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/McKinley_Wright_IV",
-    "teams_history": [
-      {
-        "period": "2021–2022",
-        "team": "Minnesota Timberwolves"
-      },
-      {
-        "period": "2021–2022",
-        "team": "Iowa Wolves"
-      },
-      {
-        "period": "2022–2023",
-        "team": "Dallas Mavericks"
-      },
-      {
-        "period": "2022–2023",
-        "team": "Texas Legends"
-      },
-      {
-        "period": "2023–2025",
-        "team": "Budućnost"
-      },
-      {
-        "period": "2025–present",
-        "team": "Dubai"
-      }
-    ],
-    "position": "Point guard",
-    "awards": [
-      "ABA League MVP ( 2025 )",
-      "All-ABA League Team ( 2025 )",
-      "Montenegrin League champion (2024)",
-      "Montenegrin Cup winner (2025)",
-      "3× First-team All-Pac-12 (2019–2021)",
-      "Pac-12 All-Defensive Team (2020)",
-      "Pac-12 All-Freshman Team (2018)",
-      "Minnesota Mr. Basketball (2017)"
-    ]
-  },
-  {
     "name": "Christian Braun",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Christian_Braun",
     "teams_history": [
@@ -26047,29 +25342,6 @@
       "Second-team All-Big East (2020)",
       "2× Robert V. Geasey Trophy (2021, 2022)",
       "Big East tournament MVP ( 2022 )"
-    ]
-  },
-  {
-    "name": "Michael Jr. Porter",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Michael_Porter_Jr.",
-    "teams_history": [
-      {
-        "period": "2018–2025",
-        "team": "Denver Nuggets"
-      },
-      {
-        "period": "2025–present",
-        "team": "Brooklyn Nets"
-      }
-    ],
-    "position": "Small forward",
-    "awards": [
-      "Father Tolton ( Columbia, Missouri )",
-      "Nathan Hale ( Seattle, Washington )",
-      "NBA champion ( 2023 )",
-      "National high school player of the year (2017)",
-      "McDonald's All-American MVP ( 2017 )",
-      "Washington Mr. Basketball (2017)"
     ]
   },
   {
@@ -26145,45 +25417,6 @@
       "NBA champion ( 2023 )",
       "Bundesliga champion ( 2025 )",
       "NBL champion ( 2021 )"
-    ]
-  },
-  {
-    "name": "Marvin III Bagley",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Marvin_Bagley_III",
-    "teams_history": [
-      {
-        "period": "2018–2022",
-        "team": "Sacramento Kings"
-      },
-      {
-        "period": "2022–2024",
-        "team": "Detroit Pistons"
-      },
-      {
-        "period": "2024–2025",
-        "team": "Washington Wizards"
-      },
-      {
-        "period": "2025",
-        "team": "Memphis Grizzlies"
-      },
-      {
-        "period": "2025–present",
-        "team": "Washington Wizards"
-      }
-    ],
-    "position": "Power forward",
-    "awards": [
-      "Corona del Sol (Tempe, Arizona)",
-      "Hillcrest Prep ( Phoenix, Arizona )",
-      "Sierra Canyon ( Chatsworth, California )",
-      "NBA All-Rookie First Team ( 2019 )",
-      "Consensus first-team All-American ( 2018 )",
-      "Pete Newell Big Man Award (2018)",
-      "NABC Freshman of the Year (2018)",
-      "ACC Player of the Year (2018)",
-      "First-team All-ACC (2018)",
-      "ACC Rookie of the Year (2018)"
     ]
   },
   {
@@ -26344,46 +25577,6 @@
       "Baldwin (Baldwin, New York)",
       "Our Saviour Lutheran ( The Bronx, New York )",
       "First-team All-Big East (2022)"
-    ]
-  },
-  {
-    "name": "Patrick Jr. Baldwin",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Patrick_Baldwin_Jr.",
-    "teams_history": [
-      {
-        "period": "2022–2023",
-        "team": "Golden State Warriors"
-      },
-      {
-        "period": "2022–2023",
-        "team": "Santa Cruz Warriors"
-      },
-      {
-        "period": "2023–2025",
-        "team": "Washington Wizards"
-      },
-      {
-        "period": "2023–2025",
-        "team": "Capital City Go-Go"
-      },
-      {
-        "period": "2025",
-        "team": "San Diego Clippers"
-      },
-      {
-        "period": "2025",
-        "team": "Los Angeles Clippers"
-      },
-      {
-        "period": "2025",
-        "team": "→San Diego Clippers"
-      }
-    ],
-    "position": "Small forward",
-    "awards": [
-      "McDonald's All-American ( 2021 )",
-      "Jordan Brand Classic (2021)",
-      "Nike Hoop Summit (2021)"
     ]
   },
   {
@@ -26647,7 +25840,7 @@
     ]
   },
   {
-    "name": "Kenyon Jr. Martin",
+    "name": "Kenyon Martin Jr.",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Kenyon_Martin_Jr.",
     "teams_history": [
       {
@@ -26680,7 +25873,7 @@
     ]
   },
   {
-    "name": "Kevin Jr. Porter",
+    "name": "Kevin Porter Jr.",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Kevin_Porter_Jr.",
     "teams_history": [
       {
@@ -26717,31 +25910,7 @@
     ]
   },
   {
-    "name": "Jabari Jr. Smith",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Jabari_Smith_Jr.",
-    "teams_history": [
-      {
-        "period": "2022–present",
-        "team": "Houston Rockets"
-      }
-    ],
-    "position": "Power forward",
-    "awards": [
-      "NBA All-Rookie Second Team ( 2023 )",
-      "Consensus second-team All-American ( 2022 )",
-      "Wayman Tisdale Award (2022)",
-      "NABC Freshman of the Year (2022)",
-      "First-team All- SEC (2022)",
-      "SEC Freshman of the Year (2022)",
-      "SEC All-Freshman Team (2022)",
-      "McDonald's All-American ( 2021 )",
-      "Jordan Brand Classic (2021)",
-      "Nike Hoop Summit (2021)",
-      "Mr. Georgia Basketball (2021)"
-    ]
-  },
-  {
-    "name": "TyTy Jr. Washington",
+    "name": "TyTy Washington Jr.",
     "wikipedia_url": "https://en.wikipedia.org/wiki/TyTy_Washington_Jr.",
     "teams_history": [
       {
@@ -26848,7 +26017,7 @@
     ]
   },
   {
-    "name": "Brandon Jr. Boston",
+    "name": "Brandon Boston Jr.",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Brandon_Boston_Jr.",
     "teams_history": [
       {
@@ -26911,58 +26080,6 @@
       "Big Ten All-Freshman Team (2022)",
       "McDonald's All-American ( 2021 )",
       "Jordan Brand Classic (2021)"
-    ]
-  },
-  {
-    "name": "Marcus Sr. Morris",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Marcus_Morris_Sr.",
-    "teams_history": [
-      {
-        "period": "2011–2013",
-        "team": "Houston Rockets"
-      },
-      {
-        "period": "2012",
-        "team": "Rio Grande Valley Vipers"
-      },
-      {
-        "period": "2013–2015",
-        "team": "Phoenix Suns"
-      },
-      {
-        "period": "2015–2017",
-        "team": "Detroit Pistons"
-      },
-      {
-        "period": "2017–2019",
-        "team": "Boston Celtics"
-      },
-      {
-        "period": "2019–2020",
-        "team": "New York Knicks"
-      },
-      {
-        "period": "2020–2023",
-        "team": "Los Angeles Clippers"
-      },
-      {
-        "period": "2023–2024",
-        "team": "Philadelphia 76ers"
-      },
-      {
-        "period": "2024",
-        "team": "Cleveland Cavaliers"
-      }
-    ],
-    "position": "Power forward",
-    "awards": [
-      "Prep Charter (Philadelphia, Pennsylvania)",
-      "APEX Academy ( Pennsauken, New Jersey )",
-      "Consensus second-team All-American ( 2011 )",
-      "Big 12 Player of the Year ( 2011 )",
-      "First-team All- Big 12 (2011)",
-      "Big 12 All-Rookie Team (2009)",
-      "No. 22 jersey retired by Kansas Jayhawks"
     ]
   },
   {
@@ -27034,36 +26151,6 @@
     ]
   },
   {
-    "name": "Scotty Jr. Pippen",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Scotty_Pippen_Jr.",
-    "teams_history": [
-      {
-        "period": "2022–2023",
-        "team": "Los Angeles Lakers"
-      },
-      {
-        "period": "2022–2023",
-        "team": "South Bay Lakers"
-      },
-      {
-        "period": "2023–2024",
-        "team": "South Bay Lakers"
-      },
-      {
-        "period": "2024–present",
-        "team": "Memphis Grizzlies"
-      }
-    ],
-    "position": "Point guard",
-    "awards": [
-      "Pine Crest School ( Fort Lauderdale, Florida )",
-      "Sierra Canyon ( Chatsworth, California )",
-      "NBA G League Next Up Game ( 2023 )",
-      "2× First-team All- SEC (2021, 2022)",
-      "SEC All-Freshman Team (2020)"
-    ]
-  },
-  {
     "name": "Cole Swider",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Cole_Swider",
     "teams_history": [
@@ -27105,47 +26192,6 @@
       "Villanova (2018–2021)",
       "Syracuse (2021–2022)",
       "NBA G League Next Up Game ( 2024 )"
-    ]
-  },
-  {
-    "name": "Lonnie IV Walker",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Lonnie_Walker_IV",
-    "teams_history": [
-      {
-        "period": "2018–2022",
-        "team": "San Antonio Spurs"
-      },
-      {
-        "period": "2018–2019",
-        "team": "Austin Spurs"
-      },
-      {
-        "period": "2022–2023",
-        "team": "Los Angeles Lakers"
-      },
-      {
-        "period": "2023–2024",
-        "team": "Brooklyn Nets"
-      },
-      {
-        "period": "2024–2025",
-        "team": "Žalgiris Kaunas"
-      },
-      {
-        "period": "2025",
-        "team": "Philadelphia 76ers"
-      },
-      {
-        "period": "2025–present",
-        "team": "Maccabi Tel Aviv"
-      }
-    ],
-    "position": "Shooting guard",
-    "awards": [
-      "King Mindaugas Cup winner ( 2025 )",
-      "ACC All-Freshman Team (2018)",
-      "McDonald's All-American ( 2017 )",
-      "Mr. Pennsylvania Basketball (2017)"
     ]
   },
   {
@@ -27339,32 +26385,6 @@
     "awards": []
   },
   {
-    "name": "Mike Conley Jr.",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Mike_Conley_Jr.",
-    "teams_history": [
-      {
-        "period": "2007–2019",
-        "team": "Memphis Grizzlies"
-      },
-      {
-        "period": "2019–2023",
-        "team": "Utah Jazz"
-      },
-      {
-        "period": "2023–present",
-        "team": "Minnesota Timberwolves"
-      }
-    ],
-    "position": "Point guard",
-    "awards": [
-      "NBA All-Star ( 2021 )",
-      "NBA All-Defensive Second Team ( 2013 )",
-      "First-team All- Big Ten (2007)",
-      "McDonald's All-American ( 2006 )",
-      "Third-team Parade All-American (2006)"
-    ]
-  },
-  {
     "name": "Josh Minott",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Josh_Minott",
     "teams_history": [
@@ -27420,40 +26440,6 @@
       "Jordan Brand Classic (2019)",
       "Nike Hoop Summit (2019)",
       "North Carolina Mr. Basketball (2019)"
-    ]
-  },
-  {
-    "name": "David Jr. Duke",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/David_Duke_Jr.",
-    "teams_history": [
-      {
-        "period": "2021–2023",
-        "team": "Brooklyn Nets"
-      },
-      {
-        "period": "2021–2023",
-        "team": "Long Island Nets"
-      },
-      {
-        "period": "2023",
-        "team": "Delaware Blue Coats"
-      },
-      {
-        "period": "2023–2025",
-        "team": "San Antonio Spurs"
-      },
-      {
-        "period": "2023–2025",
-        "team": "Austin Spurs"
-      }
-    ],
-    "position": "Point guard / shooting guard",
-    "awards": [
-      "Classical (Providence, Rhode Island)",
-      "Cushing Academy ( Ashburnham, Massachusetts )",
-      "All-NBA G League First Team ( 2023 )",
-      "NBA G League Next Up Game (2023)",
-      "Second-team All-Big East (2021)"
     ]
   },
   {
@@ -27606,42 +26592,6 @@
     ]
   },
   {
-    "name": "Duane Jr. Washington",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Duane_Washington_Jr.",
-    "teams_history": [
-      {
-        "period": "2021–2022",
-        "team": "Indiana Pacers"
-      },
-      {
-        "period": "2021–2022",
-        "team": "Fort Wayne Mad Ants"
-      },
-      {
-        "period": "2022–2023",
-        "team": "Phoenix Suns"
-      },
-      {
-        "period": "2023–2024",
-        "team": "Westchester Knicks"
-      },
-      {
-        "period": "2024–present",
-        "team": "Partizan"
-      }
-    ],
-    "position": "Shooting guard / point guard",
-    "awards": [
-      "Grand Rapids Christian ( Grand Rapids, Michigan )",
-      "Sierra Canyon ( Chatsworth, California )",
-      "ABA League champion ( 2025 )",
-      "Serbian League champion ( 2025 )",
-      "Serbian League Finals MVP ( 2025 )",
-      "NBA G League Showcase Cup champion ( 2023 )",
-      "Third-team All- Big Ten (2021)"
-    ]
-  },
-  {
     "name": "Paolo Banchero",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Paolo_Banchero",
     "teams_history": [
@@ -27660,27 +26610,6 @@
       "ACC Rookie of the Year (2022)",
       "ACC All-Freshman Team (2022)",
       "McDonald's All-American ( 2021 )"
-    ]
-  },
-  {
-    "name": "Wendell Jr. Carter",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Wendell_Carter_Jr.",
-    "teams_history": [
-      {
-        "period": "2018–2021",
-        "team": "Chicago Bulls"
-      },
-      {
-        "period": "2021–present",
-        "team": "Orlando Magic"
-      }
-    ],
-    "position": "Center / power forward",
-    "awards": [
-      "Second-team All-ACC (2018)",
-      "ACC All-Freshman Team (2018)",
-      "Morgan Wootten National Player of the Year (2017)",
-      "McDonald's All-American ( 2017 )"
     ]
   },
   {
@@ -27844,7 +26773,7 @@
     ]
   },
   {
-    "name": "John Jr. Butler",
+    "name": "John Butler Jr.",
     "wikipedia_url": "https://en.wikipedia.org/wiki/John_Butler_Jr.",
     "teams_history": [
       {
@@ -28271,46 +27200,6 @@
     ]
   },
   {
-    "name": "Lindy III Waters",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Lindy_Waters_III",
-    "teams_history": [
-      {
-        "period": "2021",
-        "team": "Enid Outlaws"
-      },
-      {
-        "period": "2021–2022",
-        "team": "Oklahoma City Blue"
-      },
-      {
-        "period": "2022–2024",
-        "team": "Oklahoma City Thunder"
-      },
-      {
-        "period": "2022–2024",
-        "team": "→Oklahoma City Blue"
-      },
-      {
-        "period": "2024–2025",
-        "team": "Golden State Warriors"
-      },
-      {
-        "period": "2025",
-        "team": "Detroit Pistons"
-      },
-      {
-        "period": "2025-present",
-        "team": "San Antonio Spurs"
-      }
-    ],
-    "position": "Small forward",
-    "awards": [
-      "Norman North (Norman, Oklahoma)",
-      "Sunrise Christian Academy ( Bel Aire, Kansas )",
-      "NBA G League champion ( 2024 )"
-    ]
-  },
-  {
     "name": "Jalen Williams",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Jalen_Williams",
     "teams_history": [
@@ -28375,45 +27264,6 @@
       "Consensus first-team All-American ( 2022 )",
       "Big 12 Player of the Year (2022)",
       "First-team All- Big 12 (2022)"
-    ]
-  },
-  {
-    "name": "Vernon Jr. Carey",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Vernon_Carey_Jr.",
-    "teams_history": [
-      {
-        "period": "2020–2022",
-        "team": "Charlotte Hornets"
-      },
-      {
-        "period": "2021–2022",
-        "team": "Greensboro Swarm"
-      },
-      {
-        "period": "2022–2023",
-        "team": "Washington Wizards"
-      },
-      {
-        "period": "2022–2023",
-        "team": "Capital City Go-Go"
-      },
-      {
-        "period": "2023–2024",
-        "team": "Pınar Karşıyaka"
-      }
-    ],
-    "position": "Power forward / center",
-    "awards": [
-      "All-FIBA Champions League Second Team ( 2024 )",
-      "Consensus second-team All-American ( 2020 )",
-      "USBWA National Freshman of the Year (2020)",
-      "NABC Freshman of the Year (2020)",
-      "First-team All-ACC (2020)",
-      "ACC Rookie of the Year (2020)",
-      "ACC All-Freshman Team (2020)",
-      "McDonald's All-American ( 2019 )",
-      "2× Florida Mr. Basketball (2018, 2019)",
-      "FIBA Americas Under-16 Championship MVP ( 2017 )"
     ]
   },
   {
@@ -28806,32 +27656,6 @@
     ]
   },
   {
-    "name": "Jaren Jackson Jr.",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Jaren_Jackson_Jr.",
-    "teams_history": [
-      {
-        "period": "2018–present",
-        "team": "Memphis Grizzlies"
-      }
-    ],
-    "position": "Power Forward / Center",
-    "awards": [
-      "Park Tudor ( Indianapolis, Indiana )",
-      "La Lumiere School ( La Porte, Indiana )",
-      "2× NBA All-Star ( 2023 , 2025 )",
-      "NBA Defensive Player of the Year ( 2023 )",
-      "2× NBA All-Defensive First Team ( 2022 , 2023 )",
-      "NBA All-Defensive Second Team ( 2025 )",
-      "NBA All-Rookie First Team ( 2019 )",
-      "2× NBA blocks leader ( 2022 , 2023 )",
-      "Third-team All- Big Ten (2018)",
-      "Big Ten Defensive Player of the Year (2018)",
-      "Big Ten Freshman of the Year (2018)",
-      "Big Ten All-Freshman Team (2018)",
-      "McDonald's All-American ( 2017 )"
-    ]
-  },
-  {
     "name": "Jake LaRavia",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Jake_LaRavia",
     "teams_history": [
@@ -29013,41 +27837,6 @@
     ]
   },
   {
-    "name": "Kira Jr. Lewis",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Kira_Lewis_Jr.",
-    "teams_history": [
-      {
-        "period": "2020–2024",
-        "team": "New Orleans Pelicans"
-      },
-      {
-        "period": "2022–2024",
-        "team": "Birmingham Squadron"
-      },
-      {
-        "period": "2024",
-        "team": "Toronto Raptors"
-      },
-      {
-        "period": "2024",
-        "team": "Raptors 905"
-      },
-      {
-        "period": "2024",
-        "team": "Utah Jazz"
-      },
-      {
-        "period": "2024–present",
-        "team": "Capital City Go-Go"
-      }
-    ],
-    "position": "Point guard",
-    "awards": [
-      "First-team All- SEC (2020)",
-      "SEC All-Freshman Team (2019)"
-    ]
-  },
-  {
     "name": "E. J. Liddell",
     "wikipedia_url": "https://en.wikipedia.org/wiki/E._J._Liddell",
     "teams_history": [
@@ -29076,61 +27865,6 @@
       "Big Ten All-Defensive Team (2022)",
       "Second-team All-Big Ten – Media (2021)",
       "2× Illinois Mr. Basketball (2018, 2019)"
-    ]
-  },
-  {
-    "name": "Trey III Murphy",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Trey_Murphy_III",
-    "teams_history": [
-      {
-        "period": "2021–present",
-        "team": "New Orleans Pelicans"
-      },
-      {
-        "period": "2021–2022",
-        "team": "Birmingham Squadron"
-      }
-    ],
-    "position": "Small forward / power forward",
-    "awards": [
-      "Rice (2018–2020)",
-      "Virginia (2020–2021)"
-    ]
-  },
-  {
-    "name": "Larry Jr. Nance",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Larry_Nance_Jr.",
-    "teams_history": [
-      {
-        "period": "2015–2018",
-        "team": "Los Angeles Lakers"
-      },
-      {
-        "period": "2018–2021",
-        "team": "Cleveland Cavaliers"
-      },
-      {
-        "period": "2021–2022",
-        "team": "Portland Trail Blazers"
-      },
-      {
-        "period": "2022–2024",
-        "team": "New Orleans Pelicans"
-      },
-      {
-        "period": "2024–2025",
-        "team": "Atlanta Hawks"
-      },
-      {
-        "period": "2025–present",
-        "team": "Cleveland Cavaliers"
-      }
-    ],
-    "position": "Power forward / center",
-    "awards": [
-      "2× First-team All- MWC (2014, 2015)",
-      "MWC Defensive Player of the Year (2015)",
-      "2× MWC All-Defensive Team (2014, 2015)"
     ]
   },
   {
@@ -29203,40 +27937,6 @@
     ]
   },
   {
-    "name": "Kelly Jr. Oubre",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Kelly_Oubre_Jr.",
-    "teams_history": [
-      {
-        "period": "2015–2018",
-        "team": "Washington Wizards"
-      },
-      {
-        "period": "2018–2020",
-        "team": "Phoenix Suns"
-      },
-      {
-        "period": "2020–2021",
-        "team": "Golden State Warriors"
-      },
-      {
-        "period": "2021–2023",
-        "team": "Charlotte Hornets"
-      },
-      {
-        "period": "2023–present",
-        "team": "Philadelphia 76ers"
-      }
-    ],
-    "position": "Shooting guard / small forward",
-    "awards": [
-      "George Bush ( Fort Bend, Texas )",
-      "Findlay Prep ( Henderson, Nevada )",
-      "Big 12 All-Newcomer Team (2015)",
-      "McDonald's All-American ( 2014 )",
-      "First-team Parade All-American (2014)"
-    ]
-  },
-  {
     "name": "Kobi Simmons",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Kobi_Simmons",
     "teams_history": [
@@ -29300,47 +28000,6 @@
     "position": "Shooting guard",
     "awards": [
       "McDonald's All-American ( 2016 )"
-    ]
-  },
-  {
-    "name": "Dennis Jr. Smith",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Dennis_Smith_Jr.",
-    "teams_history": [
-      {
-        "period": "2017–2019",
-        "team": "Dallas Mavericks"
-      },
-      {
-        "period": "2019–2021",
-        "team": "New York Knicks"
-      },
-      {
-        "period": "2021",
-        "team": "Detroit Pistons"
-      },
-      {
-        "period": "2021–2022",
-        "team": "Portland Trail Blazers"
-      },
-      {
-        "period": "2022–2023",
-        "team": "Charlotte Hornets"
-      },
-      {
-        "period": "2023–2024",
-        "team": "Brooklyn Nets"
-      },
-      {
-        "period": "2025",
-        "team": "Real Madrid"
-      }
-    ],
-    "position": "Point guard",
-    "awards": [
-      "NBA All-Rookie Second Team ( 2018 )",
-      "ACC Rookie of the Year (2017)",
-      "Second-team All-ACC (2017)",
-      "ACC All-Freshman team (2017)"
     ]
   },
   {
@@ -29732,69 +28391,6 @@
     ]
   },
   {
-    "name": "Craig Jr. Porter",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Craig_Porter_Jr.",
-    "teams_history": [
-      {
-        "period": "2023–present",
-        "team": "Cleveland Cavaliers"
-      },
-      {
-        "period": "2024–2025",
-        "team": "Cleveland Charge"
-      }
-    ],
-    "position": "Point guard",
-    "awards": [
-      "Vincennes (2018–2019)",
-      "Wichita State (2020–2023)",
-      "Third-team All- AAC (2023)",
-      "NJCAA national champion (2019)"
-    ]
-  },
-  {
-    "name": "Greg III Brown",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Greg_Brown_III",
-    "teams_history": [
-      {
-        "period": "2021–2023",
-        "team": "Portland Trail Blazers"
-      },
-      {
-        "period": "2022–2023",
-        "team": "Ontario Clippers"
-      },
-      {
-        "period": "2023",
-        "team": "Ontario Clippers"
-      },
-      {
-        "period": "2023–2024",
-        "team": "Dallas Mavericks"
-      },
-      {
-        "period": "2023–2024",
-        "team": "Texas Legends"
-      },
-      {
-        "period": "2024–2025",
-        "team": "Mexico City Capitanes"
-      },
-      {
-        "period": "2025–present",
-        "team": "Calgary Surge"
-      }
-    ],
-    "position": "Power forward / small forward",
-    "awards": [
-      "Big 12 All-Newcomer Team (2021)",
-      "Big 12 All-Freshman Team (2021)",
-      "McDonald's All-American ( 2020 )",
-      "Texas Mr. Basketball (2020)",
-      "Texas Gatorade Player of the Year (2020)"
-    ]
-  },
-  {
     "name": "Alex Fudge",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Alex_Fudge",
     "teams_history": [
@@ -29953,48 +28549,6 @@
     "position": "Small forward / power forward",
     "awards": [
       "First-team All-ACC ( 2023 )"
-    ]
-  },
-  {
-    "name": "Troy Jr. Brown",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Troy_Brown_Jr.",
-    "teams_history": [
-      {
-        "period": "2018–2021",
-        "team": "Washington Wizards"
-      },
-      {
-        "period": "2018–2019",
-        "team": "Capital City Go-Go"
-      },
-      {
-        "period": "2021–2022",
-        "team": "Chicago Bulls"
-      },
-      {
-        "period": "2022–2023",
-        "team": "Los Angeles Lakers"
-      },
-      {
-        "period": "2023–2024",
-        "team": "Minnesota Timberwolves"
-      },
-      {
-        "period": "2024",
-        "team": "Detroit Pistons"
-      },
-      {
-        "period": "2024",
-        "team": "Manisa Basket"
-      },
-      {
-        "period": "2025–present",
-        "team": "Cangrejeros de Santurce"
-      }
-    ],
-    "position": "Small forward / shooting guard",
-    "awards": [
-      "McDonald's All-American ( 2017 )"
     ]
   },
   {
@@ -30704,7 +29258,7 @@
     ]
   },
   {
-    "name": "Harry III Giles",
+    "name": "Harry Giles III",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Harry_Giles_III",
     "teams_history": [
       {
@@ -30806,26 +29360,6 @@
     ]
   },
   {
-    "name": "Jaime Jr. Jaquez",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Jaime_Jaquez_Jr.",
-    "teams_history": [
-      {
-        "period": "2023–present",
-        "team": "Miami Heat"
-      }
-    ],
-    "position": "Small forward / shooting guard",
-    "awards": [
-      "NBA All-Rookie First Team ( 2024 )",
-      "Consensus second-team All-American ( 2023 )",
-      "Lute Olson Award (2023)",
-      "Pac-12 Player of the Year ( 2023 )",
-      "2× First-team All-Pac-12 ( 2022 , 2023)",
-      "Second-team All-Pac-12 ( 2021 )",
-      "2× Pac-12 All-Defensive Team (2021, 2022)"
-    ]
-  },
-  {
     "name": "Alondes Williams",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Alondes_Williams",
     "teams_history": [
@@ -30914,25 +29448,6 @@
     ]
   },
   {
-    "name": "Andre Jr. Jackson",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Andre_Jackson_Jr.",
-    "teams_history": [
-      {
-        "period": "2023–present",
-        "team": "Milwaukee Bucks"
-      },
-      {
-        "period": "2024",
-        "team": "Wisconsin Herd"
-      }
-    ],
-    "position": "Shooting guard",
-    "awards": [
-      "NBA Cup champion ( 2024 )",
-      "NCAA champion ( 2023 )"
-    ]
-  },
-  {
     "name": "Chris Livingston",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Chris_Livingston",
     "teams_history": [
@@ -30955,45 +29470,6 @@
       "McDonald's All-American ( 2022 )",
       "Jordan Brand Classic (2022)",
       "FIBA Americas Under-16 Championship MVP ( 2019 )"
-    ]
-  },
-  {
-    "name": "Bobby Jr. Portis",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Bobby_Portis_Jr.",
-    "teams_history": [
-      {
-        "period": "2015–2019",
-        "team": "Chicago Bulls"
-      },
-      {
-        "period": "2017",
-        "team": "Windy City Bulls"
-      },
-      {
-        "period": "2019",
-        "team": "Washington Wizards"
-      },
-      {
-        "period": "2019–2020",
-        "team": "New York Knicks"
-      },
-      {
-        "period": "2020–present",
-        "team": "Milwaukee Bucks"
-      }
-    ],
-    "position": "Power forward",
-    "awards": [
-      "NBA champion ( 2021 )",
-      "NBA Cup champion ( 2024 )",
-      "Consensus second-team All-American ( 2015 )",
-      "SEC Player of the Year (2015)",
-      "First-team All- SEC (2015)",
-      "Second-team All-SEC (2014)",
-      "SEC All-Freshman team (2014)",
-      "McDonald's All-American ( 2013 )",
-      "First-team Parade All-American (2013)",
-      "Arkansas Mr. Basketball (2013)"
     ]
   },
   {
@@ -31206,71 +29682,6 @@
     ]
   },
   {
-    "name": "Charlie Jr. Brown",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Charlie_Brown_Jr._(basketball)",
-    "teams_history": [
-      {
-        "period": "2019–2020",
-        "team": "Atlanta Hawks"
-      },
-      {
-        "period": "2019–2020",
-        "team": "College Park Skyhawks"
-      },
-      {
-        "period": "2021",
-        "team": "Iowa Wolves"
-      },
-      {
-        "period": "2021",
-        "team": "Oklahoma City Thunder"
-      },
-      {
-        "period": "2021",
-        "team": "Delaware Blue Coats"
-      },
-      {
-        "period": "2021–2022",
-        "team": "Dallas Mavericks"
-      },
-      {
-        "period": "2022",
-        "team": "Philadelphia 76ers"
-      },
-      {
-        "period": "2022",
-        "team": "→Delaware Blue Coats"
-      },
-      {
-        "period": "2022–2023",
-        "team": "Delaware Blue Coats"
-      },
-      {
-        "period": "2023–2024",
-        "team": "New York Knicks"
-      },
-      {
-        "period": "2023–2024",
-        "team": "Westchester Knicks"
-      },
-      {
-        "period": "2024–present",
-        "team": "Raptors 905"
-      }
-    ],
-    "position": "Shooting guard",
-    "awards": [
-      "Imhotep Institute Charter (Philadelphia, Pennsylvania)",
-      "George Washington (Philadelphia, Pennsylvania)",
-      "St. Thomas More ( Oakdale, Connecticut )",
-      "NBA G League champion ( 2023 )",
-      "NBA G League Showcase Cup champion ( 2023 )",
-      "NBA G League steals leader (2025)",
-      "FIBA 3x3 AmeriCup MVP ( 2021 )",
-      "Second-team All- Atlantic 10 ( 2019 )"
-    ]
-  },
-  {
     "name": "Jacob Toppin",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Jacob_Toppin",
     "teams_history": [
@@ -31337,32 +29748,6 @@
       "Third-team All- Big Ten – Coaches ( 2023 )",
       "Big Ten All-Freshman Team (2023)",
       "Jordan Brand Classic (2022)"
-    ]
-  },
-  {
-    "name": "Ricky IV Council",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Ricky_Council_IV",
-    "teams_history": [
-      {
-        "period": "2023–2025",
-        "team": "Philadelphia 76ers"
-      },
-      {
-        "period": "2023–2025",
-        "team": "Delaware Blue Coats"
-      },
-      {
-        "period": "2025–present",
-        "team": "Brooklyn Nets"
-      }
-    ],
-    "position": "Shooting guard",
-    "awards": [
-      "Wichita State (2020–2022)",
-      "Arkansas (2022–2023)",
-      "Second-team All- SEC (2023)",
-      "AAC Sixth Man of the Year ( 2022 )",
-      "AAC All-Freshman team (2021)"
     ]
   },
   {
@@ -32112,57 +30497,6 @@
     ]
   },
   {
-    "name": "Kenneth Jr. Lofton",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Kenneth_Lofton_Jr.",
-    "teams_history": [
-      {
-        "period": "2022–2023",
-        "team": "Memphis Grizzlies"
-      },
-      {
-        "period": "2022–2023",
-        "team": "Memphis Hustle"
-      },
-      {
-        "period": "2023–2024",
-        "team": "Philadelphia 76ers"
-      },
-      {
-        "period": "2023–2024",
-        "team": "Delaware Blue Coats"
-      },
-      {
-        "period": "2024",
-        "team": "Utah Jazz"
-      },
-      {
-        "period": "2024",
-        "team": "Salt Lake City Stars"
-      },
-      {
-        "period": "2024–2025",
-        "team": "Shanghai Sharks"
-      },
-      {
-        "period": "2025–present",
-        "team": "Boston Celtics"
-      }
-    ],
-    "position": "Power forward",
-    "awards": [
-      "CBA International MVP ( 2025 )",
-      "CBA Club Cup champion (2025)",
-      "CBA All-Star (2025)",
-      "NBA G League Rookie of the Year ( 2023 )",
-      "2× All-NBA G League First Team (2023, 2024 )",
-      "NBA G League All-Rookie Team (2023)",
-      "2× NBA G League Next Up Game (2023, 2024)",
-      "Conference USA Freshman of the Year (2021)",
-      "First-team All- Conference USA (2022)",
-      "Third-team All-Conference USA (2021)"
-    ]
-  },
-  {
     "name": "Brice Sensabaugh",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Brice_Sensabaugh",
     "teams_history": [
@@ -32560,28 +30894,6 @@
       "McDonald's All-American ( 2022 )",
       "Jordan Brand Classic (2022)",
       "Tennessee Mr. Basketball (2022)"
-    ]
-  },
-  {
-    "name": "Nick Jr. Smith",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Nick_Smith_Jr.",
-    "teams_history": [
-      {
-        "period": "2023–present",
-        "team": "Charlotte Hornets"
-      },
-      {
-        "period": "2023–2024",
-        "team": "Greensboro Swarm"
-      }
-    ],
-    "position": "Point guard / shooting guard",
-    "awards": [
-      "Sylvan Hills ( Sherwood, Arkansas )",
-      "North Little Rock ( North Little Rock, Arkansas )",
-      "McDonald's All-American ( 2022 )",
-      "Jordan Brand Classic (2022)",
-      "Nike Hoop Summit (2022)"
     ]
   },
   {
@@ -33771,49 +32083,6 @@
     ]
   },
   {
-    "name": "Derrick Jones Jr.",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Derrick_Jones_Jr.",
-    "teams_history": [
-      {
-        "period": "2016–2017",
-        "team": "Phoenix Suns"
-      },
-      {
-        "period": "2016–2017",
-        "team": "Northern Arizona Suns"
-      },
-      {
-        "period": "2017–2020",
-        "team": "Miami Heat"
-      },
-      {
-        "period": "2017–2018",
-        "team": "Sioux Falls Skyforce"
-      },
-      {
-        "period": "2020–2021",
-        "team": "Portland Trail Blazers"
-      },
-      {
-        "period": "2021–2023",
-        "team": "Chicago Bulls"
-      },
-      {
-        "period": "2023–2024",
-        "team": "Dallas Mavericks"
-      },
-      {
-        "period": "2024–present",
-        "team": "Los Angeles Clippers"
-      }
-    ],
-    "position": "Small forward / power forward",
-    "awards": [
-      "NBA Slam Dunk Contest champion ( 2020 )",
-      "Mr. Pennsylvania Basketball (2015)"
-    ]
-  },
-  {
     "name": "Bronny James",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Bronny_James",
     "teams_history": [
@@ -34031,43 +32300,6 @@
     "awards": [
       "NBA Cup champion ( 2024 )",
       "NCAA champion ( 2023 )"
-    ]
-  },
-  {
-    "name": "Kevin Porter Jr.",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Kevin_Porter_Jr.",
-    "teams_history": [
-      {
-        "period": "2019–2021",
-        "team": "Cleveland Cavaliers"
-      },
-      {
-        "period": "2021–2023",
-        "team": "Houston Rockets"
-      },
-      {
-        "period": "2021",
-        "team": "Rio Grande Valley Vipers"
-      },
-      {
-        "period": "2024",
-        "team": "PAOK"
-      },
-      {
-        "period": "2024–2025",
-        "team": "Los Angeles Clippers"
-      },
-      {
-        "period": "2025–present",
-        "team": "Milwaukee Bucks"
-      }
-    ],
-    "position": "Point guard / small forward",
-    "awards": [
-      "All-NBA G League First Team ( 2021 )",
-      "NBA G League scoring leader ( 2021 )",
-      "NBA G League assists leader ( 2021 )",
-      "Washington Mr. Basketball (2018)"
     ]
   },
   {
@@ -34788,44 +33020,6 @@
     ]
   },
   {
-    "name": "TyTy Washington Jr.",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/TyTy_Washington_Jr.",
-    "teams_history": [
-      {
-        "period": "2022–2023",
-        "team": "Houston Rockets"
-      },
-      {
-        "period": "2022–2023",
-        "team": "Rio Grande Valley Vipers"
-      },
-      {
-        "period": "2023–2024",
-        "team": "Milwaukee Bucks"
-      },
-      {
-        "period": "2023–2024",
-        "team": "Wisconsin Herd"
-      },
-      {
-        "period": "2024–2025",
-        "team": "Phoenix Suns"
-      },
-      {
-        "period": "2024–2025",
-        "team": "Valley Suns"
-      }
-    ],
-    "position": "Point guard",
-    "awards": [
-      "Cesar Chavez (Phoenix, Arizona)",
-      "AZ Compass Prep ( Chandler, Arizona )",
-      "Second-team All- SEC (2022)",
-      "SEC All-Freshman team (2022)",
-      "Jordan Brand Classic (2021)"
-    ]
-  },
-  {
     "name": "Donovan Clingan",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Donovan_Clingan",
     "teams_history": [
@@ -35265,39 +33459,6 @@
     ]
   },
   {
-    "name": "Kenyon Martin Jr.",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Kenyon_Martin_Jr.",
-    "teams_history": [
-      {
-        "period": "2020–2023",
-        "team": "Houston Rockets"
-      },
-      {
-        "period": "2021",
-        "team": "Rio Grande Valley Vipers"
-      },
-      {
-        "period": "2023",
-        "team": "Los Angeles Clippers"
-      },
-      {
-        "period": "2023–2025",
-        "team": "Philadelphia 76ers"
-      },
-      {
-        "period": "2025–present",
-        "team": "Utah Jazz"
-      }
-    ],
-    "position": "Small forward / power forward",
-    "awards": [
-      "Chaminade College Prep (Los Angeles, California)",
-      "Sierra Canyon ( Chatsworth, California )",
-      "IMG Academy ( Bradenton, Florida )",
-      "NBA G League All-Rookie Team ( 2021 )"
-    ]
-  },
-  {
     "name": "Cody Williams",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Cody_Williams",
     "teams_history": [
@@ -35583,39 +33744,6 @@
     ]
   },
   {
-    "name": "Brandon Boston Jr.",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Brandon_Boston_Jr.",
-    "teams_history": [
-      {
-        "period": "2021–2024",
-        "team": "Los Angeles Clippers"
-      },
-      {
-        "period": "2021–2024",
-        "team": "Agua Caliente / Ontario Clippers"
-      },
-      {
-        "period": "2024–2025",
-        "team": "New Orleans Pelicans"
-      },
-      {
-        "period": "2024–2025",
-        "team": "Birmingham Squadron"
-      },
-      {
-        "period": "2025–present",
-        "team": "Fenerbahçe"
-      }
-    ],
-    "position": "Shooting guard / small forward",
-    "awards": [
-      "Norcross (Norcross, Georgia)",
-      "Sierra Canyon ( Chatsworth, California )",
-      "McDonald's All-American ( 2020 )",
-      "California Mr. Basketball (2020)"
-    ]
-  },
-  {
     "name": "Keion Brooks Jr.",
     "wikipedia_url": "https://en.wikipedia.org/wiki/Keion_Brooks_Jr.",
     "teams_history": [
@@ -35701,25 +33829,6 @@
       "NBA All-Rookie Second Team ( 2025 )",
       "Big 12 All-Defensive team (2024)",
       "Big 12 All-Freshman team (2024)"
-    ]
-  },
-  {
-    "name": "Trey Murphy III",
-    "wikipedia_url": "https://en.wikipedia.org/wiki/Trey_Murphy_III",
-    "teams_history": [
-      {
-        "period": "2021–present",
-        "team": "New Orleans Pelicans"
-      },
-      {
-        "period": "2021–2022",
-        "team": "Birmingham Squadron"
-      }
-    ],
-    "position": "Small forward / power forward",
-    "awards": [
-      "Rice (2018–2020)",
-      "Virginia (2020–2021)"
     ]
   },
   {
