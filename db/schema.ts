@@ -7,6 +7,7 @@ import {
   integer,
   jsonb,
   varchar,
+  primaryKey,
 } from "drizzle-orm/pg-core";
 
 export const user = pgTable("users", {
@@ -105,10 +106,16 @@ export const dailydraws = pgTable("dailydraws", {
 });
 
 export const dailydraws_players = pgTable("dailydraws_players", {
-  dailydrawId: text("dailydrawId").notNull().references(() => dailydraws.id, { onDelete: "cascade" }),
-  playerId: text("playerId").notNull().references(() => playersData.id, { onDelete: "cascade" }),
+  dailydrawId: text("dailydrawId")
+    .notNull()
+    .references(() => dailydraws.id, { onDelete: "cascade" }),
+  playerId: text("playerId")
+    .notNull()
+    .references(() => playersData.id, { onDelete: "cascade" }),
   flipped: boolean("flipped").notNull().default(false),
-});
+}, (table) => ({
+  pk: primaryKey({ columns: [table.dailydrawId, table.playerId] }),
+}));
 
 export const playtogether_sessions = pgTable("playtogether_sessions", {
   id: text("id").primaryKey(),

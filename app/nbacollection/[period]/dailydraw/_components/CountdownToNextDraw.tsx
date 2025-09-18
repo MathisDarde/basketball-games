@@ -30,7 +30,7 @@ export default function CountdownToNextDraw() {
   const { hours, minutes, seconds } = timeLeft;
 
   return (
-    <div className="mt-4 text-center font-outfit text-sm text-gray-600">
+    <div className="py-4 text-center font-outfit text-sm text-gray-600">
       <p>
         Prochain tirage dans{" "}
         <span className="font-semibold text-black">

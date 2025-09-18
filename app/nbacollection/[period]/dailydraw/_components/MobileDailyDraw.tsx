@@ -24,7 +24,14 @@ export const MobileDailyDraw = ({ players, teams, handleCardClick, flippedInitia
     const remaining = players.length - step;
 
     return (
-        <div className="relative w-full max-w-xs mx-auto mt-4 h-[500px] overflow-hidden">
+        <div className="relative mx-auto mt-4 h-full">
+            {/* Counter */}
+            {step < players.length && (
+                <div className="relative text-sm text-center bg-black/50 text-white px-2 py-1 rounded">
+                    {remaining} card{remaining > 1 ? "s" : ""} remaining
+                </div>
+            )}
+
             {players.map((player, index) => {
                 const { teams_history } = player;
                 const filteredTeams = teams_history.filter(({ team }) =>
@@ -55,7 +62,7 @@ export const MobileDailyDraw = ({ players, teams, handleCardClick, flippedInitia
                 return (
                     <div
                         key={player.id}
-                        className={`absolute w-full h-[400px] rounded-lg cursor-pointer transition-all duration-500 ease-in-out`}
+                        className={`absolute w-[288px] h-[400px] rounded-lg cursor-pointer transition-all duration-500 ease-in-out`}
                         style={{
                             top: isPast ? '-500px' : 0, // cartes passées complètement hors écran
                             left: 0,
@@ -96,17 +103,10 @@ export const MobileDailyDraw = ({ players, teams, handleCardClick, flippedInitia
                 );
             })}
 
-            {/* Counter */}
-            {step < players.length && (
-                <div className="absolute bottom-2 right-2 text-sm bg-black/50 text-white px-2 py-1 rounded">
-                    {remaining} card{remaining > 1 ? "s" : ""} remaining
-                </div>
-            )}
-
             {/* Récap à la fin */}
             {step >= players.length && (
-                <div className="absolute inset-0 bg-white/95 flex flex-col items-center justify-center p-4 rounded-lg">
-                    <h2 className="text-lg font-bold mb-2">Pack revealed!</h2>
+                <div className="relative bg-white flex flex-col items-center justify-center p-4 rounded-lg">
+                    <h2 className="text-lg mb-2 font-unbounded">Pack revealed!</h2>
                     <div className="grid grid-cols-2 gap-2 overflow-y-auto max-h-80 w-full">
                         {players.map((player) => {
                             const [firstName, ...lastNameParts] = player.name.split(" ");
@@ -132,7 +132,7 @@ export const MobileDailyDraw = ({ players, teams, handleCardClick, flippedInitia
                             return (
                                 <div
                                     key={player.id}
-                                    className={`relative h-40 rounded-lg shadow-lg overflow-hidden ${backgroundClass}`}
+                                    className={`relative h-40 h-[190px] rounded-lg shadow-lg overflow-hidden ${backgroundClass}`}
                                 >
                                     <div className="relative flex-1 w-full">
                                         <Image

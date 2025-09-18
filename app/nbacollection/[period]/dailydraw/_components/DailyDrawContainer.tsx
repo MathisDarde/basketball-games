@@ -49,7 +49,7 @@ export default function DailyDrawContainer({
   })
 
   return (
-    <>
+    <div>
       {mobileDailyDraw ? (
         <MobileDailyDraw players={players} teams={teams} handleCardClick={handleCardClick} flippedInitial={flippedIds} />
       ) : (
@@ -60,12 +60,12 @@ export default function DailyDrawContainer({
         <div className="mt-6 text-center">
           <button
             onClick={handleRedirectAndStore}
-            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded mt-4 cursor-pointer"
+            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-unbounded rounded mt-4 cursor-pointer"
           >
             Voir ma collection
           </button>
         </div>
       )}
-    </>
+    </div>
   );
 }
