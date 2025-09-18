@@ -1,0 +1,90 @@
+import { usePlayTogetherCtx } from "@/components/GlobalContext"
+import { PlayerData } from "@/interfaces/Interfaces"
+import Image from "next/image"
+
+export const LargeScreenDailyDraw = ({ players, teams, flippedIds, handleCardClick }: { players: PlayerData[], teams: string[], flippedIds: string [], handleCardClick: (player: PlayerData) => Promise<void> }) => {
+    const { formatPosition, getBackgroundClass, getLastYear, getTeamLogo } = usePlayTogetherCtx();
+
+    return (
+        <div className="grid grid-cols-5 gap-2">
+            {players.map((player) => {
+                const isFlipped = flippedIds.includes(player.id);
+                const { teams_history } = player;
+
+                const filteredTeams = teams_history.filter(({ team } : { team: string }) =>
+                    teams.some((t) => team.includes(t))
+                );
+                if (filteredTeams.length === 0) return null;
+
+                const lastTeam = filteredTeams[filteredTeams.length - 1];
+                const year = getLastYear(lastTeam.period);
+                const teamLogo = getTeamLogo(lastTeam.team, year);
+                const backgroundClass = getBackgroundClass(player.awards);
+                const [firstName, ...lastNameParts] = player.name.split(" ");
+
+                return (
+                    <div
+                        key={player.id}
+                        className="relative w-[288px] h-[400px] cursor-pointer border rounded overflow-hidden"
+                        onClick={() => handleCardClick(player)}
+                    >
+                        {!isFlipped ? (
+                            <div className="relative w-full h-full">
+                                <Image
+                                    src="/cardback.png"
+                                    alt="Back of the card"
+                                    fill
+                                    className="object-cover"
+                                />
+                            </div>
+                        ) : (
+                            <div
+                                className={`relative overflow-hidden h-[400px] px-4 pb-4 pt-12 ${backgroundClass} rounded-lg shadow transition-shadow`}
+                            >
+                                <div className="absolute -top-9 -left-1">
+                                    {teamLogo && (
+                                        <Image
+                                            src={teamLogo}
+                                            alt={`Team Logo`}
+                                            width={50}
+                                            height={50}
+                                            className="inline-block object-contain"
+                                        />
+                                    )}
+                                </div>
+
+                                <div
+                                    className="bg-[url('/motifbackground90s.jpg')] bg-cover bg-center w-full h-full rounded-t-full flex flex-col overflow-hidden"
+                                >
+                                    <div className="flex-1 relative w-full">
+                                        <Image
+                                            src={player.image_link ?? "/pdpdebase.png"}
+                                            alt={player.name}
+                                            fill
+                                            className="object-cover"
+                                            quality={100}
+                                        />
+                                    </div>
+
+                                    <div className="h-fit p-2 bg-black text-white uppercase flex items-center justify-center">
+                                        <div className="flex gap-2 justify-center items-center text-center font-righteous flex-5">
+                                            <div className="flex flex-col items-center">
+                                                <span className="text-sm">{firstName}</span>
+                                                <span className="text-xl">{lastNameParts.join(" ")}</span>
+                                            </div>
+                                        </div>
+                                        <div className="flex-1">
+                                            <span className="flex items-center justify-center font-righteous text-md bg-white text-black rounded-full w-full aspect-square">
+                                                {formatPosition(player.position ?? "")}
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                );
+            })}
+        </div>
+    );
+};

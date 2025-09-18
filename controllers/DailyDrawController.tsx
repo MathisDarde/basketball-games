@@ -1,8 +1,8 @@
 import { db } from "@/db";
-import { dailydraws } from "@/db/schema";
+import { dailydraws, dailydraws_players } from "@/db/schema";
 import { PlayerData } from "@/interfaces/Interfaces";
 import { getRandomPlayers } from "@/utils/get-random-players";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { v4 as uuidv4 } from "uuid";
 import storeCardInCollection from "@/actions/cardcollection/addcardtocollection";
 
@@ -15,27 +15,30 @@ export async function getDailyDraw(
 }> {
   const todayStr = new Date().toISOString().split("T")[0];
 
-  const existing = await db
+  const todayDraw = await db
     .select()
     .from(dailydraws)
-    .where(eq(dailydraws.userId, userId));
-
-  const todayDraw = existing.find(
-    (r) => r.date.toISOString().split("T")[0] === todayStr
-  );
-
-  if (todayDraw) {
-    const selected = allPlayers.filter((p) =>
-      todayDraw.playersId.includes(p.id)
+    .where(eq(dailydraws.userId, userId))
+    .then((draws) =>
+      draws.find((r) => r.date.toISOString().split("T")[0] === todayStr)
     );
-    return {
-      players: selected,
-      flippedIds: todayDraw.flippedId,
-    };
+
+  if (!todayDraw) {
+    return { players: [], flippedIds: [] };
   }
 
-  // Si pas de tirage aujourd’hui, ne rien renvoyer (pas de création)
-  return { players: [], flippedIds: [] };
+  const drawPlayers = await db
+    .select()
+    .from(dailydraws_players)
+    .where(eq(dailydraws_players.dailydrawId, todayDraw.id));
+
+  const selectedPlayers = allPlayers.filter((p) =>
+    drawPlayers.some((dp) => dp.playerId === p.id)
+  );
+
+  const flippedIds = drawPlayers.filter((dp) => dp.flipped).map((dp) => dp.playerId);
+
+  return { players: selectedPlayers, flippedIds };
 }
 
 export async function createDailyDraw(
@@ -46,46 +49,67 @@ export async function createDailyDraw(
 
   const todayStr = new Date().toISOString().split("T")[0];
 
-  const randomPlayers = getRandomPlayers({
-    numberPlayers: 10,
-    players: allPlayers,
-  });
+  const existingDraw = await db
+    .select()
+    .from(dailydraws)
+    .where(eq(dailydraws.userId, userId))
+    .then((draws) =>
+      draws.find((r) => r.date.toISOString().split("T")[0] === todayStr)
+    );
 
-  const playerIds = randomPlayers.map((p) => p.id);
+  if (existingDraw) {
+    return getDailyDraw(userId, allPlayers);
+  }
+
+  const randomPlayers = getRandomPlayers({ numberPlayers: 10, players: allPlayers });
+
+  const drawId = uuidv4();
 
   await db.insert(dailydraws).values({
-    id: uuidv4(),
+    id: drawId,
     userId,
     date: new Date(todayStr),
-    playersId: playerIds,
-    flippedId: [],
+    period: randomPlayers[0].period,
   });
 
-  return {
-    players: randomPlayers,
-    flippedIds: [],
-  };
+  const playersRows = randomPlayers.map((p) => ({
+    dailydrawId: drawId,
+    playerId: p.id,
+    flipped: false,
+  }));
+
+  await db.insert(dailydraws_players).values(playersRows);
+
+  return { players: randomPlayers, flippedIds: [] };
 }
 
 export async function flipCard(userId: string, playerId: string) {
   const todayStr = new Date().toISOString().split("T")[0];
 
-  const draws = await db
+  const draw = await db
     .select()
     .from(dailydraws)
-    .where(eq(dailydraws.userId, userId));
+    .where(eq(dailydraws.userId, userId))
+    .then((draws) =>
+      draws.find((d) => d.date.toISOString().split("T")[0] === todayStr)
+    );
 
-  const draw = draws.find(
-    (d) => d.date.toISOString().split("T")[0] === todayStr
-  );
-  if (!draw || draw.flippedId.includes(playerId)) return;
+  if (!draw) return;
+
+  const drawPlayer = await db
+    .select()
+    .from(dailydraws_players)
+    .where(eq(dailydraws_players.dailydrawId, draw.id))
+    .then((rows) => rows.find((r) => r.playerId === playerId));
+
+  if (!drawPlayer || drawPlayer.flipped) return;
 
   await db
-    .update(dailydraws)
-    .set({
-      flippedId: [...draw.flippedId, playerId],
-    })
-    .where(eq(dailydraws.id, draw.id));
+    .update(dailydraws_players)
+    .set({ flipped: true })
+    .where(
+      and(eq(dailydraws_players.dailydrawId, draw.id), eq(dailydraws_players.playerId, playerId))
+    );
 
   await storeCardInCollection(playerId, userId);
 }

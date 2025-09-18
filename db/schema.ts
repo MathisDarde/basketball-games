@@ -98,11 +98,16 @@ export const cardcollection = pgTable("cardcollection", {
 
 export const dailydraws = pgTable("dailydraws", {
   id: text("id").primaryKey(),
-  userId: text("userId").notNull(),
+  userId: text("userId").notNull().references(() => user.id, { onDelete: "cascade" }),
   date: timestamp("date").notNull(),
-  playersId: varchar("playersId", { length: 255 }).array().notNull(),
-  flippedId: varchar("flippedId", { length: 255 }).array().notNull(),
+  period: text("period").notNull(),
   createdAt: timestamp("createdAt").notNull().defaultNow(),
+});
+
+export const dailydraws_players = pgTable("dailydraws_players", {
+  dailydrawId: text("dailydrawId").notNull().references(() => dailydraws.id, { onDelete: "cascade" }),
+  playerId: text("playerId").notNull().references(() => playersData.id, { onDelete: "cascade" }),
+  flipped: boolean("flipped").notNull().default(false),
 });
 
 export const playtogether_sessions = pgTable("playtogether_sessions", {
