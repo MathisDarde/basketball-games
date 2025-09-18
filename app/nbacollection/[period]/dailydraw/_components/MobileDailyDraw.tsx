@@ -32,9 +32,20 @@ export const MobileDailyDraw = ({ players, teams, handleCardClick, flippedInitia
         );
         if (filteredTeams.length === 0) return null;
 
-        const lastTeam = filteredTeams[filteredTeams.length - 1];
-        const year = getLastYear(lastTeam.period);
-        const teamLogo = getTeamLogo(lastTeam.team, year);
+        const teamDurations = filteredTeams.map(({ team, period }) => {
+            const [startStr, endStr] = period.split("–");
+            const startYear = parseInt(startStr, 10);
+            const endYear = parseInt(endStr, 10);
+            const duration = endYear - startYear + 1;
+            return { team, startYear, endYear, duration };
+          });
+
+          const mainTeam = teamDurations.reduce((max, t) =>
+            t.duration > max.duration ? t : max
+          );
+
+          const teamLogo = getTeamLogo(mainTeam.team, mainTeam.endYear);
+          
         const backgroundClass = getBackgroundClass(player.awards);
         const [firstName, ...lastNameParts] = player.name.split(" ");
 
