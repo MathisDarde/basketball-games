@@ -24,7 +24,7 @@ export default function DailyDrawClient({
   const [flippedIds, setFlippedIds] = useState<string[]>(flippedInitial);
 
   const handleDrawClick = async () => {
-    const newDraw = await createDailyDrawServer(userId, allPlayers);
+    const newDraw = await createDailyDrawServer(userId, allPlayers, period);
     setPlayers(newDraw.players);
     setFlippedIds(newDraw.flippedIds);
   };

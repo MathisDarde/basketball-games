@@ -8,10 +8,12 @@ import storeCardInCollection from "@/actions/cardcollection/addcardtocollection"
 
 export async function getDailyDraw(
   userId: string,
-  allPlayers: PlayerData[]
+  allPlayers: PlayerData[],
+  period: string
 ): Promise<{
   players: PlayerData[];
   flippedIds: string[];
+  period: string;
 }> {
   const todayStr = new Date().toISOString().split("T")[0];
 
@@ -20,12 +22,14 @@ export async function getDailyDraw(
     .from(dailydraws)
     .where(eq(dailydraws.userId, userId))
     .then((draws) =>
-      draws.find((r) => r.date.toISOString().split("T")[0] === todayStr)
+      draws.find(
+        (r) =>
+          r.date.toISOString().split("T")[0] === todayStr &&
+          r.period === period
+      )
     );
 
-  if (!todayDraw) {
-    return { players: [], flippedIds: [] };
-  }
+  if (!todayDraw) return { players: [], flippedIds: [], period };
 
   const drawPlayers = await db
     .select()
@@ -38,14 +42,17 @@ export async function getDailyDraw(
 
   const flippedIds = drawPlayers.filter((dp) => dp.flipped).map((dp) => dp.playerId);
 
-  return { players: selectedPlayers, flippedIds };
+  return { players: selectedPlayers, flippedIds, period };
 }
 
 export async function createDailyDraw(
   userId: string,
-  allPlayers: PlayerData[]
-) {
-  if (allPlayers.length === 0) return { players: [], flippedIds: [] };
+  allPlayers: PlayerData[],
+  period: string
+): Promise<{ players: PlayerData[]; flippedIds: string[]; period: string }> {
+  if (allPlayers.length === 0) {
+    return { players: [], flippedIds: [], period }; // ✅ ajouté period
+  }
 
   const todayStr = new Date().toISOString().split("T")[0];
 
@@ -54,22 +61,25 @@ export async function createDailyDraw(
     .from(dailydraws)
     .where(eq(dailydraws.userId, userId))
     .then((draws) =>
-      draws.find((r) => r.date.toISOString().split("T")[0] === todayStr)
+      draws.find(
+        (r) =>
+          r.date.toISOString().split("T")[0] === todayStr &&
+          r.period === period
+      )
     );
 
   if (existingDraw) {
-    return getDailyDraw(userId, allPlayers);
+    return getDailyDraw(userId, allPlayers, period); // ✅ déjà typé pareil
   }
 
   const randomPlayers = getRandomPlayers({ numberPlayers: 10, players: allPlayers });
-
   const drawId = uuidv4();
 
   await db.insert(dailydraws).values({
     id: drawId,
     userId,
     date: new Date(todayStr),
-    period: randomPlayers[0].period,
+    period,
   });
 
   const playersRows = randomPlayers.map((p) => ({
@@ -80,8 +90,9 @@ export async function createDailyDraw(
 
   await db.insert(dailydraws_players).values(playersRows);
 
-  return { players: randomPlayers, flippedIds: [] };
+  return { players: randomPlayers, flippedIds: [], period };
 }
+
 
 export async function flipCard(userId: string, playerId: string) {
   const todayStr = new Date().toISOString().split("T")[0];

@@ -18,7 +18,7 @@ export default async function DailyDrawPage({
 
   const allPlayers = await getPlayers(period);
 
-  const { players, flippedIds } = await getDailyDraw(userId, allPlayers);
+  const { players, flippedIds } = await getDailyDraw(userId, allPlayers, period);
 
   return (
     <>
