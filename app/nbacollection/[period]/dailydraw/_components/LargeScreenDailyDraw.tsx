@@ -2,8 +2,8 @@ import { usePlayTogetherCtx } from "@/components/GlobalContext"
 import { PlayerData } from "@/interfaces/Interfaces"
 import Image from "next/image"
 
-export const LargeScreenDailyDraw = ({ players, teams, flippedIds, handleCardClick }: { players: PlayerData[], teams: string[], flippedIds: string [], handleCardClick: (player: PlayerData) => Promise<void> }) => {
-    const { formatPosition, getBackgroundClass, getLastYear, getTeamLogo } = usePlayTogetherCtx();
+export const LargeScreenDailyDraw = ({ players, teams, flippedIds, handleCardClick }: { players: PlayerData[], teams: string[], flippedIds: string[], handleCardClick: (player: PlayerData) => Promise<void> }) => {
+    const { formatPosition, getBackgroundClass, getTeamLogo } = usePlayTogetherCtx();
 
     return (
         <div className="grid grid-cols-5 gap-2">
@@ -11,7 +11,7 @@ export const LargeScreenDailyDraw = ({ players, teams, flippedIds, handleCardCli
                 const isFlipped = flippedIds.includes(player.id);
                 const { teams_history } = player;
 
-                const filteredTeams = teams_history.filter(({ team } : { team: string }) =>
+                const filteredTeams = teams_history.filter(({ team }: { team: string }) =>
                     teams.some((t) => team.includes(t))
                 );
                 if (filteredTeams.length === 0) return null;
@@ -22,14 +22,14 @@ export const LargeScreenDailyDraw = ({ players, teams, flippedIds, handleCardCli
                     const endYear = parseInt(endStr, 10);
                     const duration = endYear - startYear + 1;
                     return { team, startYear, endYear, duration };
-                  });
-      
-                  const mainTeam = teamDurations.reduce((max, t) =>
+                });
+
+                const mainTeam = teamDurations.reduce((max, t) =>
                     t.duration > max.duration ? t : max
-                  );
-      
-                  const teamLogo = getTeamLogo(mainTeam.team, mainTeam.endYear);
-                  
+                );
+
+                const teamLogo = getTeamLogo(mainTeam.team, mainTeam.endYear);
+
                 const backgroundClass = getBackgroundClass(player.awards);
                 const [firstName, ...lastNameParts] = player.name.split(" ");
 
