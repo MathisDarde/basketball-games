@@ -1,11 +1,12 @@
 "use client";
 
 import { usePlayTogetherCtx } from "@/components/GlobalContext";
-import { Card, PlayerData } from "@/interfaces/Interfaces";
+import { Card, Filters, PlayerData } from "@/interfaces/Interfaces";
 import Image from "next/image";
 import { teams } from "@/components/Teams";
 import { useState } from "react";
 import { CardResearch } from "./CardResearch";
+import { rarities } from "@/components/Rarity";
 
 export default function CardsDisplay({
   ownedCards,
@@ -17,16 +18,57 @@ export default function CardsDisplay({
   const { getTeamLogo, getBackgroundClass } = usePlayTogetherCtx();
 
   const cardIds = ownedCards.map((card) => card.cardId);
-  const [query, setQuery] = useState("");
+
+  const [filters, setFilters] = useState<Filters>({
+    query: "",
+    owned: [],
+    rarity: [],
+    teams: [],
+  });
+
+  const updateFilter = <K extends keyof Filters>(key: K, value: Filters[K]) => {
+    setFilters((prev) => ({ ...prev, [key]: value } as Filters));
+  };
 
   const filteredPlayers = players.filter((player) => {
-    const nameMatch = player.name.toLowerCase().includes(query.toLowerCase());
-    return nameMatch;
+    if (
+      filters.query &&
+      !player.name.toLowerCase().includes(filters.query.toLowerCase())
+    ) {
+      return false;
+    }
+
+    if (filters.owned.length > 0) {
+      const isOwned = cardIds.includes(player.id);
+      const status = isOwned ? "owned" : "notOwned";
+      if (!filters.owned.includes(status)) {
+        return false;
+      }
+    }
+
+    if (filters.rarity.length > 0) {
+      const playerClass = getBackgroundClass(player.awards || []) ?? "";
+      const playerRarity = rarities.find((r) =>
+        playerClass.includes(r.color)
+      )?.name;
+      if (!playerRarity || !filters.rarity.includes(playerRarity)) {
+        return false;
+      }
+    }
+
+    if (filters.teams.length > 0) {
+      const inAny = filters.teams.some((fTeam) =>
+        player.teams_history.some(({ team }) => team.includes(fTeam))
+      );
+      if (!inAny) return false;
+    }
+
+    return true;
   });
 
   return (
     <div>
-      <CardResearch query={query} setQuery={setQuery} />
+      <CardResearch filters={filters} updateFilter={updateFilter} />
 
       {filteredPlayers.length === 0 ? (
         <p className="text-center font-outfit text-gray-500 mt-4">
@@ -68,9 +110,8 @@ export default function CardsDisplay({
             return (
               <div
                 key={id}
-                className={`relative overflow-hidden w-[250px] h-[350px] sm:h-[400px] p-1 mx-auto ${backgroundClass} shadow transition-shadow ${
-                  isOwned ? "cursor-pointer hover:shadow-lg" : "opacity-50"
-                }`}
+                className={`relative overflow-hidden w-[250px] h-[350px] sm:h-[400px] p-1 mx-auto ${backgroundClass} shadow transition-shadow ${isOwned ? "cursor-pointer hover:shadow-lg" : "opacity-50"
+                  }`}
               >
                 {isOwned ? (
                   <div className="bg-white h-full p-2 flex">

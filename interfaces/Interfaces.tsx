@@ -40,3 +40,10 @@ export interface User {
   updatedAt: Date;
   admin: boolean;
 }
+
+export interface Filters {
+  query: string;
+  owned: ("owned" | "notOwned")[];
+  rarity: string[];
+  teams: string[];  
+}
