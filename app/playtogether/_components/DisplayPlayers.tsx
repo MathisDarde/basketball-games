@@ -32,7 +32,7 @@ export default function DisplayPlayers({
   }
 
   return (
-    <div className="flex flex-col items-center gap-6">
+    <div className="flex flex-col md:flex-row md:items-start items-center gap-6 md:gap-10 lg:gap-12 xl:gap-24">
       {randomPlayers.map((player: PlayerData, index: number) => {
         const { name, image_link, teams_history, position } = player;
 
@@ -75,43 +75,43 @@ export default function DisplayPlayers({
         }
 
         return (
-          <div key={index} className="player-card p-4 w-[300px]">
+          <div key={index} className="player-card p-4 w-[300px] sm:w-[400px] md:w-[300px] lg:w-[400px]">
             {(difficulty != "hard" || endedRound) ? (
               <Image
                 src={image_link || "/pdpdebase.png"}
                 alt={name}
-                width={75}
-                height={75}
-                className="rounded-full mb-4 mx-auto"
+                width={128}
+                height={128}
+                className="rounded-full mb-4 mx-auto w-28 sm:w-32 xl:w-36"
               />
             ) : (
               <Image
                 src="/playersilhouette.png"
                 alt={name}
-                width={75}
-                height={75}
-                className="rounded-full mb-4 mx-auto"
+                width={128}
+                height={128}
+                className="rounded-full mb-4 mx-auto w-28 sm:w-32 xl:w-36"
               />
             )}
 
-<div className="space-y-1">
-            <h2
-              className={`text-xl font-regular font-unbounded text-center`}
-            >
-              {name}
-            </h2>
+            <div className="space-y-1">
+              <h2
+                className={`text-xl sm:text-2xl font-regular font-unbounded text-center`}
+              >
+                {name}
+              </h2>
 
-            <p className="font-outfit font-light text-center text-sm">{position}</p>
+              <p className="font-outfit font-light text-center text-sm sm:text-base">{position}</p>
 
-            {(difficulty === "easy" || endedRound) && (
-              <p className="text-sm text-center font-outfit font-light">
-                Active Period: {activePeriod}
-              </p>
-            )}
+              {(difficulty === "easy" || endedRound) && (
+                <p className="text-sm sm:text-base text-center font-outfit font-light">
+                  Active Period: {activePeriod}
+                </p>
+              )}
             </div>
 
             {endedRound && (
-              <div className="grid grid-cols-3 gap-1 mt-4">
+              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 gap-1 mt-4">
                 {teams_history
                   .filter(({ team }) => teams.some((t) => team.includes(t)))
                   .map((singleTeam: TeamHistory, teamIndex: number) => {
@@ -133,15 +133,15 @@ export default function DisplayPlayers({
                             <Image
                               src={teamLogo}
                               alt={`${team} logo`}
-                              width={50}
-                              height={50}
-                              className="team-logo h-10 w-auto object-contain"
+                              width={128}
+                              height={128}
+                              className="team-logo h-10 lg:h-15 w-auto object-contain"
                             />
                           )}
-                          <p className={`font-bold uppercase font-unbounded`}>
+                          <p className={`font-bold uppercase font-unbounded lg:text-lg`}>
                             {abrevation}
                           </p>
-                          <p className={`text-xs font-outfit font-light`}>
+                          <p className={`text-xs font-outfit font-light lg:text-sm`}>
                             {period.replace("present", new Date().getFullYear().toString())}
                           </p>
                         </div>

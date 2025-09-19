@@ -30,14 +30,14 @@ export default function CareerPathPeriodSelector() {
 
   return (
     <div>
-      <h1 className="font-unbounded text-center text-2xl">Play together</h1>
-      <p className="text-center font-outfit font-light text-sm pt-2">
+      <h1 className="font-unbounded text-center text-2xl md:text-3xl 2xl:text-4xl">Play together</h1>
+      <p className="text-center font-outfit font-light text-sm pt-2 md:text-lg 2xl:text-xl">
         {step === 1 ? "Select a period to play" : "Choose your difficulty"}
       </p>
 
       {step > 1 && (
         <p
-          className="text-center font-outfit font-light text-sm pt-2 underline text-dark-purple cursor-pointer"
+          className="text-center font-outfit font-light text-sm md:text-base 2xl:text-lg pt-2 underline text-dark-purple cursor-pointer"
           onClick={() => setStep(1)}
         >
           Back to period selection
