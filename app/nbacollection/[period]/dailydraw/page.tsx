@@ -1,4 +1,4 @@
-import { getPlayers } from "@/controllers/PlayersController";
+import { getPlayersByPeriod } from "@/controllers/PlayersController";
 import { getDailyDraw } from "@/controllers/DailyDrawController";
 import { teams } from "@/components/Teams";
 import { getAuthenticatedUserId } from "@/actions/user/get-connected-user-id";
@@ -16,7 +16,7 @@ export default async function DailyDrawPage({
   const userId = await getAuthenticatedUserId();
   if (!userId) return <p>Vous devez être connecté.</p>;
 
-  const allPlayers = await getPlayers(period);
+  const allPlayers = await getPlayersByPeriod(period);
 
   const { players, flippedIds } = await getDailyDraw(userId, allPlayers, period);
 

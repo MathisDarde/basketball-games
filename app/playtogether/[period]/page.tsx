@@ -1,4 +1,4 @@
-import { getPlayers } from "@/controllers/PlayersController";
+import { getPlayersByPeriod } from "@/controllers/PlayersController";
 import { getUserId } from "@/utils/get-user-id";
 import { getLastStreak } from "@/controllers/PlayTogetherSessionsController";
 import { PeriodTypes } from "@/interfaces/Interfaces";
@@ -11,7 +11,7 @@ export default async function PlayTogetherPeriodPage(props: {
   const { period } = props.params;
   const { difficulty = "normal" } = props.searchParams;
 
-  const players = await getPlayers(period);
+  const players = await getPlayersByPeriod(period);
   const userId = await getUserId();
   const lastStreak = await getLastStreak(userId, period);
 

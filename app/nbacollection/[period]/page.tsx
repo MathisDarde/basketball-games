@@ -1,4 +1,4 @@
-import { getPlayers, getUserCards } from "@/controllers/PlayersController";
+import { getPlayersByPeriod, getUserCards, getUserCardsByPeriod } from "@/controllers/PlayersController";
 import { getAuthenticatedUserId } from "@/actions/user/get-connected-user-id";
 import PageMenu from "../_components/PageMenu";
 import CardsDisplay from "../_components/CardsDisplay";
@@ -22,7 +22,8 @@ export default async function NBACollectionPage(props: {
   }
 
   const ownedCards = await getUserCards(userId);
-  const players = await getPlayers(period);
+  const ownedByPeriod = await getUserCardsByPeriod(userId, period)
+  const players = await getPlayersByPeriod(period);
 
   return (
     <div>
@@ -30,9 +31,9 @@ export default async function NBACollectionPage(props: {
         NBA Cards Collection
       </h1>
       <PageMenu
-        ownedCards={ownedCards}
         players={players}
         params={props.params}
+        ownedByPeriod={ownedByPeriod}
       />
       <CardsDisplay ownedCards={ownedCards} players={players} />
     </div>

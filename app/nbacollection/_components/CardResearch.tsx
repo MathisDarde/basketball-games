@@ -109,11 +109,11 @@ export const CardResearch = ({ filters, updateFilter }: { filters: Filters, upda
 
             {statusMenuOpen && (
               <>
-                <label className="flex items-center gap-2 text-xs">
+                <label className="flex items-center gap-2 text-xs font-outfit font-light">
                   <input type="checkbox" checked={filters.owned.includes("owned")} onChange={() => toggleOwned("owned")} />
                   Owned
                 </label>
-                <label className="flex items-center gap-2 text-xs">
+                <label className="flex items-center gap-2 text-xs font-outfit font-light">
                   <input type="checkbox" checked={filters.owned.includes("notOwned")} onChange={() => toggleOwned("notOwned")} />
                   Not owned
                 </label>
@@ -132,10 +132,10 @@ export const CardResearch = ({ filters, updateFilter }: { filters: Filters, upda
               rarities.map((rar) => (
                 <button
                   key={rar.name}
-                  className={`flex items-center gap-2 text-xs hover:underline ${filters.rarity.includes(rar.name) ? "font-bold underline" : ""}`}
+                  className={`flex items-center gap-2 font-outfit text-xs hover:underline ${filters.rarity.includes(rar.name) ? "font-bold underline" : "font-light"}`}
                   onClick={() => toggleRarity(rar.name)}
                 >
-                  <div className={`w-2 h-2 ${rar.color} rounded-full border`}></div>
+                  <div className={`w-3 h-3 ${rar.color} rounded-full border`}></div>
                   {rar.name}
                 </button>
               ))}

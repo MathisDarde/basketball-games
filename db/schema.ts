@@ -93,6 +93,7 @@ export const cardcollection = pgTable("cardcollection", {
   cardId: text("cardId")
     .notNull()
     .references(() => playersData.id, { onDelete: "cascade" }),
+  period: text("period").notNull(),
   possessed: integer("possessed").default(0),
   createdAt: timestamp("created_at").notNull().defaultNow(),
 });

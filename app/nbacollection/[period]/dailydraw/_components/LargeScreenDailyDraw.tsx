@@ -2,13 +2,20 @@ import { usePlayTogetherCtx } from "@/components/GlobalContext"
 import { PlayerData } from "@/interfaces/Interfaces"
 import Image from "next/image"
 
-export const LargeScreenDailyDraw = ({ players, teams, flippedIds, handleCardClick }: { players: PlayerData[], teams: string[], flippedIds: string[], handleCardClick: (player: PlayerData) => Promise<void> }) => {
+type LargeScreenDailyDraw = {
+    players: PlayerData[];
+    teams: string[];
+    handleCardClick: (player: PlayerData) => Promise<void>;
+    flippedInitial: string[];
+};
+
+export const LargeScreenDailyDraw = ({ players, teams, handleCardClick, flippedInitial }: LargeScreenDailyDraw ) => {
     const { formatPosition, getBackgroundClass, getTeamLogo } = usePlayTogetherCtx();
 
     return (
         <div className="grid grid-cols-5 gap-2">
             {players.map((player) => {
-                const isFlipped = flippedIds.includes(player.id);
+                const isFlipped = flippedInitial.includes(player.id);
                 const { teams_history } = player;
 
                 const filteredTeams = teams_history.filter(({ team }: { team: string }) =>
@@ -17,9 +24,15 @@ export const LargeScreenDailyDraw = ({ players, teams, flippedIds, handleCardCli
                 if (filteredTeams.length === 0) return null;
 
                 const teamDurations = filteredTeams.map(({ team, period }) => {
-                    const [startStr, endStr] = period.split("–");
+                    const [startStr, endStrRaw] = period.split("–");
                     const startYear = parseInt(startStr, 10);
-                    const endYear = parseInt(endStr, 10);
+                
+                    const endYear = endStrRaw
+                        ? (endStrRaw.trim().toLowerCase() === "present"
+                            ? new Date().getFullYear()
+                            : parseInt(endStrRaw, 10))
+                        : startYear;
+                
                     const duration = endYear - startYear + 1;
                     return { team, startYear, endYear, duration };
                 });

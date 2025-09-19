@@ -4,10 +4,30 @@ import path from "path";
 import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
 import { PlayersSchemaType } from "@/types/players";
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { PeriodTypes } from "@/interfaces/Interfaces";
 
-export async function getPlayers(
+export async function getPlayers(): Promise<SelectPlayersData[]> {
+  const players = await db
+    .select()
+    .from(playersData)
+
+  return players.map(
+    (player): SelectPlayersData => ({
+      ...player,
+      teams_history:
+        typeof player.teams_history === "string"
+          ? JSON.parse(player.teams_history)
+          : player.teams_history,
+      awards:
+        typeof player.awards === "string"
+          ? JSON.parse(player.awards)
+          : player.awards,
+    })
+  );
+}
+
+export async function getPlayersByPeriod(
   period: PeriodTypes
 ): Promise<SelectPlayersData[]> {
   const players = await db
@@ -167,8 +187,8 @@ export async function store2020sPlayers() {
   }
 }
 
-export async function addCardToCollection(cardId: string, userId: string) {
-  const data = { id: uuidv4(), cardId, userId };
+export async function addCardToCollection(cardId: string, userId: string, period: string) {
+  const data = { id: uuidv4(), cardId, userId, period };
 
   await db.insert(cardcollection).values(data);
 
@@ -194,4 +214,11 @@ export async function getUserCards(userId: string) {
     .select()
     .from(cardcollection)
     .where(eq(cardcollection.userId, userId));
+}
+
+export async function getUserCardsByPeriod(userId: string, period: string) {
+  return await db
+    .select()
+    .from(cardcollection)
+    .where(and(eq(cardcollection.userId, userId), eq(cardcollection.period, period)));
 }

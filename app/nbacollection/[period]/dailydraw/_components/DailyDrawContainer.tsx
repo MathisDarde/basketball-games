@@ -32,7 +32,7 @@ export default function DailyDrawContainer({
   const handleCardClick = async (player: PlayerData) => {
     if (flippedIds.includes(player.id)) return;
 
-    await flipCardFunction(userId, player.id);
+    await flipCardFunction(userId, player.id, period);
     setFlippedIds((prev) => [...prev, player.id]);
   };
 
@@ -46,21 +46,21 @@ export default function DailyDrawContainer({
     } else {
       setMobileDailyDraw(false);
     }
-  })
+  }, [width]);
 
   return (
     <div>
       {mobileDailyDraw ? (
         <MobileDailyDraw players={players} teams={teams} handleCardClick={handleCardClick} flippedInitial={flippedIds} />
       ) : (
-        <LargeScreenDailyDraw players={players} teams={teams} flippedIds={flippedIds} handleCardClick={handleCardClick}  />
+        <LargeScreenDailyDraw players={players} teams={teams} handleCardClick={handleCardClick} flippedInitial={flippedIds} />
       )}
 
       {flippedIds.length === 10 && (
-        <div className="mt-6 text-center">
+        <div className="mt-4 text-center">
           <button
             onClick={handleRedirectAndStore}
-            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-unbounded rounded mt-4 cursor-pointer"
+            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-unbounded rounded cursor-pointer"
           >
             Voir ma collection
           </button>

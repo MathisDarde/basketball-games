@@ -56,7 +56,7 @@ export async function getLastStreak(userId: string | null, period: string) {
     return lastGame.length ? lastGame[0].streak : 0;
   }
 
-  export async function getUserHighestStreak(userId: string | null) {
+  export async function getUserPTHighestStreak(userId: string | null) {
     if (!userId) return 0;
   
     const result = await db

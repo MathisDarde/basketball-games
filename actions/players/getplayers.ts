@@ -1,10 +1,11 @@
 "use server";
 
-import { getPlayers } from "@/controllers/PlayersController";
+import { getPlayersByPeriod } from "@/controllers/PlayersController";
+import { PeriodTypes } from "@/interfaces/Interfaces";
 
-const getAllPlayers = async (period: string) => {
+const getAllPlayers = async (period: PeriodTypes) => {
   try {
-    const players = await getPlayers(period);
+    const players = await getPlayersByPeriod(period);
     return players;
   } catch (error) {
     console.error("getAllPlayers error:", error);

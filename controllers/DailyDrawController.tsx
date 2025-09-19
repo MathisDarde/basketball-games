@@ -94,7 +94,7 @@ export async function createDailyDraw(
 }
 
 
-export async function flipCard(userId: string, playerId: string) {
+export async function flipCard(userId: string, playerId: string, period: string) {
   const todayStr = new Date().toISOString().split("T")[0];
 
   const draw = await db
@@ -102,7 +102,7 @@ export async function flipCard(userId: string, playerId: string) {
     .from(dailydraws)
     .where(eq(dailydraws.userId, userId))
     .then((draws) =>
-      draws.find((d) => d.date.toISOString().split("T")[0] === todayStr)
+      draws.find((d) => d.date.toISOString().split("T")[0] === todayStr && d.period === period)
     );
 
   if (!draw) return;
@@ -122,5 +122,5 @@ export async function flipCard(userId: string, playerId: string) {
       and(eq(dailydraws_players.dailydrawId, draw.id), eq(dailydraws_players.playerId, playerId))
     );
 
-  await storeCardInCollection(playerId, userId);
+  await storeCardInCollection(playerId, userId, period);
 }

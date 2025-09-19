@@ -12,7 +12,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import StatisticsBlock from "./StatisticsBlock";
 
-export const ProfileContent = ({ user, highestStreak, totalPlayTogetherGames }: { user: User | null, highestStreak: number, totalPlayTogetherGames: number }) => {
+export const ProfileContent = ({ user, PTHighestStreak, totalPlayTogetherGames, totalCards, totalPlayers }: { user: User | null, PTHighestStreak: number, totalPlayTogetherGames: number, totalCards: number, totalPlayers: number }) => {
   const { getTeamLogo } = usePlayTogetherCtx();
   const router = useRouter();
   const [logoutPopupOpen, setLogoutPopupOpen] = useState(false);
@@ -127,7 +127,7 @@ export const ProfileContent = ({ user, highestStreak, totalPlayTogetherGames }: 
         <div className="mb-4 mt-8">
           <h2 className="text-center font-unbounded text-2xl">Statistics</h2>
 
-          <StatisticsBlock highestStreak={highestStreak} totalPlayTogetherGames={totalPlayTogetherGames} />
+          <StatisticsBlock PTHighestStreak={PTHighestStreak} totalPlayTogetherGames={totalPlayTogetherGames} totalCards={totalCards} totalPlayers={totalPlayers} />
         </div>
 
         <div className="flex flex-col items-center gap-4 ">
