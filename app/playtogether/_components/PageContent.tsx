@@ -8,7 +8,6 @@ import GuessingBlock from "./GuessingBlock";
 
 export default function PageContent({
   players,
-  teams,
   period,
   userId,
   streak,
@@ -16,7 +15,6 @@ export default function PageContent({
   difficulty,
 }: {
   players: PlayerData[];
-  teams: string[];
   period: PeriodTypes;
   userId: string | null;
   streak: number;
@@ -57,7 +55,6 @@ export default function PageContent({
       <DisplayPlayers
         players={players}
         randomPlayers={randomPlayers}
-        teams={teams}
         difficulty={difficulty}
       />
       <GuessingBlock

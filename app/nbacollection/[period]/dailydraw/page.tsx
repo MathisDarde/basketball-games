@@ -1,10 +1,10 @@
 import { getPlayersByPeriod } from "@/controllers/PlayersController";
 import { getDailyDraw } from "@/controllers/DailyDrawController";
-import { teams } from "@/components/Teams";
 import { getAuthenticatedUserId } from "@/actions/user/get-connected-user-id";
 import CountdownToNextDraw from "./_components/CountdownToNextDraw";
 import { PeriodTypes } from "@/interfaces/Interfaces";
 import DailyDrawClient from "./_components/DrawClient";
+import { TeamsData } from "@/components/Teams";
 
 export default async function DailyDrawPage({
   params,
@@ -18,7 +18,11 @@ export default async function DailyDrawPage({
 
   const allPlayers = await getPlayersByPeriod(period);
 
-  const { players, flippedIds } = await getDailyDraw(userId, allPlayers, period);
+  const { players, flippedIds } = await getDailyDraw(
+    userId,
+    allPlayers,
+    period
+  );
 
   return (
     <>
@@ -31,7 +35,7 @@ export default async function DailyDrawPage({
         initialPlayers={players}
         flippedInitial={flippedIds}
         allPlayers={allPlayers}
-        teams={teams}
+        teams={TeamsData}
         userId={userId}
         period={period}
       />

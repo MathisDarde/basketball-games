@@ -1,7 +1,7 @@
 import { UseFormRegister, UseFormSetValue } from "react-hook-form";
 import { RegisterSchemaType } from "@/types/forms";
 import { ImageIcon } from "lucide-react";
-import { teams } from "@/components/Teams";
+import { TeamsData } from "@/components/Teams";
 
 type FavoriteTeamSelectProps = {
   register: UseFormRegister<RegisterSchemaType>;
@@ -23,16 +23,16 @@ export default function FavoriteTeamSelect({
         Favorite Team :
       </span>
       <select className="w-full xl:w-[600px] border border-accent-brown rounded px-4 py-3 bg-white cursor-pointer flex items-center justify-between shadow font-outfit text-sm">
-        {[...teams]
-          .sort((a, b) => a.localeCompare(b))
+        {[...TeamsData]
+          .sort((a, b) => a.currentName.localeCompare(b.currentName))
           .map((team, index) => (
             <option
               key={index}
               {...register("favorite_team")}
-              onClick={() => handleSelect(team)}
+              onClick={() => handleSelect(team.currentName)}
               className="flex items-center px-4 py-3 hover:bg-gray-100 cursor-pointer"
             >
-              {team}
+              {team.currentName}
             </option>
           ))}
       </select>

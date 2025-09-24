@@ -1,7 +1,11 @@
 "use client";
 
 import flipCardFunction from "@/actions/cardcollection/flipcard";
-import { PeriodTypes, PlayerData } from "@/interfaces/Interfaces";
+import {
+  PeriodTypes,
+  PlayerData,
+  TeamsDataType,
+} from "@/interfaces/Interfaces";
 import { useScreenSize } from "@/utils/use-screen-size";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -16,7 +20,7 @@ export default function DailyDrawContainer({
   params,
 }: {
   players: PlayerData[];
-  teams: string[];
+  teams: TeamsDataType[];
   flippedInitial: string[];
   userId: string;
   params: { period: PeriodTypes };
@@ -51,9 +55,19 @@ export default function DailyDrawContainer({
   return (
     <div>
       {mobileDailyDraw ? (
-        <MobileDailyDraw players={players} teams={teams} handleCardClick={handleCardClick} flippedInitial={flippedIds} />
+        <MobileDailyDraw
+          players={players}
+          teams={teams}
+          handleCardClick={handleCardClick}
+          flippedInitial={flippedIds}
+        />
       ) : (
-        <LargeScreenDailyDraw players={players} teams={teams} handleCardClick={handleCardClick} flippedInitial={flippedIds} />
+        <LargeScreenDailyDraw
+          players={players}
+          teams={teams}
+          handleCardClick={handleCardClick}
+          flippedInitial={flippedIds}
+        />
       )}
 
       {flippedIds.length === 10 && (

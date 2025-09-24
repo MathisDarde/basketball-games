@@ -4,7 +4,7 @@ import deletePhotoDeProfil from "@/actions/user/delete-profile-pic";
 import updateProfileForm from "@/actions/user/update-profile-form";
 import { updateProfileSchema } from "@/app/schema";
 import ActionPopup from "@/components/ActionPopup";
-import { teams } from "@/components/Teams";
+import { TeamsData } from "@/components/Teams";
 import { SelectUser } from "@/db/schema";
 import { updateProfileSchemaType } from "@/types/forms";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -208,11 +208,11 @@ export default function UpdateProfileForm({
               className="w-full xl:w-[600px] py-3 px-4 rounded border border-accent-brown shadow font-outfit text-sm bg-white"
               onChange={(e) => handleSelect(e.target.value)}
             >
-              {[...teams]
-                .sort((a, b) => a.localeCompare(b))
+              {[...TeamsData]
+                .sort((a, b) => a.currentName.localeCompare(b.currentName))
                 .map((team, index) => (
-                  <option key={index} value={team}>
-                    {team}
+                  <option key={index} value={team.currentName}>
+                    {team.currentName}
                   </option>
                 ))}
             </select>

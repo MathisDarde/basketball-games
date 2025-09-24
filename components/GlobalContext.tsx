@@ -1,9 +1,8 @@
 "use client";
 
 import React, { createContext, useContext, useState } from "react";
-import { TeamLogos } from "./TeamLogos";
 import { GridThemeData, PlayerData } from "@/interfaces/Interfaces";
-import { teams } from "./Teams";
+import { TeamsData } from "./Teams";
 
 interface PlayTogetherContextType {
   getTeamLogo: (teamName: string, year: number) => string | undefined;
@@ -32,6 +31,11 @@ interface PlayTogetherContextType {
     themes: GridThemeData[];
   }) => GridThemeData[];
   getLastYear: (period: string) => number;
+  isCareerPathGood: (
+    player: PlayerData,
+    selectedTeams: (string | null)[],
+    difficulty: string
+  ) => { correct: boolean; message: string };
 }
 
 const PlayTogetherContext = createContext<PlayTogetherContextType | undefined>(
@@ -44,32 +48,33 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   const [streakCount, setStreakCount] = useState(0);
 
   const getTeamLogo = (teamName: string, year: number): string | undefined => {
-    return TeamLogos.find((t) => {
-      if (t.team !== teamName) return false;
+    const franchise = TeamsData.find((t) => t.names.includes(teamName));
+    if (!franchise) return undefined;
 
-      const normalized = t.period.replace("–", "-").toLowerCase();
+    const periodMatch = franchise.periods.find((p) => {
+      const normalized = p.period.replace("–", "-").toLowerCase();
       const [from, to] = normalized.split("-").map((x) => x.trim());
 
       const fromYear = Number(from);
       const toYear = to === "present" ? new Date().getFullYear() : Number(to);
 
       return year >= fromYear && year <= toYear;
-    })?.logo;
+    });
+
+    return periodMatch?.logo;
   };
 
   const getPlayerTeams = (player: PlayerData) => {
     return player.teams_history
-      .filter(({ team }) => teams.includes(team))
+      .filter(({ team }) => TeamsData.some((t) => t.names.includes(team)))
       .map(({ team }) => team);
   };
 
   const getPlayerDivisions = (player: PlayerData) => {
     const playerTeams = getPlayerTeams(player);
-    return divisions
-      .filter((division) =>
-        division.teams.some((team) => playerTeams.includes(team))
-      )
-      .map((division) => division.name);
+    return TeamsData.filter((t) =>
+      t.names.some((name) => playerTeams.includes(name))
+    ).map((t) => t.division);
   };
 
   const havePlayedTogether = (player1: PlayerData, player2: PlayerData) => {
@@ -151,20 +156,6 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     return posMap[firstPos] || "";
   }
 
-  const divisionNames = [
-    "Atlantic",
-    "Central",
-    "Southeast",
-    "Northwest",
-    "Pacific",
-    "Southwest",
-  ];
-
-  const divisions = divisionNames.map((name, i) => ({
-    name,
-    teams: teams.slice(i * 5, i * 5 + 5),
-  }));
-
   const awardStyleCardBg = {
     mvp: "bg-[url('/bluediamondbgtest.jpeg')]",
     all_nba: "bg-[url('/rubybgtest.jpg')]",
@@ -204,6 +195,62 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
     return [...themes].sort(() => 0.5 - Math.random()).slice(0, numberThemes);
   };
 
+  const isCareerPathGood = (
+    player: PlayerData,
+    selectedTeams: (string | null)[],
+    difficulty: string
+  ): { correct: boolean; message: string } => {
+    const playerTeams = getPlayerTeams(player);
+
+    const sameLength = selectedTeams.length === playerTeams.length;
+
+    const isExactMatch =
+      sameLength &&
+      selectedTeams.every((team, idx) => team === playerTeams[idx]);
+
+    if (isExactMatch) {
+      return {
+        correct: true,
+        message: "Excellent, you found all the teams in order!",
+      };
+    }
+
+    const wrongTeams = selectedTeams.filter(
+      (team): team is string => !!team && !playerTeams.includes(team)
+    );
+    const missingTeams = playerTeams.filter(
+      (team) => !selectedTeams.includes(team)
+    );
+    const correctButWrongPlace = selectedTeams.filter(
+      (team, idx): team is string =>
+        !!team && playerTeams.includes(team) && team !== playerTeams[idx]
+    );
+
+    if (difficulty === "easy") {
+      return {
+        correct: false,
+        message: `That's wrong. ${
+          correctButWrongPlace.length
+        } teams are correct but in the wrong order. You got ${
+          selectedTeams.filter((t, idx) => t === playerTeams[idx]).length
+        } in the right spot. ${missingTeams.length} teams are missing. ${
+          wrongTeams.length
+        } don't belong.`,
+      };
+    } else {
+      return {
+        correct: false,
+        message: `That's wrong. ${
+          correctButWrongPlace.length
+        } teams are correct but in the wrong order. You got ${
+          selectedTeams.filter((t, idx) => t === playerTeams[idx]).length
+        } in the right spot. ${missingTeams.length} teams are missing. ${
+          wrongTeams.length
+        } don't belong.`,
+      };
+    }
+  };
+
   return (
     <PlayTogetherContext.Provider
       value={{
@@ -222,6 +269,7 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         getBackgroundClass,
         getRandomGridThemes,
         getLastYear,
+        isCareerPathGood,
       }}
     >
       {children}

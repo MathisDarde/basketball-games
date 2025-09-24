@@ -1,7 +1,11 @@
 "use client";
 
 import { useState } from "react";
-import { PlayerData, PeriodTypes } from "@/interfaces/Interfaces";
+import {
+  PlayerData,
+  PeriodTypes,
+  TeamsDataType,
+} from "@/interfaces/Interfaces";
 import createDailyDrawServer from "@/actions/cardcollection/createdailydraw";
 import DailyDrawContainer from "./DailyDrawContainer";
 
@@ -16,7 +20,7 @@ export default function DailyDrawClient({
   initialPlayers: PlayerData[];
   flippedInitial: string[];
   allPlayers: PlayerData[];
-  teams: string[];
+  teams: TeamsDataType[];
   userId: string;
   period: PeriodTypes;
 }) {

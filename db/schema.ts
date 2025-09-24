@@ -6,7 +6,6 @@ import {
   timestamp,
   integer,
   jsonb,
-  varchar,
   primaryKey,
 } from "drizzle-orm/pg-core";
 
@@ -100,23 +99,29 @@ export const cardcollection = pgTable("cardcollection", {
 
 export const dailydraws = pgTable("dailydraws", {
   id: text("id").primaryKey(),
-  userId: text("userId").notNull().references(() => user.id, { onDelete: "cascade" }),
+  userId: text("userId")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
   date: timestamp("date").notNull(),
   period: text("period").notNull(),
   createdAt: timestamp("createdAt").notNull().defaultNow(),
 });
 
-export const dailydraws_players = pgTable("dailydraws_players", {
-  dailydrawId: text("dailydrawId")
-    .notNull()
-    .references(() => dailydraws.id, { onDelete: "cascade" }),
-  playerId: text("playerId")
-    .notNull()
-    .references(() => playersData.id, { onDelete: "cascade" }),
-  flipped: boolean("flipped").notNull().default(false),
-}, (table) => ({
-  pk: primaryKey({ columns: [table.dailydrawId, table.playerId] }),
-}));
+export const dailydraws_players = pgTable(
+  "dailydraws_players",
+  {
+    dailydrawId: text("dailydrawId")
+      .notNull()
+      .references(() => dailydraws.id, { onDelete: "cascade" }),
+    playerId: text("playerId")
+      .notNull()
+      .references(() => playersData.id, { onDelete: "cascade" }),
+    flipped: boolean("flipped").notNull().default(false),
+  },
+  (table) => ({
+    pk: primaryKey({ columns: [table.dailydrawId, table.playerId] }),
+  })
+);
 
 export const playtogether_sessions = pgTable("playtogether_sessions", {
   id: text("id").primaryKey(),
@@ -127,6 +132,22 @@ export const playtogether_sessions = pgTable("playtogether_sessions", {
   correct: boolean("correct").notNull(),
   streak: integer("streak").notNull(),
   difficulty: text("difficulty").notNull(),
+  playedAt: timestamp("playedAt").notNull().defaultNow(),
+});
+
+export const careerpath_sessions = pgTable("careerpath_sessions", {
+  id: text("id").primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  playerId: text("playerId")
+    .notNull()
+    .references(() => playersData.id, { onDelete: "cascade" }),
+  difficulty: text("difficulty").notNull(),
+  period: text("period").notNull(),
+  correct: boolean("correct").notNull(),
+  attempts: integer("attempts").notNull(),
+  streak: integer("streak").notNull(),
   playedAt: timestamp("playedAt").notNull().defaultNow(),
 });
 
@@ -150,3 +171,5 @@ export type SelectDailyDraws = typeof dailydraws.$inferSelect;
 
 export type SelectPlayTogetherSessions =
   typeof playtogether_sessions.$inferSelect;
+
+export type SelectCareerPathSessions = typeof careerpath_sessions.$inferSelect;

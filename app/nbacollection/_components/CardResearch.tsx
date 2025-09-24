@@ -1,13 +1,19 @@
-"use client"
+"use client";
 
-import { ChevronDown, Filter, X } from "lucide-react"
+import { ChevronDown, Filter, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import TeamsFilter from "./TeamsFilter";
 import { rarities } from "@/components/Rarity";
 import { Filters } from "@/interfaces/Interfaces";
-import { TeamLogos } from "@/components/TeamLogos";
+import { TeamsData } from "@/components/Teams";
 
-export const CardResearch = ({ filters, updateFilter }: { filters: Filters, updateFilter: <K extends keyof Filters>(key: K, value: Filters[K]) => void; }) => {
+export const CardResearch = ({
+  filters,
+  updateFilter,
+}: {
+  filters: Filters;
+  updateFilter: <K extends keyof Filters>(key: K, value: Filters[K]) => void;
+}) => {
   const [filterOpen, setFilterOpen] = useState(false);
   const [statusMenuOpen, setStatusMenuOpen] = useState(false);
   const [rarityMenuOpen, setRarityMenuOpen] = useState(false);
@@ -78,7 +84,8 @@ export const CardResearch = ({ filters, updateFilter }: { filters: Filters, upda
   };
 
   const getAbrFromTeamName = (teamName: string) =>
-    TeamLogos.find((t) => t.team === teamName)?.abr ?? teamName;
+    TeamsData.find((t) => t.names.includes(teamName))?.periods.at(-1)?.abr ??
+    teamName;
 
   return (
     <>
@@ -94,27 +101,45 @@ export const CardResearch = ({ filters, updateFilter }: { filters: Filters, upda
           size={20}
           className="absolute right-4 top-1/2 -translate-y-1/2 cursor-pointer"
           onClick={() => setFilterOpen((p) => !p)}
-
         />
       </div>
 
       {filterOpen && (
-        <div ref={filterRef} className="p-4 mx-4 mb-4 shadow-lg rounded-sm bg-white z-50 space-y-4">
+        <div
+          ref={filterRef}
+          className="p-4 mx-4 mb-4 shadow-lg rounded-sm bg-white z-50 space-y-4"
+        >
           {/* Colonne Status */}
           <div className="space-y-2">
-            <div className="flex items-center justify-between" onClick={() => setStatusMenuOpen((prev) => !prev)}>
+            <div
+              className="flex items-center justify-between"
+              onClick={() => setStatusMenuOpen((prev) => !prev)}
+            >
               <h4 className="text-sm font-unbounded">Status</h4>
-              <ChevronDown size={20} className={`transition-transform duration-300 ease-out ${statusMenuOpen ? "rotate-180" : "rotate-0"}`} />
+              <ChevronDown
+                size={20}
+                className={`transition-transform duration-300 ease-out ${
+                  statusMenuOpen ? "rotate-180" : "rotate-0"
+                }`}
+              />
             </div>
 
             {statusMenuOpen && (
               <>
                 <label className="flex items-center gap-2 text-xs font-outfit font-light">
-                  <input type="checkbox" checked={filters.owned.includes("owned")} onChange={() => toggleOwned("owned")} />
+                  <input
+                    type="checkbox"
+                    checked={filters.owned.includes("owned")}
+                    onChange={() => toggleOwned("owned")}
+                  />
                   Owned
                 </label>
                 <label className="flex items-center gap-2 text-xs font-outfit font-light">
-                  <input type="checkbox" checked={filters.owned.includes("notOwned")} onChange={() => toggleOwned("notOwned")} />
+                  <input
+                    type="checkbox"
+                    checked={filters.owned.includes("notOwned")}
+                    onChange={() => toggleOwned("notOwned")}
+                  />
                   Not owned
                 </label>
               </>
@@ -123,19 +148,31 @@ export const CardResearch = ({ filters, updateFilter }: { filters: Filters, upda
 
           {/* Colonne Raretés */}
           <div className="space-y-2">
-            <div className="flex items-center justify-between cursor-pointer" onClick={() => setRarityMenuOpen((p) => !p)}>
+            <div
+              className="flex items-center justify-between cursor-pointer"
+              onClick={() => setRarityMenuOpen((p) => !p)}
+            >
               <h4 className="text-sm font-unbounded">Rarity</h4>
-              <ChevronDown size={20} className={rarityMenuOpen ? "rotate-180" : ""} />
+              <ChevronDown
+                size={20}
+                className={rarityMenuOpen ? "rotate-180" : ""}
+              />
             </div>
 
             {rarityMenuOpen &&
               rarities.map((rar) => (
                 <button
                   key={rar.name}
-                  className={`flex items-center gap-2 font-outfit text-xs hover:underline ${filters.rarity.includes(rar.name) ? "font-bold underline" : "font-light"}`}
+                  className={`flex items-center gap-2 font-outfit text-xs hover:underline ${
+                    filters.rarity.includes(rar.name)
+                      ? "font-bold underline"
+                      : "font-light"
+                  }`}
                   onClick={() => toggleRarity(rar.name)}
                 >
-                  <div className={`w-3 h-3 ${rar.color} rounded-full border`}></div>
+                  <div
+                    className={`w-3 h-3 ${rar.color} rounded-full border`}
+                  ></div>
                   {rar.name}
                 </button>
               ))}
@@ -143,14 +180,25 @@ export const CardResearch = ({ filters, updateFilter }: { filters: Filters, upda
 
           {/* Colonnes bas - Teams */}
           <div className="space-y-2">
-            <div className="flex items-center justify-between" onClick={() => setTeamsMenuOpen((prev) => !prev)}>
+            <div
+              className="flex items-center justify-between"
+              onClick={() => setTeamsMenuOpen((prev) => !prev)}
+            >
               <h4 className="text-sm font-unbounded">Teams</h4>
-              <ChevronDown size={20} className={`transition-transform duration-300 ease-out ${teamsMenuOpen ? "rotate-180" : "rotate-0"}`} />
+              <ChevronDown
+                size={20}
+                className={`transition-transform duration-300 ease-out ${
+                  teamsMenuOpen ? "rotate-180" : "rotate-0"
+                }`}
+              />
             </div>
 
             {teamsMenuOpen && (
               <div className="grid grid-cols-6 gap-2">
-                <TeamsFilter selectedTeams={filters.teams} onToggleTeam={toggleTeam} />
+                <TeamsFilter
+                  selectedTeams={filters.teams}
+                  onToggleTeam={toggleTeam}
+                />
               </div>
             )}
           </div>
@@ -161,32 +209,58 @@ export const CardResearch = ({ filters, updateFilter }: { filters: Filters, upda
         {filters.query && (
           <div className="flex items-center gap-2 bg-accent-brown text-white font-outfit text-sm font-light px-2 py-1 rounded">
             <span className="text-sm">{filters.query}</span>
-            <X size={14} onClick={() => clearFilter("query")} className="cursor-pointer hover:text-red-300" />
+            <X
+              size={14}
+              onClick={() => clearFilter("query")}
+              className="cursor-pointer hover:text-red-300"
+            />
           </div>
         )}
 
         {filters.owned.map((s) => (
-          <div key={s} className="flex items-center gap-2 bg-accent-brown text-white font-outfit text-sm font-light px-2 py-1 rounded">
-            <span className="text-sm">{s === "owned" ? "Owned" : "Not owned"}</span>
-            <X size={14} onClick={() => toggleOwned(s)} className="cursor-pointer hover:text-red-300" />
+          <div
+            key={s}
+            className="flex items-center gap-2 bg-accent-brown text-white font-outfit text-sm font-light px-2 py-1 rounded"
+          >
+            <span className="text-sm">
+              {s === "owned" ? "Owned" : "Not owned"}
+            </span>
+            <X
+              size={14}
+              onClick={() => toggleOwned(s)}
+              className="cursor-pointer hover:text-red-300"
+            />
           </div>
         ))}
 
         {filters.rarity.map((r) => (
-          <div key={r} className="flex items-center gap-2 bg-accent-brown text-white font-outfit text-sm font-light px-2 py-1 rounded">
+          <div
+            key={r}
+            className="flex items-center gap-2 bg-accent-brown text-white font-outfit text-sm font-light px-2 py-1 rounded"
+          >
             <span className="text-sm">{r}</span>
-            <X size={14} onClick={() => toggleRarity(r)} className="cursor-pointer hover:text-red-300" />
+            <X
+              size={14}
+              onClick={() => toggleRarity(r)}
+              className="cursor-pointer hover:text-red-300"
+            />
           </div>
         ))}
 
         {filters.teams.map((teamFullName) => (
-          <div key={teamFullName} className="flex items-center gap-2 bg-accent-brown text-white font-outfit text-sm font-light px-2 py-1 rounded">
+          <div
+            key={teamFullName}
+            className="flex items-center gap-2 bg-accent-brown text-white font-outfit text-sm font-light px-2 py-1 rounded"
+          >
             <span className="text-sm">{getAbrFromTeamName(teamFullName)}</span>
-            <X size={14} onClick={() => toggleTeam(teamFullName)} className="cursor-pointer hover:text-red-300" />
+            <X
+              size={14}
+              onClick={() => toggleTeam(teamFullName)}
+              className="cursor-pointer hover:text-red-300"
+            />
           </div>
         ))}
-
       </div>
     </>
-  )
-}
+  );
+};

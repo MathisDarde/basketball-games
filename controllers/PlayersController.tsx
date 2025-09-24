@@ -8,9 +8,7 @@ import { and, eq } from "drizzle-orm";
 import { PeriodTypes } from "@/interfaces/Interfaces";
 
 export async function getPlayers(): Promise<SelectPlayersData[]> {
-  const players = await db
-    .select()
-    .from(playersData)
+  const players = await db.select().from(playersData);
 
   return players.map(
     (player): SelectPlayersData => ({
@@ -187,7 +185,11 @@ export async function store2020sPlayers() {
   }
 }
 
-export async function addCardToCollection(cardId: string, userId: string, period: string) {
+export async function addCardToCollection(
+  cardId: string,
+  userId: string,
+  period: string
+) {
   const data = { id: uuidv4(), cardId, userId, period };
 
   await db.insert(cardcollection).values(data);
@@ -220,5 +222,7 @@ export async function getUserCardsByPeriod(userId: string, period: string) {
   return await db
     .select()
     .from(cardcollection)
-    .where(and(eq(cardcollection.userId, userId), eq(cardcollection.period, period)));
+    .where(
+      and(eq(cardcollection.userId, userId), eq(cardcollection.period, period))
+    );
 }

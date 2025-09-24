@@ -45,5 +45,13 @@ export interface Filters {
   query: string;
   owned: ("owned" | "notOwned")[];
   rarity: string[];
-  teams: string[];  
+  teams: string[];
+}
+
+export interface TeamsDataType {
+  currentName: string;
+  names: string[];
+  conference: string;
+  division: string;
+  periods: { period: string; abr: string; logo: string }[];
 }

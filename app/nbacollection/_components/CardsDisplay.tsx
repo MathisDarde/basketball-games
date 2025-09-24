@@ -3,10 +3,10 @@
 import { usePlayTogetherCtx } from "@/components/GlobalContext";
 import { Card, Filters, PlayerData } from "@/interfaces/Interfaces";
 import Image from "next/image";
-import { teams } from "@/components/Teams";
 import { useState } from "react";
 import { CardResearch } from "./CardResearch";
 import { rarities } from "@/components/Rarity";
+import { TeamsData } from "@/components/Teams";
 
 export default function CardsDisplay({
   ownedCards,
@@ -77,8 +77,7 @@ export default function CardsDisplay({
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-screen mt-4">
           {filteredPlayers.map((player) => {
-            const { id, name, position, awards, teams_history, image_link } =
-              player;
+            const { id, name, awards, teams_history, image_link } = player;
             const isOwned = cardIds.includes(id);
             const uniqueCardClasses = getBackgroundClass(awards || []);
             const backgroundClass = isOwned
@@ -86,7 +85,7 @@ export default function CardsDisplay({
               : "bg-gray-300";
 
             const filteredTeams = teams_history.filter(({ team }) =>
-              teams.some((t) => team.includes(t))
+              TeamsData.some((t) => t.names.includes(team))
             );
 
             if (filteredTeams.length === 0) return "Unknown";
@@ -94,16 +93,16 @@ export default function CardsDisplay({
             const teamDurations = filteredTeams.map(({ team, period }) => {
               const [startStr, endStrRaw] = period.split("–");
               const startYear = parseInt(startStr, 10);
-          
+
               const endYear = endStrRaw
-                  ? (endStrRaw.trim().toLowerCase() === "present"
-                      ? new Date().getFullYear()
-                      : parseInt(endStrRaw, 10))
-                  : startYear;
-          
+                ? endStrRaw.trim().toLowerCase() === "present"
+                  ? new Date().getFullYear()
+                  : parseInt(endStrRaw, 10)
+                : startYear;
+
               const duration = endYear - startYear + 1;
               return { team, startYear, endYear, duration };
-          });
+            });
 
             const mainTeam = teamDurations.reduce((max, t) =>
               t.duration > max.duration ? t : max
@@ -116,8 +115,9 @@ export default function CardsDisplay({
             return (
               <div
                 key={id}
-                className={`relative overflow-hidden w-[250px] h-[350px] sm:h-[400px] p-1 mx-auto ${backgroundClass} shadow transition-shadow ${isOwned ? "cursor-pointer hover:shadow-lg" : "opacity-50"
-                  }`}
+                className={`relative overflow-hidden w-[250px] h-[350px] sm:h-[400px] p-1 mx-auto ${backgroundClass} shadow transition-shadow ${
+                  isOwned ? "cursor-pointer hover:shadow-lg" : "opacity-50"
+                }`}
               >
                 {isOwned ? (
                   <div className="bg-white h-full p-2 flex">

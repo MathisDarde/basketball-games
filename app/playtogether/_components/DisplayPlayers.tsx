@@ -1,7 +1,7 @@
 "use client";
 
 import { usePlayTogetherCtx } from "@/components/GlobalContext";
-import { TeamLogos } from "@/components/TeamLogos";
+import { TeamsData } from "@/components/Teams";
 import { PlayerData, TeamHistory } from "@/interfaces/Interfaces";
 import Image from "next/image";
 import { useRef } from "react";
@@ -9,16 +9,13 @@ import { useRef } from "react";
 export default function DisplayPlayers({
   players,
   randomPlayers,
-  teams,
   difficulty,
 }: {
   players: PlayerData[];
   randomPlayers: PlayerData[];
-  teams: string[];
   difficulty: string;
 }) {
-  const { getTeamLogo, endedRound, getLastYear } =
-    usePlayTogetherCtx();
+  const { endedRound } = usePlayTogetherCtx();
 
   const hasInitialized = useRef(false);
 
@@ -75,8 +72,11 @@ export default function DisplayPlayers({
         }
 
         return (
-          <div key={index} className="player-card p-4 w-[300px] sm:w-[400px] md:w-[300px] lg:w-[400px]">
-            {(difficulty != "hard" || endedRound) ? (
+          <div
+            key={index}
+            className="player-card p-4 w-[300px] sm:w-[400px] md:w-[300px] lg:w-[400px]"
+          >
+            {difficulty != "hard" || endedRound ? (
               <Image
                 src={image_link || "/pdpdebase.png"}
                 alt={name}
@@ -101,7 +101,9 @@ export default function DisplayPlayers({
                 {name}
               </h2>
 
-              <p className="font-outfit font-light text-center text-sm sm:text-base">{position}</p>
+              <p className="font-outfit font-light text-center text-sm sm:text-base">
+                {position}
+              </p>
 
               {(difficulty === "easy" || endedRound) && (
                 <p className="text-sm sm:text-base text-center font-outfit font-light">
@@ -113,18 +115,46 @@ export default function DisplayPlayers({
             {endedRound && (
               <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 gap-1 mt-4">
                 {teams_history
-                  .filter(({ team }) => teams.some((t) => team.includes(t)))
+                  .filter(({ team }) =>
+                    TeamsData.some((franchise) =>
+                      franchise.names.includes(team)
+                    )
+                  )
                   .map((singleTeam: TeamHistory, teamIndex: number) => {
                     const { team, period } = singleTeam;
-                    const year = getLastYear(period);
-                    const teamLogo: string | undefined = getTeamLogo(
-                      team,
-                      year
+
+                    let endYear: number;
+                    if (period.includes("–") || period.includes("-")) {
+                      const parts = period.includes("–")
+                        ? period.split("–")
+                        : period.split("-");
+                      const endStr = parts[1];
+                      endYear =
+                        endStr === "present"
+                          ? new Date().getFullYear()
+                          : parseInt(endStr, 10);
+                    } else {
+                      endYear = parseInt(period, 10);
+                    }
+
+                    const franchise = TeamsData.find((f) =>
+                      f.names.includes(team)
                     );
 
-                    const abrevation = TeamLogos.find(
-                      (t) => t.team === team
-                    )?.abr;
+                    const matchingPeriod = franchise?.periods.find((p) => {
+                      const [startStr, endStr] = p.period.includes("–")
+                        ? p.period.split("–")
+                        : p.period.split("-");
+                      const start = parseInt(startStr, 10);
+                      const end =
+                        endStr === undefined || endStr === "present"
+                          ? new Date().getFullYear()
+                          : parseInt(endStr, 10);
+                      return start <= endYear && endYear <= end;
+                    });
+
+                    const abrevation = matchingPeriod?.abr;
+                    const teamLogo = matchingPeriod?.logo;
 
                     return (
                       <div key={teamIndex} className="team-history">
@@ -138,11 +168,18 @@ export default function DisplayPlayers({
                               className="team-logo h-10 lg:h-15 w-auto object-contain"
                             />
                           )}
-                          <p className={`font-bold uppercase font-unbounded lg:text-lg`}>
+                          <p
+                            className={`font-bold uppercase font-unbounded lg:text-lg`}
+                          >
                             {abrevation}
                           </p>
-                          <p className={`text-xs font-outfit font-light lg:text-sm`}>
-                            {period.replace("present", new Date().getFullYear().toString())}
+                          <p
+                            className={`text-xs font-outfit font-light lg:text-sm`}
+                          >
+                            {period.replace(
+                              "present",
+                              new Date().getFullYear().toString()
+                            )}
                           </p>
                         </div>
                       </div>
