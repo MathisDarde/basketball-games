@@ -21,6 +21,7 @@ export default function SubmitGuess({
   period,
   streak,
   setStreak,
+  regeneratePlayer,
 }: {
   player: PlayerData;
   droppedTeams: (string | null)[];
@@ -35,6 +36,7 @@ export default function SubmitGuess({
   period: ParamValue;
   streak: number;
   setStreak: (value: number) => void;
+  regeneratePlayer: () => void;
 }) {
   const { isCareerPathGood } = usePlayTogetherCtx();
 
@@ -82,8 +84,6 @@ export default function SubmitGuess({
     } else {
       alert(correct.message);
     }
-
-    if (correct.correct) alert(correct.message);
   };
 
   const isGameOver = isCorrect || answerCount === 0;
@@ -128,6 +128,7 @@ export default function SubmitGuess({
             setIsRevealed(false);
             setIsCorrect(false);
             setAnswerCount(3);
+            regeneratePlayer();
           }}
         >
           Next round

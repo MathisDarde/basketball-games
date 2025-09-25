@@ -9,16 +9,17 @@ import MobileTeamInteraction from "./MobileTeamInteraction";
 import { useScreenSize } from "@/utils/use-screen-size";
 import StreakCounter from "@/components/StreakCounter";
 import { ParamValue } from "next/dist/server/request/params";
+import { getRandomPlayers } from "@/utils/get-random-players";
 
 export default function CareerPathComponentWrapper({
-  player,
+  players,
   teams,
   difficulty,
   period,
   userId,
   lastStreak,
 }: {
-  player: PlayerData;
+  players: PlayerData[];
   teams: TeamsDataType[];
   difficulty: string;
   period: ParamValue;
@@ -33,6 +34,14 @@ export default function CareerPathComponentWrapper({
   const [isTeamPopupOpen, setIsTeamPopupOpen] = useState(false);
   const [activeSlot, setActiveSlot] = useState<number | null>(null);
   const [streak, setStreak] = useState<number>(lastStreak);
+  const [currentPlayer, setCurrentPlayer] = useState<PlayerData>(
+    getRandomPlayers({ numberPlayers: 1, players })
+  );
+
+  const regeneratePlayer = () => {
+    const newPlayer = getRandomPlayers({ numberPlayers: 1, players });
+    setCurrentPlayer(newPlayer);
+  };
 
   const { width } = useScreenSize();
 
@@ -43,10 +52,10 @@ export default function CareerPathComponentWrapper({
   // équipes utilisées pour le challenge (ordre)
   const filteredTeams = useMemo(
     () =>
-      player.teams_history
+      currentPlayer.teams_history
         .filter(({ team }) => teams.some((t) => team.includes(t.currentName)))
         .map(({ team }) => team),
-    [player, teams]
+    [currentPlayer, teams]
   );
 
   useEffect(() => {
@@ -61,7 +70,7 @@ export default function CareerPathComponentWrapper({
       <div className="flex flex-col items-center gap-4">
         <StreakCounter streak={streak} period={period} />
         <ClientPlayerInteraction
-          player={player}
+          player={currentPlayer}
           filteredTeams={filteredTeams}
           droppedTeams={droppedTeams}
           setDroppedTeams={setDroppedTeams}
@@ -92,13 +101,13 @@ export default function CareerPathComponentWrapper({
               setActiveSlot(null);
               setIsTeamPopupOpen(false);
             }}
-            player={player}
+            player={currentPlayer}
             difficulty={difficulty}
             period={period}
           />
         ) : (
           <ClientTeamInteraction
-            player={player}
+            player={currentPlayer}
             teams={teams}
             difficulty={difficulty}
             period={period}
@@ -106,7 +115,7 @@ export default function CareerPathComponentWrapper({
         )}
       </div>
       <SubmitGuess
-        player={player}
+        player={currentPlayer}
         droppedTeams={droppedTeams}
         filteredTeams={filteredTeams}
         difficulty={difficulty}
@@ -119,6 +128,7 @@ export default function CareerPathComponentWrapper({
         period={period}
         streak={streak}
         setStreak={setStreak}
+        regeneratePlayer={regeneratePlayer}
       />
     </>
   );

@@ -113,7 +113,11 @@ export default function DisplayPlayers({
             </div>
 
             {endedRound && (
-              <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 gap-1 mt-4">
+              <div
+                className={`grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 gap-1 mt-4 ${
+                  teams_history.length <= 2 ? "flex justify-center" : ""
+                }`}
+              >
                 {teams_history
                   .filter(({ team }) =>
                     TeamsData.some((franchise) =>
