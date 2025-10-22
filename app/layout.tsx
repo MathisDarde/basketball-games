@@ -1,7 +1,6 @@
 import "./globals.css";
 import { AppProvider } from "../components/GlobalContext";
 import { Outfit, Unbounded, Righteous } from "next/font/google";
-import { Toaster } from "sonner";
 import NavbarServer from "@/components/NavbarServer";
 
 const unbounded = Unbounded({
@@ -37,7 +36,6 @@ export default function RootLayout({
         <div className="bg-light-beige">
           <NavbarServer />
           <AppProvider>{children}</AppProvider>
-          <Toaster />
         </div>
       </body>
     </html>

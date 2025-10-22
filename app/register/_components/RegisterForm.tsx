@@ -3,11 +3,10 @@
 import { RegisterSchema } from "@/app/schema";
 import { RegisterSchemaType } from "@/types/forms";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff, KeyRound, Mail, User, X } from "lucide-react";
+import { Eye, EyeOff, KeyRound, Mail, User } from "lucide-react";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
 import FileManagement from "./FileManagement";
 import submitRegisterForm from "@/actions/register/registeruser";
 import FavoriteTeamSelect from "./FavoriteTeam";
@@ -18,26 +17,28 @@ export default function RegisterForm() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const router = useRouter();
+  const [serverError, setServerError] = useState<string | null>(null);
 
-  const { register, handleSubmit, formState, setValue } =
-    useForm<RegisterSchemaType>({
-      resolver: zodResolver(RegisterSchema),
-    });
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm<RegisterSchemaType>({
+    resolver: zodResolver(RegisterSchema),
+  });
 
   const handleSubmitForm = async (data: RegisterSchemaType) => {
+    setServerError(null);
     const response = await submitRegisterForm(data, selectedFile ?? null);
 
     if (response.success) {
       router.push("/");
     } else {
-      toast.error(
+      setServerError(
         response.message
           ? response.message
-          : response.errors?.[0]?.message || "Erreur inconnue",
-        {
-          icon: <X className="text-white" />,
-          className: "bg-red-500 border border-red-200 text-white text-base",
-        }
+          : response.errors?.[0].message ?? null
       );
     }
   };
@@ -49,26 +50,32 @@ export default function RegisterForm() {
     setShowConfirmPassword(!showConfirmPassword);
   };
 
-  useEffect(() => {
-    Object.values(formState.errors).forEach((error) => {
-      if (error && "message" in error) {
-        toast.error(error.message as string, {
-          icon: <X className="text-white" />,
-          className:
-            "bg-red-500 !important border border-red-200 text-white text-base",
-        });
-      }
-    });
-  }, [formState.errors]);
-
   return (
     <div className="w-screen xl:w-[600px] mx-auto px-8 pb-8 text-center">
       <h1 className="text-center font-unbounded text-2xl">Register</h1>
       <div className="mt-2 mb-4">
-      <Link href="/login" className="font-outfit underline cursor-pointer text-dark-purple">
-        Already have an account
-      </Link>
+        <Link
+          href="/login"
+          className="font-outfit underline cursor-pointer text-dark-purple"
+        >
+          Already have an account
+        </Link>
       </div>
+
+      {/* Bloc erreurs */}
+      {(Object.keys(errors).length > 0 || serverError) && (
+        <div className="bg-red-200 border border-red-700 rounded-md p-4 mb-4 text-sm text-red-900 space-y-1 text-left">
+          {Object.values(errors).map((error, i) => (
+            <div key={i} className="font-outfit text-center">
+              {error?.message}
+            </div>
+          ))}
+          {serverError && (
+            <div className="font-outfit text-center">{serverError}</div>
+          )}
+        </div>
+      )}
+
       <form
         onSubmit={handleSubmit(handleSubmitForm)}
         id="inscform"
@@ -84,7 +91,11 @@ export default function RegisterForm() {
           <input
             type="text"
             {...register("name")}
-            className="w-full xl:w-[600px] py-3 px-4 rounded border border-accent-brown shadow font-outfit text-sm bg-white"
+            className={`w-full xl:w-[600px] py-3 px-4 rounded border shadow font-outfit text-sm bg-white ${
+              errors.name
+                ? "border-2 border-red-500 focus:ring-red-500"
+                : "border-accent-brown"
+            }`}
             placeholder="Name"
           />
         </div>
@@ -99,7 +110,11 @@ export default function RegisterForm() {
           <input
             type="email"
             {...register("email")}
-            className="w-full xl:w-[600px] py-3 px-4 rounded border border-accent-brown shadow font-outfit text-sm bg-white"
+            className={`w-full xl:w-[600px] py-3 px-4 rounded border shadow font-outfit text-sm bg-white ${
+              errors.email
+                ? "border-2 border-red-500 focus:ring-red-500"
+                : "border-accent-brown"
+            }`}
             placeholder="Mail address"
           />
         </div>
@@ -112,7 +127,11 @@ export default function RegisterForm() {
           <input
             type={showPassword ? "text" : "password"}
             {...register("password")}
-            className="w-full xl:w-[600px] py-3 px-4 rounded border border-accent-brown shadow font-outfit text-sm bg-white"
+            className={`w-full xl:w-[600px] py-3 px-4 rounded border shadow font-outfit text-sm bg-white ${
+              errors.password
+                ? "border-2 border-red-500 focus:ring-red-500"
+                : "border-accent-brown"
+            }`}
             placeholder="Password"
           />
           <span
@@ -131,7 +150,11 @@ export default function RegisterForm() {
           <input
             type={showConfirmPassword ? "text" : "password"}
             {...register("confirmPassword")}
-            className="w-full xl:w-[600px] py-3 px-4 rounded border border-accent-brown shadow font-outfit text-sm bg-white"
+            className={`w-full xl:w-[600px] py-3 px-4 rounded border shadow font-outfit text-sm bg-white ${
+              errors.confirmPassword
+                ? "border-2 border-red-500 focus:ring-red-500"
+                : "border-accent-brown"
+            }`}
             placeholder="Confirm password"
           />
           <span

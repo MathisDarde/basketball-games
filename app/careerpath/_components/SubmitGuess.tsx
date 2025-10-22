@@ -45,6 +45,7 @@ export default function SubmitGuess({
     correct: boolean;
     message: string;
   } | null>(null);
+  const [endRoundMessage, setEndRoundMessage] = useState("");
 
   const handleCheckAnswer = async () => {
     setChecked(true);
@@ -77,12 +78,12 @@ export default function SubmitGuess({
       }
 
       if (!correct.correct) {
-        alert("No more attempts left!");
+        setEndRoundMessage("No attempts left !");
         setIsRevealed(true);
         setDroppedTeams(filteredTeams.slice(0, filteredTeams.length));
       }
     } else {
-      alert(correct.message);
+      setEndRoundMessage(correct.message);
     }
   };
 
@@ -91,9 +92,15 @@ export default function SubmitGuess({
   return (
     <div className="text-center py-4 flex flex-col gap-2 justify-center items-center">
       {!isGameOver ? (
-        <p className="text-sm font-outfit bg-gray-700 opacity-50 inline-flex py-2 px-3 rounded-md text-white">
-          {answerCount}/3 guesses remaining
-        </p>
+        <>
+          <p className="text-sm font-outfit bg-gray-700 opacity-50 inline-flex py-2 px-3 rounded-md text-white">
+            {answerCount}/3 guesses remaining
+          </p>
+
+          <p className="font-outfit bg-red-200 border border-red-700 rounded-md p-4 text-sm w-[325px]">
+            {endRoundMessage}
+          </p>
+        </>
       ) : feedbackMessage ? (
         feedbackMessage.correct ? (
           <>
