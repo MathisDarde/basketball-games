@@ -14,7 +14,7 @@ export const getAuthenticatedUser = async (): Promise<User | null> => {
     const user = session?.user
       ? {
           ...session.user,
-          profilePicture: session.user.profilepicture ?? null,
+          image: session.user.image ?? null,
           favoriteTeam: session.user.favorite_team,
         }
       : null;

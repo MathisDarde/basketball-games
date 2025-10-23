@@ -21,7 +21,7 @@ export const auth = betterAuth({
         required: true,
         defaultValue: "false",
       },
-      profilepicture: {
+      image: {
         type: "string",
         required: false,
         defaultValue: null,
@@ -35,10 +35,10 @@ export const auth = betterAuth({
       clientId: process.env.GOOGLE_CLIENT_ID as string,
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     },
-    twitter: { 
-      clientId: process.env.TWITTER_CLIENT_ID as string, 
-      clientSecret: process.env.TWITTER_CLIENT_SECRET as string, 
-  }, 
+    twitter: {
+      clientId: process.env.TWITTER_CLIENT_ID as string,
+      clientSecret: process.env.TWITTER_CLIENT_SECRET as string,
+    },
   },
 
   database: drizzleAdapter(db, {

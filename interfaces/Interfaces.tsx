@@ -34,7 +34,7 @@ export interface User {
   id: string;
   email: string;
   name: string;
-  profilePicture: string | null;
+  image: string | null;
   favoriteTeam: string;
   createdAt: Date;
   updatedAt: Date;

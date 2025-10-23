@@ -91,10 +91,11 @@ export const NavbarMenu = ({ user }: { user: User | null }) => {
         </div>
         <div
           onClick={handleBack}
-          className={`${hasPeriod
-            ? "cursor-pointer text-black"
-            : "cursor-not-allowed text-gray-400"
-            }`}
+          className={`${
+            hasPeriod
+              ? "cursor-pointer text-black"
+              : "cursor-not-allowed text-gray-400"
+          }`}
         >
           <ChevronLeft />
         </div>
@@ -103,9 +104,10 @@ export const NavbarMenu = ({ user }: { user: User | null }) => {
       {/* Overlay */}
       <div
         className={`fixed inset-0 bg-black/50 z-10 transition-opacity duration-300 
-          ${menuOpen
-            ? "opacity-100 pointer-events-auto"
-            : "opacity-0 pointer-events-none"
+          ${
+            menuOpen
+              ? "opacity-100 pointer-events-auto"
+              : "opacity-0 pointer-events-none"
           }`}
         onClick={() => setMenuOpen(false)}
       />
@@ -141,13 +143,17 @@ export const NavbarMenu = ({ user }: { user: User | null }) => {
               Games
               <ChevronDown
                 size={18}
-                className={`transition-transform duration-300 ease-out ${gamesDropdownOpen ? "rotate-180" : "rotate-0"}`}
+                className={`transition-transform duration-300 ease-out ${
+                  gamesDropdownOpen ? "rotate-180" : "rotate-0"
+                }`}
               />
             </button>
 
             {gamesDropdownOpen && (
-              <GamesDropdown open={gamesDropdownOpen} onLinkClick={() => setMenuOpen(false)} />
-
+              <GamesDropdown
+                open={gamesDropdownOpen}
+                onLinkClick={() => setMenuOpen(false)}
+              />
             )}
           </div>
 
@@ -159,12 +165,17 @@ export const NavbarMenu = ({ user }: { user: User | null }) => {
               Socials
               <ChevronDown
                 size={18}
-                className={`transition-transform duration-300 ease-out ${socialsDropdownOpen ? "rotate-180" : "rotate-0"}`}
+                className={`transition-transform duration-300 ease-out ${
+                  socialsDropdownOpen ? "rotate-180" : "rotate-0"
+                }`}
               />
             </button>
 
             {socialsDropdownOpen && (
-              <SocialsDropdown open={socialsDropdownOpen} onLinkClick={() => setMenuOpen(false)} />
+              <SocialsDropdown
+                open={socialsDropdownOpen}
+                onLinkClick={() => setMenuOpen(false)}
+              />
             )}
           </div>
 
@@ -177,7 +188,7 @@ export const NavbarMenu = ({ user }: { user: User | null }) => {
                 onClick={() => setMenuOpen(false)}
               >
                 <Image
-                  src={user.profilePicture || "/pdpdebase.png"}
+                  src={user.image || "/pdpdebase.png"}
                   alt="Profile picture"
                   width={25}
                   height={25}

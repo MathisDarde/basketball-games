@@ -65,7 +65,7 @@ export async function signUp(data: RegisterSchemaType, file?: File) {
     const result = await auth.api.signUpEmail({
       body: {
         name,
-        profilepicture: imageUrl || null,
+        image: imageUrl || undefined,
         favorite_team,
         email,
         password,
@@ -118,7 +118,7 @@ export async function updateUser(
 
     const updatedData: Partial<Omit<SelectUser, "id">> = {
       ...data,
-      ...(imageUrl ? { profilepicture: imageUrl } : {}),
+      ...(imageUrl ? { image: imageUrl } : {}),
     };
 
     const result = await db
@@ -139,7 +139,7 @@ export async function deleteUser(id: SelectUser["id"]) {
 export async function getUserPicName(id: SelectUser["id"]) {
   const users = await db
     .select({
-      pdp: user.profilepicture,
+      pdp: user.image,
       username: user.name,
     })
     .from(user)
@@ -159,7 +159,7 @@ export async function deleteUserPic(id: SelectUser["id"]) {
       return;
     }
 
-    await db.update(user).set({ profilepicture: null }).where(eq(user.id, id));
+    await db.update(user).set({ image: null }).where(eq(user.id, id));
     return true;
   } else {
     return false;

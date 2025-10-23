@@ -21,7 +21,7 @@ export default function UpdateProfileForm({
 }) {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [previewPhoto, setPreviewPhoto] = useState<string | null>(
-    userData.profilepicture || "/_assets/img/pdpdebase.png"
+    userData.image || "/_assets/img/pdpdebase.png"
   );
   const [openDeletePicPopup, setOpenDeletePicPopup] = useState(false);
   const router = useRouter();
@@ -33,7 +33,7 @@ export default function UpdateProfileForm({
         name: userData.name,
         email: userData.email,
         favorite_team: userData.favorite_team || "",
-        profilepicture: userData.profilepicture || "",
+        image: userData.image || "",
       },
     }
   );

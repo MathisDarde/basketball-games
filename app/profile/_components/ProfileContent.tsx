@@ -12,15 +12,25 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import StatisticsBlock from "./StatisticsBlock";
 
-export const ProfileContent = ({ user, PTHighestStreak, totalPlayTogetherGames, totalCards, totalPlayers }: { user: User | null, PTHighestStreak: number, totalPlayTogetherGames: number, totalCards: number, totalPlayers: number }) => {
+export const ProfileContent = ({
+  user,
+  PTHighestStreak,
+  totalPlayTogetherGames,
+  totalCards,
+  totalPlayers,
+}: {
+  user: User | null;
+  PTHighestStreak: number;
+  totalPlayTogetherGames: number;
+  totalCards: number;
+  totalPlayers: number;
+}) => {
   const { getTeamLogo } = usePlayTogetherCtx();
   const router = useRouter();
   const [logoutPopupOpen, setLogoutPopupOpen] = useState(false);
   const [deletePopupOpen, setDeletePopupOpen] = useState(false);
 
-  if (!user?.favoriteTeam) return;
-
-  const teamLogo = getTeamLogo(user?.favoriteTeam, 2025);
+  const teamLogo = getTeamLogo(user?.favoriteTeam ?? "", 2025);
 
   const handleDeleteAccount = async () => {
     const userId = user?.id;
@@ -88,7 +98,7 @@ export const ProfileContent = ({ user, PTHighestStreak, totalPlayTogetherGames, 
       <div className="">
         <div className="my-4 space-y-2 text-center">
           <Image
-            src={user?.profilePicture || "/pdpdebase.png"}
+            src={user?.image || "/pdpdebase.png"}
             alt="Profile picture"
             width={125}
             height={125}
@@ -104,30 +114,40 @@ export const ProfileContent = ({ user, PTHighestStreak, totalPlayTogetherGames, 
         </div>
 
         <div className="space-y-2">
-          <div className="font-outfit text-sm flex items-center justify-center gap-2"><Mail size={18} />{user?.email}</div>
+          <div className="font-outfit text-sm flex items-center justify-center gap-2">
+            <Mail size={18} />
+            {user?.email}
+          </div>
           <div className="font-outfit text-sm flex items-center justify-center gap-2">
             <CalendarCheckIcon size={18} />
             First registered on {user?.createdAt.toLocaleDateString()}
           </div>
-          <div className="font-outfit text-sm flex items-center justify-center gap-2">
-            <BellIcon size={18} />
+          {user?.favoriteTeam && (
+            <div className="font-outfit text-sm flex items-center justify-center gap-2">
+              <BellIcon size={18} />
 
-            {user?.favoriteTeam}
+              {user?.favoriteTeam}
 
-            <Image
-              src={teamLogo || "/pdpdebase.png"}
-              alt="Team logo"
-              width={18}
-              height={18}
-              className="object-contain"
-            />
-          </div>
+              <Image
+                src={teamLogo || "/pdpdebase.png"}
+                alt="Team logo"
+                width={18}
+                height={18}
+                className="object-contain"
+              />
+            </div>
+          )}
         </div>
 
         <div className="mb-4 mt-8">
           <h2 className="text-center font-unbounded text-2xl">Statistics</h2>
 
-          <StatisticsBlock PTHighestStreak={PTHighestStreak} totalPlayTogetherGames={totalPlayTogetherGames} totalCards={totalCards} totalPlayers={totalPlayers} />
+          <StatisticsBlock
+            PTHighestStreak={PTHighestStreak}
+            totalPlayTogetherGames={totalPlayTogetherGames}
+            totalCards={totalCards}
+            totalPlayers={totalPlayers}
+          />
         </div>
 
         <div className="flex flex-col items-center gap-4 ">
