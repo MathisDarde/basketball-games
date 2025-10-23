@@ -121,7 +121,7 @@ export default function UpdateProfileForm({
                 handleDeletePDP();
                 setOpenDeletePicPopup(false);
               },
-              theme: "confirm",
+              theme: "secondary",
             },
           ]}
         />

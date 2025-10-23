@@ -16,6 +16,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { GamesDropdown } from "./GamesDropdown";
 import { SocialsDropdown } from "./SocialsDropdown";
+import Button from "./CustomButton";
 
 export const NavbarMenu = ({ user }: { user: User | null }) => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -118,10 +119,10 @@ export const NavbarMenu = ({ user }: { user: User | null }) => {
           ${menuOpen ? "translate-x-0" : "-translate-x-full"}`}
       >
         <div className="flex flex-col h-full">
-          <div className="bg-dark-purple text-white font-outfit py-2 flex items-center gap-2 justify-center rounded">
-            <button className="">Make a donation</button>
+          <Button theme="primary" size="large">
+            Make a donation
             <BadgeDollarSign size={20} />
-          </div>
+          </Button>
 
           <ul className="mt-4">
             <li>

@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export interface TeamHistory {
   period: string;
   team: string;
@@ -54,4 +56,12 @@ export interface TeamsDataType {
   conference: string;
   division: string;
   periods: { period: string; abr: string; logo: string }[];
+}
+
+export interface ButtonProps {
+  children: ReactNode;
+  onClick?: () => void;
+  type?: "submit" | "reset" | "button";
+  className?: string;
+  disabled?: boolean;
 }

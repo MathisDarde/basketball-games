@@ -11,6 +11,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import StatisticsBlock from "./StatisticsBlock";
+import Button from "@/components/CustomButton";
 
 export const ProfileContent = ({
   user,
@@ -65,7 +66,7 @@ export const ProfileContent = ({
                 logOut();
                 setLogoutPopupOpen(false);
               },
-              theme: "confirm",
+              theme: "secondary",
             },
           ]}
         />
@@ -151,22 +152,22 @@ export const ProfileContent = ({
         </div>
 
         <div className="flex flex-col items-center gap-4 ">
-          <div
-            className="flex items-center gap-2 bg-dark-purple hover:bg-fuchsia-950 text-white px-4 py-2 rounded font-outfit cursor-pointer"
+          <Button
+            size="default"
+            theme="primary"
             onClick={() => setLogoutPopupOpen(true)}
           >
             <LogOut size={18} />
-            <button className="cursor-pointer text-sm">Logout</button>
-          </div>
-          <div
-            className="flex items-center gap-2 bg-red-700 hover:bg-red-800 text-white px-4 py-2 rounded font-outfit cursor-pointer"
+            Logout
+          </Button>
+          <Button
+            size="default"
+            theme="delete"
             onClick={() => setDeletePopupOpen(true)}
           >
             <Trash size={18} />
-            <button className="cursor-pointer text-sm">
-              Delete this account
-            </button>
-          </div>
+            Delete this account
+          </Button>
         </div>
       </div>
     </>

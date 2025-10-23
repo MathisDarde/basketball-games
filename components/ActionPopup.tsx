@@ -1,11 +1,12 @@
 "use client";
 
 import { X } from "lucide-react";
+import Button from "./CustomButton";
 
 type Action = {
   label: string;
   onClick: () => void;
-  theme?: "delete" | "update" | "confirm" | "discard";
+  theme?: "delete" | "secondary" | "primary" | "discard";
 };
 
 export default function ActionPopup({
@@ -19,19 +20,6 @@ export default function ActionPopup({
   description?: string;
   actions: Action[];
 }) {
-  const getButtonClass = (theme: Action["theme"]) => {
-    switch (theme) {
-      case "delete":
-        return "bg-red-600 text-white hover:bg-red-700 transition-colors";
-      case "update":
-        return "bg-dark-purple text-white hover:bg-fuchsia-950 transition-colors";
-      case "confirm":
-        return "bg-accent-brown text-white hover:bg-yellow-700 transition-colors";
-      default:
-        return "bg-gray-200 text-black hover:bg-gray-300 transition-colors";
-    }
-  };
-
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div className="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 relative m-4">
@@ -55,15 +43,14 @@ export default function ActionPopup({
         {/* Boutons dynamiques */}
         <div className="flex justify-center font-outfit gap-3">
           {actions.map((action, idx) => (
-            <button
+            <Button
               key={idx}
               onClick={action.onClick}
-              className={`px-4 py-2 rounded-lg font-medium transition cursor-pointer ${getButtonClass(
-                action.theme
-              )}`}
+              theme={action.theme}
+              size="default"
             >
               {action.label}
-            </button>
+            </Button>
           ))}
         </div>
       </div>

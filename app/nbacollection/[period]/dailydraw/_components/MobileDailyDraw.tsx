@@ -27,7 +27,7 @@ export const MobileDailyDraw = ({
     setStep((prev) => prev + 1);
   };
 
-  const remaining = players.length - step;
+  const remaining = players.length - step - 1;
 
   return (
     <>
