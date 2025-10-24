@@ -116,7 +116,7 @@ export const ProfileContent = ({
             height={125}
             className="rounded-full aspect-square object-cover mx-auto"
           />
-          <h2 className="font-unbounded text-center">{user?.name}</h2>
+          <h2 className="font-unbounded text-center text-lg">{user?.name}</h2>
           <Link
             href={"/profile/update"}
             className="text-accent-brown underline text-center font-outfit text-sm"

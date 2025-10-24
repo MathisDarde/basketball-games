@@ -22,16 +22,15 @@ export default function FavoriteTeamSelect({
         <ImageIcon size={18} className="mr-2" />
         Favorite Team :
       </span>
-      <select className="w-full xl:w-[600px] border border-accent-brown rounded px-4 py-3 bg-white cursor-pointer flex items-center justify-between shadow font-outfit text-sm">
+      <select
+        {...register("favorite_team")}
+        onChange={(e) => handleSelect(e.target.value)}
+        className="w-full xl:w-[600px] border border-accent-brown rounded px-4 py-3 bg-white cursor-pointer flex items-center justify-between shadow font-outfit text-sm"
+      >
         {[...TeamsData]
           .sort((a, b) => a.currentName.localeCompare(b.currentName))
           .map((team, index) => (
-            <option
-              key={index}
-              {...register("favorite_team")}
-              onClick={() => handleSelect(team.currentName)}
-              className="flex items-center px-4 py-3 hover:bg-gray-100 cursor-pointer"
-            >
+            <option key={index} value={team.currentName}>
               {team.currentName}
             </option>
           ))}

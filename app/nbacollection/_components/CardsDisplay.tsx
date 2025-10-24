@@ -7,6 +7,7 @@ import { useState } from "react";
 import { CardResearch } from "./CardResearch";
 import { rarities } from "@/components/Rarity";
 import { TeamsData } from "@/components/Teams";
+import "@/css/rainbow.css";
 
 export default function CardsDisplay({
   ownedCards,
@@ -27,7 +28,7 @@ export default function CardsDisplay({
   });
 
   const updateFilter = <K extends keyof Filters>(key: K, value: Filters[K]) => {
-    setFilters((prev) => ({ ...prev, [key]: value } as Filters));
+    setFilters((prev) => ({ ...prev, [key]: value }) as Filters);
   };
 
   const filteredPlayers = players.filter((player) => {
@@ -81,7 +82,7 @@ export default function CardsDisplay({
             const isOwned = cardIds.includes(id);
             const uniqueCardClasses = getBackgroundClass(awards || []);
             const backgroundClass = isOwned
-              ? uniqueCardClasses || "bg-gray-200"
+              ? uniqueCardClasses || "bg-[url('/motifbackground90s.jpg')]"
               : "bg-gray-300";
 
             const filteredTeams = teams_history.filter(({ team }) =>
@@ -120,28 +121,38 @@ export default function CardsDisplay({
                 }`}
               >
                 {isOwned ? (
-                  <div className="bg-white h-full p-2 flex">
-                    <div className="w-full bg-gray-200 h-full rounded-tl-4xl rounded-br-4xl p-1 relative">
-                      <div className="w-full h-full bg-white rounded-tl-4xl rounded-br-4xl">
+                  <div className="bg-[#BB9754] h-full p-3 flex">
+                    <div className="w-full h-full rounded-tl-4xl rounded-br-4xl relative flex flex-col">
+                      <div className="flex items-end gap-2">
+                        <span className="text-lg font-righteous text-left">
+                          {firstName}
+                        </span>
+                        <span className="text-2xl font-righteous text-left uppercase">
+                          {lastNameParts.join("")}
+                        </span>
+                      </div>
+                      {/* Image au milieu qui prend tout l'espace restant */}
+                      <div className="relative flex-1 w-full overflow-hidden">
                         <Image
                           src={image_link ?? "/pdpdebase.png"}
-                          width={256}
-                          height={256}
                           alt={name}
-                          className="h-full w-full object-cover rounded-tl-4xl rounded-br-4xl"
+                          fill
+                          className="object-cover rounded-t-full"
+                          quality={100}
                         />
-                        <div className="mt-auto text-center px-4 py-1 bg-gray-200 leading-5 absolute bottom-0 left-0 w-4/5">
-                          <p className="font-righteous text-xs">{firstName}</p>
-                          <p className="font-righteous text-md">
-                            {lastNameParts}
-                          </p>
-                        </div>
                       </div>
-                      <div className="bg-gray-200 w-16 h-16 rounded-full absolute bottom-0 right-0 flex items-center justify-center border">
+                      {/* Bloc bas avec équipe et position */}
+                      <div className="bg-white px-2 py-1 rounded-br-full">
+                        <span className="font-outfit text-sm text-black">
+                          {mainTeam.team}
+                        </span>
+                      </div>
+
+                      <div className="absolute bottom-0 right-0 bg-white w-16 h-16 aspect-square rounded-full flex items-center justify-center">
                         <Image
                           src={teamLogo || "/pdpdebase.png"}
-                          width={50}
-                          height={50}
+                          width={40}
+                          height={40}
                           alt="Team Logo"
                         />
                       </div>

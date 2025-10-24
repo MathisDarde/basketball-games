@@ -114,9 +114,15 @@ export default function DisplayPlayers({
 
             {endedRound && (
               <div
-                className={`grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 gap-1 mt-4 ${
-                  teams_history.length <= 2 ? "flex justify-center" : ""
-                }`}
+                className={`grid grid-cols-3 sm:grid-cols-4 md:grid-cols-3 gap-1 mt-4
+                ${
+                  teams_history.length === 1
+                    ? "justify-items-stretch [grid-template-columns:repeat(3,minmax(0,1fr))] [&>*:first-child]:col-start-2"
+                    : teams_history.length === 2
+                      ? "justify-items-stretch [grid-template-columns:repeat(3,minmax(0,1fr))] [&>*:first-child]:col-start-2 [&>*:nth-child(2)]:col-start-3"
+                      : ""
+                }
+              `}
               >
                 {teams_history
                   .filter(({ team }) =>
