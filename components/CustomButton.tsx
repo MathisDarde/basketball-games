@@ -40,7 +40,7 @@ const Button = ({
       onClick={onClick}
       className={cn(
         `
-        text-sm sm:text-base font-outfit text-center rounded-sm
+        text-sm sm:text-base font-outfit text-center rounded-sm mx-auto
         transition-all cursor-pointer duration-300 flex items-center justify-center gap-2
         `,
         sizeClasses,

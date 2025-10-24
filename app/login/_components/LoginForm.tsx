@@ -6,15 +6,19 @@ import { LoginSchemaType } from "@/types/forms";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import submitLoginForm from "@/actions/login/loginuser";
-import { redirect } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { Eye, EyeOff } from "lucide-react";
 import handleLoginWithGoogle from "@/actions/login/googlelogin";
 import Image from "next/image";
 import handleLoginWithTwitter from "@/actions/login/twitterlogin";
+import Link from "next/link";
+import Button from "@/components/CustomButton";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
+
+  const router = useRouter();
 
   const {
     register,
@@ -29,12 +33,12 @@ export default function LoginForm() {
     const response = await submitLoginForm(data);
 
     if (response.success) {
-      redirect("/");
+      router.push("/");
     } else {
       setServerError(
         response.message
           ? response.message
-          : response.errors?.[0].message ?? null
+          : (response.errors?.[0].message ?? null)
       );
     }
   };
@@ -125,15 +129,22 @@ export default function LoginForm() {
             >
               {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
             </span>
+            <Link href={"/forgot-password"}>
+              <p className="text-sm sm:text-base text-dark-purple hover:underline font-outfit cursor-pointer flex justify-end transition-all">
+                Forgot your password ?
+              </p>
+            </Link>
           </div>
 
           <div className="flex justify-center items-center">
-            <button
+            <Button
               type="submit"
-              className="bg-dark-purple px-4 py-2 rounded font-outfit text-white"
+              size="default"
+              theme="primary"
+              className="m-2"
             >
               Login
-            </button>
+            </Button>
           </div>
         </form>
       </div>

@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import StatisticsBlock from "./StatisticsBlock";
 import Button from "@/components/CustomButton";
+import { toast } from "sonner";
 
 export const ProfileContent = ({
   user,
@@ -46,6 +47,16 @@ export const ProfileContent = ({
     }
   };
 
+  const handleLogOut = async () => {
+    try {
+      await logOut();
+      window.location.href = "/login";
+    } catch (e) {
+      toast.error(`${e}`);
+      console.error(e);
+    }
+  };
+
   return (
     <>
       {/* Logout Popup */}
@@ -63,7 +74,7 @@ export const ProfileContent = ({
             {
               label: "Logout",
               onClick: () => {
-                logOut();
+                handleLogOut();
                 setLogoutPopupOpen(false);
               },
               theme: "secondary",
