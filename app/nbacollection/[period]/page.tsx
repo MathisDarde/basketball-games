@@ -3,6 +3,8 @@ import { getAuthenticatedUserId } from "@/actions/user/get-connected-user-id";
 import PageMenu from "../_components/PageMenu";
 import CardsDisplay from "../_components/CardsDisplay";
 import { PeriodTypes } from "@/interfaces/Interfaces";
+import { ArrowDownUp } from "lucide-react";
+import Link from "next/link";
 
 export default async function NBACollectionPage(props: {
   params: Promise<{ period: PeriodTypes }>;
@@ -36,6 +38,12 @@ export default async function NBACollectionPage(props: {
         ownedByPeriod={ownedByPeriod}
       />
       <CardsDisplay ownedCards={ownedCards} players={players} period={period} />
+
+      <Link href={`/nbacollection/${period}/trade`}>
+        <div className="fixed bottom-0 right-0 m-6 bg-dark-purple text-white p-2 rounded-full rotate-90">
+          <ArrowDownUp size={35} />
+        </div>
+      </Link>
     </div>
   );
 }
