@@ -5,7 +5,8 @@ import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
 import { PlayersSchemaType } from "@/types/players";
 import { and, eq } from "drizzle-orm";
-import { PeriodTypes } from "@/interfaces/Interfaces";
+import { PeriodTypes, PlayerData } from "@/interfaces/Interfaces";
+import { slugifyName } from "@/utils/slugify-name";
 
 export async function getPlayers(): Promise<SelectPlayersData[]> {
   const players = await db.select().from(playersData);
@@ -225,4 +226,12 @@ export async function getUserCardsByPeriod(userId: string, period: string) {
     .where(
       and(eq(cardcollection.userId, userId), eq(cardcollection.period, period))
     );
+}
+
+export async function getPlayerBySlug(slug: string): Promise<PlayerData> {
+  const players = await db.select().from(playersData);
+
+  const player = players.find((p) => slugifyName(p.name) === slug);
+
+  return player;
 }

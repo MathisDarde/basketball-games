@@ -49,10 +49,17 @@ export const MobileDailyDraw = ({
           if (filteredTeams.length === 0) return null;
 
           const teamDurations = filteredTeams.map(({ team, period }) => {
-            const [startStr, endStr] = period.split("–");
+            const [startStr, endStrRaw] = period.split("–");
             const startYear = parseInt(startStr, 10);
-            const endYear = parseInt(endStr, 10);
+            
+            const endYear = endStrRaw
+              ? endStrRaw.trim().toLowerCase() === "present"
+                ? new Date().getFullYear()
+                : parseInt(endStrRaw, 10)
+              : startYear;
+            
             const duration = endYear - startYear + 1;
+            
             return { team, startYear, endYear, duration };
           });
 

@@ -35,7 +35,7 @@ export default async function NBACollectionPage(props: {
         params={props.params}
         ownedByPeriod={ownedByPeriod}
       />
-      <CardsDisplay ownedCards={ownedCards} players={players} />
+      <CardsDisplay ownedCards={ownedCards} players={players} period={period} />
     </div>
   );
 }

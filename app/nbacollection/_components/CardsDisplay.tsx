@@ -7,14 +7,17 @@ import { useState } from "react";
 import { CardResearch } from "./CardResearch";
 import { rarities } from "@/components/Rarity";
 import { TeamsData } from "@/components/Teams";
-import "@/css/rainbow.css";
+import Link from "next/link";
+import { slugifyName } from "@/utils/slugify-name";
 
 export default function CardsDisplay({
   ownedCards,
   players,
+  period
 }: {
   ownedCards: Card[];
   players: PlayerData[];
+  period: string;
 }) {
   const { getTeamLogo, getBackgroundClass } = usePlayTogetherCtx();
 
@@ -114,61 +117,62 @@ export default function CardsDisplay({
             const [firstName, ...lastNameParts] = name.split(" ");
 
             return (
-              <div
-                key={id}
-                className={`relative overflow-hidden w-[250px] h-[350px] sm:h-[400px] p-1 mx-auto ${backgroundClass} shadow transition-shadow ${
-                  isOwned ? "cursor-pointer hover:shadow-lg" : "opacity-50"
-                }`}
-              >
-                {isOwned ? (
-                  <div className="bg-[#BB9754] h-full p-3 flex">
-                    <div className="w-full h-full rounded-tl-4xl rounded-br-4xl relative flex flex-col">
-                      <div className="flex items-end gap-2">
-                        <span className="text-lg font-righteous text-left">
-                          {firstName}
-                        </span>
-                        <span className="text-2xl font-righteous text-left uppercase">
-                          {lastNameParts.join("")}
-                        </span>
-                      </div>
-                      {/* Image au milieu qui prend tout l'espace restant */}
-                      <div className="relative flex-1 w-full overflow-hidden">
-                        <Image
-                          src={image_link ?? "/pdpdebase.png"}
-                          alt={name}
-                          fill
-                          className="object-cover rounded-t-full"
-                          quality={100}
-                        />
-                      </div>
-                      {/* Bloc bas avec équipe et position */}
-                      <div className="bg-white px-2 py-1 rounded-br-full">
-                        <span className="font-outfit text-sm text-black">
-                          {mainTeam.team}
-                        </span>
-                      </div>
+              <Link href={`/nbacollection/${period}/${slugifyName(name)}`} key={id}>
+                <div
+                  className={`relative overflow-hidden w-[250px] h-[350px] sm:h-[400px] p-1 mx-auto ${backgroundClass} shadow transition-shadow ${isOwned ? "cursor-pointer hover:shadow-lg" : "opacity-50"
+                    }`}
+                >
+                  {isOwned ? (
+                    <div className="bg-[#BB9754] h-full p-3 flex">
+                      <div className="w-full h-full rounded-tl-4xl rounded-br-4xl relative flex flex-col">
+                        <div className="flex items-end gap-2">
+                          <span className="text-lg font-righteous text-left">
+                            {firstName}
+                          </span>
+                          <span className="text-2xl font-righteous text-left uppercase">
+                            {lastNameParts.join("")}
+                          </span>
+                        </div>
+                        {/* Image au milieu qui prend tout l'espace restant */}
+                        <div className="relative flex-1 w-full overflow-hidden">
+                          <Image
+                            src={image_link ?? "/pdpdebase.png"}
+                            alt={name}
+                            fill
+                            className="object-cover rounded-t-full"
+                            quality={100}
+                          />
+                        </div>
+                        {/* Bloc bas avec équipe et position */}
+                        <div className="bg-white px-2 py-1 rounded-br-full">
+                          <span className="font-outfit text-sm text-black">
+                            {mainTeam.team}
+                          </span>
+                        </div>
 
-                      <div className="absolute bottom-0 right-0 bg-white w-16 h-16 aspect-square rounded-full flex items-center justify-center">
-                        <Image
-                          src={teamLogo || "/pdpdebase.png"}
-                          width={40}
-                          height={40}
-                          alt="Team Logo"
-                        />
+                        <div className="absolute bottom-0 right-0 bg-white w-16 h-16 aspect-square rounded-full flex items-center justify-center">
+                          <Image
+                            src={teamLogo || "/pdpdebase.png"}
+                            width={40}
+                            height={40}
+                            alt="Team Logo"
+                          />
+                        </div>
                       </div>
                     </div>
-                  </div>
-                ) : (
-                  <div className="flex flex-col justify-center items-center w-full h-full text-center px-4">
-                    <p className="text-xl font-bold uppercase font-unbounded text-black">
-                      {name}
-                    </p>
-                    <p className="text-sm font-outfit italic text-black/60 mt-2">
-                      Card not collected
-                    </p>
-                  </div>
-                )}
-              </div>
+
+                  ) : (
+                    <div className="flex flex-col justify-center items-center w-full h-full text-center px-4">
+                      <p className="text-xl font-bold uppercase font-unbounded text-black">
+                        {name}
+                      </p>
+                      <p className="text-sm font-outfit italic text-black/60 mt-2">
+                        Card not collected
+                      </p>
+                    </div>
+                  )}
+                </div>
+              </Link>
             );
           })}
         </div>
