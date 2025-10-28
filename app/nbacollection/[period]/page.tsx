@@ -29,7 +29,7 @@ export default async function NBACollectionPage(props: {
 
   return (
     <div>
-      <h1 className="font-unbounded text-2xl text-center">
+      <h1 className="font-unbounded text-center text-2xl md:text-3xl 2xl:text-4xl">
         NBA Cards Collection
       </h1>
       <PageMenu

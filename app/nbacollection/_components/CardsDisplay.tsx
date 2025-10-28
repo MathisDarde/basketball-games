@@ -71,15 +71,15 @@ export default function CardsDisplay({
   });
 
   return (
-    <div>
+    <div className="p-6">
       <CardResearch filters={filters} updateFilter={updateFilter} />
 
       {filteredPlayers.length === 0 ? (
-        <p className="text-center font-outfit text-gray-500 mt-4">
+        <p className="text-center font-outfit text-gray-500 mt-4 text-base sm:text-lg italic">
           No player was found
         </p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-screen mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:w-[600px] lg:w-[800px] xl:w-[1100px] 2xl:w-[1350px] mx-auto mt-4">
           {filteredPlayers.map((player) => {
             const { id, name, awards, teams_history, image_link } = player;
             const isOwned = cardIds.includes(id);
@@ -119,7 +119,7 @@ export default function CardsDisplay({
             return (
               <Link href={`/nbacollection/${period}/${slugifyName(name)}`} key={id}>
                 <div
-                  className={`relative overflow-hidden w-[250px] h-[350px] sm:h-[400px] p-1 mx-auto ${backgroundClass} shadow transition-shadow ${isOwned ? "cursor-pointer hover:shadow-lg" : "opacity-50"
+                  className={`relative overflow-hidden w-[250px] h-[350px] p-1 mx-auto ${backgroundClass} shadow transition-shadow ${isOwned ? "cursor-pointer hover:shadow-lg" : "opacity-50"
                     }`}
                 >
                   {isOwned ? (

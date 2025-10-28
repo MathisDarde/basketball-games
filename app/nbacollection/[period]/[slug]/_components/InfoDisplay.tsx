@@ -111,54 +111,57 @@ export default function InfoDisplay({ period, player, isOwned }: InfoDisplayProp
                     <p className="font-unbounded text-xl">{player.name} ({player.period})</p>
                     <p className="font-outfit text-sm">{player.position}</p>
 
-                    <div className="flex flex-col items-start gap-2 font-outfit">
-                        <h3 className="text-base underline">Career</h3>
-                        {filteredTeams.map((team) => {
-                            let endYear: number;
-                            if (team.period.includes("–") || team.period.includes("-")) {
-                                const parts = team.period.includes("–")
-                                    ? team.period.split("–")
-                                    : team.period.split("-");
-                                const endStr = parts[1];
-                                endYear =
-                                    endStr?.trim().toLowerCase() === "present"
-                                        ? new Date().getFullYear()
-                                        : parseInt(endStr, 10);
-                            } else {
-                                endYear = parseInt(team.period, 10);
-                            }
+                    <div className="flex flex-col items-center gap-4 font-outfit max-w-[700px] mx-auto my-4">
+                        <div className="flex flex-col gap-1 items-start max-w-[400px] w-full">
+                            <h3 className="text-base underline">Career</h3>
+                            {filteredTeams.map((team) => {
+                                let endYear: number;
+                                if (team.period.includes("–") || team.period.includes("-")) {
+                                    const parts = team.period.includes("–")
+                                        ? team.period.split("–")
+                                        : team.period.split("-");
+                                    const endStr = parts[1];
+                                    endYear =
+                                        endStr?.trim().toLowerCase() === "present"
+                                            ? new Date().getFullYear()
+                                            : parseInt(endStr, 10);
+                                } else {
+                                    endYear = parseInt(team.period, 10);
+                                }
 
-                            const logo = getTeamLogo(team.team, endYear);
+                                const logo = getTeamLogo(team.team, endYear);
 
-                            return (
-                                <div key={team.team + team.period} className="flex flex-row items-center gap-2">
-                                    <Image
-                                        src={logo || "/pdpdebase.png"}
-                                        alt={`${team.team} logo`}
-                                        width={50}
-                                        height={50}
-                                        className="w-10 h-10 object-contain"
-                                    />
-                                    <div className="flex flex-col items-start justify-center">
-                                        <p className="text-sm">{team.team}</p>
-                                        <p className="text-sm">{team.period}</p>
+                                return (
+                                    <div key={team.team + team.period} className="flex flex-row items-center gap-2">
+                                        <Image
+                                            src={logo || "/pdpdebase.png"}
+                                            alt={`${team.team} logo`}
+                                            width={50}
+                                            height={50}
+                                            className="w-10 h-10 object-contain"
+                                        />
+                                        <div className="flex flex-col items-start justify-center">
+                                            <p className="text-sm">{team.team}</p>
+                                            <p className="text-sm">{team.period}</p>
+                                        </div>
                                     </div>
-                                </div>
-                            );
-                        })}
-
-                        <h3 className="text-base underline">Awards</h3>
-                        {player.awards && player.awards.length > 0 ? (
-                            player.awards.map((award, index) => (
-                                <p key={index} className="text-sm text-left">
-                                    {award}
+                                );
+                            })}
+                        </div>
+                        <div className="flex flex-col gap-1 items-start max-w-[400px] w-full">
+                            <h3 className="text-base underline">Awards</h3>
+                            {player.awards && player.awards.length > 0 ? (
+                                player.awards.map((award, index) => (
+                                    <p key={index} className="text-sm text-left">
+                                        {award}
+                                    </p>
+                                ))
+                            ) : (
+                                <p className="text-sm font-outfit italic text-gray-500">
+                                    This player has received no award.
                                 </p>
-                            ))
-                        ) : (
-                            <p className="text-sm font-outfit italic text-gray-500">
-                                This player has received no award.
-                            </p>
-                        )}
+                            )}
+                        </div>
                     </div>
                 </div>
             ) : (

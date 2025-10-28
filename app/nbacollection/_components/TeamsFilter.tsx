@@ -38,7 +38,7 @@ export default function TeamsFilter({
             alt={`${team.team} Logo`}
             className="w-8 h-8 object-contain"
           />
-          <span className="font-light font-unbounded">{team.abr}</span>
+          <span className="font-light sm:font-medium font-unbounded">{team.abr}</span>
         </button>
       ))}
     </>

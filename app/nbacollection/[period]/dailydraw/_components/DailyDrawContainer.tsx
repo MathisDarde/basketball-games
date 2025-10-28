@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { LargeScreenDailyDraw } from "./LargeScreenDailyDraw";
 import { MobileDailyDraw } from "./MobileDailyDraw";
+import Button from "@/components/CustomButton";
 
 export default function DailyDrawContainer({
   players,
@@ -72,12 +73,14 @@ export default function DailyDrawContainer({
 
       {flippedIds.length === 10 && (
         <div className="mt-4 text-center">
-          <button
+          <Button
             onClick={handleRedirectAndStore}
-            className="px-6 py-2 bg-blue-600 hover:bg-blue-700 text-white font-unbounded rounded cursor-pointer"
+            size="large"
+            theme="primary"
+            className="mt-8"
           >
             Voir ma collection
-          </button>
+          </Button>
         </div>
       )}
     </div>

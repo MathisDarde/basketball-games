@@ -8,6 +8,7 @@ import {
 } from "@/interfaces/Interfaces";
 import createDailyDrawServer from "@/actions/cardcollection/createdailydraw";
 import DailyDrawContainer from "./DailyDrawContainer";
+import Button from "@/components/CustomButton";
 
 export default function DailyDrawClient({
   initialPlayers,
@@ -36,12 +37,13 @@ export default function DailyDrawClient({
   if (players.length === 0) {
     return (
       <div className="text-center">
-        <button
+        <Button
           onClick={handleDrawClick}
-          className="px-6 py-2 bg-dark-purple text-white rounded font-outfit"
+          size="default"
+          theme="primary"
         >
-          Tirer mes cartes
-        </button>
+          Draw my cards
+        </Button>
       </div>
     );
   }

@@ -19,7 +19,7 @@ export const LargeScreenDailyDraw = ({
     usePlayTogetherCtx();
 
   return (
-    <div className="grid grid-cols-5 gap-2">
+    <div className="grid grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 w-[800px] xl:w-[1100px] 2xl:w-[1350px] mx-auto mt-4">
       {players.map((player) => {
         const isFlipped = flippedInitial.includes(player.id);
         const { teams_history } = player;
@@ -55,7 +55,7 @@ export const LargeScreenDailyDraw = ({
         return (
           <div
             key={player.id}
-            className="relative w-[288px] h-[400px] cursor-pointer border rounded overflow-hidden"
+            className="relative w-[250px] h-[350px] cursor-pointer border rounded overflow-hidden"
             onClick={() => handleCardClick(player)}
           >
             {!isFlipped ? (
