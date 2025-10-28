@@ -228,10 +228,23 @@ export async function getUserCardsByPeriod(userId: string, period: string) {
     );
 }
 
-export async function getPlayerBySlug(slug: string): Promise<PlayerData> {
-  const players = await db.select().from(playersData);
+export async function getPlayerBySlug(period: string, slug: string): Promise<PlayerData> {
+  const validPeriods: PeriodTypes[] = ["1990s", "2000s", "2010s", "2020s"];
+
+  if (!validPeriods.includes(period as PeriodTypes)) {
+    throw new Error(`Invalid period "${period}"`);
+  }
+
+  const players = await db
+    .select()
+    .from(playersData)
+    .where(eq(playersData.period, period as PeriodTypes));
 
   const player = players.find((p) => slugifyName(p.name) === slug);
+
+  if (!player) {
+    throw new Error(`Player not found for slug "${slug}" and period "${period}"`);
+  }
 
   return player;
 }

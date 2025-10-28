@@ -150,7 +150,7 @@ export default function InfoDisplay({ period, player, isOwned }: InfoDisplayProp
                         <h3 className="text-base underline">Awards</h3>
                         {player.awards && player.awards.length > 0 ? (
                             player.awards.map((award, index) => (
-                                <p key={index} className="text-sm">
+                                <p key={index} className="text-sm text-left">
                                     {award}
                                 </p>
                             ))
