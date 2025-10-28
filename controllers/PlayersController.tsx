@@ -4,7 +4,7 @@ import path from "path";
 import fs from "fs";
 import { v4 as uuidv4 } from "uuid";
 import { PlayersSchemaType } from "@/types/players";
-import { and, eq } from "drizzle-orm";
+import { and, eq, inArray } from "drizzle-orm";
 import { PeriodTypes, PlayerData } from "@/interfaces/Interfaces";
 import { slugifyName } from "@/utils/slugify-name";
 
@@ -247,4 +247,15 @@ export async function getPlayerBySlug(period: string, slug: string): Promise<Pla
   }
 
   return player;
+}
+
+export async function getCardsByIds(cardIds: string[]): Promise<PlayerData[]> {
+  if (cardIds.length === 0) return [];
+
+  const cards = await db
+    .select()
+    .from(playersData)
+    .where(inArray(playersData.id, cardIds));
+
+  return cards;
 }
