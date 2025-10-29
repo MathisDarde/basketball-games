@@ -19,12 +19,9 @@ export default async function MarketplacePage() {
     return (
         <div className="p-6 sm:p-10 h-screen">
             <h1 className="font-unbounded text-center text-2xl md:text-3xl 2xl:text-4xl">Marketplace</h1>
-            <div className="flex flex-col lg:flex-row items-start gap-10">
+            <div className="flex flex-col lg:flex-row items-start gap-10 my-10">
                 <div className="flex-1">
                     <UserDuplicates usersCards={usersCards} cardIds={cardIds} cardInfos={cardsInfo} />
-                </div>
-                <div>
-                    <HowDoesItWork />
                 </div>
             </div>
         </div>

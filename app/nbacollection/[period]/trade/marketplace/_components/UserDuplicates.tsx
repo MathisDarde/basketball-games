@@ -4,6 +4,7 @@ import { usePlayTogetherCtx } from "@/components/GlobalContext";
 import { TeamsData } from "@/components/Teams";
 import { Card, PlayerData } from "@/interfaces/Interfaces";
 import Image from "next/image";
+import { useState } from "react";
 
 type UserDuplicatesProps = {
   usersCards: Card[];
@@ -18,11 +19,48 @@ export default function UserDuplicates({
 }: UserDuplicatesProps) {
   const { getBackgroundClass, getTeamLogo } = usePlayTogetherCtx();
 
+  const [selectedCard, setSelectedCard] = useState<PlayerData | null>(null);
+
+  if (selectedCard) {
+    return (
+      <div className="bg-white p-6 rounded-lg shadow max-h-[700px] overflow-y-auto">
+        <button
+          onClick={() => setSelectedCard(null)}
+          className="mb-4 px-3 py-1 text-sm bg-gray-200 rounded hover:bg-gray-300"
+        >
+          ← Back
+        </button>
+        <div className="flex flex-col items-center text-center">
+          <Image
+            src={selectedCard.image_link ?? "/pdpdebase.png"}
+            alt={selectedCard.name}
+            width={200}
+            height={300}
+            className="rounded-lg shadow"
+          />
+          <h2 className="font-unbounded text-xl mt-4">{selectedCard.name}</h2>
+          <p className="text-sm text-gray-600">
+            {selectedCard.position} — {selectedCard.period}
+          </p>
+          <div className="mt-6">
+            <p>➡️ Ici tu peux ajouter le résumé, les options d’échange, etc.</p>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white p-6 space-y-4 max-h-[700px] overflow-y-auto rounded-lg shadow">
       <h2 className="text-xl sm:text-2xl font-medium text-center font-unbounded">
         My duplicates
       </h2>
+
+      {/* seed invisible pour garder les classes Tailwind */}
+      <div className="hidden">
+          bg-amber-700 bg-slate-100 bg-yellow-400 bg-emerald-400 bg-red-500 bg-cyan-300
+          text-amber-700 text-slate-100 text-yellow-400 text-emerald-400 text-red-500 text-cyan-300
+        </div>
 
       <div className="grid grid-cols-4 gap-4 place-items-center">
         {cardInfos.map((card) => {
@@ -67,6 +105,7 @@ export default function UserDuplicates({
               className={`relative w-[250px] h-[350px] p-1 mx-auto ${backgroundClass} shadow transition-shadow ${
                 isOwned ? "cursor-pointer hover:shadow-lg" : "opacity-50"
               }`}
+              onClick={() => setSelectedCard(card)}
             >
               {/* 🔴 Nombre possédé */}
               {possessed > 1 && (

@@ -13,6 +13,7 @@ export default function HowDoesItWork() {
         : null;
 
     return (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
         <div className="bg-white p-6 rounded-lg shadow max-w-[650px] w-full mx-auto space-y-4">
             <h2 className="text-xl sm:text-2xl font-medium text-center font-unbounded">
                 How does the trade work?
@@ -106,6 +107,7 @@ export default function HowDoesItWork() {
                     </div>
                 </div>
             )}
+        </div>
         </div>
     );
 }
