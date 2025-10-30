@@ -21,7 +21,7 @@ export default async function MarketplacePage() {
             <h1 className="font-unbounded text-center text-2xl md:text-3xl 2xl:text-4xl">Marketplace</h1>
             <div className="flex flex-col lg:flex-row items-start gap-10 my-10">
                 <div className="flex-1">
-                    <UserDuplicates usersCards={usersCards} cardIds={cardIds} cardInfos={cardsInfo} />
+                    <UserDuplicates cardInfos={cardsInfo} />
                 </div>
             </div>
         </div>

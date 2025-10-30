@@ -9,7 +9,7 @@ export default async function TradeCardPage({ params } : { params: { period: str
             <h1 className="font-unbounded text-center text-2xl mb-4">Trade Center</h1>
 
             <div className="flex flex-col gap-4">
-                <Link href={`/nbacollection/${period}/trade/online`}>
+                <Link href={`/nbacollection/trade/online`}>
                 <div className="w-full flex flex-col items-center gap-2 p-4 bg-dark-purple text-white rounded-md">
                     <UsersRound />
                     <p className="font-unbounded">Trade with other players</p>
@@ -17,7 +17,7 @@ export default async function TradeCardPage({ params } : { params: { period: str
                 </div>
                 </Link>
 
-                <Link href={`/nbacollection/${period}/trade/marketplace`}>
+                <Link href={`/nbacollection/trade/marketplace`}>
                 <div className="w-full flex flex-col items-center gap-2 p-4 bg-accent-brown text-white rounded-md">
                     <ShoppingBasket />
                     <p className="font-unbounded">Marketplace</p>
