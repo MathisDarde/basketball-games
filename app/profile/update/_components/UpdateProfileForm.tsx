@@ -4,6 +4,7 @@ import deletePhotoDeProfil from "@/actions/user/delete-profile-pic";
 import updateProfileForm from "@/actions/user/update-profile-form";
 import { updateProfileSchema } from "@/app/schema";
 import ActionPopup from "@/components/ActionPopup";
+import Button from "@/components/CustomButton";
 import { TeamsData } from "@/components/Teams";
 import { SelectUser } from "@/db/schema";
 import { updateProfileSchemaType } from "@/types/forms";
@@ -127,12 +128,12 @@ export default function UpdateProfileForm({
         />
       )}
 
-      <div className="w-screen xl:w-[600px] mx-auto px-8 pb-8 mt-4 text-center">
+      <div className="px-8 pb-8 mt-4 text-center">
         <form
-          className="w-full xl:w-[600px] space-y-2"
+          className="max-w-[600px] mx-auto space-y-4"
           onSubmit={handleSubmit(handleSubmitForm)}
         >
-          <div className="relative w-full xl:w-[600px] space-y-2">
+          <div className="relative w-full space-y-2">
             {previewPhoto && (
               <div className="w-fit mb-4 relative mx-auto">
                 <Image
@@ -161,7 +162,7 @@ export default function UpdateProfileForm({
               className="hidden"
               accept="image/*"
             />
-            <p className="font-outfit text-sm">
+            <p className="font-outfit text-sm sm:text-base">
               Current profile picture,
               <label
                 htmlFor="fileInput"
@@ -172,40 +173,40 @@ export default function UpdateProfileForm({
             </p>
           </div>
 
-          <div className="relative w-full xl:w-[600px] space-y-2">
-            <span className="font-outfit text-black flex items-center">
+          <div className="relative w-full space-y-2">
+            <span className="font-outfit text-base sm:text-lg text-black flex items-center">
               <User size={18} className="mr-2" />
               Name :
             </span>
             <input
               type="text"
               {...register("name")}
-              className="w-full xl:w-[600px] py-3 px-4 rounded border border-accent-brown shadow font-outfit text-sm bg-white"
+              className="w-full py-3 px-4 rounded border border-accent-brown shadow font-outfit text-sm sm:text-base bg-white"
               placeholder="Name"
             />
           </div>
 
-          <div className="relative w-full xl:w-[600px] space-y-2">
-            <span className="font-outfit text-black flex items-center">
+          <div className="relative w-full space-y-2">
+          <span className="font-outfit text-base sm:text-lg text-black flex items-center">
               <Mail size={18} className="mr-2" />
               Mail address :
             </span>
             <input
               type="email"
               {...register("email")}
-              className="w-full xl:w-[600px] py-3 px-4 rounded border border-accent-brown shadow font-outfit text-sm bg-white"
+              className="w-full py-3 px-4 rounded border border-accent-brown shadow font-outfit text-sm sm:text-base bg-white"
               placeholder="Mail address"
             />
           </div>
 
-          <div className="relative w-full xl:w-[600px] space-y-2">
-            <span className="font-outfit text-black flex items-center">
+          <div className="relative w-full space-y-2">
+          <span className="font-outfit text-base sm:text-lg text-black flex items-center">
               <ImageIcon size={18} className="mr-2" />
               Favorite Team :
             </span>
             <select
               {...register("favorite_team")}
-              className="w-full xl:w-[600px] py-3 px-4 rounded border border-accent-brown shadow font-outfit text-sm bg-white"
+              className="w-full py-3 px-4 rounded border border-accent-brown shadow font-outfit text-sm sm:text-base bg-white"
               onChange={(e) => handleSelect(e.target.value)}
             >
               {[...TeamsData]
@@ -219,7 +220,7 @@ export default function UpdateProfileForm({
           </div>
 
           <div className="inline-flex justify-center items-center rounded bg-accent-brown py-2 px-4 text-white font-outfit mt-4">
-            <button type="submit">Update my informations</button>
+            <Button type="submit" size="default" theme="secondary">Update my informations</Button>
           </div>
         </form>
       </div>

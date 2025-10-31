@@ -5,11 +5,11 @@ export default function LoginPage() {
   return (
     <>
       <div className="text-center min-h-screen">
-        <h1 className="text-center font-unbounded text-2xl">Login</h1>
+      <h1 className="font-unbounded text-center text-2xl md:text-3xl 2xl:text-4xl">Login</h1>
         <div className="mt-2 mb-4">
           <Link
             href="/register"
-            className="font-outfit underline cursor-pointer text-dark-purple"
+            className="font-outfit underline cursor-pointer text-dark-purple text-base sm:text-lg"
           >
             I don&apos;t have an account
           </Link>

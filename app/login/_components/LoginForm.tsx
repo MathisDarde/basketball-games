@@ -7,7 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import submitLoginForm from "@/actions/login/loginuser";
 import { useRouter } from "next/navigation";
-import { Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff, Loader2 } from "lucide-react";
 import handleLoginWithGoogle from "@/actions/login/googlelogin";
 import Image from "next/image";
 import handleLoginWithTwitter from "@/actions/login/twitterlogin";
@@ -17,6 +17,7 @@ import Button from "@/components/CustomButton";
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const router = useRouter();
 
@@ -30,7 +31,10 @@ export default function LoginForm() {
 
   const handleSubmitForm = async (data: LoginSchemaType) => {
     setServerError(null);
+    setLoading(true);
     const response = await submitLoginForm(data);
+
+    setLoading(false);
 
     if (response.success) {
       router.push("/");
@@ -50,35 +54,39 @@ export default function LoginForm() {
   return (
     <>
       <div className="space-y-2">
-        <h2 className="font-outfit">Login with socials</h2>
+        <h2 className="font-outfit text-base sm:text-lg">Login with socials</h2>
         <div className="flex items-center gap-2 justify-center">
           <button
             onClick={handleLoginWithGoogle}
-            className="bg-white w-[2.5rem] h-[2.5rem] rounded-sm shadow flex items-center justify-center"
+            className="bg-white size-[2.5rem] md:size-fit rounded-sm shadow flex items-center justify-center gap-4 md:p-3 cursor-pointer"
           >
             <Image
               src="/logos/Google_Favicon_2025.svg.png"
               alt="Google logo"
               width={20}
               height={20}
+              className="size-5 md:size-6"
             />
+            <span className="hidden md:block font-outfit">Login with Google</span>
           </button>
           <button
             onClick={handleLoginWithTwitter}
-            className="bg-white w-[2.5rem] h-[2.5rem] rounded-sm shadow flex items-center justify-center"
+            className="bg-white size-[2.5rem] md:size-fit rounded-sm shadow flex items-center justify-center gap-4 md:p-3 cursor-pointer"
           >
             <Image
               src="/logos/X_Logo_2023.svg"
               alt="Twitter logo"
               width={20}
               height={20}
+              className="size-5 md:size-6"
             />
+            <span className="hidden md:block font-outfit">Login with X (Twitter)</span>
           </button>
         </div>
       </div>
 
       <div className="w-screen xl:w-[600px] mx-auto px-4 pt-4 pb-8 text-center space-y-2">
-        <h2 className="font-outfit">Login with credentials</h2>
+      <h2 className="font-outfit text-base sm:text-lg">Login with credentials</h2>
 
         {/* Bloc erreurs */}
         {(Object.keys(errors).length > 0 || serverError) && (
@@ -98,29 +106,27 @@ export default function LoginForm() {
           method="POST"
           id="loginform"
           onSubmit={handleSubmit(handleSubmitForm)}
-          className="w-full xl:w-[600px] space-y-2"
+          className="max-w-[600px] mx-auto space-y-2"
         >
-          <div className="relative w-full xl:w-[600px] space-y-2">
+          <div className="relative w-full space-y-2">
             <input
               {...register("email")}
-              className={`w-full xl:w-[600px] py-3 px-4 rounded border shadow font-outfit text-sm bg-white ${
-                errors.email
+              className={`w-full py-3 px-4 rounded border shadow font-outfit text-sm sm:text-base bg-white ${errors.email
                   ? "border-2 border-red-500 focus:ring-red-500"
                   : "border-accent-brown"
-              }`}
+                }`}
               placeholder="Mail address"
             />
           </div>
 
-          <div className="relative w-full xl:w-[600px] space-y-2">
+          <div className="relative w-full space-y-2">
             <input
               type={showPassword ? "text" : "password"}
               {...register("password")}
-              className={`w-full xl:w-[600px] py-3 px-4 rounded border shadow font-outfit text-sm bg-white ${
-                errors.password
+              className={`w-full py-3 px-4 rounded border shadow font-outfit text-sm sm:text-base bg-white ${errors.password
                   ? "border-2 border-red-500 focus:ring-red-500"
                   : "border-accent-brown"
-              }`}
+                }`}
               placeholder="Password"
             />
             <span
@@ -143,7 +149,7 @@ export default function LoginForm() {
               theme="primary"
               className="m-2"
             >
-              Login
+              {loading ? <Loader2 className="animate-spin" /> : "Login"}
             </Button>
           </div>
         </form>

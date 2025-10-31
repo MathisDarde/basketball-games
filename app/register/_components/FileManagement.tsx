@@ -30,8 +30,8 @@ export default function FileManagement({ setSelectedFile }: FileProps) {
   }, [previewUrl]);
 
   return (
-    <div className="relative w-full xl:w-[600px] space-y-2">
-      <span className="font-outfit text-black flex items-center">
+    <div className="relative w-full space-y-2">
+            <span className="font-outfit text-base sm:text-lg text-black flex items-center">
         <ImageIcon size={18} className="mr-2" />
         Profile Picture :
       </span>
@@ -51,7 +51,7 @@ export default function FileManagement({ setSelectedFile }: FileProps) {
       <input
         type="file"
         onChange={handleFileChange}
-        className="w-full xl:w-[600px] py-3 px-4 rounded border border-accent-brown shadow font-outfit text-sm bg-white"
+        className="w-full py-3 px-4 rounded border border-accent-brown shadow font-outfit text-sm sm:text-base bg-white"
         accept="image/*"
       />
     </div>
