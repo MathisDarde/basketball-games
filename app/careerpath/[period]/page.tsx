@@ -3,7 +3,6 @@
 import { PeriodTypes } from "@/interfaces/Interfaces";
 import { getPlayersByPeriod } from "@/controllers/PlayersController";
 import CareerPathComponentWrapper from "../_components/ComponentWrapper";
-import { TeamsData } from "@/components/Teams";
 import { getAuthenticatedUserId } from "@/actions/user/get-connected-user-id";
 import { getLastStreak } from "@/controllers/CareerPathSessionsController";
 
@@ -23,11 +22,10 @@ export default async function CareerPathPage({
   const lastStreak = await getLastStreak(userId, params.period);
 
   return (
-    <div>
+    <div className="p-6 sm:p-10">
       <h1>Career path</h1>
       <CareerPathComponentWrapper
         players={players}
-        teams={TeamsData}
         difficulty={difficulty}
         period={params.period}
         userId={userId}
