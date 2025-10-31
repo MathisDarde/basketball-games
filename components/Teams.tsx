@@ -284,7 +284,7 @@ export const TeamsData = [
       },
       { period: "2013–2022", abr: "NOP", logo: "/logos/old/pelicans3.png" },
       { period: "2008–2012", abr: "NOH", logo: "/logos/old/pelicans2.png" },
-      { period: "2002-2007", abr: "NOH", logo: "/logos/old/pelicans1.gif" },
+      { period: "1995-2007", abr: "NOH", logo: "/logos/old/pelicans1.gif" },
     ],
   },
   {

@@ -5,14 +5,12 @@ import getUserCardsCollection from "@/actions/cardcollection/getusercards";
 import { getUserId } from "@/utils/get-user-id";
 import CardDisplay from "@/components/CardDisplay";
 import Skeleton from "@/components/CustomSkeleton";
-import Button from "@/components/CustomButton";
 
 type UserDuplicatesProps = {
   cardInfos: PlayerData[];
 };
 
 export default function UserDuplicates({ cardInfos }: UserDuplicatesProps) {
-  const [selectedCard, setSelectedCard] = useState<PlayerData | null>(null);
   const [userCards, setUserCards] = useState<Card[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -26,25 +24,6 @@ export default function UserDuplicates({ cardInfos }: UserDuplicatesProps) {
     };
     fetchCards();
   }, []);
-
-  if (selectedCard) {
-    const userCard = userCards.find((c) => c.cardId === selectedCard.id);
-    return (
-      <div className="bg-white p-6 rounded-lg shadow max-h-full overflow-y-auto">
-        <Button
-          onClick={() => setSelectedCard(null)}
-          theme="discard"
-          size="slim"
-          className="mb-4"
-        >
-          ← Back
-        </Button>
-        <div className="flex flex-col items-center">
-          <CardDisplay card={selectedCard} possessed={userCard?.possessed ?? 0} />
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="bg-white p-6 space-y-4 max-h-[700px] overflow-y-auto rounded-lg shadow">
@@ -66,7 +45,6 @@ export default function UserDuplicates({ cardInfos }: UserDuplicatesProps) {
                 key={card.id}
                 card={card}
                 amount={true}
-                onClick={() => setSelectedCard(card)}
                 possessed={userCard?.possessed ?? 0}
               />
             );

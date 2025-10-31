@@ -6,6 +6,16 @@ import { getTeamLogo } from "@/utils/get-team-logo";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
+// Fonction utilitaire pour normaliser les noms (supprime accents, majuscules, espaces inutiles, etc.)
+const normalizeName = (name: string) =>
+  name
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .replace(/[^a-z0-9\s]/gi, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+
 export default function MobileTeamInteraction({
   teams,
   isTeamPopupOpen,
@@ -29,8 +39,15 @@ export default function MobileTeamInteraction({
     if (difficulty === "easy") {
       // Affiche uniquement les équipes que le joueur a eues
       const filteredTeams = player.teams_history
-        .map((t) => teams.find((team) => team.currentName === t.team))
+        .map(({ team }) => {
+          const normalizedTeam = normalizeName(team);
+          return teams.find((t) => {
+            const allNames = [t.currentName, ...(t.names || [])];
+            return allNames.some((name) => normalizeName(name) === normalizedTeam);
+          });
+        })
         .filter((team): team is TeamsDataType => !!team); // retire les undefined
+
       setVisibleTeams(filteredTeams);
     } else {
       // Affiche toutes les équipes
@@ -46,10 +63,10 @@ export default function MobileTeamInteraction({
           onClick={() => setIsTeamPopupOpen(false)}
         >
           <div
-            className="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 relative m-4"
+            className="bg-white rounded-2xl shadow-lg w-full max-w-md p-4 relative m-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="grid grid-cols-5 gap-2">
+            <div className="grid grid-cols-4 gap-1">
               {visibleTeams.length === 0 ? (
                 <p className="text-gray-500 italic">Aucune équipe disponible</p>
               ) : (
@@ -66,9 +83,11 @@ export default function MobileTeamInteraction({
                         width={40}
                         height={40}
                         alt={`${team.currentName} Logo`}
-                        className="size-10 object-contain"
+                        className="size-8 object-contain"
                       />
-                      <p className="font-unbounded">{getAbrForYear(team.periods, year)}</p>
+                      <p className="font-unbounded font-semibold text-sm">
+                        {getAbrForYear(team.periods, year)}
+                      </p>
                     </div>
                   ))
               )}

@@ -25,14 +25,20 @@ export const NavbarMenu = ({ user }: { user: User | null }) => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const parts = pathname.split("/");
+  const parts = pathname.split("/").filter(Boolean);
   const hasPeriod = parts.length > 2 && parts[2] !== "";
 
   const handleBack = () => {
-    if (hasPeriod) {
-      router.push(`/${parts[1]}`);
+   if (parts.length > 1) {
+      // Supprime le dernier segment
+      const previousPath = "/" + parts.slice(0, -1).join("/");
+      router.push(previousPath);
+    } else if (parts.length === 1) {
+      // Si on est déjà à la racine d’un module (ex: /nbacollection)
+      router.push("/");
     }
   };
+  
 
   // swipe gestion
 
@@ -92,11 +98,7 @@ export const NavbarMenu = ({ user }: { user: User | null }) => {
         </div>
         <div
           onClick={handleBack}
-          className={`${
-            hasPeriod
-              ? "cursor-pointer text-black"
-              : "cursor-not-allowed text-gray-400"
-          }`}
+          className={`cursor-pointer text-black`}
         >
           <ChevronLeft />
         </div>

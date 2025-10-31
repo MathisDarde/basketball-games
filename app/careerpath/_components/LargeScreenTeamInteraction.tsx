@@ -6,6 +6,15 @@ import { getTeamLogo } from "@/utils/get-team-logo";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 
+const normalizeName = (name: string) =>
+  name
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .replace(/[^a-z0-9\s]/gi, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
+
 export default function LargeScreenTeamInteraction({
   player,
   teams,
@@ -23,8 +32,15 @@ export default function LargeScreenTeamInteraction({
     if (difficulty === "easy") {
       // Affiche uniquement les équipes que le joueur a eues
       const filteredTeams = player.teams_history
-        .map((t) => teams.find((team) => team.currentName === t.team))
-        .filter((team): team is TeamsDataType => !!team); // retire les undefined
+      .map(({ team }) => {
+        const normalizedTeam = normalizeName(team);
+        return teams.find((t) => {
+          const allNames = [t.currentName, ...(t.names || [])];
+          return allNames.some((name) => normalizeName(name) === normalizedTeam);
+        });
+      })
+      .filter((team): team is TeamsDataType => !!team); // retire les undefined
+
       setVisibleTeams(filteredTeams);
     } else {
       // Affiche toutes les équipes

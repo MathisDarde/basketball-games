@@ -25,6 +25,7 @@ export default function CareerPathComponentWrapper({
   lastStreak: number;
 }) {
   const [droppedTeams, setDroppedTeams] = useState<TeamsDataType[]>([]);
+  const [activeSlot, setActiveSlot] = useState<number | null>(null);
   const [streak, setStreak] = useState<number>(lastStreak);
   const [currentPlayer, setCurrentPlayer] = useState<PlayerData>(
     getRandomPlayers({ numberPlayers: 1, players })
@@ -38,9 +39,12 @@ export default function CareerPathComponentWrapper({
 
   const filteredTeams: TeamsDataType[] = useMemo(() => {
     return currentPlayer.teams_history
-      .map(({ team }) => TeamsData.find((t) => t.currentName === team))
+      .map(({ team }) =>
+        TeamsData.find((t) => t.names.includes(team))
+      )
       .filter(Boolean) as TeamsDataType[];
   }, [currentPlayer]);
+  
 
   // Détermination de la période active du joueur
   const allYears = currentPlayer.teams_history
@@ -127,18 +131,24 @@ export default function CareerPathComponentWrapper({
         />
       </div>
 
+{/* 
       <SubmitGuess
         player={currentPlayer}
         droppedTeams={droppedTeams}
         filteredTeams={filteredTeams}
         difficulty={difficulty}
         setDroppedTeams={setDroppedTeams}
+        setIsRevealed={setIsRevealed}
+        isCorrect={isCorrect}
+        setIsCorrect={setIsCorrect}
+        setChecked={setChecked}
         userId={userId}
         period={period}
         streak={streak}
         setStreak={setStreak}
         regeneratePlayer={regeneratePlayer}
       />
+  */}
     </div>
   );
 }

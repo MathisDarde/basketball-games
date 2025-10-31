@@ -13,6 +13,10 @@ export default function SubmitGuess({
   filteredTeams,
   difficulty,
   setDroppedTeams,
+  setIsRevealed,
+  isCorrect,
+  setIsCorrect,
+  setChecked,
   userId,
   period,
   streak,
@@ -24,6 +28,10 @@ export default function SubmitGuess({
   filteredTeams: TeamsDataType[];
   difficulty: string;
   setDroppedTeams: Dispatch<SetStateAction<TeamsDataType[]>>;
+  setIsRevealed: Dispatch<SetStateAction<boolean>>;
+  isCorrect: boolean;
+  setIsCorrect: Dispatch<SetStateAction<boolean>>;
+  setChecked: Dispatch<SetStateAction<boolean>>;
   userId: string | null;
   period: ParamValue;
   streak: number;
