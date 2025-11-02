@@ -21,7 +21,7 @@ const Button = ({
   theme = "primary",
 }: CustomButtonProps) => {
   const sizeClasses = {
-    default: "py-2 sm:py-3 px-4 sm:px-6 text-sm sm:text-base",
+    default: "py-2 px-4 sm:px-5 text-sm sm:text-base",
     slim: "py-1 sm:py-2 px-3 sm:px-4 text-xs sm:text-sm",
     large: "py-3 sm:py-4 px-6 sm:px-8 text-base sm:text-lg",
   }[size];

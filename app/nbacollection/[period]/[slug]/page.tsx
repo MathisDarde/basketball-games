@@ -3,7 +3,7 @@ import { getPlayerBySlug, getUserCards } from "@/controllers/PlayersController";
 import InfoDisplay from "./_components/InfoDisplay";
 
 export default async function SingleCardPage({ params }: { params: { period: string, slug: string } }) {
-    const player = await getPlayerBySlug(params.slug);
+    const player = await getPlayerBySlug(params.period, params.slug);
 
     const userId = await getAuthenticatedUserId();
     if(!userId) return;

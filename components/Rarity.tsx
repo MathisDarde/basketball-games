@@ -1,26 +1,38 @@
 export const rarities = [
     {
         name: "Bronze",
-        color: "bg-amber-700"
+        color: "amber-700",
+        level: 1,
+        needToUpgrade: 3
     },
     {
         name: "Silver",
-        color: "bg-slate-100"
+        color: "slate-100",
+        level: 2,
+        needToUpgrade: 4
     },
     {
         name: "Gold",
-        color: "bg-yellow-400"
+        color: "yellow-400",
+        level: 3,
+        needToUpgrade: 7
     },
     {
         name: "Emerald",
-        color: "bg-emerald-400"
+        color: "emerald-400",
+        level: 4,
+        needToUpgrade: 10
     },
     {
         name: "Ruby",
-        color: "bg-red-500"
+        color: "red-500",
+        level: 5,
+        needToUpgrade: 15
     },
     {
         name: "Diamond",
-        color: "bg-cyan-300"
+        color: "cyan-300",
+        level: 6,
+        needToUpgrade: 3
     },
 ]

@@ -17,15 +17,15 @@ export default function FavoriteTeamSelect({
   };
 
   return (
-    <div className="relative w-full xl:w-[600px] space-y-2">
-      <span className="font-outfit text-black flex items-center">
+    <div className="relative w-full space-y-2">
+            <span className="font-outfit text-base sm:text-lg text-black flex items-center">
         <ImageIcon size={18} className="mr-2" />
         Favorite Team :
       </span>
       <select
         {...register("favorite_team")}
         onChange={(e) => handleSelect(e.target.value)}
-        className="w-full xl:w-[600px] border border-accent-brown rounded px-4 py-3 bg-white cursor-pointer flex items-center justify-between shadow font-outfit text-sm"
+        className="w-full border border-accent-brown rounded px-4 py-3 bg-white cursor-pointer flex items-center justify-between shadow font-outfit text-sm sm:text-base"
       >
         {[...TeamsData]
           .sort((a, b) => a.currentName.localeCompare(b.currentName))

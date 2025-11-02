@@ -1,10 +1,20 @@
 "use client";
 
-import { usePlayTogetherCtx } from "@/components/GlobalContext";
 import { PlayerData, TeamsDataType } from "@/interfaces/Interfaces";
-import { ParamValue } from "next/dist/server/request/params";
+import getAbrForYear from "@/utils/get-abr-by-year";
+import { getTeamLogo } from "@/utils/get-team-logo";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+
+// Fonction utilitaire pour normaliser les noms (supprime accents, majuscules, espaces inutiles, etc.)
+const normalizeName = (name: string) =>
+  name
+    .normalize("NFD")
+    .replace(/\p{Diacritic}/gu, "")
+    .replace(/[^a-z0-9\s]/gi, "")
+    .replace(/\s+/g, " ")
+    .trim()
+    .toLowerCase();
 
 export default function MobileTeamInteraction({
   teams,
@@ -13,54 +23,37 @@ export default function MobileTeamInteraction({
   onSelectTeam,
   player,
   difficulty,
-  period,
+  year,
 }: {
   teams: TeamsDataType[];
   isTeamPopupOpen: boolean;
   setIsTeamPopupOpen: Dispatch<SetStateAction<boolean>>;
-  onSelectTeam: (team: string) => void;
+  onSelectTeam: (team: TeamsDataType) => void;
   player: PlayerData;
   difficulty: string;
-  period: ParamValue;
+  year: number;
 }) {
-  const { getTeamLogo } = usePlayTogetherCtx();
-
-  const [visibleTeams, setVisibleTeams] = useState<string[]>([]);
-  const [logoYear, setLogoYear] = useState<number>(2025);
+  const [visibleTeams, setVisibleTeams] = useState<TeamsDataType[]>([]);
 
   useEffect(() => {
     if (difficulty === "easy") {
-      setVisibleTeams(
-        player.teams_history
-          .filter((t) => teams.some((team) => team.currentName === t.team))
-          .map((t) => t.team)
-      );
+      // Affiche uniquement les équipes que le joueur a eues
+      const filteredTeams = player.teams_history
+        .map(({ team }) => {
+          const normalizedTeam = normalizeName(team);
+          return teams.find((t) => {
+            const allNames = [t.currentName, ...(t.names || [])];
+            return allNames.some((name) => normalizeName(name) === normalizedTeam);
+          });
+        })
+        .filter((team): team is TeamsDataType => !!team); // retire les undefined
+
+      setVisibleTeams(filteredTeams);
     } else {
-      setVisibleTeams(teams.map((t) => t.currentName));
+      // Affiche toutes les équipes
+      setVisibleTeams(teams);
     }
   }, [difficulty, player.teams_history, teams]);
-
-  useEffect(() => {
-    if (typeof period === "string") {
-      switch (period) {
-        case "1990s":
-          setLogoYear(1995);
-          break;
-        case "2000s":
-          setLogoYear(2005);
-          break;
-        case "2010s":
-          setLogoYear(2015);
-          break;
-        case "2020s":
-          setLogoYear(2025);
-          break;
-        default:
-          setLogoYear(2025);
-          break;
-      }
-    }
-  }, [period]);
 
   return (
     <>
@@ -70,27 +63,31 @@ export default function MobileTeamInteraction({
           onClick={() => setIsTeamPopupOpen(false)}
         >
           <div
-            className="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 relative m-4"
+            className="bg-white rounded-2xl shadow-lg w-full max-w-md p-4 relative m-4"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="grid grid-cols-5 gap-2">
+            <div className="grid grid-cols-4 gap-1">
               {visibleTeams.length === 0 ? (
                 <p className="text-gray-500 italic">Aucune équipe disponible</p>
               ) : (
                 [...visibleTeams]
-                  .sort((a, b) => a.localeCompare(b))
+                  .sort((a, b) => a.currentName.localeCompare(b.currentName))
                   .map((team, index) => (
                     <div
                       key={index}
                       onClick={() => onSelectTeam(team)}
-                      className="cursor-pointer flex items-center justify-center gap-2 p-1 border rounded h-16 hover:bg-gray-100"
+                      className="cursor-pointer flex flex-col items-center justify-center p-2 border rounded hover:bg-gray-100"
                     >
                       <Image
-                        src={getTeamLogo(team, logoYear) || "/pdpdebase.png"}
+                        src={getTeamLogo(team.currentName, year) || "/pdpdebase.png"}
                         width={40}
                         height={40}
-                        alt={`${team} Logo`}
+                        alt={`${team.currentName} Logo`}
+                        className="size-8 object-contain"
                       />
+                      <p className="font-unbounded font-semibold text-sm">
+                        {getAbrForYear(team.periods, year)}
+                      </p>
                     </div>
                   ))
               )}

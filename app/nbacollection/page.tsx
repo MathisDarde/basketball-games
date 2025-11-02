@@ -20,8 +20,8 @@ export default function CareerPathPeriodSelector() {
 
   return (
     <div>
-      <h1 className="font-unbounded text-center text-2xl">NBA Collection</h1>
-      <p className="text-center font-outfit font-light text-sm pt-2">
+      <h1 className="font-unbounded text-center text-2xl md:text-3xl 2xl:text-4xl">NBA Collection</h1>
+      <p className="text-center font-outfit font-light text-sm pt-2 md:text-lg 2xl:text-xl">
         Select a period to play
       </p>
 

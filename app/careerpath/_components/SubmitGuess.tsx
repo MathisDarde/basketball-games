@@ -2,7 +2,7 @@
 
 import handleStoreSession from "@/actions/careerpath/store-session";
 import { usePlayTogetherCtx } from "@/components/GlobalContext";
-import { PlayerData } from "@/interfaces/Interfaces";
+import { PlayerData, TeamsDataType } from "@/interfaces/Interfaces";
 import { Check, X } from "lucide-react";
 import { ParamValue } from "next/dist/server/request/params";
 import { Dispatch, SetStateAction, useState } from "react";
@@ -24,10 +24,10 @@ export default function SubmitGuess({
   regeneratePlayer,
 }: {
   player: PlayerData;
-  droppedTeams: (string | null)[];
-  filteredTeams: string[]; // équipes du challenge, dans l'ordre
+  droppedTeams: (TeamsDataType | null)[];
+  filteredTeams: TeamsDataType[];
   difficulty: string;
-  setDroppedTeams: Dispatch<SetStateAction<(string | null)[]>>;
+  setDroppedTeams: Dispatch<SetStateAction<TeamsDataType[]>>;
   setIsRevealed: Dispatch<SetStateAction<boolean>>;
   isCorrect: boolean;
   setIsCorrect: Dispatch<SetStateAction<boolean>>;
@@ -97,9 +97,11 @@ export default function SubmitGuess({
             {answerCount}/3 guesses remaining
           </p>
 
+        {feedbackMessage && (
           <p className="font-outfit bg-red-200 border border-red-700 rounded-md p-4 text-sm w-[325px]">
             {endRoundMessage}
           </p>
+          )}
         </>
       ) : feedbackMessage ? (
         feedbackMessage.correct ? (
@@ -136,6 +138,7 @@ export default function SubmitGuess({
             setIsCorrect(false);
             setAnswerCount(3);
             regeneratePlayer();
+            setFeedbackMessage(null)
           }}
         >
           Next round

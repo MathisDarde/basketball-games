@@ -93,12 +93,8 @@
           "name": "account_userId_users_id_fk",
           "tableFrom": "account",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -158,12 +154,8 @@
           "name": "cardcollection_userId_users_id_fk",
           "tableFrom": "cardcollection",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -171,12 +163,8 @@
           "name": "cardcollection_cardId_playersData_id_fk",
           "tableFrom": "cardcollection",
           "tableTo": "playersData",
-          "columnsFrom": [
-            "cardId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["cardId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -253,12 +241,8 @@
           "name": "careerpath_sessions_userId_users_id_fk",
           "tableFrom": "careerpath_sessions",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -266,12 +250,8 @@
           "name": "careerpath_sessions_playerId_playersData_id_fk",
           "tableFrom": "careerpath_sessions",
           "tableTo": "playersData",
-          "columnsFrom": [
-            "playerId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["playerId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -324,12 +304,8 @@
           "name": "dailydraws_userId_users_id_fk",
           "tableFrom": "dailydraws",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -370,12 +346,8 @@
           "name": "dailydraws_players_dailydrawId_dailydraws_id_fk",
           "tableFrom": "dailydraws_players",
           "tableTo": "dailydraws",
-          "columnsFrom": [
-            "dailydrawId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["dailydrawId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -383,12 +355,8 @@
           "name": "dailydraws_players_playerId_playersData_id_fk",
           "tableFrom": "dailydraws_players",
           "tableTo": "playersData",
-          "columnsFrom": [
-            "playerId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["playerId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -396,10 +364,7 @@
       "compositePrimaryKeys": {
         "dailydraws_players_dailydrawId_playerId_pk": {
           "name": "dailydraws_players_dailydrawId_playerId_pk",
-          "columns": [
-            "dailydrawId",
-            "playerId"
-          ]
+          "columns": ["dailydrawId", "playerId"]
         }
       },
       "uniqueConstraints": {},
@@ -523,12 +488,8 @@
           "name": "playtogether_sessions_userId_users_id_fk",
           "tableFrom": "playtogether_sessions",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -598,12 +559,8 @@
           "name": "session_userId_users_id_fk",
           "tableFrom": "session",
           "tableTo": "users",
-          "columnsFrom": [
-            "userId"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["userId"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -613,9 +570,7 @@
         "session_token_unique": {
           "name": "session_token_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "token"
-          ]
+          "columns": ["token"]
         }
       },
       "policies": {},
@@ -691,16 +646,12 @@
         "users_name_unique": {
           "name": "users_name_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "name"
-          ]
+          "columns": ["name"]
         },
         "users_email_unique": {
           "name": "users_email_unique",
           "nullsNotDistinct": false,
-          "columns": [
-            "email"
-          ]
+          "columns": ["email"]
         }
       },
       "policies": {},

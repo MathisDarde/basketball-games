@@ -7,6 +7,7 @@ import {
   integer,
   jsonb,
   primaryKey,
+  pgEnum,
 } from "drizzle-orm/pg-core";
 
 export const user = pgTable("users", {
@@ -149,6 +150,25 @@ export const careerpath_sessions = pgTable("careerpath_sessions", {
   attempts: integer("attempts").notNull(),
   streak: integer("streak").notNull(),
   playedAt: timestamp("playedAt").notNull().defaultNow(),
+});
+
+export const marketExchangeStatus = pgEnum("market_exchange_status", [
+  "pending",
+  "validated",
+]);
+
+export const card_exchange = pgTable("market_card_exchange", {
+  id: text("id").primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }),
+  receivedCardId: text("receivedCardId")
+  .notNull()
+  .references(() => playersData.id, { onDelete: "cascade" }),
+  givenCardsId: text("givenCardsId")
+  .notNull()
+  .references(() => playersData.id, { onDelete: "cascade" }),
+  status: marketExchangeStatus().notNull().default("pending"),
 });
 
 export const schema = {

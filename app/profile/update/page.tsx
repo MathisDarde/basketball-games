@@ -11,7 +11,7 @@ export default async function UpdateProfilePage() {
 
   return (
     <div>
-      <h1 className="text-center font-unbounded text-xl">
+      <h1 className="font-unbounded text-center text-2xl md:text-3xl 2xl:text-4xl">
         Update profile form
       </h1>
 

@@ -30,9 +30,9 @@ export default function CountdownToNextDraw() {
   const { hours, minutes, seconds } = timeLeft;
 
   return (
-    <div className="py-4 text-center font-outfit text-sm text-gray-600">
+    <div className="py-4 text-center font-outfit text-sm sm:text-base lg:text-lg text-gray-600">
       <p>
-        Prochain tirage dans{" "}
+        Next draw in{" "}
         <span className="font-semibold text-black">
           {`${hours.toString().padStart(2, "0")}h:${minutes
             .toString()

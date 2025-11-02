@@ -29,7 +29,7 @@ export default async function NBACollectionPage(props: {
 
   return (
     <div>
-      <h1 className="font-unbounded text-2xl text-center">
+      <h1 className="font-unbounded text-center text-2xl md:text-3xl 2xl:text-4xl">
         NBA Cards Collection
       </h1>
       <PageMenu
@@ -39,7 +39,7 @@ export default async function NBACollectionPage(props: {
       />
       <CardsDisplay ownedCards={ownedCards} players={players} period={period} />
 
-      <Link href={`/nbacollection/${period}/trade`}>
+      <Link href={`/nbacollection/trade`}>
         <div className="fixed bottom-0 right-0 m-6 bg-dark-purple text-white p-2 rounded-full rotate-90">
           <ArrowDownUp size={35} />
         </div>

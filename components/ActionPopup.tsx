@@ -48,6 +48,7 @@ export default function ActionPopup({
               onClick={action.onClick}
               theme={action.theme}
               size="default"
+              className="mx-0"
             >
               {action.label}
             </Button>
