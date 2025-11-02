@@ -41,7 +41,7 @@ const TeamHistorySchema = z.object({
 export const PlayersSchema = z.object({
   period: z.string().nonempty(),
   name: z.string().nonempty(),
-  image_link: z.string().url().optional(),
+  image_url: z.string().url(),
   position: z.string().nonempty(),
   teams_history: z.array(TeamHistorySchema).optional(),
   awards: z.array(z.string()).optional(),

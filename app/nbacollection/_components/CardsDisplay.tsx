@@ -13,7 +13,7 @@ import { slugifyName } from "@/utils/slugify-name";
 export default function CardsDisplay({
   ownedCards,
   players,
-  period
+  period,
 }: {
   ownedCards: Card[];
   players: PlayerData[];
@@ -81,7 +81,7 @@ export default function CardsDisplay({
       ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 w-screen mt-4">
           {filteredPlayers.map((player) => {
-            const { id, name, awards, teams_history, image_link } = player;
+            const { id, name, awards, teams_history, image_url } = player;
             const isOwned = cardIds.includes(id);
             const uniqueCardClasses = getBackgroundClass(awards || []);
             const backgroundClass = isOwned
@@ -117,10 +117,14 @@ export default function CardsDisplay({
             const [firstName, ...lastNameParts] = name.split(" ");
 
             return (
-              <Link href={`/nbacollection/${period}/${slugifyName(name)}`} key={id}>
+              <Link
+                href={`/nbacollection/${period}/${slugifyName(name)}`}
+                key={id}
+              >
                 <div
-                  className={`relative overflow-hidden w-[250px] h-[350px] sm:h-[400px] p-1 mx-auto ${backgroundClass} shadow transition-shadow ${isOwned ? "cursor-pointer hover:shadow-lg" : "opacity-50"
-                    }`}
+                  className={`relative overflow-hidden w-[250px] h-[350px] sm:h-[400px] p-1 mx-auto ${backgroundClass} shadow transition-shadow ${
+                    isOwned ? "cursor-pointer hover:shadow-lg" : "opacity-50"
+                  }`}
                 >
                   {isOwned ? (
                     <div className="bg-[#BB9754] h-full p-3 flex">
@@ -136,11 +140,11 @@ export default function CardsDisplay({
                         {/* Image au milieu qui prend tout l'espace restant */}
                         <div className="relative flex-1 w-full overflow-hidden">
                           <Image
-                            src={image_link ?? "/pdpdebase.png"}
+                            src={image_url ?? "/pdpdebase.png"}
                             alt={name}
-                            fill
-                            className="object-cover rounded-t-full"
-                            quality={100}
+                            height={256}
+                            width={256}
+                            className="object-cover rounded-t-full object-top"
                           />
                         </div>
                         {/* Bloc bas avec équipe et position */}
@@ -160,7 +164,6 @@ export default function CardsDisplay({
                         </div>
                       </div>
                     </div>
-
                   ) : (
                     <div className="flex flex-col justify-center items-center w-full h-full text-center px-4">
                       <p className="text-xl font-bold uppercase font-unbounded text-black">

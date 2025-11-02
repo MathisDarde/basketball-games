@@ -51,31 +51,36 @@ export async function getPlayersByPeriod(
 
 export async function store1990sPlayers() {
   try {
+    const period = "1990s";
     const filePath = path.join(
       process.cwd(),
       "public",
       "data",
-      "nba_players_1990s_enriched.json"
+      "nba_players_1990s_with_images_current.json"
     );
+
     const raw = fs.readFileSync(filePath, "utf-8");
-    const playersArray = JSON.parse(raw); // Tableau d'objets joueurs
+    const playersArray = JSON.parse(raw);
 
-    // Prépare un tableau d'insertions
-    const playersToInsert = playersArray.map((player: PlayersSchemaType) => {
-      return {
-        id: uuidv4(),
-        name: player.name,
-        period: "1990s",
-        position: player.position,
-        teams_history: player.teams_history ?? [],
-        image_link: player.image_link ?? null,
-        wikipedia_url: player.wikipedia_url ?? null,
-        awards: player.awards ?? [],
-      };
-    });
+    // 🧹 Étape 1 : Supprimer les anciennes entrées de cette période
+    await db.delete(playersData).where(eq(playersData.period, period));
+    console.log(`🗑️ Anciennes entrées supprimées pour la période ${period}`);
 
-    // Insertion multiple avec Drizzle
+    // 🧩 Étape 2 : Préparer les nouvelles données
+    const playersToInsert = playersArray.map((player: PlayersSchemaType) => ({
+      id: uuidv4(),
+      name: player.name,
+      period,
+      position: player.position ?? null,
+      teams_history: player.teams_history ?? [],
+      image_url: player.image_url ?? null,
+      wikipedia_url: player.wikipedia_url ?? null,
+      awards: player.awards ?? [],
+    }));
+
+    // 💾 Étape 3 : Insertion multiple
     const result = await db.insert(playersData).values(playersToInsert);
+    console.log(`✅ ${playersToInsert.length} joueurs ajoutés pour ${period}`);
 
     return result;
   } catch (error) {
@@ -83,13 +88,14 @@ export async function store1990sPlayers() {
     throw error;
   }
 }
+
 export async function store2000sPlayers() {
   try {
     const filePath = path.join(
       process.cwd(),
       "public",
       "data",
-      "nba_players_2000s_enriched.json"
+      "nba_players_2000s_with_images_current.json"
     );
     const raw = fs.readFileSync(filePath, "utf-8");
     const playersArray = JSON.parse(raw); // Tableau d'objets joueurs
@@ -102,7 +108,7 @@ export async function store2000sPlayers() {
         period: "2000s",
         position: player.position ?? null,
         teams_history: player.teams_history ?? [],
-        image_link: player.image_link ?? null,
+        image_url: player.image_url ?? null,
         wikipedia_url: player.wikipedia_url ?? null,
         awards: player.awards ?? [],
       };
@@ -136,7 +142,7 @@ export async function store2010sPlayers() {
         period: "2010s",
         position: player.position ?? null,
         teams_history: player.teams_history ?? [],
-        image_link: player.image_link ?? null,
+        image_url: player.image_url ?? null,
         wikipedia_url: player.wikipedia_url ?? null,
         awards: player.awards ?? [],
       };
@@ -170,7 +176,7 @@ export async function store2020sPlayers() {
         period: "2020s",
         position: player.position ?? null,
         teams_history: player.teams_history ?? [],
-        image_link: player.image_link ?? null,
+        image_url: player.image_url ?? null,
         wikipedia_url: player.wikipedia_url ?? null,
         awards: player.awards ?? [],
       };

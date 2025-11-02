@@ -22,6 +22,13 @@
       "when": 1761250677190,
       "tag": "0002_breezy_rumiko_fujikawa",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1762115471505,
+      "tag": "0003_abnormal_morgan_stark",
+      "breakpoints": true
     }
   ]
 }

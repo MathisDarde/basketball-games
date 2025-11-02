@@ -76,7 +76,7 @@ export const playersData = pgTable("playersData", {
   name: text("name").notNull(),
   position: text("position"),
   teams_history: jsonb("teams_history").$type<TeamHistoryEntry[]>().notNull(),
-  image_link: text("image_link"),
+  image_url: text("image_url"),
   wikipedia_url: text("wikipedia_url").notNull(),
   awards: jsonb("awards")
     .$type<string[]>()
@@ -159,6 +159,9 @@ export const schema = {
   playersData,
   cardcollection,
   dailydraws,
+  playtogether_sessions,
+  careerpath_sessions,
+  dailydraws_players,
 };
 
 export type SelectUser = typeof user.$inferSelect;

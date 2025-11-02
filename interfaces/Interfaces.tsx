@@ -13,7 +13,7 @@ export interface PlayerData {
   name: string;
   wikipedia_url: string;
   teams_history: TeamHistory[];
-  image_link: string | null;
+  image_url: string | null;
   position: string | null;
   awards: string[];
 }
