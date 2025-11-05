@@ -8,6 +8,7 @@ import Button from "@/components/CustomButton";
 import { TeamsData } from "@/components/Teams";
 import { SelectUser } from "@/db/schema";
 import { updateProfileSchemaType } from "@/types/forms";
+import { useFormErrorToasts } from "@/utils/form-errors-hook";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ImageIcon, Mail, Trash, User } from "lucide-react";
 import Image from "next/image";
@@ -27,7 +28,7 @@ export default function UpdateProfileForm({
   const [openDeletePicPopup, setOpenDeletePicPopup] = useState(false);
   const router = useRouter();
 
-  const { register, handleSubmit, setValue } = useForm<updateProfileSchemaType>(
+  const { register, handleSubmit, setValue, formState: {errors} } = useForm<updateProfileSchemaType>(
     {
       resolver: zodResolver(updateProfileSchema),
       defaultValues: {
@@ -101,6 +102,8 @@ export default function UpdateProfileForm({
       return;
     }
   };
+
+  useFormErrorToasts(errors)
 
   return (
     <>

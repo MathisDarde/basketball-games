@@ -13,10 +13,11 @@ import Image from "next/image";
 import handleLoginWithTwitter from "@/actions/login/twitterlogin";
 import Link from "next/link";
 import Button from "@/components/CustomButton";
+import { toast } from "sonner";
+import { useFormErrorToasts } from "@/utils/form-errors-hook";
 
 export default function LoginForm() {
   const [showPassword, setShowPassword] = useState(false);
-  const [serverError, setServerError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
@@ -30,19 +31,14 @@ export default function LoginForm() {
   });
 
   const handleSubmitForm = async (data: LoginSchemaType) => {
-    setServerError(null);
-    setLoading(true);
     const response = await submitLoginForm(data);
 
     setLoading(false);
-
     if (response.success) {
       router.push("/");
     } else {
-      setServerError(
-        response.message
-          ? response.message
-          : (response.errors?.[0].message ?? null)
+      toast.error(
+        response.message ? response.message : response.errors?.[0].message
       );
     }
   };
@@ -50,6 +46,8 @@ export default function LoginForm() {
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
   };
+
+  useFormErrorToasts(errors);
 
   return (
     <>
@@ -87,21 +85,6 @@ export default function LoginForm() {
 
       <div className="w-screen xl:w-[600px] mx-auto px-4 pt-4 pb-8 text-center space-y-2">
       <h2 className="font-outfit text-base sm:text-lg">Login with credentials</h2>
-
-        {/* Bloc erreurs */}
-        {(Object.keys(errors).length > 0 || serverError) && (
-          <div className="bg-red-200 border border-red-700 rounded-md p-4 mb-4 text-sm text-red-900 space-y-1 text-left">
-            {Object.values(errors).map((error, i) => (
-              <div key={i} className="font-outfit text-center">
-                {error?.message}
-              </div>
-            ))}
-            {serverError && (
-              <div className="font-outfit text-center">{serverError}</div>
-            )}
-          </div>
-        )}
-
         <form
           method="POST"
           id="loginform"
