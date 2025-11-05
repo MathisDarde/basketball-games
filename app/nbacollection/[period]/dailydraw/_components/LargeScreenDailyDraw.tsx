@@ -86,7 +86,7 @@ export const LargeScreenDailyDraw = ({
                 <div className="bg-[url('/motifbackground90s.jpg')] bg-cover bg-center w-full h-full rounded-t-full flex flex-col overflow-hidden">
                   <div className="flex-1 relative w-full">
                     <Image
-                      src={player.image_link ?? "/pdpdebase.png"}
+                      src={player.image_url ?? "/pdpdebase.png"}
                       alt={player.name}
                       fill
                       className="object-cover"

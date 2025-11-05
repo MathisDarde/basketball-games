@@ -93,7 +93,7 @@ export const MobileDailyDraw = ({
                 >
                   <div className="relative flex-1 w-full">
                     <Image
-                      src={player.image_link ?? "/pdpdebase.png"}
+                      src={player.image_url ?? "/pdpdebase.png"}
                       alt={player.name}
                       fill
                       className="object-cover"
@@ -166,7 +166,7 @@ export const MobileDailyDraw = ({
                   >
                     <div className="relative flex-1 w-full">
                       <Image
-                        src={player.image_link ?? "/pdpdebase.png"}
+                        src={player.image_url ?? "/pdpdebase.png"}
                         alt={player.name}
                         fill
                         className="object-cover"

@@ -31,6 +31,9 @@ export default function UserDuplicates({ cardInfos }: UserDuplicatesProps) {
         My duplicates
       </h2>
 
+        {cardInfos.length == 0 && (
+          <p className="text-center font-outfit text-gray-400 italic">You do not possess any duplicate of a card. Indeed, the trading feature is not available for you yet.</p>
+        )}
       <div className="grid grid-cols-6 gap-4 place-items-center">
         {loading
           ? cardInfos.map((card) => (
