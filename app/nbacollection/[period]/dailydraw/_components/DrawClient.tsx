@@ -17,6 +17,7 @@ export default function DailyDrawClient({
   teams,
   userId,
   period,
+  isAdmin
 }: {
   initialPlayers: PlayerData[];
   flippedInitial: string[];
@@ -24,12 +25,13 @@ export default function DailyDrawClient({
   teams: TeamsDataType[];
   userId: string;
   period: PeriodTypes;
+  isAdmin: boolean | null;
 }) {
   const [players, setPlayers] = useState<PlayerData[]>(initialPlayers);
   const [flippedIds, setFlippedIds] = useState<string[]>(flippedInitial);
 
   const handleDrawClick = async () => {
-    const newDraw = await createDailyDrawServer(userId, allPlayers, period);
+    const newDraw = await createDailyDrawServer(userId, allPlayers, period, isAdmin);
     setPlayers(newDraw.players);
     setFlippedIds(newDraw.flippedIds);
   };

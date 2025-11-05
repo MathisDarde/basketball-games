@@ -6,10 +6,11 @@ import { PlayerData } from "@/interfaces/Interfaces";
 const createDailyDrawServer = async (
   userId: string,
   allPlayers: PlayerData[],
-  period: string
-): Promise<{ players: PlayerData[]; flippedIds: string[]; period: string; }> => {
+  period: string,
+  isAdmin: boolean | null,
+): Promise<{ players: PlayerData[]; flippedIds: string[]; period: string;}> => {
   try {
-    const cards = await createDailyDraw(userId, allPlayers, period);
+    const cards = await createDailyDraw(userId, allPlayers, period, isAdmin);
     return cards;
   } catch (error) {
     console.error("createDailyDraw error:", error);

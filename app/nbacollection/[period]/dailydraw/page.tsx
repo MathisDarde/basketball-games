@@ -5,6 +5,7 @@ import CountdownToNextDraw from "./_components/CountdownToNextDraw";
 import { PeriodTypes } from "@/interfaces/Interfaces";
 import DailyDrawClient from "./_components/DrawClient";
 import { TeamsData } from "@/components/Teams";
+import { getUserById } from "@/controllers/UserController";
 
 export default async function DailyDrawPage({
   params,
@@ -16,12 +17,16 @@ export default async function DailyDrawPage({
   const userId = await getAuthenticatedUserId();
   if (!userId) return <p>Vous devez être connecté.</p>;
 
+  const user = await getUserById(userId);
+  const isAdmin = user.admin;
+
   const allPlayers = await getPlayersByPeriod(period);
 
   const { players, flippedIds } = await getDailyDraw(
     userId,
     allPlayers,
-    period
+    period,
+    isAdmin
   );
 
   return (
@@ -38,6 +43,7 @@ export default async function DailyDrawPage({
         teams={TeamsData}
         userId={userId}
         period={period}
+        isAdmin={isAdmin}
       />
 
       <CountdownToNextDraw />
