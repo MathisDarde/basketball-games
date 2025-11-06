@@ -10,6 +10,14 @@ import {
   pgEnum,
 } from "drizzle-orm/pg-core";
 
+
+export const UserRoleEnum = pgEnum("user_role", [
+  "user",
+  "premium",
+  "admin",
+  "superadmin",
+]);
+
 export const user = pgTable("users", {
   id: text("id").primaryKey(),
   name: text("name").notNull().unique(),
@@ -21,7 +29,7 @@ export const user = pgTable("users", {
   updatedAt: timestamp("updated_at")
     .notNull()
     .$onUpdate(() => new Date()),
-  admin: boolean("admin").default(false),
+  role: UserRoleEnum().notNull().default("user"),
 });
 
 export const session = pgTable("session", {
@@ -117,7 +125,6 @@ export const dailydraws_players = pgTable(
     playerId: text("playerId")
       .notNull()
       .references(() => playersData.id, { onDelete: "cascade" }),
-    flipped: boolean("flipped").notNull().default(false),
   },
   (table) => ({
     pk: primaryKey({ columns: [table.dailydrawId, table.playerId] }),

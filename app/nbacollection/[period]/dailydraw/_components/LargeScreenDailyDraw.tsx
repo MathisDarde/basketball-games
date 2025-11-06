@@ -5,15 +5,15 @@ import Image from "next/image";
 type LargeScreenDailyDraw = {
   players: PlayerData[];
   teams: TeamsDataType[];
-  handleCardClick: (player: PlayerData) => Promise<void>;
-  flippedInitial: string[];
+  handleCardClick: (player: PlayerData) => void;
+  flippedIds: string[];
 };
 
 export const LargeScreenDailyDraw = ({
   players,
   teams,
   handleCardClick,
-  flippedInitial,
+  flippedIds,
 }: LargeScreenDailyDraw) => {
   const { formatPosition, getBackgroundClass, getTeamLogo } =
     usePlayTogetherCtx();
@@ -21,7 +21,7 @@ export const LargeScreenDailyDraw = ({
   return (
     <div className="grid grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 w-[800px] xl:w-[1100px] 2xl:w-[1350px] mx-auto mt-4">
       {players.map((player) => {
-        const isFlipped = flippedInitial.includes(player.id);
+        const isFlipped = flippedIds.includes(player.id);
         const { teams_history } = player;
 
         const filteredTeams = teams_history.filter(({ team }) =>

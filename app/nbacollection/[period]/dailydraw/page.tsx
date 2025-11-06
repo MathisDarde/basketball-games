@@ -18,32 +18,28 @@ export default async function DailyDrawPage({
   if (!userId) return <p>Vous devez être connecté.</p>;
 
   const user = await getUserById(userId);
-  const isAdmin = user.admin;
+  const userRole = user.role;
 
   const allPlayers = await getPlayersByPeriod(period);
 
-  const { players, flippedIds } = await getDailyDraw(
-    userId,
-    allPlayers,
-    period,
-    isAdmin
-  );
+  const { players } = await getDailyDraw(userId, allPlayers, period, userRole);
 
   return (
     <>
       <div className="text-center mb-4">
-      <h1 className="font-unbounded text-center text-2xl md:text-3xl 2xl:text-4xl">Daily Draw</h1>
-      <p className="text-center font-outfit font-light text-sm pt-2 md:text-lg 2xl:text-xl">{period}</p>
+        <h1 className="font-unbounded text-2xl md:text-3xl 2xl:text-4xl">
+          Daily Draw
+        </h1>
+        <p className="text-sm md:text-lg 2xl:text-xl font-light pt-2">{period}</p>
       </div>
 
       <DailyDrawClient
         initialPlayers={players}
-        flippedInitial={flippedIds}
         allPlayers={allPlayers}
         teams={TeamsData}
         userId={userId}
+        userRole={userRole}
         period={period}
-        isAdmin={isAdmin}
       />
 
       <CountdownToNextDraw />

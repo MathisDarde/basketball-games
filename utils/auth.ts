@@ -29,10 +29,10 @@ export const auth = betterAuth({
         required: true,
         defaultValue: "",
       },
-      admin: {
-        type: "boolean",
+      role: {
+        type: "string",
         required: true,
-        defaultValue: "false",
+        defaultValue: "user",
       },
       image: {
         type: "string",

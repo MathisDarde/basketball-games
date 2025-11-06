@@ -40,7 +40,7 @@ export interface User {
   favoriteTeam: string;
   createdAt: Date;
   updatedAt: Date;
-  admin: boolean;
+  role: string;
 }
 
 export interface Filters {

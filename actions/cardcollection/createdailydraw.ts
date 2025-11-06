@@ -7,14 +7,14 @@ const createDailyDrawServer = async (
   userId: string,
   allPlayers: PlayerData[],
   period: string,
-  isAdmin: boolean | null,
-): Promise<{ players: PlayerData[]; flippedIds: string[]; period: string;}> => {
+  role: string
+): Promise<{ players: PlayerData[]; period: string;}> => {
   try {
-    const cards = await createDailyDraw(userId, allPlayers, period, isAdmin);
+    const cards = await createDailyDraw(userId, allPlayers, period, role);
     return cards;
   } catch (error) {
     console.error("createDailyDraw error:", error);
-    return { players: [], flippedIds: [], period };
+    return { players: [], period };
   }
 };
 

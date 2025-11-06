@@ -1,0 +1,1 @@
+ALTER TABLE "dailydraws_players" DROP COLUMN "flipped";

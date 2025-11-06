@@ -8,19 +8,19 @@ import { PlayerData, TeamsDataType } from "@/interfaces/Interfaces";
 type MobileDailyDrawProps = {
   players: PlayerData[];
   teams: TeamsDataType[];
-  handleCardClick: (player: PlayerData) => Promise<void>;
-  flippedInitial: string[];
+  handleCardClick: (player: PlayerData) => void;
+  flippedIds: string[];
 };
 
 export const MobileDailyDraw = ({
   players,
   teams,
   handleCardClick,
-  flippedInitial,
+  flippedIds,
 }: MobileDailyDrawProps) => {
   const { formatPosition, getBackgroundClass, getTeamLogo } =
     usePlayTogetherCtx();
-  const [step, setStep] = useState(flippedInitial.length);
+  const [step, setStep] = useState(flippedIds.length);
 
   const handleNext = async (player: PlayerData) => {
     await handleCardClick(player);

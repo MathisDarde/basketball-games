@@ -197,26 +197,41 @@ export async function addCardToCollection(
   userId: string,
   period: string
 ) {
-  const data = { id: uuidv4(), cardId, userId, period };
-
-  await db.insert(cardcollection).values(data);
-
-  const [current] = await db
-    .select({ possessed: cardcollection.possessed })
+  // Vérifie si la carte existe déjà pour cet utilisateur et cette période
+  const existing = await db
+    .select()
     .from(cardcollection)
-    .where(eq(cardcollection.cardId, cardId));
+    .where(
+      and(
+        eq(cardcollection.cardId, cardId),
+        eq(cardcollection.userId, userId),
+        eq(cardcollection.period, period)
+      )
+    );
 
-  const newPossessed = (current?.possessed ?? 0) + 1;
+  if (existing.length > 0) {
+    const current = existing[0];
+    const newPossessed = (current.possessed ?? 0) + 1;
 
-  await db
-    .update(cardcollection)
-    .set({
-      possessed: newPossessed,
-    })
-    .where(eq(cardcollection.cardId, cardId));
+    await db
+      .update(cardcollection)
+      .set({ possessed: newPossessed })
+      .where(eq(cardcollection.id, current.id));
 
-  return { success: true };
+    return { success: true, possessed: newPossessed };
+  } else {
+    await db.insert(cardcollection).values({
+      id: uuidv4(),
+      cardId,
+      userId,
+      period,
+      possessed: 1,
+    });
+
+    return { success: true, possessed: 1 };
+  }
 }
+
 
 export async function getUserCards(userId: string) {
   return await db

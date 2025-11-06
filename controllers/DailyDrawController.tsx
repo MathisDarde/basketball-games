@@ -5,73 +5,84 @@ import { getRandomPlayers } from "@/utils/get-random-players";
 import { and, eq } from "drizzle-orm";
 import { v4 as uuidv4 } from "uuid";
 import storeCardInCollection from "@/actions/cardcollection/addcardtocollection";
+import getQuotaByRole from "@/actions/cardcollection/getuserquota";
 
 export async function getDailyDraw(
   userId: string,
   allPlayers: PlayerData[],
   period: string,
-  isAdmin: boolean | null
-): Promise<{
-  players: PlayerData[];
-  flippedIds: string[];
-  period: string;
-}> {
+  role: string
+): Promise<{ players: PlayerData[]; period: string }> {
   const todayStr = new Date().toISOString().split("T")[0];
 
-  // ✅ Si admin, on ne filtre pas sur la date
-  const draws = await db
+  const drawsToday = await db
     .select()
     .from(dailydraws)
-    .where(eq(dailydraws.userId, userId));
+    .where(and(eq(dailydraws.userId, userId), eq(dailydraws.period, period)))
+    .then(rows => rows.filter(r => r.date.toISOString().split("T")[0] === todayStr));
 
-  const todayDraw = isAdmin
-    ? draws[0] // admin : dernier tirage ou aucun
-    : draws.find(
-        (r) =>
-          r.date.toISOString().split("T")[0] === todayStr &&
-          r.period === period
-      );
+  if (drawsToday.length === 0) {
+    return { players: [], period }; // Aucun tirage aujourd'hui
+  }
 
-  if (!todayDraw) return { players: [], flippedIds: [], period };
+  // Récupère le dernier tirage d’aujourd’hui
+  const lastDraw = drawsToday[drawsToday.length - 1];
 
   const drawPlayers = await db
     .select()
     .from(dailydraws_players)
-    .where(eq(dailydraws_players.dailydrawId, todayDraw.id));
+    .where(eq(dailydraws_players.dailydrawId, lastDraw.id));
 
-  const selectedPlayers = allPlayers.filter((p) =>
-    drawPlayers.some((dp) => dp.playerId === p.id)
-  );
+  // Map sur tous les joueurs pour récupérer les infos complètes
+  const playerMap = new Map(allPlayers.map(p => [p.id, p]));
+  const players = drawPlayers.map(dp => playerMap.get(dp.playerId)!);
 
-  const flippedIds = drawPlayers.filter((dp) => dp.flipped).map((dp) => dp.playerId);
+  // ❌ On ne touche plus à storeCardInCollection ici
+  // Toutes les cartes sont déjà possédées si le tirage existait
 
-  return { players: selectedPlayers, flippedIds, period };
+  return { players, period };
 }
+
 
 export async function createDailyDraw(
   userId: string,
   allPlayers: PlayerData[],
   period: string,
-  isAdmin: boolean | null
-): Promise<{ players: PlayerData[]; flippedIds: string[]; period: string }> {
+  role: string
+): Promise<{ players: PlayerData[]; period: string }> {
   const todayStr = new Date().toISOString().split("T")[0];
 
-  const draws = await db
+  // récupère les tirages d'aujourd'hui pour cette période
+  const drawsToday = await db
     .select()
     .from(dailydraws)
-    .where(eq(dailydraws.userId, userId));
+    .where(and(eq(dailydraws.userId, userId), eq(dailydraws.period, period)))
+    .then((rows) => rows.filter((r) => r.date.toISOString().split("T")[0] === todayStr));
 
-  const existingDraw = draws.find(
-    (r) =>
-      r.date.toISOString().split("T")[0] === todayStr &&
-      r.period === period
-  );
+  const quota = await getQuotaByRole(role);
 
-  // ✅ admin = pas de limite journalière
-  if (existingDraw && !isAdmin) {
-    return getDailyDraw(userId, allPlayers, period, isAdmin);
+  // si quota atteint, retourne le dernier tirage existant
+  if (drawsToday.length >= quota) {
+    const lastDraw = drawsToday[drawsToday.length - 1];
+
+    const drawPlayers = await db
+      .select()
+      .from(dailydraws_players)
+      .where(eq(dailydraws_players.dailydrawId, lastDraw.id));
+
+    // reconstruction du tirage en gardant les doublons
+    const playerMap = new Map(allPlayers.map(p => [p.id, p]));
+    const selectedPlayers = drawPlayers.map(dp => playerMap.get(dp.playerId)!);
+
+    // toutes les cartes sont enregistrées dans la collection
+    for (const p of selectedPlayers) {
+      await storeCardInCollection(p.id, userId, period);
+    }
+
+    return { players: selectedPlayers, period };
   }
 
+  // sinon, créer un nouveau tirage
   const randomPlayers = getRandomPlayers({ numberPlayers: 10, players: allPlayers });
   const drawId = uuidv4();
 
@@ -85,73 +96,29 @@ export async function createDailyDraw(
   const playersRows = randomPlayers.map((p) => ({
     dailydrawId: drawId,
     playerId: p.id,
-    flipped: false,
   }));
 
   await db.insert(dailydraws_players).values(playersRows);
 
-  return { players: randomPlayers, flippedIds: [], period };
+  // enregistre immédiatement toutes les cartes dans la collection
+  for (const p of randomPlayers) {
+    await storeCardInCollection(p.id, userId, period);
+  }
+
+  return { players: randomPlayers, period };
 }
 
+export async function getDrawsCount(userId: string, period: string): Promise<number> {
+  const todayStr = new Date().toISOString().split("T")[0];
 
-// remplace ta flipCard par ceci
-export async function flipCard(userId: string, playerId: string, period: string) {
-  // 1) récupérer tous les tirages de l'utilisateur pour ce period, triés du plus récent au plus ancien
   const draws = await db
     .select()
     .from(dailydraws)
-    .where(eq(dailydraws.userId, userId))
-    .then((rows) =>
-      // filtrer sur le period et trier par date descendante (plus récent en premier)
-      rows
-        .filter((r) => r.period === period)
-        .sort((a, b) => b.date.getTime() - a.date.getTime())
-    );
+    .where(eq(dailydraws.userId, userId));
 
-  if (!draws || draws.length === 0) {
-    // pas de tirage du tout
-    return;
-  }
+  const todayDraws = draws.filter(
+    (d) => d.period === period && d.date.toISOString().split("T")[0] === todayStr
+  );
 
-  // 2) trouver le premier draw qui contient le playerId
-  let foundDraw = null;
-  let foundDrawPlayer = null;
-
-  for (const d of draws) {
-    const rows = await db
-      .select()
-      .from(dailydraws_players)
-      .where(eq(dailydraws_players.dailydrawId, d.id))
-      .then((rows) => rows);
-
-    const dp = rows.find((r) => r.playerId === playerId);
-    if (dp) {
-      foundDraw = d;
-      foundDrawPlayer = dp;
-      break;
-    }
-  }
-
-  if (!foundDraw || !foundDrawPlayer) {
-    // le player n'appartient à aucun des tirages trouvés -> rien à flip
-    return;
-  }
-
-  // 3) si déjà flip, on retourne
-  if (foundDrawPlayer.flipped) return;
-
-  // 4) update la ligne précise (on s'assure d'utiliser dailydrawId + playerId dans le WHERE)
-  await db
-    .update(dailydraws_players)
-    .set({ flipped: true })
-    .where(
-      and(
-        eq(dailydraws_players.dailydrawId, foundDraw.id),
-        eq(dailydraws_players.playerId, playerId)
-      )
-    );
-
-  // 5) maintenant on ajoute la carte à la collection
-  await storeCardInCollection(playerId, userId, period);
+  return todayDraws.length;
 }
-
