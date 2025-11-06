@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { PlayerData, Card } from "@/interfaces/Interfaces";
 import getUserCardsCollection from "@/actions/cardcollection/getusercards";
 import { getUserId } from "@/utils/get-user-id";
-import CardDisplay from "@/components/CardDisplay";
 import Skeleton from "@/components/CustomSkeleton";
+import CardDisplay from "@/components/card/CardDisplay";
 
 type UserDuplicatesProps = {
   cardInfos: PlayerData[];
