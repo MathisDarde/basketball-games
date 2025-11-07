@@ -1,8 +1,8 @@
-export default function getAbrForYear(
-    periods: { period: string; abr: string; logo: string }[],
+export default function getTeamInfosByYear(
+    periods: { period: string; abr: string; logo: string, mainColor: string, accentColor: string }[],
     year: number
-  ): string {
-    if (!Array.isArray(periods)) return "";
+  ): { period: string; abr: string; logo: string; mainColor: string; accentColor: string } | null {
+    if (!Array.isArray(periods)) return null;
 
     const parsePeriod = (periodStr: string): [number, number] => {
       const match = periodStr.match(/(\d{4})[–-](\d{4}|present)/);
@@ -17,5 +17,5 @@ export default function getAbrForYear(
       return year >= start && year <= end;
     });
 
-    return found?.abr || "";
+    return found || null;
   }

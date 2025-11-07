@@ -79,7 +79,7 @@ export default function CardsDisplay({
           No player was found
         </p>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-4 sm:w-[600px] lg:w-[800px] xl:w-[1100px] 2xl:w-[1350px] mx-auto mt-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-4 sm:max-w-[625px] lg:max-w-[950px] 2xl:max-w-[1250px] mx-auto mt-4">
           {filteredPlayers.map((player) => {
             const { id, name, awards, teams_history, image_url } = player;
             const isOwned = cardIds.includes(id);
@@ -122,12 +122,12 @@ export default function CardsDisplay({
                 key={id}
               >
                 <div
-                  className={`relative overflow-hidden w-[250px] h-[350px] sm:h-[400px] p-1 mx-auto ${backgroundClass} shadow transition-shadow ${
+                  className={`relative overflow-hidden w-[300px] h-[400px] p-1 mx-auto ${backgroundClass} shadow transition-shadow ${
                     isOwned ? "cursor-pointer hover:shadow-lg" : "opacity-50"
                   }`}
                 >
                   {isOwned ? (
-                    <div className="bg-[#BB9754] h-full p-3 flex">
+                    <div className="bg-[#BB9754] h-full flex">
                       <div className="w-full h-full rounded-tl-4xl rounded-br-4xl relative flex flex-col">
                         <div className="flex items-end gap-2">
                           <span className="text-lg font-righteous text-left">

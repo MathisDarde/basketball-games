@@ -27,12 +27,12 @@ export default function CardDisplay({ card, amount, isNew, onClick, possessed }:
     return (
         <div
             key={card.id}
-            className={`relative w-[250px] h-[350px] p-1 mx-auto ${backgroundClass} shadow transition-shadow ${isOwned ? "cursor-pointer hover:shadow-lg" : "opacity-50"
+            className={`relative w-[300px] h-[400px] p-2 mx-auto ${backgroundClass} shadow transition-shadow ${isOwned ? "cursor-pointer hover:shadow-lg" : "opacity-50"
                 }`}
             onClick={onClick}
         >
             {isOwned ? (
-                <div className="bg-[#BB9754] h-full p-3 flex relative">
+                <div className="bg-[#BB9754] h-full flex relative">
                     {amount && possessed > 1 && (
                         <div className="absolute z-10 top-2/3 right-0 bg-black/60 text-white font-unbounded text-sm font-bold w-full h-10 flex items-center justify-center shadow-md">
                             ×{possessed}

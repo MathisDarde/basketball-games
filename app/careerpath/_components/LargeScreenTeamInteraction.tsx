@@ -1,7 +1,7 @@
 "use client";
 
 import { PlayerData, TeamsDataType } from "@/interfaces/Interfaces";
-import getAbrForYear from "@/utils/get-abr-by-year";
+import getAbrForYear from "@/utils/get-teaminfos-by-year";
 import { getTeamLogo } from "@/utils/get-team-logo";
 import Image from "next/image";
 import { useEffect, useState } from "react";

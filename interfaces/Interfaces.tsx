@@ -1,8 +1,20 @@
 import { ReactNode } from "react";
 
 export interface TeamHistory {
+  periods: TeamPeriod[];
   period: string;
   team: string;
+  abr: string;
+  mainColor: string;
+  accentColor: string;
+}
+
+export interface TeamPeriod {
+  period: string; 
+  abr: string;
+  logo: string, 
+  mainColor: string, 
+  accentColor: string
 }
 
 export type PeriodTypes = "1990s" | "2000s" | "2010s" | "2020s";
