@@ -1,3 +1,4 @@
+import { TeamHistory } from "@/interfaces/Interfaces";
 import { sql } from "drizzle-orm";
 import {
   pgTable,
@@ -9,7 +10,6 @@ import {
   primaryKey,
   pgEnum,
 } from "drizzle-orm/pg-core";
-
 
 export const UserRoleEnum = pgEnum("user_role", [
   "user",
@@ -72,11 +72,6 @@ export const verification = pgTable("verification", {
   updatedAt: timestamp("updated_at"),
 });
 
-type TeamHistoryEntry = {
-  period: string;
-  team: string;
-};
-
 type PeriodType = "1990s" | "2000s" | "2010s" | "2020s";
 
 export const playersData = pgTable("playersData", {
@@ -84,13 +79,17 @@ export const playersData = pgTable("playersData", {
   period: text("period").$type<PeriodType>().notNull(),
   name: text("name").notNull(),
   position: text("position"),
-  teams_history: jsonb("teams_history").$type<TeamHistoryEntry[]>().notNull(),
-  image_url: text("image_url"),
+  teams_history: jsonb("teams_history").$type<TeamHistory[]>().notNull(),
+  face_image_url: text("face_image_url"),
   wikipedia_url: text("wikipedia_url").notNull(),
   awards: jsonb("awards")
     .$type<string[]>()
     .notNull()
     .default(sql`'[]'::jsonb`),
+  rarity: text("rarity")
+    .$type<"bronze" | "silver" | "gold" | "emerald" | "ruby" | "diamond">()
+    .notNull()
+    .default("bronze"),
 });
 
 export const cardcollection = pgTable("cardcollection", {
@@ -170,11 +169,11 @@ export const card_exchange = pgTable("market_card_exchange", {
     .notNull()
     .references(() => user.id, { onDelete: "cascade" }),
   receivedCardId: text("receivedCardId")
-  .notNull()
-  .references(() => playersData.id, { onDelete: "cascade" }),
+    .notNull()
+    .references(() => playersData.id, { onDelete: "cascade" }),
   givenCardsId: text("givenCardsId")
-  .notNull()
-  .references(() => playersData.id, { onDelete: "cascade" }),
+    .notNull()
+    .references(() => playersData.id, { onDelete: "cascade" }),
   status: marketExchangeStatus().notNull().default("pending"),
 });
 

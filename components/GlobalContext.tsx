@@ -16,16 +16,14 @@ interface PlayTogetherContextType {
   setStreakCount: React.Dispatch<React.SetStateAction<number>>;
   formatPosition: (position: string) => string;
   awardStyleCardBg: {
-    readonly mvp: string;
-    readonly all_nba: string;
-    readonly all_star: string;
-    readonly dpoy: string;
-    readonly mip: string;
-    readonly "6moy": string;
-    readonly roty: string;
+    readonly diamond: string;
+    readonly ruby: string;
+    readonly emerald: string;
+    readonly gold: string;
+    readonly silver: string;
+    readonly bronze: string;
   };
-  awardPriority: readonly string[];
-  getBackgroundClass: (awards?: string[]) => string;
+  getBackgroundClass: (rarity: string) => string;
   getRandomGridThemes: (params: {
     numberThemes: number;
     themes: GridThemeData[];
@@ -157,32 +155,17 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
   }
 
   const awardStyleCardBg = {
-    mvp: "bg-[url('/bluediamondbgtest.jpeg')]",
-    all_nba: "bg-[url('/rubybgtest.jpg')]",
-    all_star: "bg-[url('/goldbgtest.avif')]",
-    dpoy: "bg-[url('/silverbgtest.jpg')]",
-    mip: "bg-[url('/silverbgtest.jpg')]",
-    "6moy": "bg-[url('/diamondbgtest.jpg')]",
-    roty: "bg-[url('/silverbgtest.jpg')]",
+    diamond: "bg-[url('/bluediamondbgtest.jpeg')]",
+    ruby: "bg-[url('/rubybgtest.jpg')]",
+    emerald: "bg-[url('/emeraldbgtest.jpg')]",
+    gold: "bg-[url('/goldbgtest.avif')]",
+    silver: "bg-[url('/silverbgtest.jpg')]",
+    bronze: "bg-[url('/bronzebgtest.avif')]",
   } as const;
 
-  const awardPriority = [
-    "mvp",
-    "all_nba",
-    "all_star",
-    "dpoy",
-    "mip",
-    "6moy",
-    "roty",
-  ] as const;
-
-  const getBackgroundClass = (awards: string[] = []) => {
-    for (const key of awardPriority) {
-      if (awards.some((a) => a.toLowerCase() === key)) {
-        return awardStyleCardBg[key];
-      }
-    }
-    return "";
+  const getBackgroundClass = (rarity: string) => {
+    const key = rarity.toLowerCase() as keyof typeof awardStyleCardBg;
+    return awardStyleCardBg[key] || "";
   };
 
   const getRandomGridThemes = ({
@@ -265,7 +248,6 @@ export const AppProvider = ({ children }: { children: React.ReactNode }) => {
         setStreakCount,
         formatPosition,
         awardStyleCardBg,
-        awardPriority,
         getBackgroundClass,
         getRandomGridThemes,
         getLastYear,

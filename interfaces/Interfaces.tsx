@@ -10,11 +10,11 @@ export interface TeamHistory {
 }
 
 export interface TeamPeriod {
-  period: string; 
+  period: string;
   abr: string;
-  logo: string, 
-  mainColor: string, 
-  accentColor: string
+  logo: string;
+  mainColor: string;
+  accentColor: string;
 }
 
 export type PeriodTypes = "1990s" | "2000s" | "2010s" | "2020s";
@@ -25,9 +25,10 @@ export interface PlayerData {
   name: string;
   wikipedia_url: string;
   teams_history: TeamHistory[];
-  image_url: string | null;
+  face_image_url: string | null;
   position: string | null;
   awards: string[];
+  rarity: "bronze" | "silver" | "gold" | "emerald" | "ruby" | "diamond";
 }
 
 export interface GridThemeData {
@@ -67,7 +68,13 @@ export interface TeamsDataType {
   names: string[];
   conference: string;
   division: string;
-  periods: { period: string; abr: string; logo: string }[];
+  periods: {
+    period: string;
+    abr: string;
+    logo: string;
+    mainColor: string;
+    accentColor: string;
+  }[];
 }
 
 export interface ButtonProps {

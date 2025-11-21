@@ -15,7 +15,6 @@ export default function CareerPathComponentWrapper({
   players,
   difficulty,
   period,
-  userId,
   lastStreak,
 }: {
   players: PlayerData[];
@@ -25,31 +24,24 @@ export default function CareerPathComponentWrapper({
   lastStreak: number;
 }) {
   const [droppedTeams, setDroppedTeams] = useState<TeamsDataType[]>([]);
-  const [activeSlot, setActiveSlot] = useState<number | null>(null);
   const [streak, setStreak] = useState<number>(lastStreak);
   const [currentPlayer, setCurrentPlayer] = useState<PlayerData>(
     getRandomPlayers({ numberPlayers: 1, players })
   );
   const [year, setYear] = useState<number>(2025);
 
-  const regeneratePlayer = () => {
-    const newPlayer = getRandomPlayers({ numberPlayers: 1, players });
-    setCurrentPlayer(newPlayer);
-  };
-
   const filteredTeams: TeamsDataType[] = useMemo(() => {
     return currentPlayer.teams_history
-      .map(({ team }) =>
-        TeamsData.find((t) => t.names.includes(team))
-      )
+      .map(({ team }) => TeamsData.find((t) => t.names.includes(team)))
       .filter(Boolean) as TeamsDataType[];
   }, [currentPlayer]);
-  
 
   // Détermination de la période active du joueur
   const allYears = currentPlayer.teams_history
     .map(({ period }) => {
-      const parts = period.includes("–") ? period.split("–") : period.split("-");
+      const parts = period.includes("–")
+        ? period.split("–")
+        : period.split("-");
       let start: number;
       let end: number;
 
@@ -58,7 +50,10 @@ export default function CareerPathComponentWrapper({
       } else {
         const [startRaw, endRaw] = parts;
         start = parseInt(startRaw, 10);
-        end = endRaw === "present" ? new Date().getFullYear() : parseInt(endRaw, 10);
+        end =
+          endRaw === "present"
+            ? new Date().getFullYear()
+            : parseInt(endRaw, 10);
       }
 
       return { start, end };
@@ -70,7 +65,8 @@ export default function CareerPathComponentWrapper({
     const minStart = Math.min(...allYears.map(({ start }) => start));
     const maxEnd = Math.max(...allYears.map(({ end }) => end));
     if (minStart === maxEnd) activePeriod = `${minStart}`;
-    else if (maxEnd === new Date().getFullYear()) activePeriod = `${minStart}-present`;
+    else if (maxEnd === new Date().getFullYear())
+      activePeriod = `${minStart}-present`;
     else activePeriod = `${minStart}-${maxEnd}`;
   }
 
@@ -102,15 +98,19 @@ export default function CareerPathComponentWrapper({
         <StreakCounter streak={streak} period={period} />
 
         <Image
-          src={currentPlayer.image_link || "/pdpdebase.png"}
+          src={currentPlayer.face_image_url || "/pdpdebase.png"}
           width={100}
           height={100}
           alt="Player Picture"
           className="rounded-full"
         />
         <p className="font-unbounded text-2xl">{currentPlayer.name}</p>
-        <p className="font-outfit font-light text-center text-medium">{activePeriod}</p>
-        <p className="font-outfit font-light text-center text-sm">{currentPlayer.position}</p>
+        <p className="font-outfit font-light text-center text-medium">
+          {activePeriod}
+        </p>
+        <p className="font-outfit font-light text-center text-sm">
+          {currentPlayer.position}
+        </p>
       </div>
 
       <DropZoneInteraction
@@ -131,7 +131,7 @@ export default function CareerPathComponentWrapper({
         />
       </div>
 
-{/* 
+      {/* 
       <SubmitGuess
         player={currentPlayer}
         droppedTeams={droppedTeams}

@@ -43,6 +43,13 @@
       "when": 1762441667486,
       "tag": "0005_ancient_cassandra_nova",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "7",
+      "when": 1762606641488,
+      "tag": "0006_cynical_energizer",
+      "breakpoints": true
     }
   ]
 }

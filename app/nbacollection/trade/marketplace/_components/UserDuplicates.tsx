@@ -31,27 +31,32 @@ export default function UserDuplicates({ cardInfos }: UserDuplicatesProps) {
         My duplicates
       </h2>
 
-        {cardInfos.length == 0 && (
-          <p className="text-center font-outfit text-gray-400 italic">You do not possess any duplicate of a card. Indeed, the trading feature is not available for you yet.</p>
-        )}
+      {cardInfos.length == 0 && (
+        <p className="text-center font-outfit text-gray-400 italic">
+          You do not possess any duplicate of a card. Indeed, the trading
+          feature is not available for you yet.
+        </p>
+      )}
       <div className="grid grid-cols-6 gap-4 place-items-center">
         {loading
           ? cardInfos.map((card) => (
-            <div key={card.id} className="w-[250px] h-[350px]">
-              <Skeleton width="100%" height="100%" borderRadius="rounded-lg" />
-            </div>
-          ))
+              <div key={card.id} className="w-[300px] h-[400px]">
+                <Skeleton
+                  width="100%"
+                  height="100%"
+                  borderRadius="rounded-lg"
+                />
+              </div>
+            ))
           : cardInfos.map((card) => {
-            const userCard = userCards.find((c) => c.cardId === card.id);
-            return (
-              <CardDisplay
-                key={card.id}
-                card={card}
-                amount={true}
-                possessed={userCard?.possessed ?? 0}
-              />
-            );
-          })}
+              return (
+                <CardDisplay
+                  key={card.id}
+                  card={card}
+                  isOwned={!!userCards.find((c) => c.cardId === card.id)}
+                />
+              );
+            })}
       </div>
     </div>
   );

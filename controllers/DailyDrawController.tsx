@@ -1,17 +1,16 @@
 import { db } from "@/db";
 import { dailydraws, dailydraws_players } from "@/db/schema";
 import { PlayerData } from "@/interfaces/Interfaces";
-import { getRandomPlayers } from "@/utils/get-random-players";
 import { and, eq } from "drizzle-orm";
 import { v4 as uuidv4 } from "uuid";
 import storeCardInCollection from "@/actions/cardcollection/addcardtocollection";
 import getQuotaByRole from "@/actions/cardcollection/getuserquota";
+import { getRandomPlayersByDropRate } from "@/utils/get-random-players-with-drop-rate";
 
 export async function getDailyDraw(
   userId: string,
   allPlayers: PlayerData[],
-  period: string,
-  role: string
+  period: string
 ): Promise<{ players: PlayerData[]; period: string }> {
   const todayStr = new Date().toISOString().split("T")[0];
 
@@ -19,7 +18,9 @@ export async function getDailyDraw(
     .select()
     .from(dailydraws)
     .where(and(eq(dailydraws.userId, userId), eq(dailydraws.period, period)))
-    .then(rows => rows.filter(r => r.date.toISOString().split("T")[0] === todayStr));
+    .then((rows) =>
+      rows.filter((r) => r.date.toISOString().split("T")[0] === todayStr)
+    );
 
   if (drawsToday.length === 0) {
     return { players: [], period }; // Aucun tirage aujourd'hui
@@ -34,15 +35,11 @@ export async function getDailyDraw(
     .where(eq(dailydraws_players.dailydrawId, lastDraw.id));
 
   // Map sur tous les joueurs pour récupérer les infos complètes
-  const playerMap = new Map(allPlayers.map(p => [p.id, p]));
-  const players = drawPlayers.map(dp => playerMap.get(dp.playerId)!);
-
-  // ❌ On ne touche plus à storeCardInCollection ici
-  // Toutes les cartes sont déjà possédées si le tirage existait
+  const playerMap = new Map(allPlayers.map((p) => [p.id, p]));
+  const players = drawPlayers.map((dp) => playerMap.get(dp.playerId)!);
 
   return { players, period };
 }
-
 
 export async function createDailyDraw(
   userId: string,
@@ -57,7 +54,9 @@ export async function createDailyDraw(
     .select()
     .from(dailydraws)
     .where(and(eq(dailydraws.userId, userId), eq(dailydraws.period, period)))
-    .then((rows) => rows.filter((r) => r.date.toISOString().split("T")[0] === todayStr));
+    .then((rows) =>
+      rows.filter((r) => r.date.toISOString().split("T")[0] === todayStr)
+    );
 
   const quota = await getQuotaByRole(role);
 
@@ -71,8 +70,10 @@ export async function createDailyDraw(
       .where(eq(dailydraws_players.dailydrawId, lastDraw.id));
 
     // reconstruction du tirage en gardant les doublons
-    const playerMap = new Map(allPlayers.map(p => [p.id, p]));
-    const selectedPlayers = drawPlayers.map(dp => playerMap.get(dp.playerId)!);
+    const playerMap = new Map(allPlayers.map((p) => [p.id, p]));
+    const selectedPlayers = drawPlayers.map(
+      (dp) => playerMap.get(dp.playerId)!
+    );
 
     // toutes les cartes sont enregistrées dans la collection
     for (const p of selectedPlayers) {
@@ -83,7 +84,11 @@ export async function createDailyDraw(
   }
 
   // sinon, créer un nouveau tirage
-  const randomPlayers = getRandomPlayers({ numberPlayers: 10, players: allPlayers });
+  const randomPlayers = getRandomPlayersByDropRate({
+    numberPlayers: 10,
+    players: allPlayers,
+    allowDuplicates: true,
+  });
   const drawId = uuidv4();
 
   await db.insert(dailydraws).values({
@@ -108,7 +113,10 @@ export async function createDailyDraw(
   return { players: randomPlayers, period };
 }
 
-export async function getDrawsCount(userId: string, period: string): Promise<number> {
+export async function getDrawsCount(
+  userId: string,
+  period: string
+): Promise<number> {
   const todayStr = new Date().toISOString().split("T")[0];
 
   const draws = await db
@@ -117,7 +125,8 @@ export async function getDrawsCount(userId: string, period: string): Promise<num
     .where(eq(dailydraws.userId, userId));
 
   const todayDraws = draws.filter(
-    (d) => d.period === period && d.date.toISOString().split("T")[0] === todayStr
+    (d) =>
+      d.period === period && d.date.toISOString().split("T")[0] === todayStr
   );
 
   return todayDraws.length;

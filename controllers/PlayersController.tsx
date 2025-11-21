@@ -56,7 +56,7 @@ export async function store1990sPlayers() {
       process.cwd(),
       "public",
       "data",
-      "nba_players_1990s_with_images_current.json"
+      "nba_players_1990s_with_rarity.json"
     );
 
     const raw = fs.readFileSync(filePath, "utf-8");
@@ -73,9 +73,10 @@ export async function store1990sPlayers() {
       period,
       position: player.position ?? null,
       teams_history: player.teams_history ?? [],
-      image_url: player.image_url ?? null,
+      face_image_url: player.face_image_url ?? null,
       wikipedia_url: player.wikipedia_url ?? null,
       awards: player.awards ?? [],
+      rarity: player.rarity ?? "bronze",
     }));
 
     // 💾 Étape 3 : Insertion multiple
@@ -91,14 +92,18 @@ export async function store1990sPlayers() {
 
 export async function store2000sPlayers() {
   try {
+    const period = "2000s";
     const filePath = path.join(
       process.cwd(),
       "public",
       "data",
-      "nba_players_2000s_with_images_current.json"
+      "nba_players_2000s_with_rarity.json"
     );
     const raw = fs.readFileSync(filePath, "utf-8");
     const playersArray = JSON.parse(raw); // Tableau d'objets joueurs
+
+    await db.delete(playersData).where(eq(playersData.period, period));
+    console.log(`🗑️ Anciennes entrées supprimées pour la période ${period}`);
 
     // Prépare un tableau d'insertions
     const playersToInsert = playersArray.map((player: PlayersSchemaType) => {
@@ -108,9 +113,10 @@ export async function store2000sPlayers() {
         period: "2000s",
         position: player.position ?? null,
         teams_history: player.teams_history ?? [],
-        image_url: player.image_url ?? null,
+        face_image_url: player.face_image_url ?? null,
         wikipedia_url: player.wikipedia_url ?? null,
         awards: player.awards ?? [],
+        rarity: player.rarity ?? "bronze",
       };
     });
 
@@ -125,14 +131,18 @@ export async function store2000sPlayers() {
 }
 export async function store2010sPlayers() {
   try {
+    const period = "2010s";
     const filePath = path.join(
       process.cwd(),
       "public",
       "data",
-      "nba_players_2010s_enriched.json"
+      "nba_players_2010s_with_rarity.json"
     );
     const raw = fs.readFileSync(filePath, "utf-8");
     const playersArray = JSON.parse(raw); // Tableau d'objets joueurs
+
+    await db.delete(playersData).where(eq(playersData.period, period));
+    console.log(`🗑️ Anciennes entrées supprimées pour la période ${period}`);
 
     // Prépare un tableau d'insertions
     const playersToInsert = playersArray.map((player: PlayersSchemaType) => {
@@ -142,9 +152,10 @@ export async function store2010sPlayers() {
         period: "2010s",
         position: player.position ?? null,
         teams_history: player.teams_history ?? [],
-        image_url: player.image_url ?? null,
+        face_image_url: player.face_image_url ?? null,
         wikipedia_url: player.wikipedia_url ?? null,
         awards: player.awards ?? [],
+        rarity: player.rarity ?? "bronze",
       };
     });
 
@@ -159,6 +170,7 @@ export async function store2010sPlayers() {
 }
 export async function store2020sPlayers() {
   try {
+    const period = "2020s";
     const filePath = path.join(
       process.cwd(),
       "public",
@@ -168,6 +180,9 @@ export async function store2020sPlayers() {
     const raw = fs.readFileSync(filePath, "utf-8");
     const playersArray = JSON.parse(raw); // Tableau d'objets joueurs
 
+    await db.delete(playersData).where(eq(playersData.period, period));
+    console.log(`🗑️ Anciennes entrées supprimées pour la période ${period}`);
+
     // Prépare un tableau d'insertions
     const playersToInsert = playersArray.map((player: PlayersSchemaType) => {
       return {
@@ -176,9 +191,10 @@ export async function store2020sPlayers() {
         period: "2020s",
         position: player.position ?? null,
         teams_history: player.teams_history ?? [],
-        image_url: player.image_url ?? null,
+        face_image_url: player.face_image_url ?? null,
         wikipedia_url: player.wikipedia_url ?? null,
         awards: player.awards ?? [],
+        rarity: player.rarity ?? "bronze",
       };
     });
 
@@ -231,7 +247,6 @@ export async function addCardToCollection(
     return { success: true, possessed: 1 };
   }
 }
-
 
 export async function getUserCards(userId: string) {
   return await db

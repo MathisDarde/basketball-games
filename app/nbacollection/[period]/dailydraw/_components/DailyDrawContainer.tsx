@@ -1,6 +1,6 @@
 "use client";
 
-import { PeriodTypes, PlayerData, TeamsDataType } from "@/interfaces/Interfaces";
+import { PeriodTypes, PlayerData } from "@/interfaces/Interfaces";
 import { useScreenSize } from "@/utils/use-screen-size";
 import { useRouter } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -10,7 +10,7 @@ import Button from "@/components/CustomButton";
 
 type DailyDrawContainerProps = {
   players: PlayerData[];
-  teams: TeamsDataType[];
+  cardIds: string[];
   params: { period: PeriodTypes };
   flippedIds: string[];
   setFlippedIds: React.Dispatch<(value: string[]) => string[]>;
@@ -20,12 +20,12 @@ type DailyDrawContainerProps = {
 
 export default function DailyDrawContainer({
   players,
-  teams,
+  cardIds,
   params,
   flippedIds,
   setFlippedIds,
   remainingDraws,
-  handleNewDraw
+  handleNewDraw,
 }: DailyDrawContainerProps) {
   const { width } = useScreenSize();
   const router = useRouter();
@@ -49,14 +49,14 @@ export default function DailyDrawContainer({
       {mobileDailyDraw ? (
         <MobileDailyDraw
           players={players}
-          teams={teams}
+          cardIds={cardIds}
           handleCardClick={handleCardClick}
           flippedIds={flippedIds} // UI uniquement
         />
       ) : (
         <LargeScreenDailyDraw
           players={players}
-          teams={teams}
+          cardIds={cardIds}
           handleCardClick={handleCardClick}
           flippedIds={flippedIds} // UI uniquement
         />
@@ -69,7 +69,8 @@ export default function DailyDrawContainer({
               <p>
                 Make a new draw ?<br />
                 <span className="text-xs">
-                  ({remainingDraws} free draw{remainingDraws > 1 ? "s" : ""} remaining)
+                  ({remainingDraws} free draw{remainingDraws > 1 ? "s" : ""}{" "}
+                  remaining)
                 </span>
               </p>
             </Button>

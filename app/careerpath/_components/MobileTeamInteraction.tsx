@@ -1,10 +1,10 @@
 "use client";
 
 import { PlayerData, TeamsDataType } from "@/interfaces/Interfaces";
-import getAbrForYear from "@/utils/get-teaminfos-by-year";
 import { getTeamLogo } from "@/utils/get-team-logo";
 import Image from "next/image";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import getTeamInfosByYear from "@/utils/get-teaminfos-by-year";
 
 // Fonction utilitaire pour normaliser les noms (supprime accents, majuscules, espaces inutiles, etc.)
 const normalizeName = (name: string) =>
@@ -43,7 +43,9 @@ export default function MobileTeamInteraction({
           const normalizedTeam = normalizeName(team);
           return teams.find((t) => {
             const allNames = [t.currentName, ...(t.names || [])];
-            return allNames.some((name) => normalizeName(name) === normalizedTeam);
+            return allNames.some(
+              (name) => normalizeName(name) === normalizedTeam
+            );
           });
         })
         .filter((team): team is TeamsDataType => !!team); // retire les undefined
@@ -72,24 +74,31 @@ export default function MobileTeamInteraction({
               ) : (
                 [...visibleTeams]
                   .sort((a, b) => a.currentName.localeCompare(b.currentName))
-                  .map((team, index) => (
-                    <div
-                      key={index}
-                      onClick={() => onSelectTeam(team)}
-                      className="cursor-pointer flex flex-col items-center justify-center p-2 border rounded hover:bg-gray-100"
-                    >
-                      <Image
-                        src={getTeamLogo(team.currentName, year) || "/pdpdebase.png"}
-                        width={40}
-                        height={40}
-                        alt={`${team.currentName} Logo`}
-                        className="size-8 object-contain"
-                      />
-                      <p className="font-unbounded font-semibold text-sm">
-                        {getAbrForYear(team.periods, year)}
-                      </p>
-                    </div>
-                  ))
+                  .map((team, index) => {
+                    const teamInfos = getTeamInfosByYear(team.periods, year);
+                    const abr = teamInfos?.abr;
+                    return (
+                      <div
+                        key={index}
+                        onClick={() => onSelectTeam(team)}
+                        className="cursor-pointer flex flex-col items-center justify-center p-2 border rounded hover:bg-gray-100"
+                      >
+                        <Image
+                          src={
+                            getTeamLogo(team.currentName, year) ||
+                            "/pdpdebase.png"
+                          }
+                          width={40}
+                          height={40}
+                          alt={`${team.currentName} Logo`}
+                          className="size-8 object-contain"
+                        />
+                        <p className="font-unbounded font-semibold text-sm">
+                          {abr}
+                        </p>
+                      </div>
+                    );
+                  })
               )}
             </div>
           </div>

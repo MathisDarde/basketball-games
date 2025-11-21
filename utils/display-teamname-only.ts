@@ -35,7 +35,8 @@ const TEAM_CITY_WORDS = [
   "New",
   "Orleans",
   "Seattle",
-  "Jersey"
+  "Jersey",
+  "Vancouver",
 ];
 
 // Fonction utilitaire pour simplifier le nom de l’équipe

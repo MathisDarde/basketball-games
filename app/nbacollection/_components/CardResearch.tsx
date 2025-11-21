@@ -107,7 +107,7 @@ export const CardResearch = ({
       {filterOpen && (
         <div
           ref={filterRef}
-          className="p-4 mx-4 mb-4 shadow-lg rounded-sm bg-white z-50 space-y-4 max-w-[600px] mx-auto"
+          className="p-4 mb-4 shadow-lg rounded-sm bg-white z-50 space-y-4 max-w-[600px] mx-auto"
         >
           {/* Colonne Status */}
           <div className="space-y-2">
@@ -173,7 +173,7 @@ export const CardResearch = ({
                   <div
                     className={`w-3 h-3 ${rar.color} rounded-full border`}
                   ></div>
-                  {rar.name}
+                  <p className="capitalize">{rar.name}</p>
                 </button>
               ))}
           </div>
@@ -238,7 +238,7 @@ export const CardResearch = ({
             key={r}
             className="flex items-center gap-2 bg-accent-brown text-white font-outfit font-light px-2 py-1 rounded"
           >
-            <span className="text-sm sm:text-base">{r}</span>
+            <span className="text-sm sm:text-base capitalize">{r}</span>
             <X
               size={14}
               onClick={() => toggleRarity(r)}
@@ -252,7 +252,9 @@ export const CardResearch = ({
             key={teamFullName}
             className="flex items-center gap-2 bg-accent-brown text-white font-outfit font-light px-2 py-1 rounded"
           >
-            <span className="text-sm sm:text-base">{getAbrFromTeamName(teamFullName)}</span>
+            <span className="text-sm sm:text-base">
+              {getAbrFromTeamName(teamFullName)}
+            </span>
             <X
               size={14}
               onClick={() => toggleTeam(teamFullName)}

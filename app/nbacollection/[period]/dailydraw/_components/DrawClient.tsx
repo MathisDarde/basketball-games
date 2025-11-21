@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { PlayerData, PeriodTypes, TeamsDataType } from "@/interfaces/Interfaces";
+import { PlayerData, PeriodTypes, Card } from "@/interfaces/Interfaces";
 import createDailyDrawServer from "@/actions/cardcollection/createdailydraw";
 import DailyDrawContainer from "./DailyDrawContainer";
 import Button from "@/components/CustomButton";
@@ -11,22 +11,22 @@ import getQuotaByRole from "@/actions/cardcollection/getuserquota";
 export default function DailyDrawClient({
   initialPlayers,
   allPlayers,
-  teams,
   userId,
   period,
   userRole,
+  ownedCards,
 }: {
   initialPlayers: PlayerData[];
   allPlayers: PlayerData[];
-  teams: TeamsDataType[];
   userId: string;
   userRole: string;
   period: PeriodTypes;
+  ownedCards: Card[];
 }) {
   const [players, setPlayers] = useState<PlayerData[]>(initialPlayers);
-const [flippedIds, setFlippedIds] = useState<string[]>(
-  initialPlayers.length > 0 ? initialPlayers.map(p => p.id) : [] // 🔹 recap seulement si tirage existant
-);
+  const [flippedIds, setFlippedIds] = useState<string[]>(
+    initialPlayers.length > 0 ? initialPlayers.map((p) => p.id) : [] // 🔹 recap seulement si tirage existant
+  );
   const [remainingDraws, setRemainingDraws] = useState<number>(0);
 
   useEffect(() => {
@@ -46,7 +46,12 @@ const [flippedIds, setFlippedIds] = useState<string[]>(
     setPlayers([]);
     setFlippedIds([]);
 
-    const newDraw = await createDailyDrawServer(userId, allPlayers, period, userRole);
+    const newDraw = await createDailyDrawServer(
+      userId,
+      allPlayers,
+      period,
+      userRole
+    );
     if (!newDraw || !newDraw.players) {
       console.error("Erreur : tirage invalide", newDraw);
       return;
@@ -60,6 +65,8 @@ const [flippedIds, setFlippedIds] = useState<string[]>(
     const draws = typeof drawsToday === "number" ? drawsToday : 0;
     setRemainingDraws(Math.max(quota - draws, 0));
   };
+
+  const cardIds = ownedCards.map((card) => card.cardId);
 
   if (players.length === 0) {
     return (
@@ -77,7 +84,7 @@ const [flippedIds, setFlippedIds] = useState<string[]>(
   return (
     <DailyDrawContainer
       players={players}
-      teams={teams}
+      cardIds={cardIds}
       params={{ period }}
       flippedIds={flippedIds}
       setFlippedIds={setFlippedIds}
